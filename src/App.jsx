@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { speak, audio } from "./audio";
-import { loadProgress, saveProgress } from "./storage";
+import { loadStore, saveStore, createProfile, avatarById, avatarsByGender } from "./profiles";
+import {
+  levelInfo, dailyVisit, skyGradient, shopItem,
+  SHOP, SHOP_CATS, isOwned, XP_PER_CORRECT, XP_PER_STAR,
+} from "./progression";
 
 /* ═══════════════════════════════════════════════════════════
    SILVANA E IL REGNO INCANTATO — PWA
@@ -154,7 +158,7 @@ const PRAISE = ["Great job!", "Wonderful!", "Perfect!", "Amazing!", "Well done!"
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const rand = (n) => Math.floor(Math.random() * n);
 
-/* ─── Weak-word helper: pick target favouring words Silvana misses ─── */
+/* ─── Weak-word helper: pick target favouring words the player misses ─── */
 function pickTarget(pool, weak, keyFn) {
   const weakOnes = pool.filter((it) => (weak[keyFn(it)] || 0) > 0);
   if (weakOnes.length && Math.random() < 0.45) return weakOnes[rand(weakOnes.length)];
@@ -176,9 +180,8 @@ function SparkleBurst({ trigger }) {
   );
 }
 
-function Crown({ gems }) {
-  const slots = 12;
-  const filled = Math.min(Math.floor(gems / 8), slots); // one crown gem every 8 earned
+function Crown({ filled = 0, caption }) {
+  const slots = 12; // una gemma della corona per ogni isola liberata
   return (
     <div className="flex flex-col items-center select-none">
       <div className="relative" style={{ width: 190, height: 74 }}>
@@ -206,7 +209,7 @@ function Crown({ gems }) {
           );
         })}
       </div>
-      <div className="text-sm font-bold tracking-wide" style={{ color: "#F0D98C" }}>💎 {gems} gemme di Silvana</div>
+      <div className="text-xs font-bold tracking-wide" style={{ color: "#F0D98C" }}>{caption}</div>
     </div>
   );
 }
@@ -731,32 +734,356 @@ const ISLANDS = [
   { id: "dragon", name: "BOSS: Il Drago Parlante", emoji: "🐉", sub: "La grande avventura finale", locked: true },
 ];
 
+/* ═══════════ LEVEL-UP: header, XP, fiamma, negozio ═══════════ */
+
+function XpBar({ lvl }) {
+  return (
+    <div style={{ width: 200 }}>
+      <div style={{ height: 10, borderRadius: 999, background: "#ffffff1e", overflow: "hidden", marginTop: 4 }}>
+        <div style={{ height: "100%", width: `${Math.round(lvl.progress * 100)}%`, background: "linear-gradient(90deg,#F5C64F,#F27EB6)", transition: "width .5s" }} />
+      </div>
+      <div className="text-xs" style={{ color: "#9F8CC9", marginTop: 3 }}>
+        {lvl.isMax
+          ? `${lvl.xpIntoLevel} XP · titolo massimo!`
+          : `${lvl.xpIntoLevel}/${lvl.xpForLevel} XP → ${lvl.next.emoji} ${lvl.next.name}`}
+      </div>
+    </div>
+  );
+}
+
+function FlameBadge({ streak }) {
+  const lit = streak > 0;
+  return (
+    <span className="px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1"
+      style={{ background: "#ffffff12", border: "1.5px solid #ffffff22", color: lit ? "#FFB86B" : "#9F8CC9" }}>
+      <span className={lit ? "flame-flicker inline-block" : "inline-block"} style={{ opacity: lit ? 1 : 0.5 }}>🔥</span>
+      {streak}
+    </span>
+  );
+}
+
+function RoyalHeader({ progress, gender, name, crownFilled, onShop, onSwitch }) {
+  const lvl = levelInfo(progress.xp, gender);
+  const me = avatarById(progress.equipped.me) || { emoji: gender === "m" ? "👦" : "👧" };
+  const pet = progress.equipped.pet ? shopItem(progress.equipped.pet) : null;
+  return (
+    <div className="w-full flex flex-col items-center gap-3">
+      <Crown filled={crownFilled} caption={`👑 ${crownFilled} ${crownFilled === 1 ? "isola liberata" : "isole liberate"}`} />
+      <div className="flex items-center gap-4">
+        <div className="relative" style={{ width: 60, height: 60 }}>
+          <span style={{ fontSize: 52, lineHeight: "60px" }}>{me.emoji}</span>
+          {pet && <span className="float" style={{ fontSize: 28, position: "absolute", right: -16, bottom: -6 }}>{pet.emoji}</span>}
+        </div>
+        <div className="flex flex-col">
+          <span className="display" style={{ color: "#F6F1FF", fontSize: 20, lineHeight: 1.1 }}>{name}</span>
+          <span className="text-xs" style={{ color: "#CDBBF2" }}>{lvl.emoji} {lvl.title} · Liv. {lvl.level}</span>
+          <XpBar lvl={lvl} />
+        </div>
+      </div>
+      <div className="flex items-center gap-2 flex-wrap justify-center">
+        <FlameBadge streak={progress.streak} />
+        <span className="px-3 py-1 rounded-full text-sm font-bold" style={{ background: "#ffffff12", border: "1.5px solid #ffffff22", color: "#F0D98C" }}>💎 {progress.gems}</span>
+        <button onClick={onShop} className="px-3 py-1 rounded-full text-sm font-extrabold"
+          style={{ background: "linear-gradient(180deg,#F8D978,#E0AC3C)", color: "#2D1B4E", border: "none", boxShadow: "0 3px 0 #B8892E" }}>
+          🛍️ Negozio
+        </button>
+        <button onClick={onSwitch} className="px-3 py-1 rounded-full text-sm font-bold"
+          style={{ background: "#ffffff12", border: "1.5px solid #ffffff22", color: "#E7DBFF" }}>
+          👥 Cambia
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function LevelUpOverlay({ lvl, gender, onClose }) {
+  const cheer = gender === "m" ? "piccolo re" : "piccola regina";
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 px-8 text-center"
+      style={{ background: "#1E1440ee" }}>
+      <SparkleBurst trigger={1} />
+      <span className="text-7xl gem-pop">{lvl.emoji}</span>
+      <h2 className="display" style={{ fontSize: "1.8rem", color: "#F5C64F" }}>Hai un nuovo titolo!</h2>
+      <p className="display" style={{ fontSize: "1.35rem", color: "#F6F1FF" }}>Ora sei<br /><b>{lvl.title}</b></p>
+      <p className="text-sm" style={{ color: "#CDBBF2" }}>Livello {lvl.level} · continua così, {cheer}! ✨</p>
+      <button onClick={onClose} className="listen-btn" style={{ fontSize: "1.15rem", padding: "14px 30px" }}>Evviva! 🎉</button>
+    </div>
+  );
+}
+
+function DailyToast({ info }) {
+  return (
+    <div className="fixed left-1/2 z-40" style={{ top: 14, transform: "translateX(-50%)", width: "min(340px, 90vw)" }}>
+      <div className="toast-in rounded-2xl px-5 py-3 text-center"
+        style={{ background: "linear-gradient(180deg,#3A2470,#241650)", border: "2px solid #F5C64F55", color: "#F6F1FF", boxShadow: "0 10px 30px #00000055" }}>
+        <div className="font-bold"><span className="flame-flicker inline-block">🔥</span> Fiamma Magica: {info.streak} {info.streak === 1 ? "giorno" : "giorni"}!</div>
+        <div className="text-sm" style={{ color: "#F0D98C" }}>Bonus di oggi: +{info.bonus} 💎</div>
+      </div>
+    </div>
+  );
+}
+
+function ShopScreen({ progress, gender, onBack, onBuyEquip, burst, denyId }) {
+  const sections = [
+    { label: "👤 Avatar", slot: "me", items: avatarsByGender(gender) },
+    ...SHOP_CATS.map((c) => ({ label: c.label, slot: c.slot, items: SHOP.filter((s) => s.cat === c.cat) })),
+  ];
+  return (
+    <div className="flex flex-col items-center gap-5 px-5 py-8 w-full max-w-md relative z-10">
+      <SparkleBurst trigger={burst} />
+      <div className="w-full flex items-center justify-between">
+        <button onClick={onBack} className="font-bold text-base rounded-full px-5 py-2"
+          style={{ background: "#ffffff18", color: "#E7DBFF", border: "2px solid #ffffff28" }}>← Mappa</button>
+        <span className="font-bold" style={{ color: "#F0D98C" }}>💎 {progress.gems}</span>
+      </div>
+      <h2 className="display text-2xl" style={{ color: "#F6F1FF" }}>🛍️ Negozio delle Gemme</h2>
+      <p className="text-sm text-center" style={{ color: "#9F8CC9" }}>
+        Guadagni gemme giocando e con la Fiamma Magica. Spendile per il tuo regno!
+      </p>
+      {sections.map(({ label, slot, items }) => (
+        <div key={slot} className="w-full">
+          <div className="display text-lg mb-2" style={{ color: "#CDBBF2" }}>{label}</div>
+          <div className="grid grid-cols-3 gap-3">
+            {items.map((item) => {
+              const owned = isOwned(item, progress.owned);
+              const equipped = progress.equipped[slot] === item.id;
+              const afford = progress.gems >= item.cost;
+              return (
+                <button key={item.id} onClick={() => onBuyEquip(item)}
+                  className={`shop-card ${denyId === item.id ? "shake" : ""}`}
+                  style={{
+                    border: equipped ? "3px solid #F5C64F" : "2px solid #ffffff24",
+                    background: equipped ? "#F5C64F22" : "#ffffff10",
+                    opacity: !owned && !afford ? 0.5 : 1,
+                  }}>
+                  <span style={{ fontSize: 38 }}>{item.emoji}</span>
+                  <span className="text-xs font-bold text-center" style={{ color: "#F6F1FF" }}>{item.name}</span>
+                  <span className="text-xs font-bold" style={{ color: equipped ? "#F5C64F" : owned ? "#8FE3A6" : afford ? "#F0D98C" : "#E8455A" }}>
+                    {equipped ? "In uso" : owned ? "Usa" : `💎 ${item.cost}`}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+      <p className="text-xs text-center" style={{ color: "#7A68A8" }}>
+        Tocca un compagno che hai già per toglierlo. Avatar e cielo si possono sempre cambiare.
+      </p>
+    </div>
+  );
+}
+
+/* ─── Selezione profilo & creazione nuovo giocatore ─── */
+function ProfilesScreen({ store, onSelect, onNew }) {
+  return (
+    <div className="flex flex-col items-center gap-6 px-5 py-10 w-full max-w-md relative z-10">
+      <span className="text-6xl float">🏝️</span>
+      <h1 className="display text-center leading-tight" style={{ fontSize: "2.2rem", color: "#F6F1FF", textShadow: "0 3px 16px #8E5FD980" }}>Isola Magica</h1>
+      <p className="display text-lg" style={{ color: "#CDBBF2" }}>Chi sta giocando?</p>
+      <div className="flex flex-col gap-3 w-full items-center">
+        {store.profiles.map((p) => {
+          const av = avatarById(p.progress.equipped.me);
+          const lvl = levelInfo(p.progress.xp, p.gender);
+          return (
+            <button key={p.id} className="game-tile" onClick={() => onSelect(p.id)}>
+              <span className="text-4xl">{av ? av.emoji : p.gender === "m" ? "👦" : "👧"}</span>
+              <span className="flex-1">
+                <span className="display block text-xl" style={{ color: "#F6F1FF" }}>{p.name}</span>
+                <span className="block text-sm" style={{ color: "#9F8CC9" }}>{lvl.emoji} {lvl.title} · Liv. {lvl.level}</span>
+              </span>
+              <span className="text-sm font-bold" style={{ color: "#FFB86B" }}>🔥 {p.progress.streak}</span>
+            </button>
+          );
+        })}
+        <button onClick={onNew} className="game-tile" style={{ justifyContent: "center", borderStyle: "dashed" }}>
+          <span className="text-3xl">➕</span>
+          <span className="display text-lg" style={{ color: "#F6F1FF" }}>Nuovo giocatore</span>
+        </button>
+      </div>
+      <p className="text-xs text-center" style={{ color: "#7A68A8" }}>Ogni giocatore ha i suoi progressi, le sue gemme e la sua avventura. ✨</p>
+    </div>
+  );
+}
+
+function CreateProfile({ onCreate, onCancel, canCancel }) {
+  const [step, setStep] = useState(0); // 0: genere · 1: nome · 2: avatar
+  const [gender, setGender] = useState(null);
+  const [name, setName] = useState("");
+  const [avatar, setAvatar] = useState(null);
+  const avatars = gender ? avatarsByGender(gender) : [];
+
+  const back = (to) => (to < 0 ? onCancel() : setStep(to));
+  const BackBtn = ({ to }) => (
+    <button onClick={() => back(to)} className="font-bold text-base rounded-full px-5 py-2 self-start"
+      style={{ background: "#ffffff18", color: "#E7DBFF", border: "2px solid #ffffff28" }}>←</button>
+  );
+
+  return (
+    <div className="flex flex-col items-center gap-6 px-5 py-10 w-full max-w-md relative z-10">
+      <h2 className="display text-2xl text-center" style={{ color: "#F6F1FF" }}>Nuovo giocatore</h2>
+
+      {step === 0 && (
+        <div className="flex flex-col items-center gap-6 w-full">
+          {canCancel && <BackBtn to={-1} />}
+          <p className="display text-lg" style={{ color: "#CDBBF2" }}>Sei una bambina o un bambino?</p>
+          <div className="flex gap-4">
+            <button onClick={() => { setGender("f"); setAvatar(null); setStep(1); }} className="game-tile"
+              style={{ flexDirection: "column", width: 140, alignItems: "center", gap: 8 }}>
+              <span className="text-5xl">👧</span><span className="display" style={{ color: "#F6F1FF" }}>Bambina</span>
+            </button>
+            <button onClick={() => { setGender("m"); setAvatar(null); setStep(1); }} className="game-tile"
+              style={{ flexDirection: "column", width: 140, alignItems: "center", gap: 8 }}>
+              <span className="text-5xl">👦</span><span className="display" style={{ color: "#F6F1FF" }}>Bambino</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {step === 1 && (
+        <div className="flex flex-col items-center gap-6 w-full">
+          <BackBtn to={0} />
+          <p className="display text-lg" style={{ color: "#CDBBF2" }}>Come ti chiami?</p>
+          <input autoFocus value={name} onChange={(e) => setName(e.target.value)} maxLength={16} placeholder="Il tuo nome"
+            className="text-center display" style={{ width: "100%", maxWidth: 300, padding: "14px 16px", borderRadius: 16, border: "2px solid #ffffff30", background: "#ffffff12", color: "#F6F1FF", fontSize: 24, outline: "none" }} />
+          <button disabled={!name.trim()} onClick={() => setStep(2)} className="listen-btn"
+            style={{ opacity: name.trim() ? 1 : 0.5, fontSize: "1.15rem", padding: "14px 34px" }}>Avanti →</button>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="flex flex-col items-center gap-6 w-full">
+          <BackBtn to={1} />
+          <p className="display text-lg text-center" style={{ color: "#CDBBF2" }}>Scegli il tuo avatar, {name}!</p>
+          <div className="grid grid-cols-4 gap-3">
+            {avatars.map((a) => (
+              <button key={a.id} onClick={() => setAvatar(a.id)} className="shop-card"
+                style={{ border: avatar === a.id ? "3px solid #F5C64F" : "2px solid #ffffff24", background: avatar === a.id ? "#F5C64F22" : "#ffffff10" }}>
+                <span style={{ fontSize: 34 }}>{a.emoji}</span>
+              </button>
+            ))}
+          </div>
+          <button disabled={!avatar} onClick={() => onCreate({ name, gender, avatar })} className="listen-btn"
+            style={{ opacity: avatar ? 1 : 0.5, fontSize: "1.2rem", padding: "16px 36px" }}>✨ Inizia l'avventura!</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ═══════════ APP ═══════════ */
 export default function App() {
-  const [progress, setProgress] = useState(null); // null = loading
-  const [view, setView] = useState({ screen: "map" }); // map | island | game
+  const [store, setStore] = useState(null); // { activeId, profiles: [...] }
+  const [view, setView] = useState({ screen: "profiles" }); // profiles|create|map|island|game|shop
   const [celebrate, setCelebrate] = useState(false);
+  const [dailyToast, setDailyToast] = useState(null); // bonus Fiamma Magica di oggi
+  const [leveledUp, setLeveledUp] = useState(null); // overlay salita di livello
+  const [shopBurst, setShopBurst] = useState(0);
+  const [denyId, setDenyId] = useState(null); // carta negozio "non puoi permettertelo"
   const saveTimer = useRef(null);
+  const prevLevelRef = useRef(null);
+  const didInit = useRef(false);
 
-  useEffect(() => { setProgress(loadProgress()); }, []);
+  // Avvio: carica i profili; primo utente → creazione, altrimenti → selezione
+  useEffect(() => {
+    if (didInit.current) return; // evita il doppio-mount di StrictMode in dev
+    didInit.current = true;
+    const s = loadStore();
+    setStore(s);
+    setView({ screen: s.profiles.length ? "profiles" : "create" });
+  }, []);
 
-  // debounced save su localStorage
+  // Profilo attivo e suoi progressi
+  const activeProfile = store ? store.profiles.find((p) => p.id === store.activeId) || null : null;
+  const progress = activeProfile ? activeProfile.progress : null;
+  const gender = activeProfile ? activeProfile.gender : "f";
+  const playerName = activeProfile ? activeProfile.name : "";
+
+  // Aggiorna i progressi del profilo attivo (stessa firma del vecchio setProgress)
+  const setProgress = useCallback((updater) => {
+    setStore((s) => {
+      if (!s || !s.activeId) return s;
+      return {
+        ...s,
+        profiles: s.profiles.map((pf) =>
+          pf.id === s.activeId
+            ? { ...pf, progress: typeof updater === "function" ? updater(pf.progress) : updater }
+            : pf
+        ),
+      };
+    });
+  }, []);
+
+  // Salvataggio (debounced) di tutto lo store
+  useEffect(() => {
+    if (!store) return;
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => saveStore(store), 500);
+    return () => clearTimeout(saveTimer.current);
+  }, [store]);
+
+  // Rileva la salita di livello quando l'XP cambia
   useEffect(() => {
     if (!progress) return;
-    clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => { saveProgress(progress); }, 600);
-    return () => clearTimeout(saveTimer.current);
-  }, [progress]);
+    const lvl = levelInfo(progress.xp, gender).level;
+    if (prevLevelRef.current === null) {
+      prevLevelRef.current = lvl; // prima misura o cambio utente: nessun festeggiamento
+      return;
+    }
+    if (lvl > prevLevelRef.current) {
+      setLeveledUp(levelInfo(progress.xp, gender));
+      speak("Level up!");
+    }
+    prevLevelRef.current = lvl;
+  }, [progress?.xp]); // eslint-disable-line
 
-  const [audioOn, setAudioOn] = useState(false);
-
-  const unlockAudio = () => {
-    audio.unlock(); // sblocca l'audio sui browser mobile (dentro il tap)
-    speak("Welcome to the Magic Kingdom, Silvana!");
-    setAudioOn(true);
+  // Applica la visita di oggi (Fiamma Magica + bonus) e mostra il toast (una volta)
+  const applyDailyVisit = (pr) => {
+    const visit = dailyVisit(pr);
+    if (!visit.changed) return pr;
+    setDailyToast({ bonus: visit.bonusGems, streak: visit.streak });
+    setTimeout(() => setDailyToast(null), 4200);
+    return {
+      ...pr,
+      gems: pr.gems + visit.bonusGems,
+      streak: visit.streak,
+      bestStreak: Math.max(pr.bestStreak || 0, visit.streak),
+      lastPlayed: visit.today,
+    };
   };
 
-  if (!progress) {
+  const selectProfile = (id) => {
+    const pf = store?.profiles.find((p) => p.id === id);
+    if (!pf) return;
+    audio.unlock(); // sblocca l'audio sui browser mobile (dentro il tap)
+    prevLevelRef.current = null; // reindicizza: niente falso level-up al cambio utente
+    const newProgress = applyDailyVisit(pf.progress);
+    setStore((s) => ({
+      ...s,
+      activeId: id,
+      profiles: s.profiles.map((p) => (p.id === id ? { ...p, progress: newProgress } : p)),
+    }));
+    speak(`Welcome to the Magic Kingdom, ${pf.name}!`);
+    setView({ screen: "map" });
+  };
+
+  const addProfile = ({ name, gender: g, avatar }) => {
+    const pf = createProfile({ name, gender: g, avatar });
+    pf.progress = applyDailyVisit(pf.progress); // accende subito la fiamma del primo giorno
+    audio.unlock();
+    prevLevelRef.current = null;
+    setStore((s) => ({ ...s, activeId: pf.id, profiles: [...s.profiles, pf] }));
+    speak(`Welcome to the Magic Kingdom, ${pf.name}!`);
+    setView({ screen: "map" });
+  };
+
+  const switchUser = () => {
+    prevLevelRef.current = null;
+    setStore((s) => ({ ...s, activeId: null }));
+    setView({ screen: "profiles" });
+  };
+
+  if (!store) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: "#2D1B4E" }}>
         <span className="text-3xl star-twinkle">✨</span>
@@ -764,7 +1091,7 @@ export default function App() {
     );
   }
 
-  const starsOf = (islandId, gameKey) => progress.stars?.[islandId]?.[gameKey] || 0;
+  const starsOf = (islandId, gameKey) => progress?.stars?.[islandId]?.[gameKey] || 0;
   const islandDone = (isl) => isl.games?.every((g) => starsOf(isl.id, g.key) > 0);
   const isUnlocked = (idx) => {
     const isl = ISLANDS[idx];
@@ -776,7 +1103,7 @@ export default function App() {
   const onGem = (words = []) => setProgress((p) => {
     const weak = { ...p.weak };
     words.forEach((w) => { if (weak[w] > 0) weak[w] = weak[w] - 1; });
-    return { ...p, gems: p.gems + 1, weak };
+    return { ...p, gems: p.gems + 1, xp: p.xp + XP_PER_CORRECT, weak };
   });
   const onMiss = (words = []) => setProgress((p) => {
     const weak = { ...p.weak };
@@ -784,22 +1111,57 @@ export default function App() {
     return { ...p, weak };
   });
   const finishGame = (islandId, gameKey) => (starCount) => {
-    setProgress((p) => ({
-      ...p,
-      stars: { ...p.stars, [islandId]: { ...(p.stars[islandId] || {}), [gameKey]: Math.max(starsOf(islandId, gameKey), starCount) } },
-    }));
+    setProgress((p) => {
+      const prev = p.stars?.[islandId]?.[gameKey] || 0;
+      const stars = Math.max(prev, starCount);
+      const gained = Math.max(0, stars - prev); // XP bonus solo per le stelle NUOVE
+      return {
+        ...p,
+        xp: p.xp + gained * XP_PER_STAR,
+        stars: { ...p.stars, [islandId]: { ...(p.stars[islandId] || {}), [gameKey]: stars } },
+      };
+    });
     setView({ screen: "island", islandId });
     setCelebrate(true);
     setTimeout(() => setCelebrate(false), 2600);
   };
 
+  // Negozio: compra (se serve e puoi) oppure equipaggia; i compagni si tolgono
+  const buyEquip = (item) => {
+    if (!progress) return;
+    const owned = isOwned(item, progress.owned);
+    if (!owned && progress.gems < item.cost) {
+      setDenyId(item.id);
+      setTimeout(() => setDenyId(null), 450);
+      return;
+    }
+    if (!owned) setShopBurst((b) => b + 1);
+    setProgress((p) => {
+      const slot = item.cat; // "me" | "pet" | "sky"
+      if (!isOwned(item, p.owned)) {
+        return {
+          ...p,
+          gems: p.gems - item.cost,
+          owned: { ...p.owned, [item.id]: true },
+          equipped: { ...p.equipped, [slot]: item.id },
+        };
+      }
+      if (slot === "pet" && p.equipped.pet === item.id) {
+        return { ...p, equipped: { ...p.equipped, pet: null } }; // togli il compagno
+      }
+      return { ...p, equipped: { ...p.equipped, [slot]: item.id } };
+    });
+  };
+
   const currentIsland = ISLANDS.find((i) => i.id === view.islandId);
   const currentGame = currentIsland?.games?.find((g) => g.key === view.gameKey);
-  const weakCount = Object.values(progress.weak).filter((v) => v > 0).length;
+  const weakCount = progress ? Object.values(progress.weak).filter((v) => v > 0).length : 0;
+  const islandsFreed = ISLANDS.filter((isl) => isl.games && islandDone(isl)).length;
+  const sky = skyGradient(progress ? progress.equipped.sky : "sky_night");
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center overflow-hidden relative"
-      style={{ background: "linear-gradient(180deg, #1E1440 0%, #2D1B4E 45%, #45307A 100%)", fontFamily: "'Nunito', system-ui, sans-serif" }}>
+      style={{ background: sky, fontFamily: "'Nunito', system-ui, sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap');
         .display { font-family: 'Baloo 2', 'Nunito', system-ui, sans-serif; }
@@ -822,7 +1184,13 @@ export default function App() {
         .shake { animation: shakeX .35s ease-in-out; }
         @keyframes floatY { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-9px);} }
         .float { animation: floatY 4.5s ease-in-out infinite; }
-        @media (prefers-reduced-motion: reduce) { .sparkle-fly,.star-twinkle,.gem-pop,.shake,.float { animation: none !important; } }
+        @keyframes flick { 0%,100% { transform: scale(1) rotate(-3deg); filter: brightness(1);} 50% { transform: scale(1.15) rotate(3deg); filter: brightness(1.4);} }
+        .flame-flicker { animation: flick 1.6s ease-in-out infinite; }
+        .shop-card { display:flex; flex-direction:column; align-items:center; gap:4px; padding:12px 6px; border-radius:18px; transition: transform .12s; }
+        .shop-card:active { transform: scale(.95); }
+        @keyframes toastIn { from { opacity:0; transform: translateY(-12px);} to { opacity:1; transform: translateY(0);} }
+        .toast-in { animation: toastIn .4s ease-out; }
+        @media (prefers-reduced-motion: reduce) { .sparkle-fly,.star-twinkle,.gem-pop,.shake,.float,.flame-flicker { animation: none !important; } }
       `}</style>
 
       {Array.from({ length: 22 }).map((_, i) => (
@@ -830,28 +1198,27 @@ export default function App() {
           style={{ left: `${(i * 37) % 100}%`, top: `${(i * 53) % 100}%`, fontSize: i % 3 ? 10 : 15, opacity: 0.5, animationDelay: `${i * 300}ms` }}>✦</span>
       ))}
 
-      {/* ── AUDIO GATE (mobile browsers need a tap to enable sound) ── */}
-      {!audioOn && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 px-8 text-center"
-          style={{ background: "linear-gradient(180deg, #1E1440 0%, #2D1B4E 55%, #45307A 100%)" }}>
-          <h1 className="display leading-tight" style={{ fontSize: "2.1rem", color: "#F6F1FF", textShadow: "0 3px 16px #8E5FD980" }}>
-            Silvana e il<br /><span style={{ color: "#F5C64F" }}>Regno Incantato</span>
-          </h1>
-          <span className="text-6xl float">🏰</span>
-          <button onClick={unlockAudio} className="listen-btn" style={{ fontSize: "1.3rem", padding: "18px 34px" }}>
-            🔊 Tocca per entrare nel Regno
-          </button>
-          <p className="text-sm" style={{ color: "#9F8CC9" }}>Alza il volume: le voci del regno parlano in inglese! ✨</p>
-        </div>
+      {/* ── Bonus giornaliero (Fiamma Magica) & salita di livello ── */}
+      {dailyToast && <DailyToast info={dailyToast} />}
+      {leveledUp && <LevelUpOverlay lvl={leveledUp} gender={gender} onClose={() => setLeveledUp(null)} />}
+
+      {/* ── SELEZIONE PROFILO (il tocco qui sblocca anche l'audio) ── */}
+      {view.screen === "profiles" && (
+        <ProfilesScreen store={store} onSelect={selectProfile} onNew={() => setView({ screen: "create" })} />
+      )}
+
+      {/* ── NUOVO GIOCATORE ── */}
+      {view.screen === "create" && (
+        <CreateProfile canCancel={store.profiles.length > 0} onCancel={() => setView({ screen: "profiles" })} onCreate={addProfile} />
       )}
 
       {/* ── MAP ── */}
-      {view.screen === "map" && (
+      {view.screen === "map" && progress && (
         <div className="flex flex-col items-center gap-5 px-5 py-8 w-full max-w-md relative z-10">
           <h1 className="display text-center leading-tight" style={{ fontSize: "2rem", color: "#F6F1FF", textShadow: "0 3px 16px #8E5FD980" }}>
-            Silvana e il<br /><span style={{ color: "#F5C64F" }}>Regno Incantato</span>
+            Isola Magica
           </h1>
-          <Crown gems={progress.gems} />
+          <RoyalHeader progress={progress} gender={gender} name={playerName} crownFilled={islandsFreed} onShop={() => setView({ screen: "shop" })} onSwitch={switchUser} />
           {weakCount > 0 && (
             <div className="text-sm font-semibold px-4 py-2 rounded-full" style={{ background: "#ffffff12", color: "#CDBBF2", border: "1.5px solid #ffffff22" }}>
               🌟 {weakCount} gemme perdute da ritrovare — torneranno nei giochi!
@@ -886,6 +1253,18 @@ export default function App() {
         </div>
       )}
 
+      {/* ── SHOP ── */}
+      {view.screen === "shop" && progress && (
+        <ShopScreen
+          progress={progress}
+          gender={gender}
+          burst={shopBurst}
+          denyId={denyId}
+          onBuyEquip={buyEquip}
+          onBack={() => setView({ screen: "map" })}
+        />
+      )}
+
       {/* ── ISLAND ── */}
       {view.screen === "island" && currentIsland && (
         <div className="flex flex-col items-center gap-5 px-5 py-8 w-full max-w-md relative z-10">
@@ -899,7 +1278,7 @@ export default function App() {
             {currentIsland.emoji} {currentIsland.name}
           </h2>
           {celebrate && (
-            <div className="display text-xl gem-pop text-center" style={{ color: "#F5C64F" }}>✨ Ottimo lavoro, Silvana! ✨</div>
+            <div className="display text-xl gem-pop text-center" style={{ color: "#F5C64F" }}>✨ Ottimo lavoro, {playerName}! ✨</div>
           )}
           <div className="flex flex-col gap-4 w-full items-center">
             {currentIsland.games.map((g) => (

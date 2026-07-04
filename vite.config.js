@@ -26,10 +26,10 @@ export default defineConfig({
         "icons/icon-maskable-512.png",
       ],
       manifest: {
-        name: "Silvana e il Regno Incantato",
-        short_name: "Regno Incantato",
+        name: "Isola Magica",
+        short_name: "Isola Magica",
         description:
-          "Impara l'inglese giocando nel Regno Incantato — 30 isole da Starters a Flyers.",
+          "Impara l'inglese giocando — 30 isole da Starters a Flyers. Più giocatori, ognuno con la sua avventura.",
         lang: "it",
         dir: "ltr",
         start_url: ".",
