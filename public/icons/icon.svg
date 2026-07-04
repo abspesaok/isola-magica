@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3A2470"/>
+      <stop offset="1" stop-color="#1E1440"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8D978"/>
+      <stop offset="1" stop-color="#E0AC3C"/>
+    </linearGradient>
+    <radialGradient id="gem" cx="0.35" cy="0.30" r="0.85">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#F27EB6"/>
+      <stop offset="1" stop-color="#8E5FD9"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <g fill="#ffffff" opacity="0.55">
+    <circle cx="92" cy="112" r="4"/>
+    <circle cx="420" cy="92" r="5"/>
+    <circle cx="446" cy="300" r="3"/>
+    <circle cx="78" cy="368" r="3"/>
+    <circle cx="360" cy="430" r="4"/>
+  </g>
+
+  <!-- Corona -->
+  <g transform="translate(256,236)">
+    <path d="M-150 78 L-162 -58 L-72 4 L0 -92 L72 4 L162 -58 L150 78 Z"
+          fill="url(#gold)" stroke="#B8892E" stroke-width="9" stroke-linejoin="round"/>
+    <rect x="-152" y="64" width="304" height="40" rx="18" fill="#D9A63F" stroke="#B8892E" stroke-width="7"/>
+    <circle cx="-162" cy="-58" r="17" fill="#3DBE6B" stroke="#ffffff" stroke-width="5"/>
+    <circle cx="0" cy="-92" r="20" fill="#E8455A" stroke="#ffffff" stroke-width="5"/>
+    <circle cx="162" cy="-58" r="17" fill="#3E7BD6" stroke="#ffffff" stroke-width="5"/>
+  </g>
+
+  <!-- Gemma grande -->
+  <g transform="translate(256,406)">
+    <path d="M-52 -10 L-30 -44 L30 -44 L52 -10 L0 52 Z"
+          fill="url(#gem)" stroke="#ffffffcc" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M-52 -10 L52 -10 M-30 -44 L0 -10 L30 -44 M0 -10 L0 52"
+          fill="none" stroke="#ffffff88" stroke-width="3"/>
+  </g>
+</svg>
