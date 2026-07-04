@@ -34,7 +34,25 @@ class AudioEngine {
     this.token = 0; // per annullare sequenze superate
     this._current = null; // elemento <audio> in riproduzione
     this._stop = null; // interrompe la clip corrente (audio o voce)
+    this._busy = false; // true mentre una sequenza speak() è in riproduzione
+    this._idleResolvers = []; // callback in attesa che l'audio finisca
     this._initVoices();
+  }
+
+  /* Risolve quando l'audio in corso è finito (o dopo maxWait ms, per sicurezza).
+     Serve a far partire la frase successiva SENZA tagliare quella attuale. */
+  whenIdle(maxWait = 3000) {
+    if (!this._busy) return Promise.resolve();
+    return new Promise((resolve) => {
+      let done = false;
+      const r = () => {
+        if (done) return;
+        done = true;
+        resolve();
+      };
+      this._idleResolvers.push(r);
+      if (maxWait) setTimeout(r, maxWait);
+    });
   }
 
   /* Carica il manifest degli MP3. Silenzioso se assente. */
@@ -166,18 +184,29 @@ class AudioEngine {
 
     this.cancel();
     const myToken = this.token;
+    this._busy = true;
 
-    for (const phrase of parts) {
-      if (myToken !== this.token) return; // una nuova speak() ci ha superato
-      const file = this.ready ? this.map.get(normalize(phrase)) : null;
-      if (file) {
-        const ok = await this._playFile(file);
+    try {
+      for (const phrase of parts) {
+        if (myToken !== this.token) return; // una nuova speak() ci ha superato
+        const file = this.ready ? this.map.get(normalize(phrase)) : null;
+        if (file) {
+          const ok = await this._playFile(file);
+          if (myToken !== this.token) return;
+          if (!ok) await this._speakSynth(phrase); // MP3 assente/rotto → voce
+        } else {
+          await this._speakSynth(phrase);
+        }
         if (myToken !== this.token) return;
-        if (!ok) await this._speakSynth(phrase); // MP3 assente/rotto → voce
-      } else {
-        await this._speakSynth(phrase);
       }
-      if (myToken !== this.token) return;
+    } finally {
+      // Segnala "idle" solo se questa sequenza non è stata superata da un'altra
+      if (myToken === this.token) {
+        this._busy = false;
+        const resolvers = this._idleResolvers;
+        this._idleResolvers = [];
+        resolvers.forEach((r) => r());
+      }
     }
   }
 }

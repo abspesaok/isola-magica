@@ -249,7 +249,8 @@ function ListenTapGame({ speak, cfg, weak, onGem, onMiss, onDone }) {
     setOptions(shuffle([t, ...distractors]));
     setTarget(t);
     setLocked(false); setWrongIdx(null);
-    setTimeout(() => speak(cfg.prompt(t)), 450);
+    // Aspetta che la lode del turno precedente finisca, poi annuncia il prompt
+    setTimeout(() => audio.whenIdle().then(() => speak(cfg.prompt(t))), 450);
   }, [speak, cfg, weak]);
 
   useEffect(() => { newRound(); }, []); // eslint-disable-line
@@ -310,7 +311,8 @@ function CountGame({ speak, weak, onGem, onMiss, onDone }) {
     while (set.size < 3) set.add(1 + rand(max));
     setN(target); setOpts(shuffle([...set]));
     setLocked(false); setWrongIdx(null);
-    setTimeout(() => speak("How many stars?"), 450);
+    // Aspetta la fine della lode precedente prima di chiedere il turno nuovo
+    setTimeout(() => audio.whenIdle().then(() => speak("How many stars?")), 450);
   }, [speak, weak]);
 
   useEffect(() => { newRound(0); }, []); // eslint-disable-line
@@ -390,7 +392,8 @@ function MemoryGame({ speak, cfg, onGem, onDone }) {
             const nm = [...m, ...nowOpen];
             if (nm.length === PAIRS * 2) {
               setTimeout(() => {
-                speak("You found all the pairs!", PRAISE[rand(PRAISE.length)]);
+                // Non tagliare la lode dell'ultima coppia: parla quando l'audio è libero
+                audio.whenIdle().then(() => speak("You found all the pairs!", PRAISE[rand(PRAISE.length)]));
                 onDone(moves + 1 <= 9 ? 3 : moves + 1 <= 13 ? 2 : 1);
               }, 900);
             }
