@@ -105,6 +105,59 @@ const SCHOOL = [
   { en: "notebook", emoji: "📓" },
 ];
 
+/* Isola 7 — Verbi di azione (Ballo Incantato · Simon Says) */
+const VERBS = [
+  { en: "run", emoji: "🏃" },
+  { en: "jump", emoji: "🤸" },
+  { en: "swim", emoji: "🏊" },
+  { en: "walk", emoji: "🚶" },
+  { en: "dance", emoji: "💃" },
+  { en: "sing", emoji: "🎤" },
+  { en: "clap", emoji: "👏" },
+  { en: "sleep", emoji: "😴" },
+  { en: "eat", emoji: "😋" },
+  { en: "drink", emoji: "🥤" },
+  { en: "read", emoji: "📖" },
+  { en: "draw", emoji: "🎨" },
+];
+
+/* Isola 8 — Meteo e natura (Giardino Reale) */
+const WEATHER = [
+  { en: "sunny", emoji: "☀️" },
+  { en: "rainy", emoji: "🌧️" },
+  { en: "cloudy", emoji: "☁️" },
+  { en: "windy", emoji: "🌬️" },
+  { en: "snowy", emoji: "🌨️" },
+  { en: "stormy", emoji: "⛈️" },
+];
+
+const NATURE = [
+  { en: "sun", emoji: "☀️" },
+  { en: "moon", emoji: "🌙" },
+  { en: "star", emoji: "⭐" },
+  { en: "tree", emoji: "🌳" },
+  { en: "flower", emoji: "🌷" },
+  { en: "rainbow", emoji: "🌈" },
+  { en: "cloud", emoji: "☁️" },
+  { en: "leaf", emoji: "🍃" },
+];
+
+/* Isola 9 — Vestiti (Guardaroba della Regina) */
+const CLOTHES = [
+  { en: "shirt", emoji: "👕" },
+  { en: "trousers", emoji: "👖" },
+  { en: "dress", emoji: "👗" },
+  { en: "shoes", emoji: "👟" },
+  { en: "socks", emoji: "🧦" },
+  { en: "hat", emoji: "👒" },
+  { en: "coat", emoji: "🧥" },
+  { en: "shorts", emoji: "🩳" },
+  { en: "boots", emoji: "👢" },
+  { en: "gloves", emoji: "🧤" },
+  { en: "scarf", emoji: "🧣" },
+  { en: "cap", emoji: "🧢" },
+];
+
 /* Prepositions pool: subject × object × in/on/under (Isola 5) */
 const PREP_SUBJECTS = [
   { en: "cat", emoji: "🐱" },
@@ -455,6 +508,30 @@ const COMBO_POOL = (() => {
   return combos;
 })();
 
+/* Isola 9 — vestiti colorati (colore × capo) */
+const CLOTHES_COMBO = (() => {
+  const usable = COLORS.filter((c) => !["white", "black", "brown"].includes(c.en));
+  const combos = [];
+  CLOTHES.slice(0, 8).forEach((o, i) => {
+    const c = usable[i % usable.length];
+    combos.push({ key: `${c.en}-${o.en}`, color: c, item: o });
+    const c2 = usable[(i + 2) % usable.length];
+    combos.push({ key: `${c2.en}-${o.en}`, color: c2, item: o });
+  });
+  return combos;
+})();
+
+/* Isola 10 — ripasso misto per il BOSS (parole con emoji dalle isole 2–9) */
+const BOSS_POOL = [
+  ...ANIMALS.slice(0, 5),
+  ...FOOD.slice(0, 4),
+  ...HOUSE.slice(0, 3),
+  ...SCHOOL.slice(0, 3),
+  ...CLOTHES.slice(0, 4),
+  ...NATURE.slice(0, 3),
+  ...VERBS.slice(0, 4),
+];
+
 const ISLANDS = [
   {
     id: "gems",
@@ -728,10 +805,170 @@ const ISLANDS = [
       },
     ],
   },
-  { id: "ball", name: "Il Ballo Incantato", emoji: "💃", sub: "Verbi di azione + microfono", locked: true },
-  { id: "garden", name: "Il Giardino Reale", emoji: "🌦️", sub: "Natura e meteo", locked: true },
-  { id: "wardrobe", name: "Il Guardaroba della Regina", emoji: "👗", sub: "I vestiti", locked: true },
-  { id: "dragon", name: "BOSS: Il Drago Parlante", emoji: "🐉", sub: "La grande avventura finale", locked: true },
+  {
+    id: "ball",
+    name: "Il Ballo Incantato",
+    emoji: "💃",
+    sub: "I verbi di azione",
+    games: [
+      {
+        key: "simon", emoji: "🕺", title: "Simon Says", type: "listentap",
+        cfg: {
+          pool: VERBS,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          wordsOf: (a) => [a.en],
+          prompt: (a) => `Simon says: ${a.en}!`,
+          hintIt: "Simon dice: tocca l'azione giusta!",
+          render: (a) => <span style={{ fontSize: 64 }}>{a.emoji}</span>,
+          style: () => ({
+            width: 128, height: 128, borderRadius: 28,
+            background: "#ffffff14", border: "3px solid #ffffff30",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      {
+        key: "memoryBall", emoji: "💃", title: "Memory del Ballo", type: "memory",
+        cfg: {
+          pool: VERBS,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
+        },
+      },
+    ],
+  },
+  {
+    id: "garden",
+    name: "Il Giardino Reale",
+    emoji: "🌦️",
+    sub: "Il meteo e la natura",
+    games: [
+      {
+        key: "weather", emoji: "🌈", title: "Che Tempo Fa?", type: "listentap",
+        cfg: {
+          pool: WEATHER,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          wordsOf: (a) => [a.en],
+          prompt: (a) => `It's ${a.en}!`,
+          hintIt: "Che tempo fa nel regno? Tocca il cielo giusto",
+          render: (a) => <span style={{ fontSize: 64 }}>{a.emoji}</span>,
+          style: () => ({
+            width: 128, height: 128, borderRadius: 28,
+            background: "#ffffff14", border: "3px solid #ffffff30",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      {
+        key: "nature", emoji: "🌳", title: "Il Giardino Magico", type: "listentap",
+        cfg: {
+          pool: NATURE,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          wordsOf: (a) => [a.en],
+          prompt: (a) => `Find the ${a.en}!`,
+          hintIt: "Ascolta e tocca la cosa giusta della natura",
+          render: (a) => <span style={{ fontSize: 64 }}>{a.emoji}</span>,
+          style: () => ({
+            width: 128, height: 128, borderRadius: 28,
+            background: "#ffffff14", border: "3px solid #ffffff30",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      {
+        key: "memoryGarden", emoji: "🌷", title: "Memory del Giardino", type: "memory",
+        cfg: {
+          pool: NATURE,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
+        },
+      },
+    ],
+  },
+  {
+    id: "wardrobe",
+    name: "Il Guardaroba della Regina",
+    emoji: "👗",
+    sub: "I vestiti · colore + capo",
+    games: [
+      {
+        key: "dressup", emoji: "👗", title: "Vesti la Principessa", type: "listentap",
+        cfg: {
+          pool: CLOTHES,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          wordsOf: (a) => [a.en],
+          prompt: (a) => `Put on the ${a.en}!`,
+          hintIt: "Vesti la principessa: tocca il capo giusto",
+          render: (a) => <span style={{ fontSize: 64 }}>{a.emoji}</span>,
+          style: () => ({
+            width: 128, height: 128, borderRadius: 28,
+            background: "#ffffff14", border: "3px solid #ffffff30",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      {
+        key: "fashion", emoji: "🌈", title: "Sfilata Colorata", type: "listentap",
+        cfg: {
+          pool: CLOTHES_COMBO,
+          keyOf: (x) => x.key,
+          sayOf: (x) => `the ${x.color.en} ${x.item.en}`,
+          wordsOf: (x) => [x.color.en, x.item.en],
+          prompt: (x) => `She's wearing a ${x.color.en} ${x.item.en}!`,
+          hintIt: "Colore + capo: tocca il vestito giusto",
+          render: (x) => <span style={{ fontSize: 54 }}>{x.item.emoji}</span>,
+          style: (x) => ({
+            width: 128, height: 128, borderRadius: "50%",
+            background: `radial-gradient(circle at 34% 28%, #ffffff90, ${x.color.hex} 68%)`,
+            border: "3px solid #ffffff55",
+            boxShadow: `0 8px 24px ${x.color.hex}66`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      {
+        key: "memoryWardrobe", emoji: "🧥", title: "Memory del Guardaroba", type: "memory",
+        cfg: {
+          pool: CLOTHES,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
+        },
+      },
+    ],
+  },
+  {
+    id: "dragon",
+    name: "BOSS: Il Drago Parlante",
+    emoji: "🐉",
+    sub: "La grande sfida di ripasso",
+    games: [
+      {
+        key: "dragonChallenge", emoji: "🔥", title: "La Sfida del Drago", type: "listentap",
+        cfg: {
+          pool: BOSS_POOL,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          wordsOf: (a) => [a.en],
+          prompt: (a) => `Find the ${a.en}!`,
+          hintIt: "Il Drago mette alla prova tutto! Tocca la parola giusta",
+          render: (a) => <span style={{ fontSize: 58 }}>{a.emoji}</span>,
+          style: () => ({
+            width: 128, height: 128, borderRadius: 28,
+            background: "#ffffff14", border: "3px solid #ffffff30",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      { key: "dragonNumbers", emoji: "🔢", title: "Il Tesoro dei Numeri", type: "count" },
+      {
+        key: "memoryDragon", emoji: "🐲", title: "Memory del Drago", type: "memory",
+        cfg: {
+          pool: BOSS_POOL,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
+        },
+      },
+    ],
+  },
 ];
 
 /* ═══════════ LEVEL-UP: header, XP, fiamma, negozio ═══════════ */
