@@ -391,7 +391,7 @@ export default function App() {
     <div style={{ minHeight: "100vh", background: "linear-gradient(180deg,#1E1440,#2D1B4E 55%,#45307A)", fontFamily: "'Nunito', system-ui, sans-serif", display: "flex", justifyContent: "center", padding: "28px 16px" }}>
       <div style={{ width: "100%", maxWidth: 560, display: "flex", flexDirection: "column", gap: 18 }}>
         <h1 style={{ color: "#F6F1FF", fontSize: 26, fontWeight: 800, margin: 0, textAlign: "center" }}>
-          🎙️ Regno Incantato — <span style={{ color: "#F5C64F" }}>Generatore Audio</span>
+          🎙️ Isola Magica — <span style={{ color: "#F5C64F" }}>Generatore Audio</span>
         </h1>
         <p style={{ color: "#CDBBF2", fontSize: 14, textAlign: "center", margin: 0 }}>
           {manifest.length} clip · {totalChars.toLocaleString("it-IT")} caratteri totali · la API key resta solo in memoria
