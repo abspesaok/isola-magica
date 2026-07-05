@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { speak, audio } from "./audio";
+import { micSupported, listenOnce, matchesSpoken } from "./mic";
 import { loadStore, saveStore, createProfile, avatarById, avatarsByGender } from "./profiles";
 import {
   levelInfo, dailyVisit, skyGradient, shopItem,
@@ -494,6 +495,102 @@ function MemoryGame({ speak, cfg, onGem, onDone }) {
   );
 }
 
+/* Say it! — guarda, ascolta e ripeti al microfono (riconoscimento vocale) */
+function SayGame({ speak, cfg, weak, onGem, onMiss, onDone }) {
+  const ROUNDS_SAY = 6;
+  const [round, setRound] = useState(0);
+  const [target, setTarget] = useState(null);
+  const [state, setState] = useState("idle"); // idle | listening | correct | retry
+  const [heard, setHeard] = useState("");
+  const [burst, setBurst] = useState(0);
+  const mistakes = useRef(0);
+  const stopRef = useRef(null);
+  const supported = micSupported();
+
+  const goalOf = (t) => (cfg.say ? cfg.say(t) : cfg.sayOf(t));
+
+  const newRound = useCallback(() => {
+    const t = pickTarget(cfg.pool, weak, cfg.keyOf);
+    setTarget(t); setState("idle"); setHeard("");
+    setTimeout(() => audio.whenIdle().then(() => speak(cfg.say ? cfg.say(t) : cfg.sayOf(t))), 450);
+  }, [speak, cfg, weak]);
+
+  useEffect(() => {
+    newRound();
+    return () => { if (stopRef.current) stopRef.current(); };
+  }, []); // eslint-disable-line
+
+  const advance = () => {
+    if (round + 1 >= ROUNDS_SAY) onDone(mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1);
+    else { setRound((r) => r + 1); newRound(); }
+  };
+
+  const succeed = () => {
+    setState("correct"); setBurst((b) => b + 1); onGem(cfg.wordsOf(target));
+    speak(cfg.sayOf(target), PRAISE[rand(PRAISE.length)]);
+    setTimeout(advance, 1600);
+  };
+
+  const listen = () => {
+    if (state === "listening" || state === "correct") return;
+    setState("listening"); setHeard("");
+    const goal = goalOf(target);
+    stopRef.current = listenOnce({
+      onResult: (alts) => {
+        if (!alts) { setState("retry"); return; }
+        setHeard(alts[0] || "");
+        if (matchesSpoken(alts, goal) || matchesSpoken(alts, cfg.keyOf(target))) {
+          succeed();
+        } else {
+          mistakes.current += 1; onMiss(cfg.wordsOf(target)); setState("retry");
+          setTimeout(() => audio.whenIdle().then(() => speak(goalOf(target))), 200);
+        }
+      },
+    });
+  };
+
+  // Fallback senza riconoscimento vocale: si ripete e si auto-valuta
+  const iSaidIt = () => {
+    setBurst((b) => b + 1); onGem(cfg.wordsOf(target));
+    speak(PRAISE[rand(PRAISE.length)]);
+    setTimeout(advance, 1200);
+  };
+
+  if (!target) return null;
+  return (
+    <div className="flex flex-col items-center gap-5 w-full">
+      <SparkleBurst trigger={burst} />
+      <ProgressPips total={ROUNDS_SAY} done={round} />
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>{cfg.hintIt}</p>
+      <div className="flex items-center justify-center" style={{ width: 150, height: 150, borderRadius: 32, background: "#ffffff12", border: "3px solid #ffffff28" }}>
+        {cfg.render ? cfg.render(target) : null}
+      </div>
+      <div className="display text-2xl text-center" style={{ color: "#F6F1FF" }}>{goalOf(target)}</div>
+      <button onClick={() => speak(goalOf(target))} className="listen-btn">🔊 Riascolta</button>
+
+      {supported ? (
+        <>
+          <button onClick={listen} disabled={state === "listening" || state === "correct"}
+            className={`mic-btn ${state === "listening" ? "mic-pulse" : ""}`}
+            style={{ background: state === "listening" ? "#E8455A" : state === "correct" ? "linear-gradient(180deg,#3DBE6B,#2E9A54)" : "linear-gradient(180deg,#8E5FD9,#5A3AA0)" }}>
+            {state === "listening" ? "🎙️ Ti ascolto…" : state === "correct" ? "✅ Bravissima!" : "🎤 Tocca e parla"}
+          </button>
+          {state === "retry" && (
+            <p className="text-sm text-center" style={{ color: "#F5A9B8" }}>
+              Riprova! {heard ? `(ho sentito: "${heard}")` : ""}
+            </p>
+          )}
+        </>
+      ) : (
+        <div className="flex flex-col items-center gap-3">
+          <p className="text-sm text-center" style={{ color: "#9F8CC9" }}>Ripeti ad alta voce, poi tocca ✅</p>
+          <button onClick={iSaidIt} className="mic-btn" style={{ background: "linear-gradient(180deg,#3DBE6B,#2E9A54)" }}>✅ L'ho detto!</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ═══════════ ISLAND CONTENT (data, not code) ═══════════ */
 const COMBO_POOL = (() => {
   // colored creatures: cross-sample of Island 1 colors × Island 2 animals
@@ -666,6 +763,15 @@ const ISLANDS = [
           renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
         },
       },
+      {
+        key: "sayMirror", emoji: "🎤", title: "Parla allo Specchio", type: "say",
+        cfg: {
+          pool: [...FAMILY, ...BODY],
+          keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en],
+          render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>,
+          hintIt: "Guarda, ascolta e ripeti al microfono!",
+        },
+      },
     ],
   },
   {
@@ -833,6 +939,16 @@ const ISLANDS = [
           pool: VERBS,
           keyOf: (a) => a.en, sayOf: (a) => a.en,
           renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
+        },
+      },
+      {
+        key: "sayBall", emoji: "🎤", title: "La Danza dei Comandi", type: "say",
+        cfg: {
+          pool: VERBS,
+          keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en],
+          say: (a) => `I can ${a.en}!`,
+          render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>,
+          hintIt: "Di' la frase al microfono: I can…!",
         },
       },
     ],
@@ -1427,7 +1543,12 @@ export default function App() {
         .shop-card:active { transform: scale(.95); }
         @keyframes toastIn { from { opacity:0; transform: translateY(-12px);} to { opacity:1; transform: translateY(0);} }
         .toast-in { animation: toastIn .4s ease-out; }
-        @media (prefers-reduced-motion: reduce) { .sparkle-fly,.star-twinkle,.gem-pop,.shake,.float,.flame-flicker { animation: none !important; } }
+        .mic-btn { font-weight:800; font-size:1.15rem; color:#fff; border:none; border-radius:999px; padding:16px 32px; box-shadow:0 5px 0 #00000033; transition: transform .1s; }
+        .mic-btn:active { transform: translateY(3px); box-shadow:0 2px 0 #00000033; }
+        .mic-btn:disabled { opacity:.9; }
+        @keyframes micPulse { 0%,100% { transform: scale(1); box-shadow:0 5px 0 #00000033, 0 0 0 0 #E8455A66;} 50% { transform: scale(1.05); box-shadow:0 5px 0 #00000033, 0 0 0 14px #E8455A00;} }
+        .mic-pulse { animation: micPulse 1.1s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) { .sparkle-fly,.star-twinkle,.gem-pop,.shake,.float,.flame-flicker,.mic-pulse { animation: none !important; } }
       `}</style>
 
       {Array.from({ length: 22 }).map((_, i) => (
@@ -1558,6 +1679,10 @@ export default function App() {
           {currentGame.type === "memory" && (
             <MemoryGame speak={speak} cfg={currentGame.cfg}
               onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "say" && (
+            <SayGame speak={speak} cfg={currentGame.cfg} weak={progress.weak}
+              onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
           )}
         </div>
       )}
