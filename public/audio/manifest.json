@@ -1,0 +1,2686 @@
+[
+  {
+    "file": "sys_welcome.mp3",
+    "text": "Welcome to the Magic Kingdom, Silvana!"
+  },
+  {
+    "file": "praise_1.mp3",
+    "text": "Great job!"
+  },
+  {
+    "file": "praise_2.mp3",
+    "text": "Wonderful!"
+  },
+  {
+    "file": "praise_3.mp3",
+    "text": "Perfect!"
+  },
+  {
+    "file": "praise_4.mp3",
+    "text": "Amazing!"
+  },
+  {
+    "file": "praise_5.mp3",
+    "text": "Well done!"
+  },
+  {
+    "file": "praise_6.mp3",
+    "text": "Fantastic!"
+  },
+  {
+    "file": "sys_howmany.mp3",
+    "text": "How many stars?"
+  },
+  {
+    "file": "sys_tryagain.mp3",
+    "text": "Try again! How many stars?"
+  },
+  {
+    "file": "sys_pairs_intro.mp3",
+    "text": "Find the pairs! Match the word and the picture."
+  },
+  {
+    "file": "sys_pairs_done.mp3",
+    "text": "You found all the pairs!"
+  },
+  {
+    "file": "word_red.mp3",
+    "text": "red"
+  },
+  {
+    "file": "word_blue.mp3",
+    "text": "blue"
+  },
+  {
+    "file": "word_green.mp3",
+    "text": "green"
+  },
+  {
+    "file": "word_yellow.mp3",
+    "text": "yellow"
+  },
+  {
+    "file": "word_purple.mp3",
+    "text": "purple"
+  },
+  {
+    "file": "word_pink.mp3",
+    "text": "pink"
+  },
+  {
+    "file": "word_orange.mp3",
+    "text": "orange"
+  },
+  {
+    "file": "word_brown.mp3",
+    "text": "brown"
+  },
+  {
+    "file": "word_white.mp3",
+    "text": "white"
+  },
+  {
+    "file": "word_black.mp3",
+    "text": "black"
+  },
+  {
+    "file": "word_cat.mp3",
+    "text": "cat"
+  },
+  {
+    "file": "word_dog.mp3",
+    "text": "dog"
+  },
+  {
+    "file": "word_horse.mp3",
+    "text": "horse"
+  },
+  {
+    "file": "word_fish.mp3",
+    "text": "fish"
+  },
+  {
+    "file": "word_bird.mp3",
+    "text": "bird"
+  },
+  {
+    "file": "word_elephant.mp3",
+    "text": "elephant"
+  },
+  {
+    "file": "word_lion.mp3",
+    "text": "lion"
+  },
+  {
+    "file": "word_monkey.mp3",
+    "text": "monkey"
+  },
+  {
+    "file": "word_mouse.mp3",
+    "text": "mouse"
+  },
+  {
+    "file": "word_sheep.mp3",
+    "text": "sheep"
+  },
+  {
+    "file": "word_cow.mp3",
+    "text": "cow"
+  },
+  {
+    "file": "word_duck.mp3",
+    "text": "duck"
+  },
+  {
+    "file": "word_frog.mp3",
+    "text": "frog"
+  },
+  {
+    "file": "word_bee.mp3",
+    "text": "bee"
+  },
+  {
+    "file": "word_mother.mp3",
+    "text": "mother"
+  },
+  {
+    "file": "word_father.mp3",
+    "text": "father"
+  },
+  {
+    "file": "word_sister.mp3",
+    "text": "sister"
+  },
+  {
+    "file": "word_brother.mp3",
+    "text": "brother"
+  },
+  {
+    "file": "word_baby.mp3",
+    "text": "baby"
+  },
+  {
+    "file": "word_grandmother.mp3",
+    "text": "grandmother"
+  },
+  {
+    "file": "word_grandfather.mp3",
+    "text": "grandfather"
+  },
+  {
+    "file": "word_eyes.mp3",
+    "text": "eyes"
+  },
+  {
+    "file": "word_ear.mp3",
+    "text": "ear"
+  },
+  {
+    "file": "word_nose.mp3",
+    "text": "nose"
+  },
+  {
+    "file": "word_mouth.mp3",
+    "text": "mouth"
+  },
+  {
+    "file": "word_hand.mp3",
+    "text": "hand"
+  },
+  {
+    "file": "word_foot.mp3",
+    "text": "foot"
+  },
+  {
+    "file": "word_arm.mp3",
+    "text": "arm"
+  },
+  {
+    "file": "word_leg.mp3",
+    "text": "leg"
+  },
+  {
+    "file": "word_face.mp3",
+    "text": "face"
+  },
+  {
+    "file": "word_apple.mp3",
+    "text": "apple"
+  },
+  {
+    "file": "word_banana.mp3",
+    "text": "banana"
+  },
+  {
+    "file": "word_egg.mp3",
+    "text": "egg"
+  },
+  {
+    "file": "word_bread.mp3",
+    "text": "bread"
+  },
+  {
+    "file": "word_milk.mp3",
+    "text": "milk"
+  },
+  {
+    "file": "word_water.mp3",
+    "text": "water"
+  },
+  {
+    "file": "word_cake.mp3",
+    "text": "cake"
+  },
+  {
+    "file": "word_ice_cream.mp3",
+    "text": "ice cream"
+  },
+  {
+    "file": "word_pizza.mp3",
+    "text": "pizza"
+  },
+  {
+    "file": "word_chicken.mp3",
+    "text": "chicken"
+  },
+  {
+    "file": "word_rice.mp3",
+    "text": "rice"
+  },
+  {
+    "file": "word_carrot.mp3",
+    "text": "carrot"
+  },
+  {
+    "file": "word_grapes.mp3",
+    "text": "grapes"
+  },
+  {
+    "file": "word_bed.mp3",
+    "text": "bed"
+  },
+  {
+    "file": "word_chair.mp3",
+    "text": "chair"
+  },
+  {
+    "file": "word_door.mp3",
+    "text": "door"
+  },
+  {
+    "file": "word_window.mp3",
+    "text": "window"
+  },
+  {
+    "file": "word_lamp.mp3",
+    "text": "lamp"
+  },
+  {
+    "file": "word_clock.mp3",
+    "text": "clock"
+  },
+  {
+    "file": "word_key.mp3",
+    "text": "key"
+  },
+  {
+    "file": "word_sofa.mp3",
+    "text": "sofa"
+  },
+  {
+    "file": "word_television.mp3",
+    "text": "television"
+  },
+  {
+    "file": "word_cup.mp3",
+    "text": "cup"
+  },
+  {
+    "file": "word_book.mp3",
+    "text": "book"
+  },
+  {
+    "file": "word_pen.mp3",
+    "text": "pen"
+  },
+  {
+    "file": "word_pencil.mp3",
+    "text": "pencil"
+  },
+  {
+    "file": "word_bag.mp3",
+    "text": "bag"
+  },
+  {
+    "file": "word_ruler.mp3",
+    "text": "ruler"
+  },
+  {
+    "file": "word_scissors.mp3",
+    "text": "scissors"
+  },
+  {
+    "file": "word_crayon.mp3",
+    "text": "crayon"
+  },
+  {
+    "file": "word_notebook.mp3",
+    "text": "notebook"
+  },
+  {
+    "file": "word_in.mp3",
+    "text": "in"
+  },
+  {
+    "file": "word_on.mp3",
+    "text": "on"
+  },
+  {
+    "file": "word_under.mp3",
+    "text": "under"
+  },
+  {
+    "file": "word_num_1.mp3",
+    "text": "one"
+  },
+  {
+    "file": "word_num_2.mp3",
+    "text": "two"
+  },
+  {
+    "file": "word_num_3.mp3",
+    "text": "three"
+  },
+  {
+    "file": "word_num_4.mp3",
+    "text": "four"
+  },
+  {
+    "file": "word_num_5.mp3",
+    "text": "five"
+  },
+  {
+    "file": "word_num_6.mp3",
+    "text": "six"
+  },
+  {
+    "file": "word_num_7.mp3",
+    "text": "seven"
+  },
+  {
+    "file": "word_num_8.mp3",
+    "text": "eight"
+  },
+  {
+    "file": "word_num_9.mp3",
+    "text": "nine"
+  },
+  {
+    "file": "word_num_10.mp3",
+    "text": "ten"
+  },
+  {
+    "file": "word_num_11.mp3",
+    "text": "eleven"
+  },
+  {
+    "file": "word_num_12.mp3",
+    "text": "twelve"
+  },
+  {
+    "file": "word_num_13.mp3",
+    "text": "thirteen"
+  },
+  {
+    "file": "word_num_14.mp3",
+    "text": "fourteen"
+  },
+  {
+    "file": "word_num_15.mp3",
+    "text": "fifteen"
+  },
+  {
+    "file": "word_num_16.mp3",
+    "text": "sixteen"
+  },
+  {
+    "file": "word_num_17.mp3",
+    "text": "seventeen"
+  },
+  {
+    "file": "word_num_18.mp3",
+    "text": "eighteen"
+  },
+  {
+    "file": "word_num_19.mp3",
+    "text": "nineteen"
+  },
+  {
+    "file": "word_num_20.mp3",
+    "text": "twenty"
+  },
+  {
+    "file": "prompt_gem_red.mp3",
+    "text": "Find the red gem!"
+  },
+  {
+    "file": "prompt_gem_blue.mp3",
+    "text": "Find the blue gem!"
+  },
+  {
+    "file": "prompt_gem_green.mp3",
+    "text": "Find the green gem!"
+  },
+  {
+    "file": "prompt_gem_yellow.mp3",
+    "text": "Find the yellow gem!"
+  },
+  {
+    "file": "prompt_gem_purple.mp3",
+    "text": "Find the purple gem!"
+  },
+  {
+    "file": "prompt_gem_pink.mp3",
+    "text": "Find the pink gem!"
+  },
+  {
+    "file": "prompt_gem_orange.mp3",
+    "text": "Find the orange gem!"
+  },
+  {
+    "file": "prompt_gem_brown.mp3",
+    "text": "Find the brown gem!"
+  },
+  {
+    "file": "prompt_gem_white.mp3",
+    "text": "Find the white gem!"
+  },
+  {
+    "file": "prompt_gem_black.mp3",
+    "text": "Find the black gem!"
+  },
+  {
+    "file": "yes_1.mp3",
+    "text": "Yes! one stars."
+  },
+  {
+    "file": "yes_2.mp3",
+    "text": "Yes! two stars."
+  },
+  {
+    "file": "yes_3.mp3",
+    "text": "Yes! three stars."
+  },
+  {
+    "file": "yes_4.mp3",
+    "text": "Yes! four stars."
+  },
+  {
+    "file": "yes_5.mp3",
+    "text": "Yes! five stars."
+  },
+  {
+    "file": "yes_6.mp3",
+    "text": "Yes! six stars."
+  },
+  {
+    "file": "yes_7.mp3",
+    "text": "Yes! seven stars."
+  },
+  {
+    "file": "yes_8.mp3",
+    "text": "Yes! eight stars."
+  },
+  {
+    "file": "yes_9.mp3",
+    "text": "Yes! nine stars."
+  },
+  {
+    "file": "yes_10.mp3",
+    "text": "Yes! ten stars."
+  },
+  {
+    "file": "yes_11.mp3",
+    "text": "Yes! eleven stars."
+  },
+  {
+    "file": "yes_12.mp3",
+    "text": "Yes! twelve stars."
+  },
+  {
+    "file": "yes_13.mp3",
+    "text": "Yes! thirteen stars."
+  },
+  {
+    "file": "yes_14.mp3",
+    "text": "Yes! fourteen stars."
+  },
+  {
+    "file": "yes_15.mp3",
+    "text": "Yes! fifteen stars."
+  },
+  {
+    "file": "yes_16.mp3",
+    "text": "Yes! sixteen stars."
+  },
+  {
+    "file": "yes_17.mp3",
+    "text": "Yes! seventeen stars."
+  },
+  {
+    "file": "yes_18.mp3",
+    "text": "Yes! eighteen stars."
+  },
+  {
+    "file": "yes_19.mp3",
+    "text": "Yes! nineteen stars."
+  },
+  {
+    "file": "yes_20.mp3",
+    "text": "Yes! twenty stars."
+  },
+  {
+    "file": "prompt_animal_cat.mp3",
+    "text": "Find the cat!"
+  },
+  {
+    "file": "prompt_animal_dog.mp3",
+    "text": "Find the dog!"
+  },
+  {
+    "file": "prompt_animal_horse.mp3",
+    "text": "Find the horse!"
+  },
+  {
+    "file": "prompt_animal_fish.mp3",
+    "text": "Find the fish!"
+  },
+  {
+    "file": "prompt_animal_bird.mp3",
+    "text": "Find the bird!"
+  },
+  {
+    "file": "prompt_animal_elephant.mp3",
+    "text": "Find the elephant!"
+  },
+  {
+    "file": "prompt_animal_lion.mp3",
+    "text": "Find the lion!"
+  },
+  {
+    "file": "prompt_animal_monkey.mp3",
+    "text": "Find the monkey!"
+  },
+  {
+    "file": "prompt_animal_mouse.mp3",
+    "text": "Find the mouse!"
+  },
+  {
+    "file": "prompt_animal_sheep.mp3",
+    "text": "Find the sheep!"
+  },
+  {
+    "file": "prompt_animal_cow.mp3",
+    "text": "Find the cow!"
+  },
+  {
+    "file": "prompt_animal_duck.mp3",
+    "text": "Find the duck!"
+  },
+  {
+    "file": "prompt_animal_frog.mp3",
+    "text": "Find the frog!"
+  },
+  {
+    "file": "prompt_animal_bee.mp3",
+    "text": "Find the bee!"
+  },
+  {
+    "file": "prompt_combo_red_cat.mp3",
+    "text": "Find the red cat!"
+  },
+  {
+    "file": "name_combo_red_cat.mp3",
+    "text": "the red cat"
+  },
+  {
+    "file": "prompt_combo_yellow_cat.mp3",
+    "text": "Find the yellow cat!"
+  },
+  {
+    "file": "name_combo_yellow_cat.mp3",
+    "text": "the yellow cat"
+  },
+  {
+    "file": "prompt_combo_blue_dog.mp3",
+    "text": "Find the blue dog!"
+  },
+  {
+    "file": "name_combo_blue_dog.mp3",
+    "text": "the blue dog"
+  },
+  {
+    "file": "prompt_combo_purple_dog.mp3",
+    "text": "Find the purple dog!"
+  },
+  {
+    "file": "name_combo_purple_dog.mp3",
+    "text": "the purple dog"
+  },
+  {
+    "file": "prompt_combo_green_horse.mp3",
+    "text": "Find the green horse!"
+  },
+  {
+    "file": "name_combo_green_horse.mp3",
+    "text": "the green horse"
+  },
+  {
+    "file": "prompt_combo_pink_horse.mp3",
+    "text": "Find the pink horse!"
+  },
+  {
+    "file": "name_combo_pink_horse.mp3",
+    "text": "the pink horse"
+  },
+  {
+    "file": "prompt_combo_yellow_fish.mp3",
+    "text": "Find the yellow fish!"
+  },
+  {
+    "file": "name_combo_yellow_fish.mp3",
+    "text": "the yellow fish"
+  },
+  {
+    "file": "prompt_combo_orange_fish.mp3",
+    "text": "Find the orange fish!"
+  },
+  {
+    "file": "name_combo_orange_fish.mp3",
+    "text": "the orange fish"
+  },
+  {
+    "file": "prompt_combo_purple_bird.mp3",
+    "text": "Find the purple bird!"
+  },
+  {
+    "file": "name_combo_purple_bird.mp3",
+    "text": "the purple bird"
+  },
+  {
+    "file": "prompt_combo_red_bird.mp3",
+    "text": "Find the red bird!"
+  },
+  {
+    "file": "name_combo_red_bird.mp3",
+    "text": "the red bird"
+  },
+  {
+    "file": "prompt_combo_pink_elephant.mp3",
+    "text": "Find the pink elephant!"
+  },
+  {
+    "file": "name_combo_pink_elephant.mp3",
+    "text": "the pink elephant"
+  },
+  {
+    "file": "prompt_combo_blue_elephant.mp3",
+    "text": "Find the blue elephant!"
+  },
+  {
+    "file": "name_combo_blue_elephant.mp3",
+    "text": "the blue elephant"
+  },
+  {
+    "file": "prompt_combo_orange_lion.mp3",
+    "text": "Find the orange lion!"
+  },
+  {
+    "file": "name_combo_orange_lion.mp3",
+    "text": "the orange lion"
+  },
+  {
+    "file": "prompt_combo_green_lion.mp3",
+    "text": "Find the green lion!"
+  },
+  {
+    "file": "name_combo_green_lion.mp3",
+    "text": "the green lion"
+  },
+  {
+    "file": "prompt_combo_red_monkey.mp3",
+    "text": "Find the red monkey!"
+  },
+  {
+    "file": "name_combo_red_monkey.mp3",
+    "text": "the red monkey"
+  },
+  {
+    "file": "prompt_combo_yellow_monkey.mp3",
+    "text": "Find the yellow monkey!"
+  },
+  {
+    "file": "name_combo_yellow_monkey.mp3",
+    "text": "the yellow monkey"
+  },
+  {
+    "file": "prompt_combo_blue_mouse.mp3",
+    "text": "Find the blue mouse!"
+  },
+  {
+    "file": "name_combo_blue_mouse.mp3",
+    "text": "the blue mouse"
+  },
+  {
+    "file": "prompt_combo_purple_mouse.mp3",
+    "text": "Find the purple mouse!"
+  },
+  {
+    "file": "name_combo_purple_mouse.mp3",
+    "text": "the purple mouse"
+  },
+  {
+    "file": "prompt_combo_green_sheep.mp3",
+    "text": "Find the green sheep!"
+  },
+  {
+    "file": "name_combo_green_sheep.mp3",
+    "text": "the green sheep"
+  },
+  {
+    "file": "prompt_combo_pink_sheep.mp3",
+    "text": "Find the pink sheep!"
+  },
+  {
+    "file": "name_combo_pink_sheep.mp3",
+    "text": "the pink sheep"
+  },
+  {
+    "file": "prompt_family_mother.mp3",
+    "text": "Find the mother!"
+  },
+  {
+    "file": "prompt_family_father.mp3",
+    "text": "Find the father!"
+  },
+  {
+    "file": "prompt_family_sister.mp3",
+    "text": "Find the sister!"
+  },
+  {
+    "file": "prompt_family_brother.mp3",
+    "text": "Find the brother!"
+  },
+  {
+    "file": "prompt_family_baby.mp3",
+    "text": "Find the baby!"
+  },
+  {
+    "file": "prompt_family_grandmother.mp3",
+    "text": "Find the grandmother!"
+  },
+  {
+    "file": "prompt_family_grandfather.mp3",
+    "text": "Find the grandfather!"
+  },
+  {
+    "file": "prompt_body_eyes.mp3",
+    "text": "Touch the eyes!"
+  },
+  {
+    "file": "prompt_body_ear.mp3",
+    "text": "Touch the ear!"
+  },
+  {
+    "file": "prompt_body_nose.mp3",
+    "text": "Touch the nose!"
+  },
+  {
+    "file": "prompt_body_mouth.mp3",
+    "text": "Touch the mouth!"
+  },
+  {
+    "file": "prompt_body_hand.mp3",
+    "text": "Touch the hand!"
+  },
+  {
+    "file": "prompt_body_foot.mp3",
+    "text": "Touch the foot!"
+  },
+  {
+    "file": "prompt_body_arm.mp3",
+    "text": "Touch the arm!"
+  },
+  {
+    "file": "prompt_body_leg.mp3",
+    "text": "Touch the leg!"
+  },
+  {
+    "file": "prompt_body_face.mp3",
+    "text": "Touch the face!"
+  },
+  {
+    "file": "prompt_food_apple.mp3",
+    "text": "I like apple! Give me the apple, please!"
+  },
+  {
+    "file": "prompt_food_banana.mp3",
+    "text": "I like banana! Give me the banana, please!"
+  },
+  {
+    "file": "prompt_food_orange.mp3",
+    "text": "I like orange! Give me the orange, please!"
+  },
+  {
+    "file": "prompt_food_egg.mp3",
+    "text": "I like egg! Give me the egg, please!"
+  },
+  {
+    "file": "prompt_food_bread.mp3",
+    "text": "I like bread! Give me the bread, please!"
+  },
+  {
+    "file": "prompt_food_milk.mp3",
+    "text": "I like milk! Give me the milk, please!"
+  },
+  {
+    "file": "prompt_food_water.mp3",
+    "text": "I like water! Give me the water, please!"
+  },
+  {
+    "file": "prompt_food_cake.mp3",
+    "text": "I like cake! Give me the cake, please!"
+  },
+  {
+    "file": "prompt_food_ice_cream.mp3",
+    "text": "I like ice cream! Give me the ice cream, please!"
+  },
+  {
+    "file": "prompt_food_pizza.mp3",
+    "text": "I like pizza! Give me the pizza, please!"
+  },
+  {
+    "file": "prompt_food_chicken.mp3",
+    "text": "I like chicken! Give me the chicken, please!"
+  },
+  {
+    "file": "prompt_food_rice.mp3",
+    "text": "I like rice! Give me the rice, please!"
+  },
+  {
+    "file": "prompt_food_carrot.mp3",
+    "text": "I like carrot! Give me the carrot, please!"
+  },
+  {
+    "file": "prompt_food_grapes.mp3",
+    "text": "I like grapes! Give me the grapes, please!"
+  },
+  {
+    "file": "prompt_house_bed.mp3",
+    "text": "Find the bed!"
+  },
+  {
+    "file": "prompt_house_chair.mp3",
+    "text": "Find the chair!"
+  },
+  {
+    "file": "prompt_house_door.mp3",
+    "text": "Find the door!"
+  },
+  {
+    "file": "prompt_house_window.mp3",
+    "text": "Find the window!"
+  },
+  {
+    "file": "prompt_house_lamp.mp3",
+    "text": "Find the lamp!"
+  },
+  {
+    "file": "prompt_house_clock.mp3",
+    "text": "Find the clock!"
+  },
+  {
+    "file": "prompt_house_key.mp3",
+    "text": "Find the key!"
+  },
+  {
+    "file": "prompt_house_sofa.mp3",
+    "text": "Find the sofa!"
+  },
+  {
+    "file": "prompt_house_television.mp3",
+    "text": "Find the television!"
+  },
+  {
+    "file": "prompt_house_cup.mp3",
+    "text": "Find the cup!"
+  },
+  {
+    "file": "prompt_prep_cat_in_box.mp3",
+    "text": "The cat is in the box!"
+  },
+  {
+    "file": "prompt_prep_cat_on_box.mp3",
+    "text": "The cat is on the box!"
+  },
+  {
+    "file": "prompt_prep_cat_under_box.mp3",
+    "text": "The cat is under the box!"
+  },
+  {
+    "file": "prompt_prep_cat_in_chair.mp3",
+    "text": "The cat is in the chair!"
+  },
+  {
+    "file": "prompt_prep_cat_on_chair.mp3",
+    "text": "The cat is on the chair!"
+  },
+  {
+    "file": "prompt_prep_cat_under_chair.mp3",
+    "text": "The cat is under the chair!"
+  },
+  {
+    "file": "prompt_prep_cat_in_bed.mp3",
+    "text": "The cat is in the bed!"
+  },
+  {
+    "file": "prompt_prep_cat_on_bed.mp3",
+    "text": "The cat is on the bed!"
+  },
+  {
+    "file": "prompt_prep_cat_under_bed.mp3",
+    "text": "The cat is under the bed!"
+  },
+  {
+    "file": "prompt_prep_dog_in_box.mp3",
+    "text": "The dog is in the box!"
+  },
+  {
+    "file": "prompt_prep_dog_on_box.mp3",
+    "text": "The dog is on the box!"
+  },
+  {
+    "file": "prompt_prep_dog_under_box.mp3",
+    "text": "The dog is under the box!"
+  },
+  {
+    "file": "prompt_prep_dog_in_chair.mp3",
+    "text": "The dog is in the chair!"
+  },
+  {
+    "file": "prompt_prep_dog_on_chair.mp3",
+    "text": "The dog is on the chair!"
+  },
+  {
+    "file": "prompt_prep_dog_under_chair.mp3",
+    "text": "The dog is under the chair!"
+  },
+  {
+    "file": "prompt_prep_dog_in_bed.mp3",
+    "text": "The dog is in the bed!"
+  },
+  {
+    "file": "prompt_prep_dog_on_bed.mp3",
+    "text": "The dog is on the bed!"
+  },
+  {
+    "file": "prompt_prep_dog_under_bed.mp3",
+    "text": "The dog is under the bed!"
+  },
+  {
+    "file": "prompt_prep_ball_in_box.mp3",
+    "text": "The ball is in the box!"
+  },
+  {
+    "file": "prompt_prep_ball_on_box.mp3",
+    "text": "The ball is on the box!"
+  },
+  {
+    "file": "prompt_prep_ball_under_box.mp3",
+    "text": "The ball is under the box!"
+  },
+  {
+    "file": "prompt_prep_ball_in_chair.mp3",
+    "text": "The ball is in the chair!"
+  },
+  {
+    "file": "prompt_prep_ball_on_chair.mp3",
+    "text": "The ball is on the chair!"
+  },
+  {
+    "file": "prompt_prep_ball_under_chair.mp3",
+    "text": "The ball is under the chair!"
+  },
+  {
+    "file": "prompt_prep_ball_in_bed.mp3",
+    "text": "The ball is in the bed!"
+  },
+  {
+    "file": "prompt_prep_ball_on_bed.mp3",
+    "text": "The ball is on the bed!"
+  },
+  {
+    "file": "prompt_prep_ball_under_bed.mp3",
+    "text": "The ball is under the bed!"
+  },
+  {
+    "file": "prompt_prep_mouse_in_box.mp3",
+    "text": "The mouse is in the box!"
+  },
+  {
+    "file": "prompt_prep_mouse_on_box.mp3",
+    "text": "The mouse is on the box!"
+  },
+  {
+    "file": "prompt_prep_mouse_under_box.mp3",
+    "text": "The mouse is under the box!"
+  },
+  {
+    "file": "prompt_prep_mouse_in_chair.mp3",
+    "text": "The mouse is in the chair!"
+  },
+  {
+    "file": "prompt_prep_mouse_on_chair.mp3",
+    "text": "The mouse is on the chair!"
+  },
+  {
+    "file": "prompt_prep_mouse_under_chair.mp3",
+    "text": "The mouse is under the chair!"
+  },
+  {
+    "file": "prompt_prep_mouse_in_bed.mp3",
+    "text": "The mouse is in the bed!"
+  },
+  {
+    "file": "prompt_prep_mouse_on_bed.mp3",
+    "text": "The mouse is on the bed!"
+  },
+  {
+    "file": "prompt_prep_mouse_under_bed.mp3",
+    "text": "The mouse is under the bed!"
+  },
+  {
+    "file": "name_prep_in_box.mp3",
+    "text": "in the box"
+  },
+  {
+    "file": "name_prep_in_chair.mp3",
+    "text": "in the chair"
+  },
+  {
+    "file": "name_prep_in_bed.mp3",
+    "text": "in the bed"
+  },
+  {
+    "file": "name_prep_on_box.mp3",
+    "text": "on the box"
+  },
+  {
+    "file": "name_prep_on_chair.mp3",
+    "text": "on the chair"
+  },
+  {
+    "file": "name_prep_on_bed.mp3",
+    "text": "on the bed"
+  },
+  {
+    "file": "name_prep_under_box.mp3",
+    "text": "under the box"
+  },
+  {
+    "file": "name_prep_under_chair.mp3",
+    "text": "under the chair"
+  },
+  {
+    "file": "name_prep_under_bed.mp3",
+    "text": "under the bed"
+  },
+  {
+    "file": "prompt_school_book.mp3",
+    "text": "Put the book in the bag!"
+  },
+  {
+    "file": "prompt_school_pen.mp3",
+    "text": "Put the pen in the bag!"
+  },
+  {
+    "file": "prompt_school_pencil.mp3",
+    "text": "Put the pencil in the bag!"
+  },
+  {
+    "file": "prompt_school_bag.mp3",
+    "text": "Put the bag in the bag!"
+  },
+  {
+    "file": "prompt_school_ruler.mp3",
+    "text": "Put the ruler in the bag!"
+  },
+  {
+    "file": "prompt_school_scissors.mp3",
+    "text": "Put the scissors in the bag!"
+  },
+  {
+    "file": "prompt_school_crayon.mp3",
+    "text": "Put the crayon in the bag!"
+  },
+  {
+    "file": "prompt_school_notebook.mp3",
+    "text": "Put the notebook in the bag!"
+  },
+  {
+    "file": "prompt_scombo_red_book.mp3",
+    "text": "Find the red book!"
+  },
+  {
+    "file": "name_scombo_red_book.mp3",
+    "text": "the red book"
+  },
+  {
+    "file": "prompt_scombo_yellow_book.mp3",
+    "text": "Find the yellow book!"
+  },
+  {
+    "file": "name_scombo_yellow_book.mp3",
+    "text": "the yellow book"
+  },
+  {
+    "file": "prompt_scombo_blue_pen.mp3",
+    "text": "Find the blue pen!"
+  },
+  {
+    "file": "name_scombo_blue_pen.mp3",
+    "text": "the blue pen"
+  },
+  {
+    "file": "prompt_scombo_purple_pen.mp3",
+    "text": "Find the purple pen!"
+  },
+  {
+    "file": "name_scombo_purple_pen.mp3",
+    "text": "the purple pen"
+  },
+  {
+    "file": "prompt_scombo_green_pencil.mp3",
+    "text": "Find the green pencil!"
+  },
+  {
+    "file": "name_scombo_green_pencil.mp3",
+    "text": "the green pencil"
+  },
+  {
+    "file": "prompt_scombo_pink_pencil.mp3",
+    "text": "Find the pink pencil!"
+  },
+  {
+    "file": "name_scombo_pink_pencil.mp3",
+    "text": "the pink pencil"
+  },
+  {
+    "file": "prompt_scombo_yellow_bag.mp3",
+    "text": "Find the yellow bag!"
+  },
+  {
+    "file": "name_scombo_yellow_bag.mp3",
+    "text": "the yellow bag"
+  },
+  {
+    "file": "prompt_scombo_orange_bag.mp3",
+    "text": "Find the orange bag!"
+  },
+  {
+    "file": "name_scombo_orange_bag.mp3",
+    "text": "the orange bag"
+  },
+  {
+    "file": "prompt_scombo_purple_ruler.mp3",
+    "text": "Find the purple ruler!"
+  },
+  {
+    "file": "name_scombo_purple_ruler.mp3",
+    "text": "the purple ruler"
+  },
+  {
+    "file": "prompt_scombo_red_ruler.mp3",
+    "text": "Find the red ruler!"
+  },
+  {
+    "file": "name_scombo_red_ruler.mp3",
+    "text": "the red ruler"
+  },
+  {
+    "file": "prompt_scombo_pink_scissors.mp3",
+    "text": "Find the pink scissors!"
+  },
+  {
+    "file": "name_scombo_pink_scissors.mp3",
+    "text": "the pink scissors"
+  },
+  {
+    "file": "prompt_scombo_blue_scissors.mp3",
+    "text": "Find the blue scissors!"
+  },
+  {
+    "file": "name_scombo_blue_scissors.mp3",
+    "text": "the blue scissors"
+  },
+  {
+    "file": "word_run.mp3",
+    "text": "run"
+  },
+  {
+    "file": "prompt_simon_run.mp3",
+    "text": "Simon says: run!"
+  },
+  {
+    "file": "say_ican_run.mp3",
+    "text": "I can run!"
+  },
+  {
+    "file": "word_jump.mp3",
+    "text": "jump"
+  },
+  {
+    "file": "prompt_simon_jump.mp3",
+    "text": "Simon says: jump!"
+  },
+  {
+    "file": "say_ican_jump.mp3",
+    "text": "I can jump!"
+  },
+  {
+    "file": "word_swim.mp3",
+    "text": "swim"
+  },
+  {
+    "file": "prompt_simon_swim.mp3",
+    "text": "Simon says: swim!"
+  },
+  {
+    "file": "say_ican_swim.mp3",
+    "text": "I can swim!"
+  },
+  {
+    "file": "word_walk.mp3",
+    "text": "walk"
+  },
+  {
+    "file": "prompt_simon_walk.mp3",
+    "text": "Simon says: walk!"
+  },
+  {
+    "file": "say_ican_walk.mp3",
+    "text": "I can walk!"
+  },
+  {
+    "file": "word_dance.mp3",
+    "text": "dance"
+  },
+  {
+    "file": "prompt_simon_dance.mp3",
+    "text": "Simon says: dance!"
+  },
+  {
+    "file": "say_ican_dance.mp3",
+    "text": "I can dance!"
+  },
+  {
+    "file": "word_sing.mp3",
+    "text": "sing"
+  },
+  {
+    "file": "prompt_simon_sing.mp3",
+    "text": "Simon says: sing!"
+  },
+  {
+    "file": "say_ican_sing.mp3",
+    "text": "I can sing!"
+  },
+  {
+    "file": "word_clap.mp3",
+    "text": "clap"
+  },
+  {
+    "file": "prompt_simon_clap.mp3",
+    "text": "Simon says: clap!"
+  },
+  {
+    "file": "say_ican_clap.mp3",
+    "text": "I can clap!"
+  },
+  {
+    "file": "word_sleep.mp3",
+    "text": "sleep"
+  },
+  {
+    "file": "prompt_simon_sleep.mp3",
+    "text": "Simon says: sleep!"
+  },
+  {
+    "file": "say_ican_sleep.mp3",
+    "text": "I can sleep!"
+  },
+  {
+    "file": "word_eat.mp3",
+    "text": "eat"
+  },
+  {
+    "file": "prompt_simon_eat.mp3",
+    "text": "Simon says: eat!"
+  },
+  {
+    "file": "say_ican_eat.mp3",
+    "text": "I can eat!"
+  },
+  {
+    "file": "word_drink.mp3",
+    "text": "drink"
+  },
+  {
+    "file": "prompt_simon_drink.mp3",
+    "text": "Simon says: drink!"
+  },
+  {
+    "file": "say_ican_drink.mp3",
+    "text": "I can drink!"
+  },
+  {
+    "file": "word_read.mp3",
+    "text": "read"
+  },
+  {
+    "file": "prompt_simon_read.mp3",
+    "text": "Simon says: read!"
+  },
+  {
+    "file": "say_ican_read.mp3",
+    "text": "I can read!"
+  },
+  {
+    "file": "word_draw.mp3",
+    "text": "draw"
+  },
+  {
+    "file": "prompt_simon_draw.mp3",
+    "text": "Simon says: draw!"
+  },
+  {
+    "file": "say_ican_draw.mp3",
+    "text": "I can draw!"
+  },
+  {
+    "file": "word_sunny.mp3",
+    "text": "sunny"
+  },
+  {
+    "file": "prompt_weather_sunny.mp3",
+    "text": "It's sunny!"
+  },
+  {
+    "file": "prompt_wasweather_sunny.mp3",
+    "text": "It was sunny!"
+  },
+  {
+    "file": "word_rainy.mp3",
+    "text": "rainy"
+  },
+  {
+    "file": "prompt_weather_rainy.mp3",
+    "text": "It's rainy!"
+  },
+  {
+    "file": "prompt_wasweather_rainy.mp3",
+    "text": "It was rainy!"
+  },
+  {
+    "file": "word_cloudy.mp3",
+    "text": "cloudy"
+  },
+  {
+    "file": "prompt_weather_cloudy.mp3",
+    "text": "It's cloudy!"
+  },
+  {
+    "file": "prompt_wasweather_cloudy.mp3",
+    "text": "It was cloudy!"
+  },
+  {
+    "file": "word_windy.mp3",
+    "text": "windy"
+  },
+  {
+    "file": "prompt_weather_windy.mp3",
+    "text": "It's windy!"
+  },
+  {
+    "file": "prompt_wasweather_windy.mp3",
+    "text": "It was windy!"
+  },
+  {
+    "file": "word_snowy.mp3",
+    "text": "snowy"
+  },
+  {
+    "file": "prompt_weather_snowy.mp3",
+    "text": "It's snowy!"
+  },
+  {
+    "file": "prompt_wasweather_snowy.mp3",
+    "text": "It was snowy!"
+  },
+  {
+    "file": "word_stormy.mp3",
+    "text": "stormy"
+  },
+  {
+    "file": "prompt_weather_stormy.mp3",
+    "text": "It's stormy!"
+  },
+  {
+    "file": "prompt_wasweather_stormy.mp3",
+    "text": "It was stormy!"
+  },
+  {
+    "file": "word_sun.mp3",
+    "text": "sun"
+  },
+  {
+    "file": "prompt_nature_sun.mp3",
+    "text": "Find the sun!"
+  },
+  {
+    "file": "word_moon.mp3",
+    "text": "moon"
+  },
+  {
+    "file": "prompt_nature_moon.mp3",
+    "text": "Find the moon!"
+  },
+  {
+    "file": "word_star.mp3",
+    "text": "star"
+  },
+  {
+    "file": "prompt_nature_star.mp3",
+    "text": "Find the star!"
+  },
+  {
+    "file": "word_tree.mp3",
+    "text": "tree"
+  },
+  {
+    "file": "prompt_nature_tree.mp3",
+    "text": "Find the tree!"
+  },
+  {
+    "file": "word_flower.mp3",
+    "text": "flower"
+  },
+  {
+    "file": "prompt_nature_flower.mp3",
+    "text": "Find the flower!"
+  },
+  {
+    "file": "word_rainbow.mp3",
+    "text": "rainbow"
+  },
+  {
+    "file": "prompt_nature_rainbow.mp3",
+    "text": "Find the rainbow!"
+  },
+  {
+    "file": "word_cloud.mp3",
+    "text": "cloud"
+  },
+  {
+    "file": "prompt_nature_cloud.mp3",
+    "text": "Find the cloud!"
+  },
+  {
+    "file": "word_leaf.mp3",
+    "text": "leaf"
+  },
+  {
+    "file": "prompt_nature_leaf.mp3",
+    "text": "Find the leaf!"
+  },
+  {
+    "file": "word_shirt.mp3",
+    "text": "shirt"
+  },
+  {
+    "file": "prompt_clothes_shirt.mp3",
+    "text": "Put on the shirt!"
+  },
+  {
+    "file": "word_trousers.mp3",
+    "text": "trousers"
+  },
+  {
+    "file": "prompt_clothes_trousers.mp3",
+    "text": "Put on the trousers!"
+  },
+  {
+    "file": "word_dress.mp3",
+    "text": "dress"
+  },
+  {
+    "file": "prompt_clothes_dress.mp3",
+    "text": "Put on the dress!"
+  },
+  {
+    "file": "word_shoes.mp3",
+    "text": "shoes"
+  },
+  {
+    "file": "prompt_clothes_shoes.mp3",
+    "text": "Put on the shoes!"
+  },
+  {
+    "file": "word_socks.mp3",
+    "text": "socks"
+  },
+  {
+    "file": "prompt_clothes_socks.mp3",
+    "text": "Put on the socks!"
+  },
+  {
+    "file": "word_hat.mp3",
+    "text": "hat"
+  },
+  {
+    "file": "prompt_clothes_hat.mp3",
+    "text": "Put on the hat!"
+  },
+  {
+    "file": "word_coat.mp3",
+    "text": "coat"
+  },
+  {
+    "file": "prompt_clothes_coat.mp3",
+    "text": "Put on the coat!"
+  },
+  {
+    "file": "word_shorts.mp3",
+    "text": "shorts"
+  },
+  {
+    "file": "prompt_clothes_shorts.mp3",
+    "text": "Put on the shorts!"
+  },
+  {
+    "file": "word_boots.mp3",
+    "text": "boots"
+  },
+  {
+    "file": "prompt_clothes_boots.mp3",
+    "text": "Put on the boots!"
+  },
+  {
+    "file": "word_gloves.mp3",
+    "text": "gloves"
+  },
+  {
+    "file": "prompt_clothes_gloves.mp3",
+    "text": "Put on the gloves!"
+  },
+  {
+    "file": "word_scarf.mp3",
+    "text": "scarf"
+  },
+  {
+    "file": "prompt_clothes_scarf.mp3",
+    "text": "Put on the scarf!"
+  },
+  {
+    "file": "word_cap.mp3",
+    "text": "cap"
+  },
+  {
+    "file": "prompt_clothes_cap.mp3",
+    "text": "Put on the cap!"
+  },
+  {
+    "file": "prompt_fashion_red_shirt.mp3",
+    "text": "She's wearing a red shirt!"
+  },
+  {
+    "file": "name_fashion_red_shirt.mp3",
+    "text": "the red shirt"
+  },
+  {
+    "file": "prompt_fashion_green_shirt.mp3",
+    "text": "She's wearing a green shirt!"
+  },
+  {
+    "file": "name_fashion_green_shirt.mp3",
+    "text": "the green shirt"
+  },
+  {
+    "file": "prompt_fashion_blue_trousers.mp3",
+    "text": "She's wearing a blue trousers!"
+  },
+  {
+    "file": "name_fashion_blue_trousers.mp3",
+    "text": "the blue trousers"
+  },
+  {
+    "file": "prompt_fashion_yellow_trousers.mp3",
+    "text": "She's wearing a yellow trousers!"
+  },
+  {
+    "file": "name_fashion_yellow_trousers.mp3",
+    "text": "the yellow trousers"
+  },
+  {
+    "file": "prompt_fashion_green_dress.mp3",
+    "text": "She's wearing a green dress!"
+  },
+  {
+    "file": "name_fashion_green_dress.mp3",
+    "text": "the green dress"
+  },
+  {
+    "file": "prompt_fashion_purple_dress.mp3",
+    "text": "She's wearing a purple dress!"
+  },
+  {
+    "file": "name_fashion_purple_dress.mp3",
+    "text": "the purple dress"
+  },
+  {
+    "file": "prompt_fashion_yellow_shoes.mp3",
+    "text": "She's wearing a yellow shoes!"
+  },
+  {
+    "file": "name_fashion_yellow_shoes.mp3",
+    "text": "the yellow shoes"
+  },
+  {
+    "file": "prompt_fashion_pink_shoes.mp3",
+    "text": "She's wearing a pink shoes!"
+  },
+  {
+    "file": "name_fashion_pink_shoes.mp3",
+    "text": "the pink shoes"
+  },
+  {
+    "file": "prompt_fashion_purple_socks.mp3",
+    "text": "She's wearing a purple socks!"
+  },
+  {
+    "file": "name_fashion_purple_socks.mp3",
+    "text": "the purple socks"
+  },
+  {
+    "file": "prompt_fashion_orange_socks.mp3",
+    "text": "She's wearing a orange socks!"
+  },
+  {
+    "file": "name_fashion_orange_socks.mp3",
+    "text": "the orange socks"
+  },
+  {
+    "file": "prompt_fashion_pink_hat.mp3",
+    "text": "She's wearing a pink hat!"
+  },
+  {
+    "file": "name_fashion_pink_hat.mp3",
+    "text": "the pink hat"
+  },
+  {
+    "file": "prompt_fashion_red_hat.mp3",
+    "text": "She's wearing a red hat!"
+  },
+  {
+    "file": "name_fashion_red_hat.mp3",
+    "text": "the red hat"
+  },
+  {
+    "file": "prompt_fashion_orange_coat.mp3",
+    "text": "She's wearing a orange coat!"
+  },
+  {
+    "file": "name_fashion_orange_coat.mp3",
+    "text": "the orange coat"
+  },
+  {
+    "file": "prompt_fashion_blue_coat.mp3",
+    "text": "She's wearing a blue coat!"
+  },
+  {
+    "file": "name_fashion_blue_coat.mp3",
+    "text": "the blue coat"
+  },
+  {
+    "file": "prompt_fashion_red_shorts.mp3",
+    "text": "She's wearing a red shorts!"
+  },
+  {
+    "file": "name_fashion_red_shorts.mp3",
+    "text": "the red shorts"
+  },
+  {
+    "file": "prompt_fashion_green_shorts.mp3",
+    "text": "She's wearing a green shorts!"
+  },
+  {
+    "file": "name_fashion_green_shorts.mp3",
+    "text": "the green shorts"
+  },
+  {
+    "file": "prompt_find_apple.mp3",
+    "text": "Find the apple!"
+  },
+  {
+    "file": "prompt_find_banana.mp3",
+    "text": "Find the banana!"
+  },
+  {
+    "file": "prompt_find_orange.mp3",
+    "text": "Find the orange!"
+  },
+  {
+    "file": "prompt_find_egg.mp3",
+    "text": "Find the egg!"
+  },
+  {
+    "file": "prompt_find_book.mp3",
+    "text": "Find the book!"
+  },
+  {
+    "file": "prompt_find_pen.mp3",
+    "text": "Find the pen!"
+  },
+  {
+    "file": "prompt_find_pencil.mp3",
+    "text": "Find the pencil!"
+  },
+  {
+    "file": "prompt_find_shirt.mp3",
+    "text": "Find the shirt!"
+  },
+  {
+    "file": "prompt_find_trousers.mp3",
+    "text": "Find the trousers!"
+  },
+  {
+    "file": "prompt_find_dress.mp3",
+    "text": "Find the dress!"
+  },
+  {
+    "file": "prompt_find_shoes.mp3",
+    "text": "Find the shoes!"
+  },
+  {
+    "file": "prompt_find_run.mp3",
+    "text": "Find the run!"
+  },
+  {
+    "file": "prompt_find_jump.mp3",
+    "text": "Find the jump!"
+  },
+  {
+    "file": "prompt_find_swim.mp3",
+    "text": "Find the swim!"
+  },
+  {
+    "file": "prompt_find_walk.mp3",
+    "text": "Find the walk!"
+  },
+  {
+    "file": "story_dragon_n1.mp3",
+    "text": "Hello! I am the dragon. I am very hungry! What can I eat?"
+  },
+  {
+    "file": "story_dragon_n2.mp3",
+    "text": "Thank you! Now let's fly. How is the weather today?"
+  },
+  {
+    "file": "story_dragon_n3.mp3",
+    "text": "Who comes with us on the adventure?"
+  },
+  {
+    "file": "story_dragon_n4.mp3",
+    "text": "We found the treasure! Which gem do you want?"
+  },
+  {
+    "file": "story_dragon_c1.mp3",
+    "text": "Yum! I like apples!"
+  },
+  {
+    "file": "story_dragon_c2.mp3",
+    "text": "Yum! I like pizza!"
+  },
+  {
+    "file": "story_dragon_c3.mp3",
+    "text": "Yum! I like cake!"
+  },
+  {
+    "file": "story_dragon_c4.mp3",
+    "text": "It's sunny! Let's fly high!"
+  },
+  {
+    "file": "story_dragon_c5.mp3",
+    "text": "It's rainy! Take an umbrella!"
+  },
+  {
+    "file": "story_dragon_c6.mp3",
+    "text": "The unicorn! Hello unicorn!"
+  },
+  {
+    "file": "story_dragon_c7.mp3",
+    "text": "The lion! Roar!"
+  },
+  {
+    "file": "story_dragon_c8.mp3",
+    "text": "The cat! Meow!"
+  },
+  {
+    "file": "story_dragon_c9.mp3",
+    "text": "The red gem! Beautiful!"
+  },
+  {
+    "file": "story_dragon_c10.mp3",
+    "text": "The blue gem! Beautiful!"
+  },
+  {
+    "file": "story_dragon_c11.mp3",
+    "text": "The green gem! Beautiful!"
+  },
+  {
+    "file": "word_doctor.mp3",
+    "text": "doctor"
+  },
+  {
+    "file": "prompt_job_doctor.mp3",
+    "text": "He's a doctor!"
+  },
+  {
+    "file": "word_teacher.mp3",
+    "text": "teacher"
+  },
+  {
+    "file": "prompt_job_teacher.mp3",
+    "text": "He's a teacher!"
+  },
+  {
+    "file": "word_farmer.mp3",
+    "text": "farmer"
+  },
+  {
+    "file": "prompt_job_farmer.mp3",
+    "text": "He's a farmer!"
+  },
+  {
+    "file": "word_cook.mp3",
+    "text": "cook"
+  },
+  {
+    "file": "prompt_job_cook.mp3",
+    "text": "He's a cook!"
+  },
+  {
+    "file": "word_pilot.mp3",
+    "text": "pilot"
+  },
+  {
+    "file": "prompt_job_pilot.mp3",
+    "text": "He's a pilot!"
+  },
+  {
+    "file": "word_police_officer.mp3",
+    "text": "police officer"
+  },
+  {
+    "file": "prompt_job_police_officer.mp3",
+    "text": "He's a police officer!"
+  },
+  {
+    "file": "word_firefighter.mp3",
+    "text": "firefighter"
+  },
+  {
+    "file": "prompt_job_firefighter.mp3",
+    "text": "He's a firefighter!"
+  },
+  {
+    "file": "word_singer.mp3",
+    "text": "singer"
+  },
+  {
+    "file": "prompt_job_singer.mp3",
+    "text": "He's a singer!"
+  },
+  {
+    "file": "word_painter.mp3",
+    "text": "painter"
+  },
+  {
+    "file": "prompt_job_painter.mp3",
+    "text": "He's a painter!"
+  },
+  {
+    "file": "word_astronaut.mp3",
+    "text": "astronaut"
+  },
+  {
+    "file": "prompt_job_astronaut.mp3",
+    "text": "He's a astronaut!"
+  },
+  {
+    "file": "word_school.mp3",
+    "text": "school"
+  },
+  {
+    "file": "prompt_place_school.mp3",
+    "text": "Let's go to the school!"
+  },
+  {
+    "file": "word_hospital.mp3",
+    "text": "hospital"
+  },
+  {
+    "file": "prompt_place_hospital.mp3",
+    "text": "Let's go to the hospital!"
+  },
+  {
+    "file": "word_shop.mp3",
+    "text": "shop"
+  },
+  {
+    "file": "prompt_place_shop.mp3",
+    "text": "Let's go to the shop!"
+  },
+  {
+    "file": "word_park.mp3",
+    "text": "park"
+  },
+  {
+    "file": "prompt_place_park.mp3",
+    "text": "Let's go to the park!"
+  },
+  {
+    "file": "word_house.mp3",
+    "text": "house"
+  },
+  {
+    "file": "prompt_place_house.mp3",
+    "text": "Let's go to the house!"
+  },
+  {
+    "file": "word_station.mp3",
+    "text": "station"
+  },
+  {
+    "file": "prompt_place_station.mp3",
+    "text": "Let's go to the station!"
+  },
+  {
+    "file": "word_farm.mp3",
+    "text": "farm"
+  },
+  {
+    "file": "prompt_place_farm.mp3",
+    "text": "Let's go to the farm!"
+  },
+  {
+    "file": "word_beach.mp3",
+    "text": "beach"
+  },
+  {
+    "file": "prompt_place_beach.mp3",
+    "text": "Let's go to the beach!"
+  },
+  {
+    "file": "word_castle.mp3",
+    "text": "castle"
+  },
+  {
+    "file": "prompt_place_castle.mp3",
+    "text": "Let's go to the castle!"
+  },
+  {
+    "file": "word_church.mp3",
+    "text": "church"
+  },
+  {
+    "file": "prompt_place_church.mp3",
+    "text": "Let's go to the church!"
+  },
+  {
+    "file": "prompt_market_apple.mp3",
+    "text": "Can I have some apple, please?"
+  },
+  {
+    "file": "prompt_market_banana.mp3",
+    "text": "Can I have some banana, please?"
+  },
+  {
+    "file": "prompt_market_orange.mp3",
+    "text": "Can I have some orange, please?"
+  },
+  {
+    "file": "prompt_market_grapes.mp3",
+    "text": "Can I have some grapes, please?"
+  },
+  {
+    "file": "prompt_market_carrot.mp3",
+    "text": "Can I have some carrot, please?"
+  },
+  {
+    "file": "word_tomato.mp3",
+    "text": "tomato"
+  },
+  {
+    "file": "prompt_market_tomato.mp3",
+    "text": "Can I have some tomato, please?"
+  },
+  {
+    "file": "word_potato.mp3",
+    "text": "potato"
+  },
+  {
+    "file": "prompt_market_potato.mp3",
+    "text": "Can I have some potato, please?"
+  },
+  {
+    "file": "word_cheese.mp3",
+    "text": "cheese"
+  },
+  {
+    "file": "prompt_market_cheese.mp3",
+    "text": "Can I have some cheese, please?"
+  },
+  {
+    "file": "prompt_market_bread.mp3",
+    "text": "Can I have some bread, please?"
+  },
+  {
+    "file": "word_lemon.mp3",
+    "text": "lemon"
+  },
+  {
+    "file": "prompt_market_lemon.mp3",
+    "text": "Can I have some lemon, please?"
+  },
+  {
+    "file": "word_monday.mp3",
+    "text": "Monday"
+  },
+  {
+    "file": "prompt_day_monday.mp3",
+    "text": "Today is Monday!"
+  },
+  {
+    "file": "word_tuesday.mp3",
+    "text": "Tuesday"
+  },
+  {
+    "file": "prompt_day_tuesday.mp3",
+    "text": "Today is Tuesday!"
+  },
+  {
+    "file": "word_wednesday.mp3",
+    "text": "Wednesday"
+  },
+  {
+    "file": "prompt_day_wednesday.mp3",
+    "text": "Today is Wednesday!"
+  },
+  {
+    "file": "word_thursday.mp3",
+    "text": "Thursday"
+  },
+  {
+    "file": "prompt_day_thursday.mp3",
+    "text": "Today is Thursday!"
+  },
+  {
+    "file": "word_friday.mp3",
+    "text": "Friday"
+  },
+  {
+    "file": "prompt_day_friday.mp3",
+    "text": "Today is Friday!"
+  },
+  {
+    "file": "word_saturday.mp3",
+    "text": "Saturday"
+  },
+  {
+    "file": "prompt_day_saturday.mp3",
+    "text": "Today is Saturday!"
+  },
+  {
+    "file": "word_sunday.mp3",
+    "text": "Sunday"
+  },
+  {
+    "file": "prompt_day_sunday.mp3",
+    "text": "Today is Sunday!"
+  },
+  {
+    "file": "word_get_up.mp3",
+    "text": "get up"
+  },
+  {
+    "file": "prompt_routine_get_up.mp3",
+    "text": "Every day I get up."
+  },
+  {
+    "file": "word_wash.mp3",
+    "text": "wash"
+  },
+  {
+    "file": "prompt_routine_wash.mp3",
+    "text": "Every day I wash."
+  },
+  {
+    "file": "word_eat_breakfast.mp3",
+    "text": "eat breakfast"
+  },
+  {
+    "file": "prompt_routine_eat_breakfast.mp3",
+    "text": "Every day I eat breakfast."
+  },
+  {
+    "file": "word_go_to_school.mp3",
+    "text": "go to school"
+  },
+  {
+    "file": "prompt_routine_go_to_school.mp3",
+    "text": "Every day I go to school."
+  },
+  {
+    "file": "word_play.mp3",
+    "text": "play"
+  },
+  {
+    "file": "prompt_routine_play.mp3",
+    "text": "Every day I play."
+  },
+  {
+    "file": "word_go_to_bed.mp3",
+    "text": "go to bed"
+  },
+  {
+    "file": "prompt_routine_go_to_bed.mp3",
+    "text": "Every day I go to bed."
+  },
+  {
+    "file": "sys_bigger.mp3",
+    "text": "Which one is bigger?"
+  },
+  {
+    "file": "sys_smaller.mp3",
+    "text": "Which one is smaller?"
+  },
+  {
+    "file": "word_played.mp3",
+    "text": "played"
+  },
+  {
+    "file": "prompt_past_played.mp3",
+    "text": "Yesterday I played."
+  },
+  {
+    "file": "word_ate.mp3",
+    "text": "ate"
+  },
+  {
+    "file": "prompt_past_ate.mp3",
+    "text": "Yesterday I ate."
+  },
+  {
+    "file": "word_ran.mp3",
+    "text": "ran"
+  },
+  {
+    "file": "prompt_past_ran.mp3",
+    "text": "Yesterday I ran."
+  },
+  {
+    "file": "word_jumped.mp3",
+    "text": "jumped"
+  },
+  {
+    "file": "prompt_past_jumped.mp3",
+    "text": "Yesterday I jumped."
+  },
+  {
+    "file": "word_slept.mp3",
+    "text": "slept"
+  },
+  {
+    "file": "prompt_past_slept.mp3",
+    "text": "Yesterday I slept."
+  },
+  {
+    "file": "word_sang.mp3",
+    "text": "sang"
+  },
+  {
+    "file": "prompt_past_sang.mp3",
+    "text": "Yesterday I sang."
+  },
+  {
+    "file": "word_danced.mp3",
+    "text": "danced"
+  },
+  {
+    "file": "prompt_past_danced.mp3",
+    "text": "Yesterday I danced."
+  },
+  {
+    "file": "word_swam.mp3",
+    "text": "swam"
+  },
+  {
+    "file": "prompt_past_swam.mp3",
+    "text": "Yesterday I swam."
+  },
+  {
+    "file": "word_drew.mp3",
+    "text": "drew"
+  },
+  {
+    "file": "prompt_past_drew.mp3",
+    "text": "Yesterday I drew."
+  },
+  {
+    "file": "word_flew.mp3",
+    "text": "flew"
+  },
+  {
+    "file": "prompt_past_flew.mp3",
+    "text": "Yesterday I flew."
+  },
+  {
+    "file": "word_spring.mp3",
+    "text": "spring"
+  },
+  {
+    "file": "prompt_season_spring.mp3",
+    "text": "It's spring!"
+  },
+  {
+    "file": "word_summer.mp3",
+    "text": "summer"
+  },
+  {
+    "file": "prompt_season_summer.mp3",
+    "text": "It's summer!"
+  },
+  {
+    "file": "word_autumn.mp3",
+    "text": "autumn"
+  },
+  {
+    "file": "prompt_season_autumn.mp3",
+    "text": "It's autumn!"
+  },
+  {
+    "file": "word_winter.mp3",
+    "text": "winter"
+  },
+  {
+    "file": "prompt_season_winter.mp3",
+    "text": "It's winter!"
+  },
+  {
+    "file": "word_headache.mp3",
+    "text": "headache"
+  },
+  {
+    "file": "prompt_health_headache.mp3",
+    "text": "I have a headache!"
+  },
+  {
+    "file": "word_tummy_ache.mp3",
+    "text": "tummy ache"
+  },
+  {
+    "file": "prompt_health_tummy_ache.mp3",
+    "text": "I have a tummy ache!"
+  },
+  {
+    "file": "word_cold.mp3",
+    "text": "cold"
+  },
+  {
+    "file": "prompt_health_cold.mp3",
+    "text": "I have a cold!"
+  },
+  {
+    "file": "word_cough.mp3",
+    "text": "cough"
+  },
+  {
+    "file": "prompt_health_cough.mp3",
+    "text": "I have a cough!"
+  },
+  {
+    "file": "word_fever.mp3",
+    "text": "fever"
+  },
+  {
+    "file": "prompt_health_fever.mp3",
+    "text": "I have a fever!"
+  },
+  {
+    "file": "word_toothache.mp3",
+    "text": "toothache"
+  },
+  {
+    "file": "prompt_health_toothache.mp3",
+    "text": "I have a toothache!"
+  },
+  {
+    "file": "word_sore_throat.mp3",
+    "text": "sore throat"
+  },
+  {
+    "file": "prompt_health_sore_throat.mp3",
+    "text": "I have a sore throat!"
+  },
+  {
+    "file": "word_earache.mp3",
+    "text": "earache"
+  },
+  {
+    "file": "prompt_health_earache.mp3",
+    "text": "I have a earache!"
+  },
+  {
+    "file": "word_football.mp3",
+    "text": "football"
+  },
+  {
+    "file": "prompt_sport_football.mp3",
+    "text": "I like football!"
+  },
+  {
+    "file": "word_basketball.mp3",
+    "text": "basketball"
+  },
+  {
+    "file": "prompt_sport_basketball.mp3",
+    "text": "I like basketball!"
+  },
+  {
+    "file": "word_tennis.mp3",
+    "text": "tennis"
+  },
+  {
+    "file": "prompt_sport_tennis.mp3",
+    "text": "I like tennis!"
+  },
+  {
+    "file": "word_swimming.mp3",
+    "text": "swimming"
+  },
+  {
+    "file": "prompt_sport_swimming.mp3",
+    "text": "I like swimming!"
+  },
+  {
+    "file": "word_running.mp3",
+    "text": "running"
+  },
+  {
+    "file": "prompt_sport_running.mp3",
+    "text": "I like running!"
+  },
+  {
+    "file": "word_cycling.mp3",
+    "text": "cycling"
+  },
+  {
+    "file": "prompt_sport_cycling.mp3",
+    "text": "I like cycling!"
+  },
+  {
+    "file": "word_skiing.mp3",
+    "text": "skiing"
+  },
+  {
+    "file": "prompt_sport_skiing.mp3",
+    "text": "I like skiing!"
+  },
+  {
+    "file": "word_baseball.mp3",
+    "text": "baseball"
+  },
+  {
+    "file": "prompt_sport_baseball.mp3",
+    "text": "I like baseball!"
+  },
+  {
+    "file": "word_volleyball.mp3",
+    "text": "volleyball"
+  },
+  {
+    "file": "prompt_sport_volleyball.mp3",
+    "text": "I like volleyball!"
+  },
+  {
+    "file": "word_dancing.mp3",
+    "text": "dancing"
+  },
+  {
+    "file": "prompt_sport_dancing.mp3",
+    "text": "I like dancing!"
+  },
+  {
+    "file": "word_car.mp3",
+    "text": "car"
+  },
+  {
+    "file": "prompt_transport_car.mp3",
+    "text": "Let's go by car!"
+  },
+  {
+    "file": "word_bus.mp3",
+    "text": "bus"
+  },
+  {
+    "file": "prompt_transport_bus.mp3",
+    "text": "Let's go by bus!"
+  },
+  {
+    "file": "word_train.mp3",
+    "text": "train"
+  },
+  {
+    "file": "prompt_transport_train.mp3",
+    "text": "Let's go by train!"
+  },
+  {
+    "file": "word_plane.mp3",
+    "text": "plane"
+  },
+  {
+    "file": "prompt_transport_plane.mp3",
+    "text": "Let's go by plane!"
+  },
+  {
+    "file": "word_boat.mp3",
+    "text": "boat"
+  },
+  {
+    "file": "prompt_transport_boat.mp3",
+    "text": "Let's go by boat!"
+  },
+  {
+    "file": "word_bike.mp3",
+    "text": "bike"
+  },
+  {
+    "file": "prompt_transport_bike.mp3",
+    "text": "Let's go by bike!"
+  },
+  {
+    "file": "word_taxi.mp3",
+    "text": "taxi"
+  },
+  {
+    "file": "prompt_transport_taxi.mp3",
+    "text": "Let's go by taxi!"
+  },
+  {
+    "file": "word_helicopter.mp3",
+    "text": "helicopter"
+  },
+  {
+    "file": "prompt_transport_helicopter.mp3",
+    "text": "Let's go by helicopter!"
+  },
+  {
+    "file": "word_scooter.mp3",
+    "text": "scooter"
+  },
+  {
+    "file": "prompt_transport_scooter.mp3",
+    "text": "Let's go by scooter!"
+  },
+  {
+    "file": "word_truck.mp3",
+    "text": "truck"
+  },
+  {
+    "file": "prompt_transport_truck.mp3",
+    "text": "Let's go by truck!"
+  },
+  {
+    "file": "word_left.mp3",
+    "text": "left"
+  },
+  {
+    "file": "prompt_direction_left.mp3",
+    "text": "Go left!"
+  },
+  {
+    "file": "word_right.mp3",
+    "text": "right"
+  },
+  {
+    "file": "prompt_direction_right.mp3",
+    "text": "Go right!"
+  },
+  {
+    "file": "word_straight_on.mp3",
+    "text": "straight on"
+  },
+  {
+    "file": "prompt_direction_straight_on.mp3",
+    "text": "Go straight on!"
+  },
+  {
+    "file": "word_back.mp3",
+    "text": "back"
+  },
+  {
+    "file": "prompt_direction_back.mp3",
+    "text": "Go back!"
+  },
+  {
+    "file": "word_up.mp3",
+    "text": "up"
+  },
+  {
+    "file": "prompt_direction_up.mp3",
+    "text": "Go up!"
+  },
+  {
+    "file": "word_down.mp3",
+    "text": "down"
+  },
+  {
+    "file": "prompt_direction_down.mp3",
+    "text": "Go down!"
+  },
+  {
+    "file": "prompt_find_doctor.mp3",
+    "text": "Find the doctor!"
+  },
+  {
+    "file": "prompt_find_teacher.mp3",
+    "text": "Find the teacher!"
+  },
+  {
+    "file": "prompt_find_farmer.mp3",
+    "text": "Find the farmer!"
+  },
+  {
+    "file": "prompt_find_cook.mp3",
+    "text": "Find the cook!"
+  },
+  {
+    "file": "prompt_find_school.mp3",
+    "text": "Find the school!"
+  },
+  {
+    "file": "prompt_find_hospital.mp3",
+    "text": "Find the hospital!"
+  },
+  {
+    "file": "prompt_find_shop.mp3",
+    "text": "Find the shop!"
+  },
+  {
+    "file": "prompt_find_football.mp3",
+    "text": "Find the football!"
+  },
+  {
+    "file": "prompt_find_basketball.mp3",
+    "text": "Find the basketball!"
+  },
+  {
+    "file": "prompt_find_tennis.mp3",
+    "text": "Find the tennis!"
+  },
+  {
+    "file": "prompt_find_swimming.mp3",
+    "text": "Find the swimming!"
+  },
+  {
+    "file": "prompt_find_car.mp3",
+    "text": "Find the car!"
+  },
+  {
+    "file": "prompt_find_bus.mp3",
+    "text": "Find the bus!"
+  },
+  {
+    "file": "prompt_find_train.mp3",
+    "text": "Find the train!"
+  },
+  {
+    "file": "prompt_find_plane.mp3",
+    "text": "Find the plane!"
+  },
+  {
+    "file": "prompt_find_spring.mp3",
+    "text": "Find the spring!"
+  },
+  {
+    "file": "prompt_find_summer.mp3",
+    "text": "Find the summer!"
+  },
+  {
+    "file": "prompt_find_autumn.mp3",
+    "text": "Find the autumn!"
+  },
+  {
+    "file": "prompt_find_winter.mp3",
+    "text": "Find the winter!"
+  },
+  {
+    "file": "prompt_find_headache.mp3",
+    "text": "Find the headache!"
+  },
+  {
+    "file": "prompt_find_tummy_ache.mp3",
+    "text": "Find the tummy ache!"
+  },
+  {
+    "file": "prompt_find_cold.mp3",
+    "text": "Find the cold!"
+  },
+  {
+    "file": "story_witch_n1.mp3",
+    "text": "I am the Witch of the Past. Yesterday I lost my magic! Where did you go yesterday?"
+  },
+  {
+    "file": "story_witch_n2.mp3",
+    "text": "And what did you do there?"
+  },
+  {
+    "file": "story_witch_n3.mp3",
+    "text": "What was the weather like?"
+  },
+  {
+    "file": "story_witch_c1.mp3",
+    "text": "You went to school!"
+  },
+  {
+    "file": "story_witch_c2.mp3",
+    "text": "You went to the beach!"
+  },
+  {
+    "file": "story_witch_c3.mp3",
+    "text": "You went to the park!"
+  },
+  {
+    "file": "story_witch_c4.mp3",
+    "text": "You played! Great!"
+  },
+  {
+    "file": "story_witch_c5.mp3",
+    "text": "You swam! Great!"
+  },
+  {
+    "file": "story_witch_c6.mp3",
+    "text": "You sang! Great!"
+  }
+]
