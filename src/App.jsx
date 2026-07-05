@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, Fragment } from "react";
 import { speak, audio } from "./audio";
 import { micSupported, listenOnce, matchesSpoken } from "./mic";
 import { loadStore, saveStore, createProfile, avatarById, avatarsByGender } from "./profiles";
@@ -212,6 +212,19 @@ const PRAISE = ["Great job!", "Wonderful!", "Perfect!", "Amazing!", "Well done!"
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const rand = (n) => Math.floor(Math.random() * n);
 
+/* ─── Render/style condivisi per i giochi (compattezza) ─── */
+const tileStyle = () => ({
+  width: 128, height: 128, borderRadius: 28,
+  background: "#ffffff14", border: "3px solid #ffffff30",
+  display: "flex", alignItems: "center", justifyContent: "center",
+});
+const wordTileStyle = () => ({
+  minWidth: 120, padding: "18px 22px", borderRadius: 20,
+  background: "#F6F1FF", border: "none", boxShadow: "0 5px 0 #C9B6EE",
+});
+const emojiRender = (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span>;
+const textRender = (a) => <span className="display" style={{ fontSize: 22, fontWeight: 800, color: "#4A2F8E" }}>{a.en}</span>;
+
 /* ─── Weak-word helper: pick target favouring words the player misses ─── */
 function pickTarget(pool, weak, keyFn) {
   const weakOnes = pool.filter((it) => (weak[keyFn(it)] || 0) > 0);
@@ -334,7 +347,10 @@ function ListenTapGame({ speak, cfg, weak, onGem, onMiss, onDone }) {
     <div className="flex flex-col items-center gap-6 w-full">
       <SparkleBurst trigger={burst} />
       <ProgressPips total={ROUNDS} done={round} />
-      <p className="text-lg font-semibold" style={{ color: "#CDBBF2" }}>{cfg.hintIt}</p>
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>{cfg.hintIt}</p>
+      {cfg.showWord && (
+        <div className="display text-3xl" style={{ color: "#F5C64F" }}>{cfg.sayOf(target)}</div>
+      )}
       <button onClick={() => speak(cfg.prompt(target))} className="listen-btn">🔊 Riascolta</button>
       <div className="grid grid-cols-2 gap-6 mt-2">
         {options.map((it, i) => (
@@ -675,6 +691,9 @@ function ExamGame({ speak, cfg, name, onGem, onDone }) {
     }
   };
 
+  const diploma = cfg.diploma || "Starters";
+  const examEmoji = cfg.examEmoji || "🐉";
+
   if (finished) {
     const s = score.current;
     const stars = s >= 7 ? 3 : s >= 5 ? 2 : 1;
@@ -682,7 +701,7 @@ function ExamGame({ speak, cfg, name, onGem, onDone }) {
       <div className="flex flex-col items-center gap-4 text-center">
         <SparkleBurst trigger={1} />
         <div className="text-6xl gem-pop">🎓</div>
-        <h3 className="display text-2xl" style={{ color: "#F5C64F" }}>Diploma di Starters</h3>
+        <h3 className="display text-2xl" style={{ color: "#F5C64F" }}>Diploma di {diploma}</h3>
         <div className="rounded-2xl px-6 py-5" style={{ background: "#ffffff10", border: "2px solid #F5C64F55" }}>
           <p className="display text-xl" style={{ color: "#F6F1FF" }}>{name}</p>
           <p className="text-sm" style={{ color: "#CDBBF2" }}>ha superato l'esame del Drago!</p>
@@ -698,12 +717,71 @@ function ExamGame({ speak, cfg, name, onGem, onDone }) {
     <div className="flex flex-col items-center gap-5 w-full">
       <SparkleBurst trigger={burst} />
       <ProgressPips total={N} done={round} />
-      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>🐉 L'Esame del Drago — domanda {round + 1}/{N}</p>
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>{examEmoji} L'Esame Magico — domanda {round + 1}/{N}</p>
       <button onClick={() => speak(cfg.prompt(target))} className="listen-btn">🔊 Riascolta</button>
       <div className="grid grid-cols-2 gap-6 mt-2">
         {options.map((it, i) => (
           <button key={cfg.keyOf(it)} onClick={() => pick(it, i)} className={`opt-btn ${wrongIdx === i ? "shake" : ""}`} style={cfg.style ? cfg.style(it) : undefined}>
             {cfg.render(it)}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* Confronti (Isola 14): tocca il più grande / il più piccolo */
+function CompareGame({ speak, cfg, onGem, onDone }) {
+  const ROUNDS_C = 6;
+  const [round, setRound] = useState(0);
+  const [pair, setPair] = useState(null);
+  const [adj, setAdj] = useState("bigger");
+  const [order, setOrder] = useState(["big", "small"]);
+  const [locked, setLocked] = useState(false);
+  const [wrong, setWrong] = useState(null);
+  const [burst, setBurst] = useState(0);
+  const mistakes = useRef(0);
+
+  const newRound = useCallback(() => {
+    const p = cfg.pool[rand(cfg.pool.length)];
+    const a = Math.random() < 0.5 ? "bigger" : "smaller";
+    setPair(p); setAdj(a); setOrder(shuffle(["big", "small"])); setLocked(false); setWrong(null);
+    setTimeout(() => audio.whenIdle().then(() => speak(`Which one is ${a}?`)), 450);
+  }, [speak, cfg]);
+
+  useEffect(() => { newRound(); }, []); // eslint-disable-line
+
+  const pick = (which, idx) => {
+    if (locked) return;
+    const correct = adj === "bigger" ? "big" : "small";
+    if (which === correct) {
+      setLocked(true); setBurst((b) => b + 1); onGem([]);
+      speak(`Yes! ${PRAISE[rand(PRAISE.length)]}`);
+      setTimeout(() => {
+        if (round + 1 >= ROUNDS_C) onDone(mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1);
+        else { setRound((r) => r + 1); newRound(); }
+      }, 1400);
+    } else {
+      mistakes.current += 1; setWrong(idx);
+      speak(`Try again! Which one is ${adj}?`);
+      setTimeout(() => setWrong(null), 700);
+    }
+  };
+
+  if (!pair) return null;
+  return (
+    <div className="flex flex-col items-center gap-6 w-full">
+      <SparkleBurst trigger={burst} />
+      <ProgressPips total={ROUNDS_C} done={round} />
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>
+        Tocca quello {adj === "bigger" ? "più grande" : "più piccolo"} — Which one is {adj}?
+      </p>
+      <button onClick={() => speak(`Which one is ${adj}?`)} className="listen-btn">🔊 Riascolta</button>
+      <div className="flex items-center justify-center gap-8">
+        {order.map((which, i) => (
+          <button key={i} onClick={() => pick(which, i)} className={`opt-btn ${wrong === i ? "shake" : ""}`}
+            style={{ width: 140, height: 140, borderRadius: 28, background: "#ffffff12", border: "3px solid #ffffff28", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ fontSize: which === "big" ? 92 : 44 }}>{which === "big" ? pair.big : pair.small}</span>
           </button>
         ))}
       </div>
@@ -796,6 +874,114 @@ const DRAGON_STORY = {
       emoji: "🏆",
       en: "You did it, {name}! You are the hero of the Magic Kingdom!",
       it: "Ce l'hai fatta, {name}! Sei l'eroe del Regno Incantato!",
+      end: true,
+    },
+  },
+};
+
+/* ═══════════ ARCIPELAGO 2 · MOVERS (isole 11-20) ═══════════ */
+const JOBS = [
+  { en: "doctor", emoji: "👩‍⚕️" }, { en: "teacher", emoji: "👩‍🏫" }, { en: "farmer", emoji: "👨‍🌾" },
+  { en: "cook", emoji: "👨‍🍳" }, { en: "pilot", emoji: "👨‍✈️" }, { en: "police officer", emoji: "👮" },
+  { en: "firefighter", emoji: "🧑‍🚒" }, { en: "singer", emoji: "👩‍🎤" }, { en: "painter", emoji: "👨‍🎨" },
+  { en: "astronaut", emoji: "👨‍🚀" },
+];
+const PLACES = [
+  { en: "school", emoji: "🏫" }, { en: "hospital", emoji: "🏥" }, { en: "shop", emoji: "🏬" },
+  { en: "park", emoji: "🎠" }, { en: "house", emoji: "🏠" }, { en: "station", emoji: "🚉" },
+  { en: "farm", emoji: "🚜" }, { en: "beach", emoji: "🏖️" }, { en: "castle", emoji: "🏰" }, { en: "church", emoji: "⛪" },
+];
+const MARKET = [
+  { en: "apple", emoji: "🍎" }, { en: "banana", emoji: "🍌" }, { en: "orange", emoji: "🍊" },
+  { en: "grapes", emoji: "🍇" }, { en: "carrot", emoji: "🥕" }, { en: "tomato", emoji: "🍅" },
+  { en: "potato", emoji: "🥔" }, { en: "cheese", emoji: "🧀" }, { en: "bread", emoji: "🍞" }, { en: "lemon", emoji: "🍋" },
+];
+const DAYS = [
+  { en: "Monday" }, { en: "Tuesday" }, { en: "Wednesday" }, { en: "Thursday" },
+  { en: "Friday" }, { en: "Saturday" }, { en: "Sunday" },
+];
+const ROUTINE = [
+  { en: "get up", emoji: "🛏️" }, { en: "wash", emoji: "🚿" }, { en: "eat breakfast", emoji: "🥣" },
+  { en: "go to school", emoji: "🎒" }, { en: "play", emoji: "⚽" }, { en: "go to bed", emoji: "😴" },
+];
+const PAST_VERBS = [
+  { en: "played", emoji: "⚽" }, { en: "ate", emoji: "🍽️" }, { en: "ran", emoji: "🏃" },
+  { en: "jumped", emoji: "🤸" }, { en: "slept", emoji: "😴" }, { en: "sang", emoji: "🎤" },
+  { en: "danced", emoji: "💃" }, { en: "swam", emoji: "🏊" }, { en: "drew", emoji: "🎨" }, { en: "flew", emoji: "🪁" },
+];
+const SEASONS = [
+  { en: "spring", emoji: "🌸" }, { en: "summer", emoji: "🌞" }, { en: "autumn", emoji: "🍂" }, { en: "winter", emoji: "⛄" },
+];
+const HEALTH = [
+  { en: "headache", emoji: "🤕" }, { en: "tummy ache", emoji: "🤢" }, { en: "cold", emoji: "🤧" },
+  { en: "cough", emoji: "😷" }, { en: "fever", emoji: "🤒" }, { en: "toothache", emoji: "🦷" },
+  { en: "sore throat", emoji: "😣" }, { en: "earache", emoji: "👂" },
+];
+const SPORTS = [
+  { en: "football", emoji: "⚽" }, { en: "basketball", emoji: "🏀" }, { en: "tennis", emoji: "🎾" },
+  { en: "swimming", emoji: "🏊" }, { en: "running", emoji: "🏃" }, { en: "cycling", emoji: "🚴" },
+  { en: "skiing", emoji: "⛷️" }, { en: "baseball", emoji: "⚾" }, { en: "volleyball", emoji: "🏐" }, { en: "dancing", emoji: "💃" },
+];
+const TRANSPORT = [
+  { en: "car", emoji: "🚗" }, { en: "bus", emoji: "🚌" }, { en: "train", emoji: "🚆" },
+  { en: "plane", emoji: "✈️" }, { en: "boat", emoji: "⛵" }, { en: "bike", emoji: "🚲" },
+  { en: "taxi", emoji: "🚕" }, { en: "helicopter", emoji: "🚁" }, { en: "scooter", emoji: "🛵" }, { en: "truck", emoji: "🚚" },
+];
+const DIRECTIONS = [
+  { en: "left", emoji: "⬅️" }, { en: "right", emoji: "➡️" }, { en: "straight on", emoji: "⬆️" },
+  { en: "back", emoji: "⬇️" }, { en: "up", emoji: "🔼" }, { en: "down", emoji: "🔽" },
+];
+
+/* Confronti: coppie con un elemento chiaramente più grande e uno più piccolo */
+const COMPARE_POOL = [
+  { big: "🐘", small: "🐭" }, { big: "🦒", small: "🐈" }, { big: "🐋", small: "🐟" },
+  { big: "🌳", small: "🌱" }, { big: "🏰", small: "🏠" }, { big: "🚌", small: "🚗" },
+  { big: "🍉", small: "🍒" }, { big: "🐻", small: "🐝" },
+];
+
+/* Ripasso Movers per il BOSS (tutte le parole hanno emoji) */
+const MOVERS_POOL = [
+  ...JOBS.slice(0, 4), ...PLACES.slice(0, 3), ...SPORTS.slice(0, 4),
+  ...TRANSPORT.slice(0, 4), ...SEASONS, ...HEALTH.slice(0, 3),
+];
+
+/* Isola 20 — la quest al passato della Strega */
+const WITCH_STORY = {
+  start: "meet",
+  nodes: {
+    meet: {
+      emoji: "🧙",
+      en: "I am the Witch of the Past. Yesterday I lost my magic! Where did you go yesterday?",
+      it: "Sono la Strega del Passato. Ieri ho perso la mia magia! Dove sei andato ieri?",
+      choices: [
+        { emoji: "🏫", label: "school", say: "You went to school!", next: "did" },
+        { emoji: "🏖️", label: "beach", say: "You went to the beach!", next: "did" },
+        { emoji: "🎠", label: "park", say: "You went to the park!", next: "did" },
+      ],
+    },
+    did: {
+      emoji: "📜",
+      en: "And what did you do there?",
+      it: "E cosa hai fatto lì?",
+      choices: [
+        { emoji: "⚽", label: "played", say: "You played! Great!", words: ["played"], next: "weatherPast" },
+        { emoji: "🏊", label: "swam", say: "You swam! Great!", words: ["swam"], next: "weatherPast" },
+        { emoji: "🎤", label: "sang", say: "You sang! Great!", words: ["sang"], next: "weatherPast" },
+      ],
+    },
+    weatherPast: {
+      emoji: "🌦️",
+      en: "What was the weather like?",
+      it: "Che tempo faceva?",
+      choices: [
+        { emoji: "☀️", label: "sunny", say: "It was sunny!", words: ["sunny"], next: "win" },
+        { emoji: "🌧️", label: "rainy", say: "It was rainy!", words: ["rainy"], next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🏅",
+      en: "You found my magic, {name}! You are a true Mover now!",
+      it: "Hai ritrovato la mia magia, {name}! Ora sei un vero Mover!",
       end: true,
     },
   },
@@ -1269,6 +1455,169 @@ const ISLANDS = [
           keyOf: (a) => a.en, sayOf: (a) => a.en,
           renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
         },
+      },
+    ],
+  },
+
+  /* ── ARCIPELAGO 2 · MOVERS ── */
+  {
+    id: "village", name: "Il Villaggio dei Mestieri", emoji: "🏘️", sub: "Lavori e luoghi",
+    games: [
+      {
+        key: "jobs", emoji: "👩‍⚕️", title: "Chi Fa Cosa?", type: "listentap",
+        cfg: { pool: JOBS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `He's a ${a.en}!`, hintIt: "Chi è? Tocca il mestiere giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "places", emoji: "🏫", title: "I Luoghi del Villaggio", type: "listentap",
+        cfg: { pool: PLACES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Let's go to the ${a.en}!`, showWord: true, hintIt: "Leggi la parola e tocca il posto giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "memoryVillage", emoji: "🏘️", title: "Memory del Villaggio", type: "memory",
+        cfg: { pool: JOBS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "market", name: "Il Mercato Fatato", emoji: "🛍️", sub: "Compere e quantità",
+    games: [
+      {
+        key: "buy", emoji: "🍎", title: "La Spesa Magica", type: "listentap",
+        cfg: { pool: MARKET, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Can I have some ${a.en}, please?`, hintIt: "Fai la spesa: tocca la cosa giusta", render: emojiRender, style: tileStyle },
+      },
+      { key: "howmany", emoji: "🔢", title: "Quanti Ne Vuoi?", type: "count" },
+      {
+        key: "memoryMarket", emoji: "🛒", title: "Memory del Mercato", type: "memory",
+        cfg: { pool: MARKET, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "time", name: "La Torre del Tempo", emoji: "⏰", sub: "Giorni e routine",
+    games: [
+      {
+        key: "days", emoji: "📅", title: "I Giorni della Settimana", type: "listentap",
+        cfg: { pool: DAYS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Today is ${a.en}!`, hintIt: "Ascolta e tocca il giorno giusto", render: textRender, style: wordTileStyle },
+      },
+      {
+        key: "routine", emoji: "🌅", title: "La Giornata Reale", type: "listentap",
+        cfg: { pool: ROUTINE, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Every day I ${a.en}.`, hintIt: "La routine: tocca l'azione giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "memoryTime", emoji: "⏰", title: "Memory della Giornata", type: "memory",
+        cfg: { pool: ROUTINE, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "lake", name: "Il Lago degli Specchi", emoji: "🪷", sub: "I confronti",
+    games: [
+      { key: "compare", emoji: "⚖️", title: "Più Grande o Più Piccolo?", type: "compare", cfg: { pool: COMPARE_POOL } },
+      {
+        key: "memoryLake", emoji: "🪷", title: "Memory degli Animali", type: "memory",
+        cfg: { pool: ANIMALS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "stories", name: "Il Sentiero delle Storie", emoji: "📜", sub: "I verbi al passato",
+    games: [
+      {
+        key: "past", emoji: "⏳", title: "Racconta Ieri", type: "listentap",
+        cfg: { pool: PAST_VERBS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Yesterday I ${a.en}.`, hintIt: "Ieri...: tocca l'azione giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayPast", emoji: "🎤", title: "Ieri Io...", type: "say",
+        cfg: { pool: PAST_VERBS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `Yesterday I ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' la frase al passato!" },
+      },
+      {
+        key: "memoryStories", emoji: "📜", title: "Memory delle Storie", type: "memory",
+        cfg: { pool: PAST_VERBS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "mountain", name: "La Montagna del Meteo", emoji: "🏔️", sub: "Stagioni e meteo",
+    games: [
+      {
+        key: "seasons", emoji: "🍂", title: "Le Quattro Stagioni", type: "listentap",
+        cfg: { pool: SEASONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It's ${a.en}!`, hintIt: "Tocca la stagione giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "weatherWas", emoji: "🌦️", title: "Che Tempo Faceva?", type: "listentap",
+        cfg: { pool: WEATHER, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It was ${a.en}!`, hintIt: "Che tempo faceva? Tocca il cielo", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "memoryMountain", emoji: "🏔️", title: "Memory delle Stagioni", type: "memory",
+        cfg: { pool: [...SEASONS, ...WEATHER], keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "fairyhospital", name: "L'Ospedale delle Fate", emoji: "🧚", sub: "Salute e malanni",
+    games: [
+      {
+        key: "ailments", emoji: "🤒", title: "Cosa Ti Fa Male?", type: "listentap",
+        cfg: { pool: HEALTH, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `I have a ${a.en}!`, hintIt: "What's the matter? Tocca il malanno", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayHealth", emoji: "🎤", title: "Dalla Dottoressa Fata", type: "say",
+        cfg: { pool: HEALTH, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `I have a ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' cosa ti fa male!" },
+      },
+      {
+        key: "memoryHospital", emoji: "🧚", title: "Memory dell'Ospedale", type: "memory",
+        cfg: { pool: HEALTH, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "hobbies", name: "La Foresta degli Hobby", emoji: "⚽", sub: "Sport e passatempi",
+    games: [
+      {
+        key: "sports", emoji: "🏀", title: "Il Torneo del Regno", type: "listentap",
+        cfg: { pool: SPORTS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `I like ${a.en}!`, hintIt: "Tocca lo sport giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "saySports", emoji: "🎤", title: "Intervista Magica", type: "say",
+        cfg: { pool: SPORTS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `I like ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' cosa ti piace fare!" },
+      },
+      {
+        key: "memoryHobbies", emoji: "⚽", title: "Memory degli Hobby", type: "memory",
+        cfg: { pool: SPORTS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "port", name: "Il Porto delle Avventure", emoji: "⛵", sub: "Viaggi e direzioni",
+    games: [
+      {
+        key: "transport", emoji: "🚗", title: "Come Viaggiamo?", type: "listentap",
+        cfg: { pool: TRANSPORT, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Let's go by ${a.en}!`, hintIt: "Tocca il mezzo giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "directions", emoji: "🧭", title: "La Mappa del Tesoro", type: "listentap",
+        cfg: { pool: DIRECTIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Go ${a.en}!`, hintIt: "Segui le indicazioni: tocca la freccia", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "memoryPort", emoji: "⛵", title: "Memory del Porto", type: "memory",
+        cfg: { pool: TRANSPORT, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "witch", name: "BOSS: La Strega del Passato", emoji: "🧙", sub: "Storia ed esame Movers",
+    games: [
+      { key: "witchStory", emoji: "📖", title: "La Quest della Strega", type: "story", story: WITCH_STORY },
+      {
+        key: "witchChallenge", emoji: "🔮", title: "La Sfida della Strega", type: "listentap",
+        cfg: { pool: MOVERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, hintIt: "Ripasso Movers: tocca la parola giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "witchExam", emoji: "🎓", title: "L'Esame di Movers", type: "exam",
+        cfg: { pool: MOVERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, prompt: (a) => `Find the ${a.en}!`, render: emojiRender, style: tileStyle, examEmoji: "🧙", diploma: "Movers" },
+      },
+      {
+        key: "memoryWitch", emoji: "🧙", title: "Memory della Strega", type: "memory",
+        cfg: { pool: MOVERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
       },
     ],
   },
@@ -1774,8 +2123,13 @@ export default function App() {
               const unlocked = isUnlocked(idx);
               const done = isl.games ? islandDone(isl) : false;
               const totalStars = isl.games ? isl.games.reduce((s, g) => s + starsOf(isl.id, g.key), 0) : 0;
+              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : null;
               return (
-                <button key={isl.id} className="game-tile" disabled={!unlocked}
+                <Fragment key={isl.id}>
+                {archLabel && (
+                  <div className="display text-sm mt-3 mb-1 text-center" style={{ color: "#CDBBF2", opacity: 0.9 }}>{archLabel}</div>
+                )}
+                <button className="game-tile" disabled={!unlocked}
                   style={{ opacity: unlocked ? 1 : 0.45 }}
                   onClick={() => unlocked && setView({ screen: "island", islandId: isl.id })}>
                   <span className="text-4xl">{unlocked ? isl.emoji : "🔒"}</span>
@@ -1789,6 +2143,7 @@ export default function App() {
                   </span>
                   {unlocked && isl.games && <span className="font-bold text-sm" style={{ color: "#F0D98C" }}>⭐ {totalStars}/{isl.games.length * 3}</span>}
                 </button>
+                </Fragment>
               );
             })}
           </div>
@@ -1877,6 +2232,10 @@ export default function App() {
           )}
           {currentGame.type === "exam" && (
             <ExamGame speak={speak} cfg={currentGame.cfg} name={playerName}
+              onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "compare" && (
+            <CompareGame speak={speak} cfg={currentGame.cfg}
               onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
           )}
         </div>
