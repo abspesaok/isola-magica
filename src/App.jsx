@@ -591,6 +591,126 @@ function SayGame({ speak, cfg, weak, onGem, onMiss, onDone }) {
   );
 }
 
+/* Storia interattiva a bivi (BOSS): ogni scelta porta avanti, tutti vincono */
+function StoryGame({ speak, story, name, onGem, onDone }) {
+  const [nodeId, setNodeId] = useState(story.start);
+  const [burst, setBurst] = useState(0);
+  const node = story.nodes[nodeId];
+  const fill = (s) => String(s).replace(/\{name\}/g, name || "hero");
+
+  useEffect(() => {
+    const n = story.nodes[nodeId];
+    const t = setTimeout(() => audio.whenIdle().then(() => speak(fill(n.en))), 450);
+    return () => clearTimeout(t);
+  }, [nodeId]); // eslint-disable-line
+
+  const choose = (c) => {
+    setBurst((b) => b + 1);
+    onGem(c.words || []);
+    speak(c.say || c.label);
+    setTimeout(() => setNodeId(c.next), 1100);
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-5 w-full">
+      <SparkleBurst trigger={burst} />
+      <div className="text-7xl float">{node.emoji}</div>
+      <div className="rounded-3xl px-5 py-4 text-center" style={{ background: "#ffffff10", border: "2px solid #ffffff22", maxWidth: 420 }}>
+        <p className="display text-lg" style={{ color: "#F6F1FF" }}>{fill(node.en)}</p>
+        <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{fill(node.it)}</p>
+      </div>
+      {node.end ? (
+        <button onClick={() => onDone(3)} className="listen-btn" style={{ fontSize: "1.2rem", padding: "16px 36px" }}>🎉 Evviva!</button>
+      ) : (
+        <div className="flex flex-wrap justify-center gap-4">
+          {node.choices.map((c, i) => (
+            <button key={i} onClick={() => choose(c)} className="opt-btn flex flex-col items-center gap-1"
+              style={{ width: 112, padding: "14px 8px", borderRadius: 24, background: "#ffffff12", border: "2px solid #ffffff28" }}>
+              <span style={{ fontSize: 46 }}>{c.emoji}</span>
+              <span className="text-sm font-bold" style={{ color: "#E7DBFF" }}>{c.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* Mini-esame stile Starters (BOSS): quiz a punti che termina con un diploma */
+function ExamGame({ speak, cfg, name, onGem, onDone }) {
+  const N = 8;
+  const [round, setRound] = useState(0);
+  const [target, setTarget] = useState(null);
+  const [options, setOptions] = useState([]);
+  const [locked, setLocked] = useState(false);
+  const [wrongIdx, setWrongIdx] = useState(null);
+  const [burst, setBurst] = useState(0);
+  const [finished, setFinished] = useState(false);
+  const score = useRef(0);
+
+  const newQ = useCallback(() => {
+    const t = cfg.pool[rand(cfg.pool.length)];
+    const distractors = shuffle(cfg.pool.filter((x) => cfg.keyOf(x) !== cfg.keyOf(t))).slice(0, 3);
+    setOptions(shuffle([t, ...distractors])); setTarget(t); setLocked(false); setWrongIdx(null);
+    setTimeout(() => audio.whenIdle().then(() => speak(cfg.prompt(t))), 400);
+  }, [speak, cfg]);
+
+  useEffect(() => { newQ(); }, []); // eslint-disable-line
+
+  const nextOrEnd = () => {
+    if (round + 1 >= N) setFinished(true);
+    else { setRound((r) => r + 1); newQ(); }
+  };
+
+  const pick = (it, i) => {
+    if (locked) return;
+    setLocked(true);
+    if (cfg.keyOf(it) === cfg.keyOf(target)) {
+      setBurst((b) => b + 1); score.current += 1; onGem([cfg.sayOf(target)]);
+      speak(cfg.sayOf(target), PRAISE[rand(PRAISE.length)]);
+      setTimeout(nextOrEnd, 1400);
+    } else {
+      setWrongIdx(i); speak(`That's ${cfg.sayOf(it)}.`);
+      setTimeout(nextOrEnd, 1300);
+    }
+  };
+
+  if (finished) {
+    const s = score.current;
+    const stars = s >= 7 ? 3 : s >= 5 ? 2 : 1;
+    return (
+      <div className="flex flex-col items-center gap-4 text-center">
+        <SparkleBurst trigger={1} />
+        <div className="text-6xl gem-pop">🎓</div>
+        <h3 className="display text-2xl" style={{ color: "#F5C64F" }}>Diploma di Starters</h3>
+        <div className="rounded-2xl px-6 py-5" style={{ background: "#ffffff10", border: "2px solid #F5C64F55" }}>
+          <p className="display text-xl" style={{ color: "#F6F1FF" }}>{name}</p>
+          <p className="text-sm" style={{ color: "#CDBBF2" }}>ha superato l'esame del Drago!</p>
+          <div className="text-2xl mt-2">{[1, 2, 3].map((i) => <span key={i} style={{ opacity: i <= stars ? 1 : 0.25 }}>⭐</span>)}</div>
+          <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{s}/{N} risposte giuste</p>
+        </div>
+        <button onClick={() => onDone(stars)} className="listen-btn" style={{ fontSize: "1.15rem", padding: "14px 32px" }}>🎉 Evviva!</button>
+      </div>
+    );
+  }
+  if (!target) return null;
+  return (
+    <div className="flex flex-col items-center gap-5 w-full">
+      <SparkleBurst trigger={burst} />
+      <ProgressPips total={N} done={round} />
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>🐉 L'Esame del Drago — domanda {round + 1}/{N}</p>
+      <button onClick={() => speak(cfg.prompt(target))} className="listen-btn">🔊 Riascolta</button>
+      <div className="grid grid-cols-2 gap-6 mt-2">
+        {options.map((it, i) => (
+          <button key={cfg.keyOf(it)} onClick={() => pick(it, i)} className={`opt-btn ${wrongIdx === i ? "shake" : ""}`} style={cfg.style ? cfg.style(it) : undefined}>
+            {cfg.render(it)}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════ ISLAND CONTENT (data, not code) ═══════════ */
 const COMBO_POOL = (() => {
   // colored creatures: cross-sample of Island 1 colors × Island 2 animals
@@ -628,6 +748,58 @@ const BOSS_POOL = [
   ...NATURE.slice(0, 3),
   ...VERBS.slice(0, 4),
 ];
+
+/* Isola 10 — storia interattiva a bivi del Drago (tutti i cammini vincono) */
+const DRAGON_STORY = {
+  start: "hungry",
+  nodes: {
+    hungry: {
+      emoji: "🐉",
+      en: "Hello! I am the dragon. I am very hungry! What can I eat?",
+      it: "Ciao! Sono il drago. Ho tanta fame! Cosa posso mangiare?",
+      choices: [
+        { emoji: "🍎", label: "apple", say: "Yum! I like apples!", words: ["apple"], next: "weather" },
+        { emoji: "🍕", label: "pizza", say: "Yum! I like pizza!", words: ["pizza"], next: "weather" },
+        { emoji: "🍰", label: "cake", say: "Yum! I like cake!", words: ["cake"], next: "weather" },
+      ],
+    },
+    weather: {
+      emoji: "🌈",
+      en: "Thank you! Now let's fly. How is the weather today?",
+      it: "Grazie! Ora voliamo. Che tempo fa oggi?",
+      choices: [
+        { emoji: "☀️", label: "sunny", say: "It's sunny! Let's fly high!", words: ["sunny"], next: "friend" },
+        { emoji: "🌧️", label: "rainy", say: "It's rainy! Take an umbrella!", words: ["rainy"], next: "friend" },
+      ],
+    },
+    friend: {
+      emoji: "🐲",
+      en: "Who comes with us on the adventure?",
+      it: "Chi viene con noi nell'avventura?",
+      choices: [
+        { emoji: "🦄", label: "unicorn", say: "The unicorn! Hello unicorn!", words: [], next: "treasure" },
+        { emoji: "🦁", label: "lion", say: "The lion! Roar!", words: ["lion"], next: "treasure" },
+        { emoji: "🐱", label: "cat", say: "The cat! Meow!", words: ["cat"], next: "treasure" },
+      ],
+    },
+    treasure: {
+      emoji: "💎",
+      en: "We found the treasure! Which gem do you want?",
+      it: "Abbiamo trovato il tesoro! Quale gemma vuoi?",
+      choices: [
+        { emoji: "🔴", label: "red gem", say: "The red gem! Beautiful!", words: ["red"], next: "win" },
+        { emoji: "🔵", label: "blue gem", say: "The blue gem! Beautiful!", words: ["blue"], next: "win" },
+        { emoji: "🟢", label: "green gem", say: "The green gem! Beautiful!", words: ["green"], next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🏆",
+      en: "You did it, {name}! You are the hero of the Magic Kingdom!",
+      it: "Ce l'hai fatta, {name}! Sei l'eroe del Regno Incantato!",
+      end: true,
+    },
+  },
+};
 
 const ISLANDS = [
   {
@@ -1056,8 +1228,9 @@ const ISLANDS = [
     id: "dragon",
     name: "BOSS: Il Drago Parlante",
     emoji: "🐉",
-    sub: "La grande sfida di ripasso",
+    sub: "Storia, sfida e mini-esame",
     games: [
+      { key: "story", emoji: "📖", title: "La Storia del Drago", type: "story", story: DRAGON_STORY },
       {
         key: "dragonChallenge", emoji: "🔥", title: "La Sfida del Drago", type: "listentap",
         cfg: {
@@ -1066,6 +1239,20 @@ const ISLANDS = [
           wordsOf: (a) => [a.en],
           prompt: (a) => `Find the ${a.en}!`,
           hintIt: "Il Drago mette alla prova tutto! Tocca la parola giusta",
+          render: (a) => <span style={{ fontSize: 58 }}>{a.emoji}</span>,
+          style: () => ({
+            width: 128, height: 128, borderRadius: 28,
+            background: "#ffffff14", border: "3px solid #ffffff30",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      {
+        key: "exam", emoji: "🎓", title: "L'Esame di Starters", type: "exam",
+        cfg: {
+          pool: BOSS_POOL,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          prompt: (a) => `Find the ${a.en}!`,
           render: (a) => <span style={{ fontSize: 58 }}>{a.emoji}</span>,
           style: () => ({
             width: 128, height: 128, borderRadius: 28,
@@ -1683,6 +1870,14 @@ export default function App() {
           {currentGame.type === "say" && (
             <SayGame speak={speak} cfg={currentGame.cfg} weak={progress.weak}
               onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "story" && (
+            <StoryGame speak={speak} story={currentGame.story} name={playerName}
+              onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "exam" && (
+            <ExamGame speak={speak} cfg={currentGame.cfg} name={playerName}
+              onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
           )}
         </div>
       )}
