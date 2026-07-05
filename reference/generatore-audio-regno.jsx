@@ -374,7 +374,7 @@ export default function App() {
       .filter((m) => resultsRef.current[m.file])
       .map((m) => ({ name: `audio/${m.file}`, data: resultsRef.current[m.file] }));
     files.push({
-      name: "manifest.json",
+      name: "audio/manifest.json", // dentro audio/: così l'intera cartella va in public/
       data: new TextEncoder().encode(JSON.stringify(manifest, null, 2)),
     });
     const blob = makeZip(files);
@@ -482,15 +482,15 @@ export default function App() {
           <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
             {!zipUrl && <button onClick={buildZip} style={btnStyle(false)}>📦 Prepara ZIP con le {generated} pronte</button>}
             {zipUrl && (
-              <a href={zipUrl} download="regno-incantato-audio.zip" style={{ ...btnStyle(true), textDecoration: "none", display: "inline-block" }}>
-                ⬇️ Scarica regno-incantato-audio.zip
+              <a href={zipUrl} download="isola-magica-audio.zip" style={{ ...btnStyle(true), textDecoration: "none", display: "inline-block" }}>
+                ⬇️ Scarica isola-magica-audio.zip
               </a>
             )}
           </div>
         )}
 
         <p style={{ color: "#7A68A8", fontSize: 12, textAlign: "center" }}>
-          Dentro lo ZIP: cartella <b>audio/</b> con i {manifest.length} MP3 nominati per il gioco + <b>manifest.json</b> (mappa file → frase).
+          Dentro lo ZIP: la cartella <b>audio/</b> con i {manifest.length} MP3 + <b>manifest.json</b>. Trascina quella cartella <b>audio/</b> dentro <b>public/</b> del progetto.
         </p>
       </div>
     </div>
