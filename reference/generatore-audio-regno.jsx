@@ -1,8 +1,8 @@
 import { useState, useRef, useMemo } from "react";
 
 /* ═══════════════════════════════════════════════════════════
-   REGNO INCANTATO — Generatore Audio Batch (ElevenLabs)
-   Costruisce ~300 clip MP3 da tutte le frasi del gioco
+   ISOLA MAGICA — Generatore Audio Batch (ElevenLabs)
+   Costruisce ~670 clip MP3 da tutte le frasi del gioco (isole 1-20)
    e le scarica in un unico ZIP (+ manifest.json).
    La API key vive solo in memoria: mai salvata, mai loggata.
    ═══════════════════════════════════════════════════════════ */
@@ -20,6 +20,25 @@ const PRAISE = ["Great job!","Wonderful!","Perfect!","Amazing!","Well done!","Fa
 const PREP_SUBJECTS = ["cat","dog","ball","mouse"];
 const PREP_OBJECTS = ["box","chair","bed"];
 const PREPS = ["in","on","under"];
+
+/* Isole 7-10 (resto Arcipelago 1) */
+const VERBS = ["run","jump","swim","walk","dance","sing","clap","sleep","eat","drink","read","draw"];
+const WEATHER = ["sunny","rainy","cloudy","windy","snowy","stormy"];
+const NATURE = ["sun","moon","star","tree","flower","rainbow","cloud","leaf"];
+const CLOTHES = ["shirt","trousers","dress","shoes","socks","hat","coat","shorts","boots","gloves","scarf","cap"];
+
+/* Isole 11-20 (Arcipelago 2 · Movers) */
+const JOBS = ["doctor","teacher","farmer","cook","pilot","police officer","firefighter","singer","painter","astronaut"];
+const PLACES = ["school","hospital","shop","park","house","station","farm","beach","castle","church"];
+const MARKET = ["apple","banana","orange","grapes","carrot","tomato","potato","cheese","bread","lemon"];
+const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+const ROUTINE = ["get up","wash","eat breakfast","go to school","play","go to bed"];
+const PAST_VERBS = ["played","ate","ran","jumped","slept","sang","danced","swam","drew","flew"];
+const SEASONS = ["spring","summer","autumn","winter"];
+const HEALTH = ["headache","tummy ache","cold","cough","fever","toothache","sore throat","earache"];
+const SPORTS = ["football","basketball","tennis","swimming","running","cycling","skiing","baseball","volleyball","dancing"];
+const TRANSPORT = ["car","bus","train","plane","boat","bike","taxi","helicopter","scooter","truck"];
+const DIRECTIONS = ["left","right","straight on","back","up","down"];
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_");
 
@@ -85,9 +104,113 @@ function buildManifest() {
     });
   });
 
-  /* dedupe by filename (word overlaps across islands) */
+  /* ─── Isola 7 · Ballo (verbi) ─── */
+  VERBS.forEach((v) => {
+    add(`word_${slug(v)}`, v);
+    add(`prompt_simon_${slug(v)}`, `Simon says: ${v}!`);
+    add(`say_ican_${slug(v)}`, `I can ${v}!`);
+  });
+
+  /* ─── Isola 8 · Giardino (meteo, natura) ─── */
+  WEATHER.forEach((w) => {
+    add(`word_${slug(w)}`, w);
+    add(`prompt_weather_${slug(w)}`, `It's ${w}!`);
+    add(`prompt_wasweather_${slug(w)}`, `It was ${w}!`); // Isola 16
+  });
+  NATURE.forEach((n) => {
+    add(`word_${slug(n)}`, n);
+    add(`prompt_nature_${slug(n)}`, `Find the ${n}!`);
+  });
+
+  /* ─── Isola 9 · Guardaroba (vestiti, colore+capo) ─── */
+  CLOTHES.forEach((c) => {
+    add(`word_${slug(c)}`, c);
+    add(`prompt_clothes_${slug(c)}`, `Put on the ${c}!`);
+  });
+  CLOTHES.slice(0, 8).forEach((o, i) => {
+    [usable[i % usable.length], usable[(i + 2) % usable.length]].forEach((c) => {
+      add(`prompt_fashion_${slug(c)}_${slug(o)}`, `She's wearing a ${c} ${o}!`);
+      add(`name_fashion_${slug(c)}_${slug(o)}`, `the ${c} ${o}`);
+    });
+  });
+
+  /* ─── Isola 10 · Drago (ripasso + storia) ─── */
+  const bossWords = [
+    ...ANIMALS.slice(0, 5), ...FOOD.slice(0, 4), ...HOUSE.slice(0, 3),
+    ...SCHOOL.slice(0, 3), ...CLOTHES.slice(0, 4), ...NATURE.slice(0, 3), ...VERBS.slice(0, 4),
+  ];
+  bossWords.forEach((w) => add(`prompt_find_${slug(w)}`, `Find the ${w}!`));
+  [
+    "Hello! I am the dragon. I am very hungry! What can I eat?",
+    "Thank you! Now let's fly. How is the weather today?",
+    "Who comes with us on the adventure?",
+    "We found the treasure! Which gem do you want?",
+  ].forEach((t, i) => add(`story_dragon_n${i + 1}`, t));
+  [
+    "Yum! I like apples!", "Yum! I like pizza!", "Yum! I like cake!",
+    "It's sunny! Let's fly high!", "It's rainy! Take an umbrella!",
+    "The unicorn! Hello unicorn!", "The lion! Roar!", "The cat! Meow!",
+    "The red gem! Beautiful!", "The blue gem! Beautiful!", "The green gem! Beautiful!",
+  ].forEach((t, i) => add(`story_dragon_c${i + 1}`, t));
+
+  /* ─── Isola 11 · Villaggio (mestieri, luoghi) ─── */
+  JOBS.forEach((j) => { add(`word_${slug(j)}`, j); add(`prompt_job_${slug(j)}`, `He's a ${j}!`); });
+  PLACES.forEach((p) => { add(`word_${slug(p)}`, p); add(`prompt_place_${slug(p)}`, `Let's go to the ${p}!`); });
+
+  /* ─── Isola 12 · Mercato ─── */
+  MARKET.forEach((m) => { add(`word_${slug(m)}`, m); add(`prompt_market_${slug(m)}`, `Can I have some ${m}, please?`); });
+
+  /* ─── Isola 13 · Tempo (giorni, routine) ─── */
+  DAYS.forEach((d) => { add(`word_${slug(d)}`, d); add(`prompt_day_${slug(d)}`, `Today is ${d}!`); });
+  ROUTINE.forEach((r) => { add(`word_${slug(r)}`, r); add(`prompt_routine_${slug(r)}`, `Every day I ${r}.`); });
+
+  /* ─── Isola 14 · Confronti ─── */
+  add("sys_bigger", "Which one is bigger?");
+  add("sys_smaller", "Which one is smaller?");
+
+  /* ─── Isola 15 · Storie (passato) ─── */
+  PAST_VERBS.forEach((v) => { add(`word_${slug(v)}`, v); add(`prompt_past_${slug(v)}`, `Yesterday I ${v}.`); });
+
+  /* ─── Isola 16 · Stagioni ─── */
+  SEASONS.forEach((s) => { add(`word_${slug(s)}`, s); add(`prompt_season_${slug(s)}`, `It's ${s}!`); });
+
+  /* ─── Isola 17 · Ospedale (salute) ─── */
+  HEALTH.forEach((h) => { add(`word_${slug(h)}`, h); add(`prompt_health_${slug(h)}`, `I have a ${h}!`); });
+
+  /* ─── Isola 18 · Hobby (sport) ─── */
+  SPORTS.forEach((s) => { add(`word_${slug(s)}`, s); add(`prompt_sport_${slug(s)}`, `I like ${s}!`); });
+
+  /* ─── Isola 19 · Porto (trasporti, direzioni) ─── */
+  TRANSPORT.forEach((t) => { add(`word_${slug(t)}`, t); add(`prompt_transport_${slug(t)}`, `Let's go by ${t}!`); });
+  DIRECTIONS.forEach((d) => { add(`word_${slug(d)}`, d); add(`prompt_direction_${slug(d)}`, `Go ${d}!`); });
+
+  /* ─── Isola 20 · Strega (ripasso Movers + storia) ─── */
+  const moversWords = [
+    ...JOBS.slice(0, 4), ...PLACES.slice(0, 3), ...SPORTS.slice(0, 4),
+    ...TRANSPORT.slice(0, 4), ...SEASONS, ...HEALTH.slice(0, 3),
+  ];
+  moversWords.forEach((w) => add(`prompt_find_${slug(w)}`, `Find the ${w}!`));
+  [
+    "I am the Witch of the Past. Yesterday I lost my magic! Where did you go yesterday?",
+    "And what did you do there?",
+    "What was the weather like?",
+  ].forEach((t, i) => add(`story_witch_n${i + 1}`, t));
+  [
+    "You went to school!", "You went to the beach!", "You went to the park!",
+    "You played! Great!", "You swam! Great!", "You sang! Great!",
+    "It was sunny!", "It was rainy!",
+  ].forEach((t, i) => add(`story_witch_c${i + 1}`, t));
+
+  /* dedup per TESTO normalizzato: ogni frase distinta = una sola clip
+     (stessa normalizzazione del gioco → nessuno spreco di crediti) */
+  const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   const seen = new Set();
-  return M.filter((m) => (seen.has(m.file) ? false : (seen.add(m.file), true)));
+  return M.filter((m) => {
+    const k = norm(m.text);
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
 }
 
 /* ─── Minimal ZIP writer (store, no compression — MP3s don't compress) ─── */
