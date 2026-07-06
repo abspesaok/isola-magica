@@ -6,6 +6,9 @@ dist/
 dist-ssr/
 dev-dist/
 
+# Firebase (cache di deploy locale)
+.firebase/
+
 # Log
 *.log
 npm-debug.log*

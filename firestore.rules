@@ -1,0 +1,13 @@
+rules_version = '2';
+
+// Sicurezza dei profili condivisi di famiglia.
+// Esiste un solo account (Email/Password "famiglia"): solo chi conosce la
+// password ottiene un accesso valido da Firebase e può leggere/scrivere i
+// profili. Tutto il resto è negato per impostazione predefinita.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /families/{familyId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

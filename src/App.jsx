@@ -1,7 +1,12 @@
 import { useState, useEffect, useRef, useCallback, Fragment } from "react";
 import { speak, audio } from "./audio";
 import { micSupported, listenOnce, matchesSpoken } from "./mic";
-import { loadStore, saveStore, createProfile, avatarById, avatarsByGender } from "./profiles";
+import { loadStore, createProfile, avatarById, avatarsByGender } from "./profiles";
+import { subscribeProfiles, pushProfiles } from "./cloudStore";
+
+// L'ID del profilo attivo (chi gioca su QUESTO dispositivo) resta locale:
+// non si sincronizza, così ogni dispositivo può avere un bimbo diverso al lavoro.
+const ACTIVE_KEY = "isola-magica-active-v1";
 import {
   levelInfo, dailyVisit, skyGradient, shopItem,
   SHOP, SHOP_CATS, isOwned, XP_PER_CORRECT, XP_PER_STAR,
@@ -1872,15 +1877,63 @@ export default function App() {
   const saveTimer = useRef(null);
   const prevLevelRef = useRef(null);
   const didInit = useRef(false);
+  const syncedRef = useRef(null); // JSON dei profili già allineati col cloud (anti-eco)
 
-  // Avvio: carica i profili; primo utente → creazione, altrimenti → selezione
+  // Avvio: ascolta i profili dal cloud (condivisi tra dispositivi). Il profilo
+  // attivo è invece locale a questo dispositivo. Alla prima ricezione decido la
+  // schermata (creazione se non c'è nessun profilo, altrimenti selezione).
   useEffect(() => {
     if (didInit.current) return; // evita il doppio-mount di StrictMode in dev
     didInit.current = true;
-    const s = loadStore();
-    setStore(s);
-    setView({ screen: s.profiles.length ? "profiles" : "create" });
+
+    let localActiveId = null;
+    try { localActiveId = localStorage.getItem(ACTIVE_KEY); } catch { /* n/d */ }
+
+    // Profili già presenti in locale su QUESTO dispositivo (da prima del cloud)
+    const seed = loadStore().profiles;
+
+    let first = true;
+    const unsub = subscribeProfiles((cloudProfiles) => {
+      let profiles = cloudProfiles;
+
+      if (first) {
+        first = false;
+        // Migrazione una-tantum: porta nel cloud i profili locali non ancora
+        // presenti (confronto per id), così i progressi fatti prima del cloud
+        // non si perdono e non si creano doppioni.
+        const missing = seed.filter((sp) => !cloudProfiles.some((cp) => cp.id === sp.id));
+        if (missing.length) {
+          profiles = [...cloudProfiles, ...missing];
+          pushProfiles(profiles).catch((e) => console.error("Migrazione cloud:", e));
+        }
+        setView({ screen: profiles.length ? "profiles" : "create" });
+        syncedRef.current = JSON.stringify(profiles);
+        const active = localActiveId && profiles.some((p) => p.id === localActiveId) ? localActiveId : null;
+        setStore({ activeId: active, profiles });
+        return;
+      }
+
+      const remoteJson = JSON.stringify(profiles);
+      if (remoteJson === syncedRef.current) return; // nostro stesso salvataggio tornato indietro
+      syncedRef.current = remoteJson;
+      setStore((s) => {
+        const activeId = s?.activeId ?? localActiveId;
+        const stillThere = profiles.some((p) => p.id === activeId);
+        return { activeId: stillThere ? activeId : null, profiles };
+      });
+    });
+
+    return () => unsub();
   }, []);
+
+  // Il profilo attivo resta salvato SOLO su questo dispositivo (non nel cloud)
+  useEffect(() => {
+    if (!store) return;
+    try {
+      if (store.activeId) localStorage.setItem(ACTIVE_KEY, store.activeId);
+      else localStorage.removeItem(ACTIVE_KEY);
+    } catch { /* storage non disponibile */ }
+  }, [store?.activeId]);
 
   // Profilo attivo e suoi progressi
   const activeProfile = store ? store.profiles.find((p) => p.id === store.activeId) || null : null;
@@ -1903,13 +1956,19 @@ export default function App() {
     });
   }, []);
 
-  // Salvataggio (debounced) di tutto lo store
+  // Salvataggio (debounced) dei PROFILI nel cloud. Salta se sono già allineati
+  // (cambiamento arrivato dal cloud o nostro stesso eco) per non ciclare.
   useEffect(() => {
     if (!store) return;
+    const json = JSON.stringify(store.profiles);
+    if (json === syncedRef.current) return;
     clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => saveStore(store), 500);
+    saveTimer.current = setTimeout(() => {
+      syncedRef.current = json;
+      pushProfiles(store.profiles).catch((e) => console.error("Salvataggio cloud:", e));
+    }, 600);
     return () => clearTimeout(saveTimer.current);
-  }, [store]);
+  }, [store?.profiles]); // eslint-disable-line
 
   // Rileva la salita di livello quando l'XP cambia
   useEffect(() => {

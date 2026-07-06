@@ -1,56 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { onAuth, signInFamily } from "./cloudStore";
 
 /*
- * Cancello d'accesso "codice famiglia".
- * Il codice NON è scritto in chiaro nel sito: qui c'è solo il suo hash SHA-256,
- * così chi curiosa nel codice sorgente non lo trova. Non è sicurezza "da banca"
- * (l'app resta un file statico), ma blocca chiunque non conosca il codice.
- *
- * Cambiare codice = sostituire CODE_HASH con l'hash della nuova parola.
- * (Hash attuale = SHA-256 di "nanette".)
+ * Cancello d'accesso con la password di famiglia, verificata da Firebase.
+ * Entrando con la password si ottiene l'accesso ai profili condivisi in cloud
+ * (gli stessi su ogni dispositivo). L'accesso resta memorizzato: la password
+ * si inserisce una sola volta per dispositivo.
  */
-const CODE_HASH = "3456f0ae06e4588d0198dcb76b15388e3f08c74c49b5c3842a81279d11db06bb";
-const UNLOCK_KEY = "isola-magica-unlocked-v1";
-
-async function sha256Hex(text) {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
 export default function Gate({ children }) {
-  const [unlocked, setUnlocked] = useState(() => {
-    try {
-      return localStorage.getItem(UNLOCK_KEY) === "1";
-    } catch {
-      return false;
-    }
-  });
+  const [authState, setAuthState] = useState("loading"); // loading | in | out
   const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
-  if (unlocked) return children;
+  useEffect(() => onAuth((user) => setAuthState(user ? "in" : "out")), []);
+
+  if (authState === "in") return children;
 
   async function submit(e) {
     e.preventDefault();
     if (busy || !value.trim()) return;
     setBusy(true);
-    setError(false);
+    setError("");
     try {
-      const ok = (await sha256Hex(value.trim().toLowerCase())) === CODE_HASH;
-      if (ok) {
-        try {
-          localStorage.setItem(UNLOCK_KEY, "1");
-        } catch {}
-        setUnlocked(true);
-        return;
-      }
-    } catch {
-      // crypto.subtle non disponibile (contesto non sicuro): trattiamo come errore
+      await signInFamily(value);
+      // onAuth aggiornerà lo stato → verranno mostrati i figli (il gioco)
+    } catch (err) {
+      const code = err?.code || "";
+      if (code.includes("network"))
+        setError("Nessuna connessione: la prima volta serve internet.");
+      else if (code.includes("too-many-requests"))
+        setError("Troppi tentativi, riprova tra un minuto.");
+      else setError("Codice non corretto, riprova.");
+      setValue("");
+      setBusy(false);
     }
-    setError(true);
-    setValue("");
-    setBusy(false);
   }
 
   return (
@@ -72,9 +56,9 @@ export default function Gate({ children }) {
       <style>{`
         @keyframes gateShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
         @keyframes gateFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes gateSpin { to { transform: rotate(360deg) } }
       `}</style>
 
-      {/* Qualche stellina di sfondo, come nel gioco */}
       {Array.from({ length: 18 }).map((_, i) => (
         <span
           key={i}
@@ -98,83 +82,109 @@ export default function Gate({ children }) {
       >
         🏝️
       </div>
-
       <h1 style={{ margin: 0, fontSize: 30, fontWeight: 800, color: "#F6F1FF" }}>
         Isola Magica
       </h1>
-      <p style={{ margin: 0, fontSize: 18, color: "#CDBBF2", textAlign: "center" }}>
-        Inserisci il codice per entrare
-      </p>
 
-      <form
-        onSubmit={submit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 16,
-          width: "100%",
-          maxWidth: 320,
-          animation: error ? "gateShake .35s ease-in-out" : "none",
-        }}
-      >
-        <input
-          autoFocus
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-            setError(false);
-          }}
-          type="password"
-          inputMode="text"
-          autoCapitalize="none"
-          autoCorrect="off"
-          spellCheck={false}
-          placeholder="Codice"
-          aria-label="Codice di accesso"
-          style={{
-            width: "100%",
-            padding: "14px 16px",
-            borderRadius: 16,
-            border: error ? "2px solid #F58A8A" : "2px solid #ffffff30",
-            background: "#ffffff12",
-            color: "#F6F1FF",
-            fontSize: 24,
-            textAlign: "center",
-            outline: "none",
-            fontFamily: "'Baloo 2', 'Nunito', system-ui, sans-serif",
-          }}
-        />
+      {authState === "loading" ? (
+        <>
+          <div
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: "50%",
+              border: "3px solid #ffffff33",
+              borderTopColor: "#F8D978",
+              animation: "gateSpin .8s linear infinite",
+            }}
+            aria-label="Caricamento"
+          />
+          <p style={{ margin: 0, fontSize: 15, color: "#9F8CC9" }}>Un attimo…</p>
+        </>
+      ) : (
+        <>
+          <p
+            style={{ margin: 0, fontSize: 18, color: "#CDBBF2", textAlign: "center" }}
+          >
+            Inserisci il codice per entrare
+          </p>
 
-        {error && (
-          <span style={{ color: "#F9B4B4", fontSize: 15 }}>
-            Codice non corretto, riprova.
-          </span>
-        )}
+          <form
+            onSubmit={submit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 16,
+              width: "100%",
+              maxWidth: 320,
+              animation: error ? "gateShake .35s ease-in-out" : "none",
+            }}
+          >
+            <input
+              autoFocus
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+                setError("");
+              }}
+              type="password"
+              inputMode="text"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
+              placeholder="Codice"
+              aria-label="Codice di accesso"
+              style={{
+                width: "100%",
+                padding: "14px 16px",
+                borderRadius: 16,
+                border: error ? "2px solid #F58A8A" : "2px solid #ffffff30",
+                background: "#ffffff12",
+                color: "#F6F1FF",
+                fontSize: 24,
+                textAlign: "center",
+                outline: "none",
+                fontFamily: "'Baloo 2', 'Nunito', system-ui, sans-serif",
+              }}
+            />
 
-        <button
-          type="submit"
-          disabled={!value.trim() || busy}
-          style={{
-            fontWeight: 800,
-            fontSize: "1.1rem",
-            color: "#2D1B4E",
-            background: "linear-gradient(180deg,#F8D978,#E0AC3C)",
-            border: "none",
-            borderRadius: 999,
-            padding: "14px 40px",
-            boxShadow: "0 5px 0 #B8892E",
-            opacity: value.trim() && !busy ? 1 : 0.5,
-            cursor: value.trim() && !busy ? "pointer" : "default",
-          }}
-        >
-          Entra ✨
-        </button>
-      </form>
+            {error && (
+              <span style={{ color: "#F9B4B4", fontSize: 15 }}>{error}</span>
+            )}
 
-      <p style={{ margin: 0, fontSize: 12, color: "#7A68A8", textAlign: "center" }}>
-        Il codice va inserito una sola volta per dispositivo.
-      </p>
+            <button
+              type="submit"
+              disabled={!value.trim() || busy}
+              style={{
+                fontWeight: 800,
+                fontSize: "1.1rem",
+                color: "#2D1B4E",
+                background: "linear-gradient(180deg,#F8D978,#E0AC3C)",
+                border: "none",
+                borderRadius: 999,
+                padding: "14px 40px",
+                boxShadow: "0 5px 0 #B8892E",
+                opacity: value.trim() && !busy ? 1 : 0.5,
+                cursor: value.trim() && !busy ? "pointer" : "default",
+              }}
+            >
+              {busy ? "Entro…" : "Entra ✨"}
+            </button>
+          </form>
+
+          <p
+            style={{
+              margin: 0,
+              fontSize: 12,
+              color: "#7A68A8",
+              textAlign: "center",
+            }}
+          >
+            Stessa password su ogni dispositivo → stessi profili.
+          </p>
+        </>
+      )}
     </div>
   );
 }
