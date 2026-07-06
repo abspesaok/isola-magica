@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Font del gioco caricato globalmente così anche il cancello d'accesso lo usa */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap");
 
 html,
 body,
