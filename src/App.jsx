@@ -992,6 +992,106 @@ const WITCH_STORY = {
   },
 };
 
+/* ═══════════ ARCIPELAGO 3 · FLYERS (isole 21-30) ═══════════ */
+const WORLD = [
+  { en: "Italy", emoji: "🇮🇹" }, { en: "France", emoji: "🇫🇷" }, { en: "Spain", emoji: "🇪🇸" },
+  { en: "Germany", emoji: "🇩🇪" }, { en: "China", emoji: "🇨🇳" }, { en: "America", emoji: "🇺🇸" },
+  { en: "Brazil", emoji: "🇧🇷" }, { en: "Egypt", emoji: "🇪🇬" }, { en: "Japan", emoji: "🇯🇵" }, { en: "Australia", emoji: "🇦🇺" },
+];
+const LANDSCAPE = [
+  { en: "mountain", emoji: "🏔️" }, { en: "river", emoji: "🏞️" }, { en: "desert", emoji: "🏜️" },
+  { en: "forest", emoji: "🌲" }, { en: "island", emoji: "🏝️" }, { en: "volcano", emoji: "🌋" },
+  { en: "jungle", emoji: "🌴" }, { en: "cave", emoji: "🕳️" }, { en: "waterfall", emoji: "💦" }, { en: "sea", emoji: "🌊" },
+];
+const FEELINGS = [
+  { en: "happy", emoji: "😄" }, { en: "sad", emoji: "😢" }, { en: "angry", emoji: "😠" },
+  { en: "scared", emoji: "😱" }, { en: "tired", emoji: "😴" }, { en: "excited", emoji: "🤩" },
+  { en: "surprised", emoji: "😲" }, { en: "bored", emoji: "😒" }, { en: "hungry", emoji: "😋" }, { en: "thirsty", emoji: "🥤" },
+];
+const MATERIALS = [
+  { en: "wood", emoji: "🪵" }, { en: "glass", emoji: "🥛" }, { en: "metal", emoji: "🔩" },
+  { en: "plastic", emoji: "🧴" }, { en: "gold", emoji: "🪙" }, { en: "paper", emoji: "📄" },
+  { en: "stone", emoji: "🪨" }, { en: "wool", emoji: "🧶" }, { en: "ice", emoji: "🧊" }, { en: "cloth", emoji: "🧵" },
+];
+const TECH = [
+  { en: "computer", emoji: "💻" }, { en: "phone", emoji: "📱" }, { en: "camera", emoji: "📷" },
+  { en: "robot", emoji: "🤖" }, { en: "keyboard", emoji: "⌨️" }, { en: "television", emoji: "📺" },
+  { en: "headphones", emoji: "🎧" }, { en: "game", emoji: "🎮" }, { en: "printer", emoji: "🖨️" }, { en: "mouse", emoji: "🖱️" },
+];
+const SEA = [
+  { en: "dolphin", emoji: "🐬" }, { en: "whale", emoji: "🐋" }, { en: "shark", emoji: "🦈" },
+  { en: "octopus", emoji: "🐙" }, { en: "crab", emoji: "🦀" }, { en: "jellyfish", emoji: "🪼" },
+  { en: "seal", emoji: "🦭" }, { en: "turtle", emoji: "🐢" }, { en: "fish", emoji: "🐠" }, { en: "shell", emoji: "🐚" },
+];
+const SPACE = [
+  { en: "star", emoji: "⭐" }, { en: "moon", emoji: "🌙" }, { en: "sun", emoji: "☀️" },
+  { en: "planet", emoji: "🪐" }, { en: "rocket", emoji: "🚀" }, { en: "astronaut", emoji: "👨‍🚀" },
+  { en: "alien", emoji: "👽" }, { en: "Earth", emoji: "🌍" }, { en: "comet", emoji: "☄️" }, { en: "telescope", emoji: "🔭" },
+];
+const FUTURE_ACTIONS = [
+  { en: "travel", emoji: "✈️" }, { en: "fly", emoji: "🪁" }, { en: "swim", emoji: "🏊" },
+  { en: "read", emoji: "📖" }, { en: "win", emoji: "🏆" }, { en: "paint", emoji: "🎨" },
+  { en: "dance", emoji: "💃" }, { en: "sing", emoji: "🎤" }, { en: "cook", emoji: "🍳" }, { en: "explore", emoji: "🧭" },
+];
+const SEEN_THINGS = [
+  { en: "dragon", emoji: "🐉" }, { en: "castle", emoji: "🏰" }, { en: "rainbow", emoji: "🌈" },
+  { en: "dolphin", emoji: "🐬" }, { en: "mountain", emoji: "🏔️" }, { en: "star", emoji: "⭐" },
+  { en: "robot", emoji: "🤖" }, { en: "snake", emoji: "🐍" }, { en: "whale", emoji: "🐋" }, { en: "lion", emoji: "🦁" },
+];
+const ADJECTIVES = [
+  { en: "big", emoji: "🐘" }, { en: "small", emoji: "🐭" }, { en: "tall", emoji: "🦒" },
+  { en: "fast", emoji: "🐆" }, { en: "slow", emoji: "🐌" }, { en: "strong", emoji: "💪" },
+  { en: "hot", emoji: "🔥" }, { en: "cold", emoji: "🧊" }, { en: "happy", emoji: "😄" }, { en: "scary", emoji: "👻" },
+];
+
+/* Ripasso Flyers per il BOSS (tutte le parole hanno emoji chiara) */
+const FLYERS_POOL = [
+  ...LANDSCAPE.slice(0, 3), ...FEELINGS.slice(0, 3), ...SEA.slice(0, 3),
+  ...SPACE.slice(0, 3), ...TECH.slice(0, 3), ...MATERIALS.slice(0, 2),
+];
+
+/* Isola 30 — il viaggio nei cieli del Gran Mago (tutti i cammini vincono) */
+const WIZARD_STORY = {
+  start: "greet",
+  nodes: {
+    greet: {
+      emoji: "🧙‍♂️",
+      en: "Welcome, brave flyer! I am the Sky Wizard. Where will you fly tomorrow?",
+      it: "Benvenuto, coraggioso viaggiatore! Sono il Gran Mago dei Cieli. Dove volerai domani?",
+      choices: [
+        { emoji: "🌊", label: "the sea", say: "You will fly over the sea!", words: ["sea"], next: "saw" },
+        { emoji: "🏔️", label: "the mountain", say: "You will fly over the mountain!", words: ["mountain"], next: "saw" },
+        { emoji: "🌋", label: "the volcano", say: "You will fly over the volcano!", words: ["volcano"], next: "saw" },
+      ],
+    },
+    saw: {
+      emoji: "👀",
+      en: "Amazing! And what have you seen on your journey?",
+      it: "Fantastico! E cosa hai visto nel tuo viaggio?",
+      choices: [
+        { emoji: "🐬", label: "a dolphin", say: "You have seen a dolphin!", words: ["dolphin"], next: "feel" },
+        { emoji: "🐉", label: "a dragon", say: "You have seen a dragon!", words: ["dragon"], next: "feel" },
+        { emoji: "⭐", label: "a star", say: "You have seen a star!", words: ["star"], next: "feel" },
+      ],
+    },
+    feel: {
+      emoji: "💫",
+      en: "Wonderful! How do you feel now?",
+      it: "Meraviglioso! Come ti senti adesso?",
+      choices: [
+        { emoji: "😄", label: "happy", say: "You feel happy!", words: ["happy"], next: "win" },
+        { emoji: "🤩", label: "excited", say: "You feel excited!", words: ["excited"], next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🏆",
+      en: "You did it, {name}! You have flown around the whole world. You are a true Flyer!",
+      it: "Ce l'hai fatta, {name}! Hai volato intorno al mondo. Ora sei un vero Flyer!",
+      end: true,
+    },
+  },
+};
+
 const ISLANDS = [
   {
     id: "gems",
@@ -1626,6 +1726,173 @@ const ISLANDS = [
       },
     ],
   },
+
+  /* ── ARCIPELAGO 3 · FLYERS ── */
+  {
+    id: "world", name: "Il Mappamondo Incantato", emoji: "🌍", sub: "Paesi e paesaggi",
+    games: [
+      {
+        key: "countries", emoji: "🗺️", title: "Il Giro del Mondo", type: "listentap",
+        cfg: { pool: WORLD, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Let's fly to ${a.en}!`, showWord: true, hintIt: "Leggi e tocca il Paese giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "landscape", emoji: "🏔️", title: "Terre Lontane", type: "listentap",
+        cfg: { pool: LANDSCAPE, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Look at the ${a.en}!`, hintIt: "Tocca il paesaggio giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "memoryWorld", emoji: "🌍", title: "Memory del Mondo", type: "memory",
+        cfg: { pool: LANDSCAPE, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "feelings", name: "Il Faro delle Emozioni", emoji: "💫", sub: "Sentimenti ed emozioni",
+    games: [
+      {
+        key: "emotions", emoji: "😊", title: "Come Ti Senti?", type: "listentap",
+        cfg: { pool: FEELINGS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `I feel ${a.en}!`, hintIt: "How do you feel? Tocca l'emozione giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayFeelings", emoji: "🎤", title: "Dillo col Cuore", type: "say",
+        cfg: { pool: FEELINGS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `I feel ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' come ti senti!" },
+      },
+      {
+        key: "memoryFeelings", emoji: "💫", title: "Memory delle Emozioni", type: "memory",
+        cfg: { pool: FEELINGS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "materials", name: "La Grotta dei Materiali", emoji: "🪨", sub: "Di cosa è fatto?",
+    games: [
+      {
+        key: "madeof", emoji: "🔨", title: "Di Cosa è Fatto?", type: "listentap",
+        cfg: { pool: MATERIALS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It's made of ${a.en}!`, showWord: true, hintIt: "Leggi e tocca il materiale giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayMaterials", emoji: "🎤", title: "Il Mastro Artigiano", type: "say",
+        cfg: { pool: MATERIALS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `It's made of ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' di cosa è fatto!" },
+      },
+      {
+        key: "memoryMaterials", emoji: "🪨", title: "Memory dei Materiali", type: "memory",
+        cfg: { pool: MATERIALS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "tech", name: "La Torre della Tecnologia", emoji: "🤖", sub: "Macchine e gadget",
+    games: [
+      {
+        key: "gadgets", emoji: "💻", title: "I Gadget Magici", type: "listentap",
+        cfg: { pool: TECH, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca l'oggetto giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayTech", emoji: "🎤", title: "La Piccola Inventrice", type: "say",
+        cfg: { pool: TECH, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `I can use the ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' cosa sai usare!" },
+      },
+      {
+        key: "memoryTech", emoji: "🤖", title: "Memory della Tecnologia", type: "memory",
+        cfg: { pool: TECH, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "sea", name: "Le Profondità del Mare", emoji: "🌊", sub: "Il mare e le sue creature",
+    games: [
+      {
+        key: "seacreatures", emoji: "🐬", title: "Il Mondo Sommerso", type: "listentap",
+        cfg: { pool: SEA, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, hintIt: "Tuffati e tocca la creatura giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "saySea", emoji: "🎤", title: "L'Esploratrice del Mare", type: "say",
+        cfg: { pool: SEA, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `I can see a ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' cosa vedi nel mare!" },
+      },
+      {
+        key: "memorySea", emoji: "🌊", title: "Memory del Mare", type: "memory",
+        cfg: { pool: SEA, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "space", name: "Il Cielo Stellato", emoji: "🚀", sub: "Lo spazio e i pianeti",
+    games: [
+      {
+        key: "spaceobjects", emoji: "🪐", title: "Viaggio nello Spazio", type: "listentap",
+        cfg: { pool: SPACE, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca l'oggetto dello spazio", render: emojiRender, style: tileStyle },
+      },
+      { key: "countStars", emoji: "⭐", title: "Conta le Stelle", type: "count" },
+      {
+        key: "memorySpace", emoji: "🚀", title: "Memory dello Spazio", type: "memory",
+        cfg: { pool: SPACE, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "tomorrow", name: "Il Sentiero del Domani", emoji: "🔮", sub: "Il futuro · I will…",
+    games: [
+      {
+        key: "future", emoji: "✨", title: "Domani Io...", type: "listentap",
+        cfg: { pool: FUTURE_ACTIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Tomorrow I will ${a.en}!`, hintIt: "Cosa farai domani? Tocca l'azione", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayFuture", emoji: "🎤", title: "La Promessa Magica", type: "say",
+        cfg: { pool: FUTURE_ACTIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `Tomorrow I will ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Di' cosa farai domani!" },
+      },
+      {
+        key: "memoryFuture", emoji: "🔮", title: "Memory del Futuro", type: "memory",
+        cfg: { pool: FUTURE_ACTIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "memories", name: "Il Diario dei Ricordi", emoji: "📔", sub: "Present perfect · I have seen…",
+    games: [
+      {
+        key: "seen", emoji: "👀", title: "Ho Visto...", type: "listentap",
+        cfg: { pool: SEEN_THINGS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `I have seen a ${a.en}!`, hintIt: "Cosa hai visto? Tocca la cosa giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "saySeen", emoji: "🎤", title: "Il Mio Diario", type: "say",
+        cfg: { pool: SEEN_THINGS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `I have seen a ${a.en}.`, render: (a) => <span style={{ fontSize: 76 }}>{a.emoji}</span>, hintIt: "Racconta cosa hai visto!" },
+      },
+      {
+        key: "memoryMemories", emoji: "📔", title: "Memory dei Ricordi", type: "memory",
+        cfg: { pool: SEEN_THINGS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "opposites", name: "Il Giardino degli Opposti", emoji: "🌗", sub: "Aggettivi e confronti",
+    games: [
+      {
+        key: "adjectives", emoji: "🎭", title: "Il Mondo degli Aggettivi", type: "listentap",
+        cfg: { pool: ADJECTIVES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It is ${a.en}!`, showWord: true, hintIt: "Leggi e tocca la cosa giusta", render: emojiRender, style: tileStyle },
+      },
+      { key: "compareBig", emoji: "⚖️", title: "Più Grande o Più Piccolo?", type: "compare", cfg: { pool: COMPARE_POOL } },
+      {
+        key: "memoryOpposites", emoji: "🌗", title: "Memory degli Aggettivi", type: "memory",
+        cfg: { pool: ADJECTIVES, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "skywizard", name: "BOSS: Il Gran Mago dei Cieli", emoji: "🧙‍♂️", sub: "Storia ed esame Flyers",
+    games: [
+      { key: "wizardStory", emoji: "📖", title: "Il Viaggio nei Cieli", type: "story", story: WIZARD_STORY },
+      {
+        key: "wizardChallenge", emoji: "🌟", title: "La Sfida del Mago", type: "listentap",
+        cfg: { pool: FLYERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, hintIt: "Ripasso Flyers: tocca la parola giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "flyersExam", emoji: "🎓", title: "L'Esame di Flyers", type: "exam",
+        cfg: { pool: FLYERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, prompt: (a) => `Find the ${a.en}!`, render: emojiRender, style: tileStyle, examEmoji: "🧙‍♂️", diploma: "Flyers" },
+      },
+      {
+        key: "memoryWizard", emoji: "🧙‍♂️", title: "Memory del Mago", type: "memory",
+        cfg: { pool: FLYERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
 ];
 
 /* ═══════════ LEVEL-UP: header, XP, fiamma, negozio ═══════════ */
@@ -2182,7 +2449,7 @@ export default function App() {
               const unlocked = isUnlocked(idx);
               const done = isl.games ? islandDone(isl) : false;
               const totalStars = isl.games ? isl.games.reduce((s, g) => s + starsOf(isl.id, g.key), 0) : 0;
-              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : null;
+              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 20 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : null;
               return (
                 <Fragment key={isl.id}>
                 {archLabel && (

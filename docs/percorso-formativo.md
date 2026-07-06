@@ -25,7 +25,7 @@ A questo si aggiungono alcuni **principi di apprendimento** su cui è costruito 
 
 ## 2. La mappa di oggi — cosa impara, isola per isola
 
-Attualmente ci sono **20 isole** in **2 arcipelaghi**. Lidia è arrivata alla **3ª isola**.
+Attualmente ci sono **30 isole** in **3 arcipelaghi** — l'intero percorso Cambridge **Starters → Movers → Flyers**. Lidia è arrivata alla **3ª isola**.
 
 ### 🏝️ Arcipelago 1 — STARTERS (isole 1–10) · *Le prime parole*
 
@@ -57,6 +57,21 @@ Attualmente ci sono **20 isole** in **2 arcipelaghi**. Lidia è arrivata alla **
 | 19 | Il Porto delle Avventure | **Trasporti** e **direzioni** (left / right / la mappa) |
 | 20 | 🧙 BOSS: La Strega del Passato | **Ripasso + esame Movers** (diploma) |
 
+### 🏝️ Arcipelago 3 — FLYERS (isole 21–30) · *Il grande mondo*
+
+| # | Isola | Cosa si impara (inglese) |
+|---|---|---|
+| 21 | Il Mappamondo Incantato | **Paesi** del mondo e **paesaggi** (mountain, river, desert…) — anche lettura |
+| 22 | Il Faro delle Emozioni | **Sentimenti ed emozioni** ("I feel happy") — anche col **microfono** |
+| 23 | La Grotta dei Materiali | I **materiali** ("It's made of wood") — anche lettura e microfono |
+| 24 | La Torre della Tecnologia | **Tecnologia e gadget** (computer, phone, robot…) — anche lettura |
+| 25 | Le Profondità del Mare | Il **mare** e le sue **creature** (dolphin, whale, octopus…) — anche microfono |
+| 26 | Il Cielo Stellato | Lo **spazio** e i **pianeti** (star, moon, rocket…) + contare |
+| 27 | Il Sentiero del Domani | Il **futuro**: "Tomorrow I will…" — anche col microfono |
+| 28 | Il Diario dei Ricordi | Il **present perfect**: "I have seen…" — anche col microfono |
+| 29 | Il Giardino degli Opposti | **Aggettivi** e **confronti** (big/small, comparativi) — anche lettura |
+| 30 | 🧙‍♂️ BOSS: Il Gran Mago dei Cieli | **Ripasso + esame Flyers** (storia e diploma) |
+
 ---
 
 ## 3. Quali abilità stiamo allenando
@@ -79,18 +94,14 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 
 ## 4. Cosa manca ancora nel percorso
 
-Per completare il viaggio Cambridge e andare oltre, mancano due cose: **un terzo arcipelago** e **due abilità nuove**.
-
-### 🏝️ Arcipelago 3 — FLYERS (isole 21–30) · *Da costruire*
-Porterebbe al livello **A2**, cioè un'autonomia reale. Coprirebbe:
-- Tempi verbali più ricchi: **futuro** ("I will…"), **present perfect** ("I have seen…")
-- Vocabolario più ampio: il **mondo** (paesi, spazio, mare), **materiali**, **tecnologia**, **emozioni e sentimenti**
-- **Ascolti e testi più lunghi** (piccole storie invece di singole parole)
-- Primo **spelling** guidato
+Con il **terzo arcipelago (Flyers, isole 21–30) ora costruito**, l'intero percorso ufficiale Cambridge — Starters, Movers e Flyers — è coperto: il grande mondo (paesi e paesaggi), le emozioni, i materiali, la tecnologia, il mare, lo spazio, il **futuro** ("I will…"), il **present perfect** ("I have seen…"), aggettivi e confronti, fino al mini-esame Flyers. A ora restano **due abilità nuove** da aggiungere e un affinamento.
 
 ### Le due abilità da aggiungere
-- ✍️ **Scrittura**: dallo spelling di parole, a comporre frasi, a scrivere due righe su di sé.
+- ✍️ **Scrittura / spelling guidato**: dal comporre parole (lettera per lettera), a comporre frasi, a scrivere due righe su di sé. Serve un nuovo tipo di gioco dedicato.
 - 💬 **Conversazione**: un **compagno con cui parlare** (un assistente che ascolta e risponde a voce) per allenare il dialogo vero — la cosa che più avvicina alla padronanza.
+
+### Un affinamento (audio)
+Le 30 isole sono tutte giocabili. Le **isole 21–30 usano per ora la voce di sistema del dispositivo** (un po' robotica) al posto delle voci inglesi vere (ElevenLabs) che accompagnano le isole 1–20. Nessuna bambina le sente ancora — restano **bloccate** finché non si completa l'isola 20 — ma per dare loro le stesse voci naturali basta un **passaggio di generazione audio** dedicato (come già fatto per le prime 20).
 
 ---
 
@@ -102,8 +113,8 @@ Ecco il traguardo per tappe:
 
 | Tappa | Isole | Livello raggiunto | Cosa sa fare la bambina |
 |---|---|---|---|
-| **Fondamenta** *(oggi)* | 1–20 | Verso A1 (Movers) | Capisce e riconosce tantissime parole, dice cose semplici |
-| **Diploma Young Learners** | 21–30 | **A2 (Flyers)** | Comprende storie brevi, parla al passato/futuro, autonomia di base |
+| **Fondamenta** | 1–20 | Verso A1 (Movers) | Capisce e riconosce tantissime parole, dice cose semplici |
+| **Diploma Young Learners** *(oggi completo)* | 21–30 | **A2 (Flyers)** | Comprende storie brevi, parla al passato/futuro, autonomia di base |
 | **Grande padronanza** | 31–40 | **A2+ → B1** | **Conversa**, legge racconti, scrive paragrafi, esprime opinioni ed emozioni |
 | *(Arricchimento facoltativo)* | 41–50 | B1 consolidato | Canzoni, cultura, storie lunghe, giochi di ruolo, dibattiti semplici |
 
@@ -112,7 +123,7 @@ Ecco il traguardo per tappe:
 - **~40 isole** sono la stima realistica per una **"grandissima abilità" per la loro età**: capaci di **conversare**, leggere e scrivere.
 - Fino a **~50 isole** se vogliamo aggiungere arricchimenti (canzoni, cultura, storie lunghe) per rendere l'inglese davvero naturale e divertente a lungo termine.
 
-Detto in modo semplice: **siamo circa a metà delle fondamenta.** Con il terzo arcipelago si chiude il percorso "scolastico" ufficiale; con un quarto si arriva alla **vera padronanza parlata**. Da lì in poi è tutto consolidamento e piacere.
+Detto in modo semplice: **con il terzo arcipelago il percorso "scolastico" ufficiale Cambridge è chiuso** (Starters → Movers → Flyers, ≈ A2). Con un quarto arcipelago si arriva alla **vera padronanza parlata** (conversazione e scrittura). Da lì in poi è tutto consolidamento e piacere.
 
 ---
 
