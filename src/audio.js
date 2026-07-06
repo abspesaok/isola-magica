@@ -11,6 +11,12 @@
 // Rispetta la base di Vite ("/" in locale, "/<repo>/" su GitHub Pages)
 const AUDIO_BASE = `${import.meta.env.BASE_URL}audio/`;
 
+// Velocità di riproduzione delle clip MP3. Le voci ElevenLabs sono un po'
+// veloci: le rallentiamo di un filo per renderle più capibili, mantenendo il
+// tono naturale (preservesPitch). 1 = originale · 0.9 ≈ 10% più lenta.
+// Per ritoccare: più basso = più lento (es. 0.87), più vicino a 1 = più veloce.
+const MP3_RATE = 0.9;
+
 // WAV silenzioso di ~1 frame: serve a "sbloccare" l'audio su iOS/Android
 // (il primo play va fatto dentro un gesto dell'utente).
 const SILENT_WAV =
@@ -133,6 +139,11 @@ class AudioEngine {
         resolve(ok);
       };
       const a = new Audio(`${AUDIO_BASE}${file}`);
+      // Rallenta un filo la clip mantenendo il tono (niente effetto "cupo")
+      a.playbackRate = MP3_RATE;
+      a.preservesPitch = true;
+      a.mozPreservesPitch = true;
+      a.webkitPreservesPitch = true;
       this._current = a;
       this._stop = () => {
         try {
