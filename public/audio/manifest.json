@@ -2682,5 +2682,849 @@
   {
     "file": "story_witch_c6.mp3",
     "text": "You sang! Great!"
+  },
+  {
+    "file": "word_country_italy.mp3",
+    "text": "Italy"
+  },
+  {
+    "file": "prompt_country_italy.mp3",
+    "text": "Let's fly to Italy!"
+  },
+  {
+    "file": "word_country_france.mp3",
+    "text": "France"
+  },
+  {
+    "file": "prompt_country_france.mp3",
+    "text": "Let's fly to France!"
+  },
+  {
+    "file": "word_country_spain.mp3",
+    "text": "Spain"
+  },
+  {
+    "file": "prompt_country_spain.mp3",
+    "text": "Let's fly to Spain!"
+  },
+  {
+    "file": "word_country_germany.mp3",
+    "text": "Germany"
+  },
+  {
+    "file": "prompt_country_germany.mp3",
+    "text": "Let's fly to Germany!"
+  },
+  {
+    "file": "word_country_china.mp3",
+    "text": "China"
+  },
+  {
+    "file": "prompt_country_china.mp3",
+    "text": "Let's fly to China!"
+  },
+  {
+    "file": "word_country_america.mp3",
+    "text": "America"
+  },
+  {
+    "file": "prompt_country_america.mp3",
+    "text": "Let's fly to America!"
+  },
+  {
+    "file": "word_country_brazil.mp3",
+    "text": "Brazil"
+  },
+  {
+    "file": "prompt_country_brazil.mp3",
+    "text": "Let's fly to Brazil!"
+  },
+  {
+    "file": "word_country_egypt.mp3",
+    "text": "Egypt"
+  },
+  {
+    "file": "prompt_country_egypt.mp3",
+    "text": "Let's fly to Egypt!"
+  },
+  {
+    "file": "word_country_japan.mp3",
+    "text": "Japan"
+  },
+  {
+    "file": "prompt_country_japan.mp3",
+    "text": "Let's fly to Japan!"
+  },
+  {
+    "file": "word_country_australia.mp3",
+    "text": "Australia"
+  },
+  {
+    "file": "prompt_country_australia.mp3",
+    "text": "Let's fly to Australia!"
+  },
+  {
+    "file": "word_mountain.mp3",
+    "text": "mountain"
+  },
+  {
+    "file": "prompt_land_mountain.mp3",
+    "text": "Look at the mountain!"
+  },
+  {
+    "file": "word_river.mp3",
+    "text": "river"
+  },
+  {
+    "file": "prompt_land_river.mp3",
+    "text": "Look at the river!"
+  },
+  {
+    "file": "word_desert.mp3",
+    "text": "desert"
+  },
+  {
+    "file": "prompt_land_desert.mp3",
+    "text": "Look at the desert!"
+  },
+  {
+    "file": "word_forest.mp3",
+    "text": "forest"
+  },
+  {
+    "file": "prompt_land_forest.mp3",
+    "text": "Look at the forest!"
+  },
+  {
+    "file": "word_island.mp3",
+    "text": "island"
+  },
+  {
+    "file": "prompt_land_island.mp3",
+    "text": "Look at the island!"
+  },
+  {
+    "file": "word_volcano.mp3",
+    "text": "volcano"
+  },
+  {
+    "file": "prompt_land_volcano.mp3",
+    "text": "Look at the volcano!"
+  },
+  {
+    "file": "word_jungle.mp3",
+    "text": "jungle"
+  },
+  {
+    "file": "prompt_land_jungle.mp3",
+    "text": "Look at the jungle!"
+  },
+  {
+    "file": "word_cave.mp3",
+    "text": "cave"
+  },
+  {
+    "file": "prompt_land_cave.mp3",
+    "text": "Look at the cave!"
+  },
+  {
+    "file": "word_waterfall.mp3",
+    "text": "waterfall"
+  },
+  {
+    "file": "prompt_land_waterfall.mp3",
+    "text": "Look at the waterfall!"
+  },
+  {
+    "file": "word_sea.mp3",
+    "text": "sea"
+  },
+  {
+    "file": "prompt_land_sea.mp3",
+    "text": "Look at the sea!"
+  },
+  {
+    "file": "word_happy.mp3",
+    "text": "happy"
+  },
+  {
+    "file": "prompt_feel_happy.mp3",
+    "text": "I feel happy!"
+  },
+  {
+    "file": "word_sad.mp3",
+    "text": "sad"
+  },
+  {
+    "file": "prompt_feel_sad.mp3",
+    "text": "I feel sad!"
+  },
+  {
+    "file": "word_angry.mp3",
+    "text": "angry"
+  },
+  {
+    "file": "prompt_feel_angry.mp3",
+    "text": "I feel angry!"
+  },
+  {
+    "file": "word_scared.mp3",
+    "text": "scared"
+  },
+  {
+    "file": "prompt_feel_scared.mp3",
+    "text": "I feel scared!"
+  },
+  {
+    "file": "word_tired.mp3",
+    "text": "tired"
+  },
+  {
+    "file": "prompt_feel_tired.mp3",
+    "text": "I feel tired!"
+  },
+  {
+    "file": "word_excited.mp3",
+    "text": "excited"
+  },
+  {
+    "file": "prompt_feel_excited.mp3",
+    "text": "I feel excited!"
+  },
+  {
+    "file": "word_surprised.mp3",
+    "text": "surprised"
+  },
+  {
+    "file": "prompt_feel_surprised.mp3",
+    "text": "I feel surprised!"
+  },
+  {
+    "file": "word_bored.mp3",
+    "text": "bored"
+  },
+  {
+    "file": "prompt_feel_bored.mp3",
+    "text": "I feel bored!"
+  },
+  {
+    "file": "word_hungry.mp3",
+    "text": "hungry"
+  },
+  {
+    "file": "prompt_feel_hungry.mp3",
+    "text": "I feel hungry!"
+  },
+  {
+    "file": "word_thirsty.mp3",
+    "text": "thirsty"
+  },
+  {
+    "file": "prompt_feel_thirsty.mp3",
+    "text": "I feel thirsty!"
+  },
+  {
+    "file": "word_wood.mp3",
+    "text": "wood"
+  },
+  {
+    "file": "prompt_material_wood.mp3",
+    "text": "It's made of wood!"
+  },
+  {
+    "file": "word_glass.mp3",
+    "text": "glass"
+  },
+  {
+    "file": "prompt_material_glass.mp3",
+    "text": "It's made of glass!"
+  },
+  {
+    "file": "word_metal.mp3",
+    "text": "metal"
+  },
+  {
+    "file": "prompt_material_metal.mp3",
+    "text": "It's made of metal!"
+  },
+  {
+    "file": "word_plastic.mp3",
+    "text": "plastic"
+  },
+  {
+    "file": "prompt_material_plastic.mp3",
+    "text": "It's made of plastic!"
+  },
+  {
+    "file": "word_gold.mp3",
+    "text": "gold"
+  },
+  {
+    "file": "prompt_material_gold.mp3",
+    "text": "It's made of gold!"
+  },
+  {
+    "file": "word_paper.mp3",
+    "text": "paper"
+  },
+  {
+    "file": "prompt_material_paper.mp3",
+    "text": "It's made of paper!"
+  },
+  {
+    "file": "word_stone.mp3",
+    "text": "stone"
+  },
+  {
+    "file": "prompt_material_stone.mp3",
+    "text": "It's made of stone!"
+  },
+  {
+    "file": "word_wool.mp3",
+    "text": "wool"
+  },
+  {
+    "file": "prompt_material_wool.mp3",
+    "text": "It's made of wool!"
+  },
+  {
+    "file": "word_ice.mp3",
+    "text": "ice"
+  },
+  {
+    "file": "prompt_material_ice.mp3",
+    "text": "It's made of ice!"
+  },
+  {
+    "file": "word_cloth.mp3",
+    "text": "cloth"
+  },
+  {
+    "file": "prompt_material_cloth.mp3",
+    "text": "It's made of cloth!"
+  },
+  {
+    "file": "word_computer.mp3",
+    "text": "computer"
+  },
+  {
+    "file": "prompt_tech_computer.mp3",
+    "text": "Find the computer!"
+  },
+  {
+    "file": "say_tech_computer.mp3",
+    "text": "I can use the computer."
+  },
+  {
+    "file": "word_phone.mp3",
+    "text": "phone"
+  },
+  {
+    "file": "prompt_tech_phone.mp3",
+    "text": "Find the phone!"
+  },
+  {
+    "file": "say_tech_phone.mp3",
+    "text": "I can use the phone."
+  },
+  {
+    "file": "word_camera.mp3",
+    "text": "camera"
+  },
+  {
+    "file": "prompt_tech_camera.mp3",
+    "text": "Find the camera!"
+  },
+  {
+    "file": "say_tech_camera.mp3",
+    "text": "I can use the camera."
+  },
+  {
+    "file": "word_robot.mp3",
+    "text": "robot"
+  },
+  {
+    "file": "prompt_tech_robot.mp3",
+    "text": "Find the robot!"
+  },
+  {
+    "file": "say_tech_robot.mp3",
+    "text": "I can use the robot."
+  },
+  {
+    "file": "word_keyboard.mp3",
+    "text": "keyboard"
+  },
+  {
+    "file": "prompt_tech_keyboard.mp3",
+    "text": "Find the keyboard!"
+  },
+  {
+    "file": "say_tech_keyboard.mp3",
+    "text": "I can use the keyboard."
+  },
+  {
+    "file": "say_tech_television.mp3",
+    "text": "I can use the television."
+  },
+  {
+    "file": "word_headphones.mp3",
+    "text": "headphones"
+  },
+  {
+    "file": "prompt_tech_headphones.mp3",
+    "text": "Find the headphones!"
+  },
+  {
+    "file": "say_tech_headphones.mp3",
+    "text": "I can use the headphones."
+  },
+  {
+    "file": "word_game.mp3",
+    "text": "game"
+  },
+  {
+    "file": "prompt_tech_game.mp3",
+    "text": "Find the game!"
+  },
+  {
+    "file": "say_tech_game.mp3",
+    "text": "I can use the game."
+  },
+  {
+    "file": "word_printer.mp3",
+    "text": "printer"
+  },
+  {
+    "file": "prompt_tech_printer.mp3",
+    "text": "Find the printer!"
+  },
+  {
+    "file": "say_tech_printer.mp3",
+    "text": "I can use the printer."
+  },
+  {
+    "file": "say_tech_mouse.mp3",
+    "text": "I can use the mouse."
+  },
+  {
+    "file": "word_dolphin.mp3",
+    "text": "dolphin"
+  },
+  {
+    "file": "prompt_sea_dolphin.mp3",
+    "text": "Find the dolphin!"
+  },
+  {
+    "file": "say_sea_dolphin.mp3",
+    "text": "I can see a dolphin."
+  },
+  {
+    "file": "word_whale.mp3",
+    "text": "whale"
+  },
+  {
+    "file": "prompt_sea_whale.mp3",
+    "text": "Find the whale!"
+  },
+  {
+    "file": "say_sea_whale.mp3",
+    "text": "I can see a whale."
+  },
+  {
+    "file": "word_shark.mp3",
+    "text": "shark"
+  },
+  {
+    "file": "prompt_sea_shark.mp3",
+    "text": "Find the shark!"
+  },
+  {
+    "file": "say_sea_shark.mp3",
+    "text": "I can see a shark."
+  },
+  {
+    "file": "word_octopus.mp3",
+    "text": "octopus"
+  },
+  {
+    "file": "prompt_sea_octopus.mp3",
+    "text": "Find the octopus!"
+  },
+  {
+    "file": "say_sea_octopus.mp3",
+    "text": "I can see a octopus."
+  },
+  {
+    "file": "word_crab.mp3",
+    "text": "crab"
+  },
+  {
+    "file": "prompt_sea_crab.mp3",
+    "text": "Find the crab!"
+  },
+  {
+    "file": "say_sea_crab.mp3",
+    "text": "I can see a crab."
+  },
+  {
+    "file": "word_jellyfish.mp3",
+    "text": "jellyfish"
+  },
+  {
+    "file": "prompt_sea_jellyfish.mp3",
+    "text": "Find the jellyfish!"
+  },
+  {
+    "file": "say_sea_jellyfish.mp3",
+    "text": "I can see a jellyfish."
+  },
+  {
+    "file": "word_seal.mp3",
+    "text": "seal"
+  },
+  {
+    "file": "prompt_sea_seal.mp3",
+    "text": "Find the seal!"
+  },
+  {
+    "file": "say_sea_seal.mp3",
+    "text": "I can see a seal."
+  },
+  {
+    "file": "word_turtle.mp3",
+    "text": "turtle"
+  },
+  {
+    "file": "prompt_sea_turtle.mp3",
+    "text": "Find the turtle!"
+  },
+  {
+    "file": "say_sea_turtle.mp3",
+    "text": "I can see a turtle."
+  },
+  {
+    "file": "say_sea_fish.mp3",
+    "text": "I can see a fish."
+  },
+  {
+    "file": "word_shell.mp3",
+    "text": "shell"
+  },
+  {
+    "file": "prompt_sea_shell.mp3",
+    "text": "Find the shell!"
+  },
+  {
+    "file": "say_sea_shell.mp3",
+    "text": "I can see a shell."
+  },
+  {
+    "file": "word_planet.mp3",
+    "text": "planet"
+  },
+  {
+    "file": "prompt_space_planet.mp3",
+    "text": "Find the planet!"
+  },
+  {
+    "file": "word_rocket.mp3",
+    "text": "rocket"
+  },
+  {
+    "file": "prompt_space_rocket.mp3",
+    "text": "Find the rocket!"
+  },
+  {
+    "file": "prompt_space_astronaut.mp3",
+    "text": "Find the astronaut!"
+  },
+  {
+    "file": "word_alien.mp3",
+    "text": "alien"
+  },
+  {
+    "file": "prompt_space_alien.mp3",
+    "text": "Find the alien!"
+  },
+  {
+    "file": "word_earth.mp3",
+    "text": "Earth"
+  },
+  {
+    "file": "prompt_space_earth.mp3",
+    "text": "Find the Earth!"
+  },
+  {
+    "file": "word_comet.mp3",
+    "text": "comet"
+  },
+  {
+    "file": "prompt_space_comet.mp3",
+    "text": "Find the comet!"
+  },
+  {
+    "file": "word_telescope.mp3",
+    "text": "telescope"
+  },
+  {
+    "file": "prompt_space_telescope.mp3",
+    "text": "Find the telescope!"
+  },
+  {
+    "file": "word_travel.mp3",
+    "text": "travel"
+  },
+  {
+    "file": "prompt_future_travel.mp3",
+    "text": "Tomorrow I will travel!"
+  },
+  {
+    "file": "word_fly.mp3",
+    "text": "fly"
+  },
+  {
+    "file": "prompt_future_fly.mp3",
+    "text": "Tomorrow I will fly!"
+  },
+  {
+    "file": "prompt_future_swim.mp3",
+    "text": "Tomorrow I will swim!"
+  },
+  {
+    "file": "prompt_future_read.mp3",
+    "text": "Tomorrow I will read!"
+  },
+  {
+    "file": "word_win.mp3",
+    "text": "win"
+  },
+  {
+    "file": "prompt_future_win.mp3",
+    "text": "Tomorrow I will win!"
+  },
+  {
+    "file": "word_paint.mp3",
+    "text": "paint"
+  },
+  {
+    "file": "prompt_future_paint.mp3",
+    "text": "Tomorrow I will paint!"
+  },
+  {
+    "file": "prompt_future_dance.mp3",
+    "text": "Tomorrow I will dance!"
+  },
+  {
+    "file": "prompt_future_sing.mp3",
+    "text": "Tomorrow I will sing!"
+  },
+  {
+    "file": "prompt_future_cook.mp3",
+    "text": "Tomorrow I will cook!"
+  },
+  {
+    "file": "word_explore.mp3",
+    "text": "explore"
+  },
+  {
+    "file": "prompt_future_explore.mp3",
+    "text": "Tomorrow I will explore!"
+  },
+  {
+    "file": "word_dragon.mp3",
+    "text": "dragon"
+  },
+  {
+    "file": "prompt_seen_dragon.mp3",
+    "text": "I have seen a dragon!"
+  },
+  {
+    "file": "prompt_seen_castle.mp3",
+    "text": "I have seen a castle!"
+  },
+  {
+    "file": "prompt_seen_rainbow.mp3",
+    "text": "I have seen a rainbow!"
+  },
+  {
+    "file": "prompt_seen_dolphin.mp3",
+    "text": "I have seen a dolphin!"
+  },
+  {
+    "file": "prompt_seen_mountain.mp3",
+    "text": "I have seen a mountain!"
+  },
+  {
+    "file": "prompt_seen_star.mp3",
+    "text": "I have seen a star!"
+  },
+  {
+    "file": "prompt_seen_robot.mp3",
+    "text": "I have seen a robot!"
+  },
+  {
+    "file": "word_snake.mp3",
+    "text": "snake"
+  },
+  {
+    "file": "prompt_seen_snake.mp3",
+    "text": "I have seen a snake!"
+  },
+  {
+    "file": "prompt_seen_whale.mp3",
+    "text": "I have seen a whale!"
+  },
+  {
+    "file": "prompt_seen_lion.mp3",
+    "text": "I have seen a lion!"
+  },
+  {
+    "file": "word_big.mp3",
+    "text": "big"
+  },
+  {
+    "file": "prompt_adj_big.mp3",
+    "text": "It is big!"
+  },
+  {
+    "file": "word_small.mp3",
+    "text": "small"
+  },
+  {
+    "file": "prompt_adj_small.mp3",
+    "text": "It is small!"
+  },
+  {
+    "file": "word_tall.mp3",
+    "text": "tall"
+  },
+  {
+    "file": "prompt_adj_tall.mp3",
+    "text": "It is tall!"
+  },
+  {
+    "file": "word_fast.mp3",
+    "text": "fast"
+  },
+  {
+    "file": "prompt_adj_fast.mp3",
+    "text": "It is fast!"
+  },
+  {
+    "file": "word_slow.mp3",
+    "text": "slow"
+  },
+  {
+    "file": "prompt_adj_slow.mp3",
+    "text": "It is slow!"
+  },
+  {
+    "file": "word_strong.mp3",
+    "text": "strong"
+  },
+  {
+    "file": "prompt_adj_strong.mp3",
+    "text": "It is strong!"
+  },
+  {
+    "file": "word_hot.mp3",
+    "text": "hot"
+  },
+  {
+    "file": "prompt_adj_hot.mp3",
+    "text": "It is hot!"
+  },
+  {
+    "file": "prompt_adj_cold.mp3",
+    "text": "It is cold!"
+  },
+  {
+    "file": "prompt_adj_happy.mp3",
+    "text": "It is happy!"
+  },
+  {
+    "file": "word_scary.mp3",
+    "text": "scary"
+  },
+  {
+    "file": "prompt_adj_scary.mp3",
+    "text": "It is scary!"
+  },
+  {
+    "file": "prompt_find_mountain.mp3",
+    "text": "Find the mountain!"
+  },
+  {
+    "file": "prompt_find_river.mp3",
+    "text": "Find the river!"
+  },
+  {
+    "file": "prompt_find_desert.mp3",
+    "text": "Find the desert!"
+  },
+  {
+    "file": "prompt_find_happy.mp3",
+    "text": "Find the happy!"
+  },
+  {
+    "file": "prompt_find_sad.mp3",
+    "text": "Find the sad!"
+  },
+  {
+    "file": "prompt_find_angry.mp3",
+    "text": "Find the angry!"
+  },
+  {
+    "file": "prompt_find_wood.mp3",
+    "text": "Find the wood!"
+  },
+  {
+    "file": "prompt_find_glass.mp3",
+    "text": "Find the glass!"
+  },
+  {
+    "file": "story_wizard_n1.mp3",
+    "text": "Welcome, brave flyer! I am the Sky Wizard. Where will you fly tomorrow?"
+  },
+  {
+    "file": "story_wizard_n2.mp3",
+    "text": "Amazing! And what have you seen on your journey?"
+  },
+  {
+    "file": "story_wizard_n3.mp3",
+    "text": "Wonderful! How do you feel now?"
+  },
+  {
+    "file": "story_wizard_c1.mp3",
+    "text": "You will fly over the sea!"
+  },
+  {
+    "file": "story_wizard_c2.mp3",
+    "text": "You will fly over the mountain!"
+  },
+  {
+    "file": "story_wizard_c3.mp3",
+    "text": "You will fly over the volcano!"
+  },
+  {
+    "file": "story_wizard_c4.mp3",
+    "text": "You have seen a dolphin!"
+  },
+  {
+    "file": "story_wizard_c5.mp3",
+    "text": "You have seen a dragon!"
+  },
+  {
+    "file": "story_wizard_c6.mp3",
+    "text": "You have seen a star!"
+  },
+  {
+    "file": "story_wizard_c7.mp3",
+    "text": "You feel happy!"
+  },
+  {
+    "file": "story_wizard_c8.mp3",
+    "text": "You feel excited!"
   }
 ]

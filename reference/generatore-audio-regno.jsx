@@ -40,11 +40,31 @@ const SPORTS = ["football","basketball","tennis","swimming","running","cycling",
 const TRANSPORT = ["car","bus","train","plane","boat","bike","taxi","helicopter","scooter","truck"];
 const DIRECTIONS = ["left","right","straight on","back","up","down"];
 
+/* Isole 21-30 (Arcipelago 3 · Flyers) — devono rispecchiare esattamente App.jsx */
+const WORLD = ["Italy","France","Spain","Germany","China","America","Brazil","Egypt","Japan","Australia"];
+const LANDSCAPE = ["mountain","river","desert","forest","island","volcano","jungle","cave","waterfall","sea"];
+const FEELINGS = ["happy","sad","angry","scared","tired","excited","surprised","bored","hungry","thirsty"];
+const MATERIALS = ["wood","glass","metal","plastic","gold","paper","stone","wool","ice","cloth"];
+const TECH = ["computer","phone","camera","robot","keyboard","television","headphones","game","printer","mouse"];
+const SEA = ["dolphin","whale","shark","octopus","crab","jellyfish","seal","turtle","fish","shell"];
+const SPACE = ["star","moon","sun","planet","rocket","astronaut","alien","Earth","comet","telescope"];
+const FUTURE_ACTIONS = ["travel","fly","swim","read","win","paint","dance","sing","cook","explore"];
+const SEEN_THINGS = ["dragon","castle","rainbow","dolphin","mountain","star","robot","snake","whale","lion"];
+const ADJECTIVES = ["big","small","tall","fast","slow","strong","hot","cold","happy","scary"];
+const FLYERS_POOL = [
+  ...LANDSCAPE.slice(0, 3), ...FEELINGS.slice(0, 3), ...SEA.slice(0, 3),
+  ...SPACE.slice(0, 3), ...TECH.slice(0, 3), ...MATERIALS.slice(0, 2),
+];
+
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_");
 
 function buildManifest() {
   const M = [];
   const add = (file, text) => M.push({ file: `${file}.mp3`, text });
+  // addN = come add, ma marca la clip come "nuova" (isole 21-30): serve a
+  // generare SOLO le nuove senza rifare le 671 già esistenti. Se una frase
+  // nuova coincide con una vecchia, il dedup tiene quella vecchia (già incisa).
+  const addN = (file, text) => M.push({ file: `${file}.mp3`, text, isNew: true });
 
   /* system */
   add("sys_welcome", "Welcome to the Magic Kingdom, Silvana!");
@@ -201,6 +221,49 @@ function buildManifest() {
     "It was sunny!", "It was rainy!",
   ].forEach((t, i) => add(`story_witch_c${i + 1}`, t));
 
+  /* ═══════════ ARCIPELAGO 3 · FLYERS (isole 21-30) — clip NUOVE ═══════════ */
+
+  /* ─── Isola 21 · Mappamondo (paesi, paesaggi) ─── */
+  WORLD.forEach((c) => { addN(`word_country_${slug(c)}`, c); addN(`prompt_country_${slug(c)}`, `Let's fly to ${c}!`); });
+  LANDSCAPE.forEach((l) => { addN(`word_${slug(l)}`, l); addN(`prompt_land_${slug(l)}`, `Look at the ${l}!`); });
+
+  /* ─── Isola 22 · Emozioni ─── */
+  FEELINGS.forEach((f) => { addN(`word_${slug(f)}`, f); addN(`prompt_feel_${slug(f)}`, `I feel ${f}!`); addN(`say_feel_${slug(f)}`, `I feel ${f}.`); });
+
+  /* ─── Isola 23 · Materiali ─── */
+  MATERIALS.forEach((m) => { addN(`word_${slug(m)}`, m); addN(`prompt_material_${slug(m)}`, `It's made of ${m}!`); addN(`say_material_${slug(m)}`, `It's made of ${m}.`); });
+
+  /* ─── Isola 24 · Tecnologia ─── */
+  TECH.forEach((t) => { addN(`word_${slug(t)}`, t); addN(`prompt_tech_${slug(t)}`, `Find the ${t}!`); addN(`say_tech_${slug(t)}`, `I can use the ${t}.`); });
+
+  /* ─── Isola 25 · Mare ─── */
+  SEA.forEach((s) => { addN(`word_${slug(s)}`, s); addN(`prompt_sea_${slug(s)}`, `Find the ${s}!`); addN(`say_sea_${slug(s)}`, `I can see a ${s}.`); });
+
+  /* ─── Isola 26 · Spazio (il conteggio riusa "How many stars?" già inciso) ─── */
+  SPACE.forEach((s) => { addN(`word_${slug(s)}`, s); addN(`prompt_space_${slug(s)}`, `Find the ${s}!`); });
+
+  /* ─── Isola 27 · Futuro (I will…) ─── */
+  FUTURE_ACTIONS.forEach((v) => { addN(`word_${slug(v)}`, v); addN(`prompt_future_${slug(v)}`, `Tomorrow I will ${v}!`); addN(`say_future_${slug(v)}`, `Tomorrow I will ${v}.`); });
+
+  /* ─── Isola 28 · Present perfect (I have seen…) ─── */
+  SEEN_THINGS.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_seen_${slug(w)}`, `I have seen a ${w}!`); addN(`say_seen_${slug(w)}`, `I have seen a ${w}.`); });
+
+  /* ─── Isola 29 · Opposti (i confronti riusano "Which one is bigger/smaller?") ─── */
+  ADJECTIVES.forEach((a) => { addN(`word_${slug(a)}`, a); addN(`prompt_adj_${slug(a)}`, `It is ${a}!`); });
+
+  /* ─── Isola 30 · Gran Mago dei Cieli (ripasso Flyers + storia) ─── */
+  FLYERS_POOL.forEach((w) => addN(`prompt_find_${slug(w)}`, `Find the ${w}!`));
+  [
+    "Welcome, brave flyer! I am the Sky Wizard. Where will you fly tomorrow?",
+    "Amazing! And what have you seen on your journey?",
+    "Wonderful! How do you feel now?",
+  ].forEach((t, i) => addN(`story_wizard_n${i + 1}`, t));
+  [
+    "You will fly over the sea!", "You will fly over the mountain!", "You will fly over the volcano!",
+    "You have seen a dolphin!", "You have seen a dragon!", "You have seen a star!",
+    "You feel happy!", "You feel excited!",
+  ].forEach((t, i) => addN(`story_wizard_c${i + 1}`, t));
+
   /* dedup per TESTO normalizzato: ogni frase distinta = una sola clip
      (stessa normalizzazione del gioco → nessuno spreco di crediti) */
   const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -292,12 +355,16 @@ export default function App() {
   const [errors, setErrors] = useState([]);
   const [log, setLog] = useState("");
   const [zipUrl, setZipUrl] = useState(null);
+  const [genAll, setGenAll] = useState(false); // false = solo isole 21-30 (nuove)
   const resultsRef = useRef({});
   const abortRef = useRef(false);
   const audioRef = useRef(null);
 
   const manifest = useMemo(buildManifest, []);
-  const totalChars = useMemo(() => manifest.reduce((s, m) => s + m.text.length, 0), [manifest]);
+  const newCount = useMemo(() => manifest.filter((m) => m.isNew).length, [manifest]);
+  // Coda di generazione: solo le clip nuove (isole 21-30), oppure tutte se genAll.
+  const genQueue = useMemo(() => manifest.filter((m) => genAll || m.isNew), [manifest, genAll]);
+  const totalChars = useMemo(() => genQueue.reduce((s, m) => s + m.text.length, 0), [genQueue]);
 
   const loadVoices = async () => {
     try {
@@ -329,8 +396,8 @@ export default function App() {
   const runAll = async () => {
     if (!apiKey || !voiceId) { setLog("⚠️ Inserisci API key e scegli una voce"); return; }
     setStatus("running"); setErrors([]); setZipUrl(null); abortRef.current = false;
-    const todo = manifest.filter((m) => !resultsRef.current[m.file]);
-    setDoneCount(manifest.length - todo.length);
+    const todo = genQueue.filter((m) => !resultsRef.current[m.file]);
+    setDoneCount(genQueue.length - todo.length);
     let idx = 0;
     const failed = [];
     const WORKERS = 3;
@@ -375,13 +442,14 @@ export default function App() {
       .map((m) => ({ name: `audio/${m.file}`, data: resultsRef.current[m.file] }));
     files.push({
       name: "audio/manifest.json", // dentro audio/: così l'intera cartella va in public/
-      data: new TextEncoder().encode(JSON.stringify(manifest, null, 2)),
+      // manifest COMPLETO (vecchie + nuove), senza il flag interno isNew
+      data: new TextEncoder().encode(JSON.stringify(manifest.map(({ isNew, ...r }) => r), null, 2)),
     });
     const blob = makeZip(files);
     setZipUrl(URL.createObjectURL(blob));
   };
 
-  const pct = Math.round((doneCount / manifest.length) * 100);
+  const pct = genQueue.length ? Math.round((doneCount / genQueue.length) * 100) : 0;
   const generated = Object.keys(resultsRef.current).length;
 
   const inputStyle = { width: "100%", padding: "12px 14px", borderRadius: 12, border: "2px solid #ffffff26", background: "#ffffff10", color: "#F6F1FF", fontSize: 15, outline: "none" };
@@ -394,7 +462,7 @@ export default function App() {
           🎙️ Isola Magica — <span style={{ color: "#F5C64F" }}>Generatore Audio</span>
         </h1>
         <p style={{ color: "#CDBBF2", fontSize: 14, textAlign: "center", margin: 0 }}>
-          {manifest.length} clip · {totalChars.toLocaleString("it-IT")} caratteri totali · la API key resta solo in memoria
+          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (isole 21-30) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
         </p>
 
         {/* credentials */}
@@ -444,12 +512,18 @@ export default function App() {
           </p>
         </div>
 
+        {/* scope della generazione */}
+        <label style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", color: "#CDBBF2", fontSize: 14, cursor: "pointer" }}>
+          <input type="checkbox" checked={genAll} onChange={(e) => setGenAll(e.target.checked)} disabled={status === "running"} style={{ width: 18, height: 18 }} />
+          Rigenera <b>anche</b> le isole 1-20 (di default incide solo le <b>{newCount} nuove</b>)
+        </label>
+
         {/* actions */}
         <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
           <button onClick={playTest} style={btnStyle(false)} disabled={status === "running"}>🎧 Prova la voce</button>
           {status !== "running" ? (
             <button onClick={runAll} style={btnStyle(true)}>
-              ⚡ Genera {generated > 0 ? `le ${manifest.length - generated} mancanti` : `tutte le ${manifest.length} clip`}
+              ⚡ Genera {generated > 0 ? `le ${genQueue.length - generated} mancanti` : `le ${genQueue.length} clip`}
             </button>
           ) : (
             <button onClick={() => { abortRef.current = true; }} style={btnStyle(false)}>⏸️ Ferma</button>
@@ -464,7 +538,7 @@ export default function App() {
               <div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg,#F5C64F,#F27EB6)", transition: "width .3s" }} />
             </div>
             <p style={{ color: "#CDBBF2", fontSize: 14, margin: "10px 0 0", textAlign: "center" }}>
-              {doneCount}/{manifest.length} clip ({pct}%)
+              {doneCount}/{genQueue.length} clip ({pct}%)
             </p>
           </div>
         )}
@@ -490,7 +564,7 @@ export default function App() {
         )}
 
         <p style={{ color: "#7A68A8", fontSize: 12, textAlign: "center" }}>
-          Dentro lo ZIP: la cartella <b>audio/</b> con i {manifest.length} MP3 + <b>manifest.json</b>. Trascina quella cartella <b>audio/</b> dentro <b>public/</b> del progetto.
+          Dentro lo ZIP: la cartella <b>audio/</b> con gli MP3 <b>appena generati</b> + il <b>manifest.json completo</b> (tutte le {manifest.length} clip). Copia il contenuto di <b>audio/</b> dentro <b>public/audio/</b> del progetto (i nuovi MP3 si aggiungono ai vecchi e il manifest.json va sostituito).
         </p>
       </div>
     </div>
