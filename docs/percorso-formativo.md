@@ -94,14 +94,11 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 
 ## 4. Cosa manca ancora nel percorso
 
-Con il **terzo arcipelago (Flyers, isole 21–30) ora costruito**, l'intero percorso ufficiale Cambridge — Starters, Movers e Flyers — è coperto: il grande mondo (paesi e paesaggi), le emozioni, i materiali, la tecnologia, il mare, lo spazio, il **futuro** ("I will…"), il **present perfect** ("I have seen…"), aggettivi e confronti, fino al mini-esame Flyers. A ora restano **due abilità nuove** da aggiungere e un affinamento.
+Con il **terzo arcipelago (Flyers, isole 21–30) ora costruito e doppiato**, l'intero percorso ufficiale Cambridge — Starters, Movers e Flyers — è coperto: il grande mondo (paesi e paesaggi), le emozioni, i materiali, la tecnologia, il mare, lo spazio, il **futuro** ("I will…"), il **present perfect** ("I have seen…"), aggettivi e confronti, fino al mini-esame Flyers. Tutte e 30 le isole hanno le **voci inglesi vere** (madrelingua). A ora restano **due abilità nuove** da aggiungere.
 
 ### Le due abilità da aggiungere
 - ✍️ **Scrittura / spelling guidato**: dal comporre parole (lettera per lettera), a comporre frasi, a scrivere due righe su di sé. Serve un nuovo tipo di gioco dedicato.
 - 💬 **Conversazione**: un **compagno con cui parlare** (un assistente che ascolta e risponde a voce) per allenare il dialogo vero — la cosa che più avvicina alla padronanza.
-
-### Un affinamento (audio)
-Le 30 isole sono tutte giocabili. Le **isole 21–30 usano per ora la voce di sistema del dispositivo** (un po' robotica) al posto delle voci inglesi vere (ElevenLabs) che accompagnano le isole 1–20. Nessuna bambina le sente ancora — restano **bloccate** finché non si completa l'isola 20 — ma per dare loro le stesse voci naturali basta un **passaggio di generazione audio** dedicato (come già fatto per le prime 20).
 
 ---
 
