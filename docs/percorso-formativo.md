@@ -178,6 +178,7 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 | 🃏 **Memoria** | 💪 Forte | I giochi Memory fissano le parole |
 | 📖 **Lettura** | 💪 Forte | Tante isole mostrano la parola **scritta** e leggono le frasi |
 | 🔎 **Comprensione (lettura + ascolto)** | ✅ **Novità!** | **Arcipelago 8**: uno **stimolo condiviso** (testo da rileggere o audio da riascoltare) + più **domande collegate** — la prima vera *comprensione* su brano/scena, in stile A2 Key |
+| 🔦 **Ripasso & costanza (Faro)** | ✅ **Novità!** | La **Sfida di oggi**: 6 domande veloci al giorno che ripescano le parole **già viste** e quelle **sbagliate** con **ripetizione dilazionata** (scatole di Leitner) — memoria a lungo termine, +💎 bonus, e alimenta la Fiamma |
 | ✍️ **Scrittura / spelling** | ✅ In crescita | Si **compongono le parole** lettera per lettera (Arcipelaghi 4 e 6) |
 | 🧩 **Produzione / grammatica** | ✅ **Novità!** | **Arcipelago 7**: con le **tessere-parola** e il **riempi-il-buco** la bambina *costruisce* la frase (domande, negative, passato, condizionali…), non solo la riconosce |
 | 💬 **Conversazione (guidata)** | ✅ **Presente!** | Il motore **chat** dell'Arcipelago 5: dialoghi veri a più battute, a voce o toccando |
@@ -192,7 +193,7 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 Con **otto arcipelaghi (81 isole)** il percorso ufficiale Cambridge (Starters → Movers → Flyers) è coperto **e ampiamente superato**: si aggiungono il ponte **Explorers** verso il B1 (con la scrittura), la **conversazione parlata** ("La Voce"), un ricco **arricchimento B1+** ("Il Mondo Reale"), la **Palestra della Grammatica** (la **produzione**: costruire le frasi) e ora **Lettura e Ascolto** (la **comprensione** su un testo o un audio condiviso). Le cinque abilità sono tutte allenate, **conversazione guidata, produzione grammaticale e comprensione comprese**.
 
 ### I prossimi passi
-- 🧱 **Crescita sostenibile verso A2 Key → B1 Preliminary** (a costo zero, senza AI): c'è ancora molto margine per salire di livello **restando a frasi chiuse**. Oggi l'app è fortissima nel **riconoscere** (tocca quella giusta); i buchi veri sono la **produzione** (costruire una frase, non solo sceglierla) e la **comprensione su testo/audio condiviso** (leggi/ascolta una scena e rispondi a più domande). Si colmano con giochi a **tessere-parola** e **riempi-il-buco**, sempre auto-corretti sul dispositivo. Il piano completo è nella **sezione 6 (La roadmap futura)**.
+- 🧱 **Crescita sostenibile verso A2 Key → B1 Preliminary** (a costo zero, senza AI): c'è ancora margine per salire di livello **restando a frasi chiuse**. I tre buchi veri di ieri — la **produzione** (costruire una frase), la **comprensione su testo/audio condiviso** e la **memoria a lungo termine** — sono ora **coperti** (Arcipelaghi 7 e 8 + il **Faro** con la Sfida di oggi). Resta solo la **Fase 4 · Accademia degli Esami**: gli ultimi formati d'esame A2 Key (abbinamento, gapped-text). Il piano completo è nella **sezione 6 (La roadmap futura)**.
 - 💬 **Conversazione libera con una vera AI** (opzionale, a pagamento): un compagno che ascolta qualunque cosa e **risponde a braccio** (non tra risposte prefissate). È l'ultimo miglio verso la padronanza, ma richiede una **AI online** (chiave API, es. Anthropic) e un **piano Firebase a pagamento (Blaze)** con un piccolo backend — non è testabile offline. I dialoghi guidati dell'Arcipelago 5 ne sono la versione **gratuita, sicura e già funzionante**; la versione AI libera è un possibile **upgrade futuro opzionale**.
 
 > **Voci:** le isole **1–61** hanno le **voci inglesi vere** (madrelingua, ElevenLabs) — **1851 clip** incise (incluse ora le **verdure dell'isola 5**). Usano la **voce sintetica del dispositivo**: le battute **personalizzate col nome** della bambina; le **frasi dell'Arcipelago 7** (la grammatica); e le **scene di comprensione dell'Arcipelago 8** (i testi di lettura e gli audio d'ascolto) — non ancora incise. La voce sintetica le legge chiaramente e il gioco funziona già al 100%; per le scene d'**ascolto** la voce del dispositivo va benissimo (è proprio un esercizio di ascolto). Le voci vere si aggiungono al generatore quando vuoi.
@@ -233,7 +234,9 @@ Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso
 
 > **✅ Fase 1 FATTA (2026-07-08):** la **Palestra della Grammatica** (Arcipelago 7, isole 62–71) è **costruita e giocabile** — motori *tessere-parola* e *riempi-il-buco* (vedi §2).
 >
-> **✅ Fase 2 FATTA (2026-07-08):** **Lettura e Ascolto** (Arcipelago 8, isole 72–81) è **costruita e giocabile** — nuovo motore *scena di lettura/ascolto* (`readscene`): **10 isole, 62 domande** di comprensione con distrattori, **generate e validate** in modo avversariale (vedi §2). Restano le fasi 3–5 qui sotto.
+> **✅ Fase 2 FATTA (2026-07-08):** **Lettura e Ascolto** (Arcipelago 8, isole 72–81) è **costruita e giocabile** — nuovo motore *scena di lettura/ascolto* (`readscene`): **10 isole, 62 domande** di comprensione con distrattori, **generate e validate** in modo avversariale (vedi §2).
+>
+> **✅ Fase 3 FATTA (2026-07-08):** il **Faro della Memoria** è **acceso** — la **Sfida di oggi** sulla mappa: 6 domande veloci al giorno che ripescano le parole già viste e quelle deboli con **ripetizione dilazionata** (Leitner), +💎 bonus una volta al giorno. Strato **trasversale** (nessuna isola nuova): riusa la Fiamma e le "parole deboli" esistenti, aggiunge solo il ripasso schedulato. **È l'unica novità che aiuta *subito*, fin dalle prime isole.** Restano le fasi 4–5 qui sotto.
 
 ### Le 5 fasi
 
@@ -241,7 +244,7 @@ Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso
 |---|---|---|---|---|
 | **1 · La Palestra della Grammatica** ✅ *FATTA* | 7 (isole 62–71) | Dal riconoscere al **costruire**: domande, negative, ordine delle parole, comparativi, *first conditional* — a **tessere-parola** | in stile **A2 Key** | ✅ Fatto |
 | **2 · Lettura e Ascolto** ✅ *FATTA* | 8 (isole 72–81) | **Scena condivisa** (testo ri-leggibile o audio ri-ascoltabile) + più domande collegate, con distrattori scritti a mano | A2 → inizio **B1** | ✅ Fatto |
-| **3 · Il Faro della Memoria** | *strato trasversale* | **Ripetizione dilazionata** sugli item già imparati + **Sfida Giornaliera** (che "spende" lo streak già calcolato). Massima ritenzione, zero contenuto nuovo | rinforzo A2 | Medio |
+| **3 · Il Faro della Memoria** ✅ *FATTA* | *strato trasversale* | **Ripetizione dilazionata** (Leitner) sugli item già imparati + **Sfida Giornaliera** con gemma bonus. Massima ritenzione, zero contenuto nuovo | rinforzo A2 | ✅ Fatto |
 | **4 · L'Accademia degli Esami** | 9 (isole 82–91) | Formati d'esame ancora scoperti: **abbinamento** molti-a-uno, *gapped-text*, cloze a scelta, **scrittura guidata a tessere** | **A2 Key** completo → ponte B1 | Alto |
 | **5 · Il Grande Palco** *(opzionale)* | 10 (isole 92–101) | **Conversazione ramificata**: la scelta del bimbo cambia la battuta del compagno (telefonare, negoziare, opinioni con registro) | parlato funzionale | Medio |
 
@@ -252,7 +255,7 @@ Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso
 | **Costruttore di frasi** (tessere-parola) | Ordinare le tessere per formare una frase → si confronta con l'ordine giusto | il motore dello *spelling*, con le parole al posto delle lettere |
 | **Riempi-il-buco** (banco di tessere) | Scegliere la tessera giusta per un buco (preposizioni, articoli, tempi) | il motore "ascolta e tocca" + le tessere-testo già usate ne *La Voce* |
 | **Scena di lettura/ascolto** | Uno stimolo persistente con più domande collegate e distrattori plausibili | la logica a scelta multipla, con un'intestazione-stimolo fissa |
-| **Ripasso dilazionato** | Programma quando ripresentare ogni parola (scatole di Leitner) | il contatore "parole deboli" già esistente |
+| **Ripasso dilazionato** ✅ | Programma quando ripresentare ogni parola (scatole di Leitner) → alimenta la Sfida di oggi | il contatore "parole deboli" già esistente |
 | **Abbinamento** | Collegare molti elementi a uno (formato esame reale) | la meccanica a coppie del Memory |
 
 ### Onestà (come sempre)
@@ -260,7 +263,7 @@ Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso
 - **Cosa resta impossibile senza AI** (e va tenuto fuori dalle promesse): la **scrittura libera estesa** (l'email da ~100 parole di PET), la **conversazione aperta** imprevedibile, la **qualità di pronuncia/fluenza**, la descrizione libera. La versione a tessere allena la *costruzione*, non la *composizione libera*; il parlato ramificato allena il *rehearsal* di funzioni, non l'interazione spontanea.
 
 ### Prossimo passo
-Le **Fasi 1 e 2 sono fatte** (i motori *tessere-parola*, *riempi-il-buco* e *scena di lettura/ascolto* sono pronti e riutilizzabili). Il prossimo passo è la **Fase 3 — Il Faro della Memoria**: **ripetizione dilazionata** sugli item già imparati + **Sfida Giornaliera** che "spende" lo streak già calcolato — massima ritenzione, **zero contenuto nuovo**, quasi gratis (riusa il contatore "parole deboli" già esistente). Poi l'**Accademia degli Esami** (Fase 4) con gli ultimi formati A2 Key.
+Le **Fasi 1, 2 e 3 sono fatte** (i motori *tessere-parola*, *riempi-il-buco*, *scena di lettura/ascolto* e ora la **Sfida di oggi** con ripasso dilazionato). Il prossimo passo è la **Fase 4 — L'Accademia degli Esami** (Arcipelago 9, isole 82–91): gli ultimi formati d'esame A2 Key ancora scoperti — **abbinamento** molti-a-uno (motore `matching`, riusa la meccanica del Memory), *gapped-text* e cloze a scelta. Poi, opzionale, il **Grande Palco** (Fase 5) con la conversazione ramificata.
 
 ---
 

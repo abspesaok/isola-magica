@@ -8,7 +8,7 @@ import { subscribeProfiles, pushProfiles } from "./cloudStore";
 // non si sincronizza, così ogni dispositivo può avere un bimbo diverso al lavoro.
 const ACTIVE_KEY = "isola-magica-active-v1";
 import {
-  levelInfo, dailyVisit, skyGradient, shopItem,
+  levelInfo, dailyVisit, todayStr, skyGradient, shopItem,
   SHOP, SHOP_CATS, isOwned, XP_PER_CORRECT, XP_PER_STAR,
 } from "./progression";
 import { ARC8_ISLANDS } from "./comprehension.js";
@@ -3980,6 +3980,124 @@ const ISLANDS = [
   ...ARC8_ISLANDS,
 ];
 
+/* ═══════════════════════════════════════════════════════════
+   IL FARO DELLA MEMORIA (Fase 3) — Sfida Giornaliera + ripasso dilazionato
+   Strato TRASVERSALE (nessuna isola nuova): ripesca le parole già viste e
+   quelle deboli con priorità a scadenza (Leitner), una sfida veloce al giorno
+   con gemma bonus. Riusa `weak` e la Fiamma esistenti; aggiunge solo `review`
+   (scatole) e `daily` (bonus 1/giorno). Tutto chiuso e sul dispositivo.
+   ═══════════════════════════════════════════════════════════ */
+
+// Catalogo piatto di TUTTO il vocabolario "illustrabile" (parola + emoji),
+// ricavato una volta dalle isole con giochi ascolta&tocca / memory.
+const VOCAB_CATALOG = (() => {
+  const seen = new Set();
+  const out = [];
+  for (const isl of ISLANDS) {
+    for (const g of isl.games || []) {
+      if (g.type !== "listentap" && g.type !== "memory") continue;
+      for (const it of (g.cfg && g.cfg.pool) || []) {
+        if (it && typeof it.en === "string" && typeof it.emoji === "string" && it.emoji) {
+          const k = it.en.toLowerCase().trim();
+          if (!seen.has(k)) { seen.add(k); out.push({ en: it.en, emoji: it.emoji, islandId: isl.id }); }
+        }
+      }
+    }
+  }
+  return out;
+})();
+
+// Ripasso dilazionato: intervalli (in giorni) per scatola di Leitner 0..5.
+const REVIEW_INTERVALS = [0, 1, 2, 4, 8, 16];
+const dayIndex = () => Math.floor(new Date(todayStr() + "T00:00:00").getTime() / 86400000);
+
+// PRNG deterministico da stringa (mulberry32) → la Sfida "di oggi" è stabile nel giorno.
+function seededRng(str) {
+  let h = 1779033703 ^ str.length;
+  for (let i = 0; i < str.length; i++) { h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+  let a = h >>> 0;
+  return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+
+// Sceglie le N parole della Sfida: deboli prima, poi quelle "in scadenza" nel
+// ripasso, poi vocabolario già visto. Pesca solo dalle isole già giocate.
+function pickDailyItems(seenIslandIds, weak, review, dateStr, n = 6) {
+  const seenSet = new Set(seenIslandIds);
+  let pool = VOCAB_CATALOG.filter((x) => seenSet.has(x.islandId));
+  if (pool.length < n && ISLANDS[0]) pool = VOCAB_CATALOG.filter((x) => x.islandId === ISLANDS[0].id);
+  if (pool.length < n) pool = VOCAB_CATALOG.slice();
+  const rng = seededRng(dateStr + ":" + pool.length);
+  const today = dayIndex();
+  const score = (x) => {
+    let s = rng() * 5; // varietà stabile nel giorno
+    const w = weak[x.en] || 0;
+    if (w > 0) s += 100 + w; // deboli: massima priorità
+    const r = review[x.en];
+    if (r) { const due = today - r.seen - (REVIEW_INTERVALS[r.box] || 0); if (due >= 0) s += 40 + Math.min(due, 20); }
+    else s += 12; // mai ripassata: priorità media
+    return s;
+  };
+  return [...pool].sort((a, b) => score(b) - score(a)).slice(0, n);
+}
+
+/* Sfida Giornaliera: quiz ascolta&tocca veloce sulle parole selezionate. */
+function DailyChallengeGame({ speak, items, onGem, onMiss, onDone }) {
+  const N = items.length;
+  const [round, setRound] = useState(0);
+  const [opts, setOpts] = useState([]);
+  const [locked, setLocked] = useState(false);
+  const [wrongIdx, setWrongIdx] = useState(null);
+  const [burst, setBurst] = useState(0);
+  const mistakes = useRef(0);
+  const target = items[round];
+
+  const build = useCallback(() => {
+    const pool = VOCAB_CATALOG.filter((x) => x.en !== target.en);
+    const same = shuffle(pool.filter((x) => x.islandId === target.islandId));
+    const other = shuffle(pool.filter((x) => x.islandId !== target.islandId));
+    const distr = [...same, ...other].slice(0, 3);
+    setOpts(shuffle([target, ...distr]));
+    setLocked(false); setWrongIdx(null);
+    setTimeout(() => audio.whenIdle().then(() => speak(`Find the ${target.en}!`)), 450);
+  }, [round]); // eslint-disable-line
+
+  useEffect(() => { build(); }, [round]); // eslint-disable-line
+
+  const pick = (it, i) => {
+    if (locked) return;
+    if (it.en === target.en) {
+      setLocked(true); setBurst((b) => b + 1); onGem(target);
+      speak(target.en, PRAISE[rand(PRAISE.length)]);
+      setTimeout(() => {
+        if (round + 1 >= N) onDone(mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1);
+        else setRound((r) => r + 1);
+      }, 1500);
+    } else {
+      mistakes.current += 1; setWrongIdx(i); onMiss(target);
+      speak(`That's ${it.en}.`, `Find the ${target.en}!`);
+      setTimeout(() => setWrongIdx(null), 700);
+    }
+  };
+
+  if (!target) return null;
+  return (
+    <div className="flex flex-col items-center gap-6 w-full">
+      <SparkleBurst trigger={burst} />
+      <ProgressPips total={N} done={round} />
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>🔦 Ascolta e tocca la parola giusta!</p>
+      <button onClick={() => speak(`Find the ${target.en}!`)} className="listen-btn">🔊 Riascolta</button>
+      <div className="grid grid-cols-2 gap-6 mt-2">
+        {opts.map((it, i) => (
+          <button key={it.en} onClick={() => pick(it, i)}
+            className={`opt-btn ${wrongIdx === i ? "shake" : ""}`}>
+            <span className="text-5xl">{it.emoji}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════ LEVEL-UP: header, XP, fiamma, negozio ═══════════ */
 
 function XpBar({ lvl }) {
@@ -4220,9 +4338,10 @@ function CreateProfile({ onCreate, onCancel, canCancel }) {
 /* ═══════════ APP ═══════════ */
 export default function App() {
   const [store, setStore] = useState(null); // { activeId, profiles: [...] }
-  const [view, setView] = useState({ screen: "profiles" }); // profiles|create|map|island|game|shop
+  const [view, setView] = useState({ screen: "profiles" }); // profiles|create|map|island|game|shop|daily
   const [celebrate, setCelebrate] = useState(false);
   const [dailyToast, setDailyToast] = useState(null); // bonus Fiamma Magica di oggi
+  const [dailyItems, setDailyItems] = useState([]); // parole della Sfida di oggi (Faro)
   const [leveledUp, setLeveledUp] = useState(null); // overlay salita di livello
   const [shopBurst, setShopBurst] = useState(0);
   const [denyId, setDenyId] = useState(null); // carta negozio "non puoi permettertelo"
@@ -4410,6 +4529,37 @@ export default function App() {
     words.forEach((w) => { weak[w] = (weak[w] || 0) + 2; });
     return { ...p, weak };
   });
+
+  // ─── Faro della Memoria: Sfida Giornaliera (aggiorna weak + ripasso Leitner) ───
+  const onDailyGem = (item) => setProgress((p) => {
+    const weak = { ...p.weak }; if (weak[item.en] > 0) weak[item.en] -= 1;
+    const review = { ...(p.review || {}) };
+    const cur = review[item.en] || { box: 0, seen: 0 };
+    review[item.en] = { box: Math.min(5, cur.box + 1), seen: dayIndex() };
+    return { ...p, gems: p.gems + 1, xp: p.xp + XP_PER_CORRECT, weak, review };
+  });
+  const onDailyMiss = (item) => setProgress((p) => {
+    const weak = { ...p.weak }; weak[item.en] = (weak[item.en] || 0) + 2;
+    const review = { ...(p.review || {}) };
+    review[item.en] = { box: 0, seen: dayIndex() }; // sbagliata → torna alla scatola 0
+    return { ...p, weak, review };
+  });
+  const startDaily = () => {
+    audio.unlock();
+    const stars = progress.stars || {};
+    const seen = Object.keys(stars).filter((id) => Object.values(stars[id] || {}).some((v) => v > 0));
+    setDailyItems(pickDailyItems(seen, progress.weak || {}, progress.review || {}, todayStr(), 6));
+    setView({ screen: "daily" });
+  };
+  const finishDaily = (stars) => {
+    setProgress((p) => {
+      const firstToday = !(p.daily && p.daily.date === todayStr() && p.daily.done);
+      const bonus = firstToday ? 5 : 0; // gemma bonus una sola volta al giorno
+      return { ...p, gems: p.gems + bonus, daily: { date: todayStr(), done: true } };
+    });
+    speak("Great job!");
+    setView({ screen: "map" });
+  };
   const finishGame = (islandId, gameKey) => (starCount) => {
     setProgress((p) => {
       const prev = p.stars?.[islandId]?.[gameKey] || 0;
@@ -4456,6 +4606,8 @@ export default function App() {
   const currentIsland = ISLANDS.find((i) => i.id === view.islandId);
   const currentGame = currentIsland?.games?.find((g) => g.key === view.gameKey);
   const weakCount = progress ? Object.values(progress.weak).filter((v) => v > 0).length : 0;
+  const dailyDoneToday = !!(progress && progress.daily && progress.daily.date === todayStr() && progress.daily.done);
+  const hasPlayed = !!(progress && Object.keys(progress.stars || {}).length > 0); // sblocca il Faro dopo il primo gioco
   const islandsFreed = ISLANDS.filter((isl) => isl.games && islandDone(isl)).length;
   const sky = skyGradient(progress ? progress.equipped.sky : "sky_night");
 
@@ -4524,6 +4676,21 @@ export default function App() {
             Isola Magica
           </h1>
           <RoyalHeader progress={progress} gender={gender} name={playerName} crownFilled={islandsFreed} onShop={() => setView({ screen: "shop" })} onSwitch={switchUser} />
+          {/* 🔦 Il Faro della Memoria — Sfida Giornaliera di ripasso (dopo il primo gioco) */}
+          {hasPlayed && (
+            <button onClick={startDaily} className="game-tile" style={{ width: "100%" }}>
+              <span className="text-4xl">🔦</span>
+              <span className="flex-1">
+                <span className="display block text-lg leading-snug" style={{ color: "#F6F1FF" }}>Sfida di oggi</span>
+                <span className="block text-sm" style={{ color: "#9F8CC9" }}>
+                  {dailyDoneToday ? "✅ Fatta oggi — torna domani!" : "6 domande veloci di ripasso · +💎 bonus"}
+                </span>
+              </span>
+              <span className="font-bold text-sm" style={{ color: dailyDoneToday ? "#7FE0A3" : "#FFB86B" }}>
+                {dailyDoneToday ? "✅" : "▶"}
+              </span>
+            </button>
+          )}
           {weakCount > 0 && (
             <div className="text-sm font-semibold px-4 py-2 rounded-full" style={{ background: "#ffffff12", color: "#CDBBF2", border: "1.5px solid #ffffff22" }}>
               🌟 {weakCount} gemme perdute da ritrovare — torneranno nei giochi!
@@ -4561,6 +4728,27 @@ export default function App() {
           <p className="text-xs mt-2 text-center" style={{ color: "#7A68A8" }}>
             🔊 Attiva l'audio del tablet — le voci parlano in inglese! I progressi si salvano da soli.
           </p>
+        </div>
+      )}
+
+      {/* ── SFIDA DI OGGI (Faro della Memoria) ── */}
+      {view.screen === "daily" && progress && (
+        <div className="flex flex-col items-center gap-5 px-5 py-8 w-full max-w-md relative z-10">
+          <div className="w-full flex items-center">
+            <button onClick={() => setView({ screen: "map" })}
+              className="text-sm font-semibold px-4 py-2 rounded-full"
+              style={{ background: "#ffffff12", color: "#CDBBF2", border: "1.5px solid #ffffff22" }}>← Mappa</button>
+          </div>
+          <h2 className="display text-2xl text-center" style={{ color: "#F6F1FF" }}>🔦 Sfida di oggi</h2>
+          {dailyItems.length >= 4 ? (
+            <DailyChallengeGame speak={speak} items={dailyItems}
+              onGem={onDailyGem} onMiss={onDailyMiss} onDone={finishDaily} />
+          ) : (
+            <div className="text-center" style={{ color: "#CDBBF2" }}>
+              <p className="text-lg">Gioca almeno un'isola per accendere il Faro! 🔦</p>
+              <button onClick={() => setView({ screen: "map" })} className="listen-btn mt-4">Torna alla mappa</button>
+            </div>
+          )}
         </div>
       )}
 
