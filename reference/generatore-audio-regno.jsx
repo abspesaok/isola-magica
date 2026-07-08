@@ -56,6 +56,22 @@ const FLYERS_POOL = [
   ...SPACE.slice(0, 3), ...TECH.slice(0, 3), ...MATERIALS.slice(0, 2),
 ];
 
+/* Isole 31-40 (Arcipelago 4 · Explorers, verso il B1) — rispecchiano App.jsx */
+const ENVIRONMENT = ["bottle","can","paper","box","jar","battery","plastic","bag","newspaper","carton"];
+const SCHOOL_SUBJECTS = ["maths","science","history","geography","art","music","English","sport","drama","computers"];
+const HABITS = ["drink water","eat fruit","eat vegetables","do exercise","sleep well","wash your hands","brush your teeth","go outside","eat salad","rest"];
+const TRAVEL_HOLIDAY = ["airport","hotel","ticket","map","beach","camera","gift","passport","suitcase","tent"];
+const RESTAURANT_FOOD = ["rice","noodles","steak","soup","salad","pasta","juice","curry","sushi","chips"];
+const ENTERTAINMENT = ["movie","popcorn","guitar","drum","song","circus","magic","clown","balloon","cartoon"];
+const DIGITAL = ["email","photo","video","chat","wifi","app","screen","link","website","download"];
+const PERSONALITY = ["friendly","funny","clever","kind","shy","brave","quiet","polite","calm","tidy"];
+const AMBITIONS = ["vet","scientist","dancer","chef","writer","nurse","sailor","builder","gardener","waiter"];
+const CONDITIONAL = [
+  "If I study, I will learn","If I run, I will be fast","If I try, I will win","If I practise, I will play well",
+  "If I read, I will be clever","If I help, I will be kind","If I train, I will be strong","If I dream, I will fly",
+];
+const EXPLORERS_POOL = ["bottle","paper","hotel","airport","beach","juice","salad","movie","guitar","email","photo","map"];
+
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_");
 
 function buildManifest() {
@@ -221,48 +237,92 @@ function buildManifest() {
     "It was sunny!", "It was rainy!",
   ].forEach((t, i) => add(`story_witch_c${i + 1}`, t));
 
-  /* ═══════════ ARCIPELAGO 3 · FLYERS (isole 21-30) — clip NUOVE ═══════════ */
+  /* ═══════════ ARCIPELAGO 3 · FLYERS (isole 21-30) — GIÀ INCISE ═══════════ */
 
   /* ─── Isola 21 · Mappamondo (paesi, paesaggi) ─── */
-  WORLD.forEach((c) => { addN(`word_country_${slug(c)}`, c); addN(`prompt_country_${slug(c)}`, `Let's fly to ${c}!`); });
-  LANDSCAPE.forEach((l) => { addN(`word_${slug(l)}`, l); addN(`prompt_land_${slug(l)}`, `Look at the ${l}!`); });
+  WORLD.forEach((c) => { add(`word_country_${slug(c)}`, c); add(`prompt_country_${slug(c)}`, `Let's fly to ${c}!`); });
+  LANDSCAPE.forEach((l) => { add(`word_${slug(l)}`, l); add(`prompt_land_${slug(l)}`, `Look at the ${l}!`); });
 
   /* ─── Isola 22 · Emozioni ─── */
-  FEELINGS.forEach((f) => { addN(`word_${slug(f)}`, f); addN(`prompt_feel_${slug(f)}`, `I feel ${f}!`); addN(`say_feel_${slug(f)}`, `I feel ${f}.`); });
+  FEELINGS.forEach((f) => { add(`word_${slug(f)}`, f); add(`prompt_feel_${slug(f)}`, `I feel ${f}!`); add(`say_feel_${slug(f)}`, `I feel ${f}.`); });
 
   /* ─── Isola 23 · Materiali ─── */
-  MATERIALS.forEach((m) => { addN(`word_${slug(m)}`, m); addN(`prompt_material_${slug(m)}`, `It's made of ${m}!`); addN(`say_material_${slug(m)}`, `It's made of ${m}.`); });
+  MATERIALS.forEach((m) => { add(`word_${slug(m)}`, m); add(`prompt_material_${slug(m)}`, `It's made of ${m}!`); add(`say_material_${slug(m)}`, `It's made of ${m}.`); });
 
   /* ─── Isola 24 · Tecnologia ─── */
-  TECH.forEach((t) => { addN(`word_${slug(t)}`, t); addN(`prompt_tech_${slug(t)}`, `Find the ${t}!`); addN(`say_tech_${slug(t)}`, `I can use the ${t}.`); });
+  TECH.forEach((t) => { add(`word_${slug(t)}`, t); add(`prompt_tech_${slug(t)}`, `Find the ${t}!`); add(`say_tech_${slug(t)}`, `I can use the ${t}.`); });
 
   /* ─── Isola 25 · Mare ─── */
-  SEA.forEach((s) => { addN(`word_${slug(s)}`, s); addN(`prompt_sea_${slug(s)}`, `Find the ${s}!`); addN(`say_sea_${slug(s)}`, `I can see a ${s}.`); });
+  SEA.forEach((s) => { add(`word_${slug(s)}`, s); add(`prompt_sea_${slug(s)}`, `Find the ${s}!`); add(`say_sea_${slug(s)}`, `I can see a ${s}.`); });
 
   /* ─── Isola 26 · Spazio (il conteggio riusa "How many stars?" già inciso) ─── */
-  SPACE.forEach((s) => { addN(`word_${slug(s)}`, s); addN(`prompt_space_${slug(s)}`, `Find the ${s}!`); });
+  SPACE.forEach((s) => { add(`word_${slug(s)}`, s); add(`prompt_space_${slug(s)}`, `Find the ${s}!`); });
 
   /* ─── Isola 27 · Futuro (I will…) ─── */
-  FUTURE_ACTIONS.forEach((v) => { addN(`word_${slug(v)}`, v); addN(`prompt_future_${slug(v)}`, `Tomorrow I will ${v}!`); addN(`say_future_${slug(v)}`, `Tomorrow I will ${v}.`); });
+  FUTURE_ACTIONS.forEach((v) => { add(`word_${slug(v)}`, v); add(`prompt_future_${slug(v)}`, `Tomorrow I will ${v}!`); add(`say_future_${slug(v)}`, `Tomorrow I will ${v}.`); });
 
   /* ─── Isola 28 · Present perfect (I have seen…) ─── */
-  SEEN_THINGS.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_seen_${slug(w)}`, `I have seen a ${w}!`); addN(`say_seen_${slug(w)}`, `I have seen a ${w}.`); });
+  SEEN_THINGS.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_seen_${slug(w)}`, `I have seen a ${w}!`); add(`say_seen_${slug(w)}`, `I have seen a ${w}.`); });
 
   /* ─── Isola 29 · Opposti (i confronti riusano "Which one is bigger/smaller?") ─── */
-  ADJECTIVES.forEach((a) => { addN(`word_${slug(a)}`, a); addN(`prompt_adj_${slug(a)}`, `It is ${a}!`); });
+  ADJECTIVES.forEach((a) => { add(`word_${slug(a)}`, a); add(`prompt_adj_${slug(a)}`, `It is ${a}!`); });
 
   /* ─── Isola 30 · Gran Mago dei Cieli (ripasso Flyers + storia) ─── */
-  FLYERS_POOL.forEach((w) => addN(`prompt_find_${slug(w)}`, `Find the ${w}!`));
+  FLYERS_POOL.forEach((w) => add(`prompt_find_${slug(w)}`, `Find the ${w}!`));
   [
     "Welcome, brave flyer! I am the Sky Wizard. Where will you fly tomorrow?",
     "Amazing! And what have you seen on your journey?",
     "Wonderful! How do you feel now?",
-  ].forEach((t, i) => addN(`story_wizard_n${i + 1}`, t));
+  ].forEach((t, i) => add(`story_wizard_n${i + 1}`, t));
   [
     "You will fly over the sea!", "You will fly over the mountain!", "You will fly over the volcano!",
     "You have seen a dolphin!", "You have seen a dragon!", "You have seen a star!",
     "You feel happy!", "You feel excited!",
-  ].forEach((t, i) => addN(`story_wizard_c${i + 1}`, t));
+  ].forEach((t, i) => add(`story_wizard_c${i + 1}`, t));
+
+  /* ═══════════ ARCIPELAGO 4 · EXPLORERS (isole 31-40) — clip NUOVE ═══════════ */
+  // 31 Ambiente e riciclo (should)
+  ENVIRONMENT.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_recycle_${slug(w)}`, `We should recycle the ${w}!`); });
+  // 32 Materie di scuola
+  SCHOOL_SUBJECTS.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_subject_${slug(w)}`, `My favourite subject is ${w}.`); });
+  // 33 Abitudini sane (should)
+  HABITS.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_habit_${slug(w)}`, `You should ${w}!`); addN(`say_habit_${slug(w)}`, `You should ${w}.`); });
+  // 34 Viaggi e vacanze
+  TRAVEL_HOLIDAY.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_travel_${slug(w)}`, `Find the ${w}!`); });
+  // 35 Ristorante (would like)
+  RESTAURANT_FOOD.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_order_${slug(w)}`, `I would like some ${w}.`); addN(`say_order_${slug(w)}`, `I would like some ${w}, please.`); });
+  // 36 Spettacolo e musica
+  ENTERTAINMENT.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_show_${slug(w)}`, `Find the ${w}!`); });
+  // 37 Comunicare e internet
+  DIGITAL.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_digital_${slug(w)}`, `Find the ${w}!`); });
+  // 38 Descrivere le persone (be + aggettivo)
+  PERSONALITY.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_person_${slug(w)}`, `She is ${w}.`); addN(`say_person_${slug(w)}`, `He is ${w}.`); });
+  // 39 Ambizioni + first conditional
+  AMBITIONS.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_ambition_${slug(w)}`, `I want to be a ${w}!`); });
+  CONDITIONAL.forEach((s, i) => addN(`say_cond_${i + 1}`, `${s}.`));
+  // 40 BOSS · ripasso Explorers
+  EXPLORERS_POOL.forEach((w) => addN(`prompt_find_${slug(w)}`, `Find the ${w}!`));
+  // Storie 38-40 (i nodi con {name} restano voce sintetica, come per il Gran Mago)
+  [
+    "Welcome to the portrait gallery! Look at this girl. What is she like?",
+    "Wonderful! And this boy — what is he like?",
+    "Great! And you — what are you like?",
+    "Welcome, dreamer! If you work hard, what will you be?",
+    "Wonderful! And if you try your best, what will you win?",
+    "Amazing! How do you feel about your dream?",
+    "Wonderful! And what have you seen on the way?",
+    "Amazing! What will you explore next?",
+  ].forEach((t, i) => addN(`story_exp_n${i + 1}`, t));
+  [
+    "She is friendly!", "She is clever!", "She is funny!", "He is brave!", "He is kind!", "He is quiet!",
+    "You are friendly!", "You are clever!",
+    "You will be a vet!", "You will be a dancer!", "You will be a writer!",
+    "You will win a cup!", "You will win a medal!", "You will win a prize!",
+    "You feel happy!", "You feel excited!",
+    "You have been to the sea!", "You have been to the mountains!", "You have been to the city!",
+    "You have seen a dolphin!", "You have seen a castle!", "You have seen a rainbow!",
+    "You will explore the stars!", "You will explore the ocean!",
+  ].forEach((t, i) => addN(`story_exp_c${i + 1}`, t));
 
   /* dedup per TESTO normalizzato: ogni frase distinta = una sola clip
      (stessa normalizzazione del gioco → nessuno spreco di crediti) */
@@ -355,7 +415,7 @@ export default function App() {
   const [errors, setErrors] = useState([]);
   const [log, setLog] = useState("");
   const [zipUrl, setZipUrl] = useState(null);
-  const [genAll, setGenAll] = useState(false); // false = solo isole 21-30 (nuove)
+  const [genAll, setGenAll] = useState(false); // false = solo isole 31-40 (nuove)
   const resultsRef = useRef({});
   const abortRef = useRef(false);
   const audioRef = useRef(null);
@@ -462,7 +522,7 @@ export default function App() {
           🎙️ Isola Magica — <span style={{ color: "#F5C64F" }}>Generatore Audio</span>
         </h1>
         <p style={{ color: "#CDBBF2", fontSize: 14, textAlign: "center", margin: 0 }}>
-          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (isole 21-30) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
+          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (isole 31-40) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
         </p>
 
         {/* credentials */}
@@ -515,7 +575,7 @@ export default function App() {
         {/* scope della generazione */}
         <label style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", color: "#CDBBF2", fontSize: 14, cursor: "pointer" }}>
           <input type="checkbox" checked={genAll} onChange={(e) => setGenAll(e.target.checked)} disabled={status === "running"} style={{ width: 18, height: 18 }} />
-          Rigenera <b>anche</b> le isole 1-20 (di default incide solo le <b>{newCount} nuove</b>)
+          Rigenera <b>anche</b> le isole 1-30 (di default incide solo le <b>{newCount} nuove</b>)
         </label>
 
         {/* actions */}
