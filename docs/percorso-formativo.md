@@ -19,7 +19,7 @@ Il percorso non è inventato: segue il programma ufficiale di **Cambridge Englis
 A questo si aggiungono alcuni **principi di apprendimento** su cui è costruito il gioco:
 
 1. **Prima si ascolta, poi si parla** (come fanno i bambini con la lingua madre). Quasi ogni gioco è "ascolta la voce inglese e tocca la cosa giusta" — con **voci inglesi vere** (madrelingua), non robotiche.
-2. **Ripetizione intelligente**: le parole sbagliate diventano "parole deboli" e **ritornano più spesso**, finché non si fissano.
+2. **Ripetizione intelligente**: le parole sbagliate diventano "parole deboli" e **ritornano più spesso**, finché non si fissano. Ora c'è anche il **Faro della Memoria** (Sfida di oggi) con **ripasso dilazionato**.
 3. **Poco stress, tanto gioco**: si impara con gemme, stelle, avatar e storie — la bambina gioca, non "studia".
 4. **Dal singolo alla frase, dalla frase alla conversazione**: prima le parole (rosso, gatto), poi si combinano ("the red cat"), poi frasi intere, infine **dialoghi veri a più battute**.
 
@@ -27,7 +27,7 @@ A questo si aggiungono alcuni **principi di apprendimento** su cui è costruito 
 
 ## 2. La mappa di oggi — cosa impara, isola per isola
 
-Attualmente ci sono **81 isole** in **8 arcipelaghi**: l'intero percorso Cambridge **Starters → Movers → Flyers** (isole 1–31), il nostro arcipelago **"Explorers"** (isole 32–41, il ponte verso il B1, con la **scrittura**), **"La Voce"** (isole 42–51, la **conversazione parlata**), **"Il Mondo Reale"** (isole 52–61, l'**arricchimento B1+**), la **"Palestra della Grammatica"** (isole 62–71, la **produzione**: costruire le frasi con le tessere-parola) e la nuova **"Lettura e Ascolto"** (isole 72–81, la **comprensione**: capire un testo o un audio condiviso rispondendo a domande, in stile A2 Key).
+Attualmente ci sono **81 isole** in **8 arcipelaghi**: l'intero percorso Cambridge **Starters → Movers → Flyers** (isole 1–31), il nostro arcipelago **"Explorers"** (isole 32–41, il ponte verso il B1, con la **scrittura**), **"La Voce"** (isole 42–51, la **conversazione parlata**), **"Il Mondo Reale"** (isole 52–61, l'**arricchimento B1+**), la **"Palestra della Grammatica"** (isole 62–71, la **produzione**: costruire le frasi con le tessere-parola) e la nuova **"Lettura e Ascolto"** (isole 72–81, la **comprensione**: capire un testo o un audio condiviso rispondendo a domande, in stile A2 Key). In più, il **Faro della Memoria** (Sfida di oggi) è uno **strato trasversale** di ripasso, non un arcipelago.
 
 > **Novità (2026-07-08):** su richiesta della bambina è stata aggiunta l'**isola 5 · L'Orto Reale 🥕** (le verdure). Le isole successive scalano di +1 nel numero mostrato, ma **nessun progresso è andato perso** (le stelle sono legate all'identità dell'isola, non al numero).
 
@@ -166,6 +166,12 @@ Attualmente ci sono **81 isole** in **8 arcipelaghi**: l'intero percorso Cambrid
 
 ---
 
+### 🔦 Strato trasversale — IL FARO DELLA MEMORIA · *Ripasso & costanza*
+
+*Non è un arcipelago: è la **Sfida di oggi**, un pulsante sulla mappa (compare dopo il primo gioco). Ogni giorno propone **6 domande veloci** ("ascolta e tocca") che ripescano le parole **già viste** e quelle **sbagliate**, con **ripetizione dilazionata** (scatole di Leitner: chi la sai torna più tardi, chi la sbagli torna presto). Dà una **💎 gemma bonus** una volta al giorno e alimenta la **Fiamma Magica**. Riusa le voci vere dove esistono. Tutto chiuso e sul dispositivo.*
+
+---
+
 ## 3. Quali abilità stiamo allenando
 
 L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi:
@@ -184,7 +190,7 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 | 💬 **Conversazione (guidata)** | ✅ **Presente!** | Il motore **chat** dell'Arcipelago 5: dialoghi veri a più battute, a voce o toccando |
 | 💬 **Conversazione libera (AI)** | 🌱 Possibile upgrade | Un compagno che risponde "a braccio" — richiede una AI online (vedi §4) |
 
-**In sintesi:** oggi il gioco è eccellente per **capire** l'inglese parlato, forte per **pronuncia, memoria, lettura**, in crescita per la **scrittura**, e — grande novità — porta la **conversazione guidata**: la bambina sostiene un dialogo vero, non solo risponde a parole singole.
+**In sintesi:** oggi il gioco è eccellente per **capire** l'inglese parlato, forte per **pronuncia, memoria, lettura**, in crescita per la **scrittura**, e — grandi novità — porta la **conversazione guidata**, la **comprensione** su testo/audio e il **ripasso dilazionato** (Faro): la bambina sostiene un dialogo vero, capisce brani e ascolti, e le parole già viste **tornano al momento giusto** per fissarsi.
 
 ---
 
@@ -196,7 +202,7 @@ Con **otto arcipelaghi (81 isole)** il percorso ufficiale Cambridge (Starters �
 - 🧱 **Crescita sostenibile verso A2 Key → B1 Preliminary** (a costo zero, senza AI): c'è ancora margine per salire di livello **restando a frasi chiuse**. I tre buchi veri di ieri — la **produzione** (costruire una frase), la **comprensione su testo/audio condiviso** e la **memoria a lungo termine** — sono ora **coperti** (Arcipelaghi 7 e 8 + il **Faro** con la Sfida di oggi). Resta solo la **Fase 4 · Accademia degli Esami**: gli ultimi formati d'esame A2 Key (abbinamento, gapped-text). Il piano completo è nella **sezione 6 (La roadmap futura)**.
 - 💬 **Conversazione libera con una vera AI** (opzionale, a pagamento): un compagno che ascolta qualunque cosa e **risponde a braccio** (non tra risposte prefissate). È l'ultimo miglio verso la padronanza, ma richiede una **AI online** (chiave API, es. Anthropic) e un **piano Firebase a pagamento (Blaze)** con un piccolo backend — non è testabile offline. I dialoghi guidati dell'Arcipelago 5 ne sono la versione **gratuita, sicura e già funzionante**; la versione AI libera è un possibile **upgrade futuro opzionale**.
 
-> **Voci:** le isole **1–61** hanno le **voci inglesi vere** (madrelingua, ElevenLabs) — **1851 clip** incise (incluse ora le **verdure dell'isola 5**). Usano la **voce sintetica del dispositivo**: le battute **personalizzate col nome** della bambina; le **frasi dell'Arcipelago 7** (la grammatica); e le **scene di comprensione dell'Arcipelago 8** (i testi di lettura e gli audio d'ascolto) — non ancora incise. La voce sintetica le legge chiaramente e il gioco funziona già al 100%; per le scene d'**ascolto** la voce del dispositivo va benissimo (è proprio un esercizio di ascolto). Le voci vere si aggiungono al generatore quando vuoi.
+> **Voci:** le isole **1–61** hanno le **voci inglesi vere** (madrelingua, ElevenLabs) — **1851 clip** incise (incluse ora le **verdure dell'isola 5**). Usano la **voce sintetica del dispositivo**: le battute **personalizzate col nome** della bambina; le **frasi dell'Arcipelago 7** (la grammatica); e le **scene di comprensione dell'Arcipelago 8** (i testi di lettura e gli audio d'ascolto) — non ancora incise. La voce sintetica le legge chiaramente e il gioco funziona già al 100%; per le scene d'**ascolto** la voce del dispositivo va benissimo (è proprio un esercizio di ascolto). La **Sfida di oggi** riusa le voci vere dove la clip "Find the …!" esiste già. Le voci vere si aggiungono al generatore quando vuoi.
 
 ---
 
@@ -215,16 +221,17 @@ Ecco il traguardo per tappe:
 | **Il Mondo Reale** *(oggi costruito)* | 52–61 | **B1+** | Comprende temi ampi (scienza, culture, storia, emozioni) con passivo, "used to", condizionali |
 | **Palestra della Grammatica** *(oggi costruito)* | 62–71 | **A2: produzione** | **Costruisce** le frasi: domande, negative, passato, comparativi, condizionali; sceglie la forma giusta del verbo |
 | **Lettura e Ascolto** *(oggi costruito)* | 72–81 | **A2 Key: comprensione** | **Capisce** un testo o un audio condiviso e risponde a domande: cartelli, messaggi, racconti, annunci, telefonate, lettere |
+| **Faro della Memoria** *(oggi costruito)* | *trasversale* | **rinforzo A2** | **Ripassa ogni giorno** le parole già viste e quelle deboli, con scadenze intelligenti (Leitner) |
 
 **Quante isole al massimo?**
 - **31 isole** completano il percorso Cambridge ufficiale (Starters → Movers → Flyers) ≈ **livello A2 solido**.
 - **41 isole** aggiungono il ponte **Explorers**: lettura di frasi, primi passi nella scrittura, verso il **B1**.
 - **61 isole** aggiungono **La Voce** (conversazione parlata) e **Il Mondo Reale** (arricchimento B1+): tutte le cinque abilità allenate, conversazione guidata compresa.
 - **71 isole** aggiungono la **Palestra della Grammatica**: la bambina **costruisce** le frasi (produzione, in stile A2 Key), non solo le riconosce.
-- **81 isole** *(dove siamo ora)* aggiungono **Lettura e Ascolto**: la prima vera **comprensione** su un testo o un audio condiviso, con domande e distrattori (in stile A2 Key Reading/Listening).
-- Oltre le 81, la crescita **sostenibile** prosegue verso **A2 Key → B1 Preliminary** (ripasso dilazionato, formati d'esame — vedi §6) e resta l'eventuale **conversazione AI libera**.
+- **81 isole** *(dove siamo ora)* aggiungono **Lettura e Ascolto**: la prima vera **comprensione** su un testo o un audio condiviso, con domande e distrattori (in stile A2 Key Reading/Listening). In più il **Faro della Memoria** dà il **ripasso dilazionato** quotidiano.
+- Oltre le 81, la crescita **sostenibile** prosegue verso **A2 Key → B1 Preliminary** (ultimi formati d'esame — vedi §6) e resta l'eventuale **conversazione AI libera**.
 
-Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso e ampiamente superato**, ed è ora coperta anche la **conversazione** (guidata). L'unico upgrade rimasto è la **conversazione libera con una AI**, opzionale e a pagamento.
+Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso e ampiamente superato**, ed è ora coperta anche la **conversazione** (guidata), la **produzione**, la **comprensione** e il **ripasso a lungo termine**. L'unico upgrade rimasto è la **conversazione libera con una AI**, opzionale e a pagamento.
 
 ---
 
@@ -269,8 +276,8 @@ Le **Fasi 1, 2 e 3 sono fatte** (i motori *tessere-parola*, *riempi-il-buco*, *s
 
 ## 7. In una frase
 
-> Oggi Isola Magica costruisce **l'orecchio, il vocabolario, la lettura, la scrittura**, la **conversazione parlata** (guidata) e — con 81 isole — la **produzione grammaticale** e la **comprensione** su testo/audio: la bambina non solo capisce e parla, ma **costruisce le frasi** e **capisce brani e ascolti** rispondendo a domande. Da qui cresce ancora **verso A2 Key e B1** restando gratuita (ripasso dilazionato, formati d'esame: vedi §6); l'ultimo passo, opzionale e a pagamento, è chiacchierare con una AI a braccio.
+> Oggi Isola Magica costruisce **l'orecchio, il vocabolario, la lettura, la scrittura**, la **conversazione parlata** (guidata), la **produzione grammaticale**, la **comprensione** su testo/audio e — con il **Faro della Memoria** — il **ripasso quotidiano** che fissa tutto: la bambina non solo capisce e parla, ma **costruisce le frasi**, **capisce brani e ascolti** e **ritrova ogni giorno** le parole al momento giusto. Da qui cresce ancora **verso A2 Key e B1** restando gratuita (ultimi formati d'esame: vedi §6); l'ultimo passo, opzionale e a pagamento, è chiacchierare con una AI a braccio.
 
 ---
 
-*Basato sul syllabus Cambridge English Young Learners (Starters/Movers/Flyers) e, per gli arcipelaghi 4–8 ("Explorers", "La Voce", "Il Mondo Reale", "La Palestra della Grammatica", "Lettura e Ascolto"), sui contenuti di Cambridge A2 Key → B1 Preliminary for Schools → inizio B2 First for Schools; sul quadro europeo CEFR (pre-A1 → B1+) e sui principi dell'apprendimento linguistico infantile (ascolto prima di tutto, ripetizione spaziata, apprendimento giocoso, dalla parola alla conversazione). "Explorers", "La Voce", "Il Mondo Reale", "La Palestra della Grammatica" e "Lettura e Ascolto" (e i diplomi Conversation, B1 Master, Campione di Grammatica e Lettore del Regno) sono tappe create da noi, ispirate alla scala Cambridge, non livelli o esami Cambridge ufficiali.*
+*Basato sul syllabus Cambridge English Young Learners (Starters/Movers/Flyers) e, per gli arcipelaghi 4–8 ("Explorers", "La Voce", "Il Mondo Reale", "La Palestra della Grammatica", "Lettura e Ascolto") e il Faro della Memoria, sui contenuti di Cambridge A2 Key → B1 Preliminary for Schools → inizio B2 First for Schools; sul quadro europeo CEFR (pre-A1 → B1+) e sui principi dell'apprendimento linguistico infantile (ascolto prima di tutto, ripetizione spaziata, apprendimento giocoso, dalla parola alla conversazione). "Explorers", "La Voce", "Il Mondo Reale", "La Palestra della Grammatica" e "Lettura e Ascolto" (e i diplomi Conversation, B1 Master, Campione di Grammatica e Lettore del Regno) sono tappe create da noi, ispirate alla scala Cambridge, non livelli o esami Cambridge ufficiali.*
