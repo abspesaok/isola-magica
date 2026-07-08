@@ -150,10 +150,11 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 
 Con **sei arcipelaghi (60 isole)** il percorso ufficiale Cambridge (Starters → Movers → Flyers) è coperto **e ampiamente superato**: si aggiungono il ponte **Explorers** verso il B1 (con la scrittura), la **conversazione parlata** ("La Voce") e un ricco **arricchimento B1+** ("Il Mondo Reale": scienza, natura, corpo, culture, futuro, soldi, storia, racconti, emozioni). Le cinque abilità sono tutte allenate, **conversazione guidata compresa**.
 
-### L'unico grande passo che resta
-- 💬 **Conversazione libera con una vera AI**: un compagno che ascolta qualunque cosa e **risponde a braccio** (non tra risposte prefissate). È l'ultimo miglio verso la padronanza. Richiede però una **AI online** (una chiave API, es. Anthropic) e un **piano Firebase a pagamento (Blaze)** con un piccolo backend — non è testabile offline. I dialoghi guidati dell'Arcipelago 5 ne sono la versione **gratuita, sicura e già funzionante**; la versione AV libera è un possibile **upgrade futuro opzionale**.
+### I prossimi passi
+- 🧱 **Crescita sostenibile verso A2 Key → B1 Preliminary** (a costo zero, senza AI): c'è ancora molto margine per salire di livello **restando a frasi chiuse**. Oggi l'app è fortissima nel **riconoscere** (tocca quella giusta); i buchi veri sono la **produzione** (costruire una frase, non solo sceglierla) e la **comprensione su testo/audio condiviso** (leggi/ascolta una scena e rispondi a più domande). Si colmano con giochi a **tessere-parola** e **riempi-il-buco**, sempre auto-corretti sul dispositivo. Il piano completo è nella **sezione 6 (La roadmap futura)**.
+- 💬 **Conversazione libera con una vera AI** (opzionale, a pagamento): un compagno che ascolta qualunque cosa e **risponde a braccio** (non tra risposte prefissate). È l'ultimo miglio verso la padronanza, ma richiede una **AI online** (chiave API, es. Anthropic) e un **piano Firebase a pagamento (Blaze)** con un piccolo backend — non è testabile offline. I dialoghi guidati dell'Arcipelago 5 ne sono la versione **gratuita, sicura e già funzionante**; la versione AI libera è un possibile **upgrade futuro opzionale**.
 
-> **Voci:** le isole **1–40** hanno le **voci inglesi vere** (madrelingua, ElevenLabs). Per gli **Arcipelaghi 5 e 6** il testo dei nuovi dialoghi/parole è pronto per essere **inciso** con una **nuova chiave** ElevenLabs; finché non sono generate, quelle battute usano la **voce sintetica del dispositivo** (il gioco funziona comunque al 100%).
+> **Voci:** **tutte le 60 isole** hanno ora le **voci inglesi vere** (madrelingua, ElevenLabs) — **1834 clip** incise e verificate (manifest ⟺ file: 1834 = 1834, zero mancanti). Le uniche battute in **voce sintetica del dispositivo** sono quelle **personalizzate col nome** della bambina (es. *"See you soon, Silvana!"*), che non si possono pre-registrare — tutto il resto (dialoghi, storie, prompt) è voce vera.
 
 ---
 
@@ -181,9 +182,42 @@ Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso
 
 ---
 
-## 6. In una frase
+## 6. La roadmap futura — verso A2 Key e B1 Preliminary (sostenibile, senza AI)
 
-> Oggi Isola Magica costruisce **l'orecchio, il vocabolario, la lettura, la scrittura** e — grande novità con 60 isole — la **conversazione parlata** (guidata). Ha portato la bambina da "capisce e legge l'inglese" a "**parla inglese in un dialogo vero**". L'ultimo passo, opzionale, è chiacchierare con una AI a braccio.
+*Come far crescere ancora l'app **restando gratuita e per sempre sostenibile**: tutti i contenuti sono **chiusi** (domande e risposte prefissate) e **auto-corretti sul dispositivo** — zero AI, zero costi ricorrenti. L'unico costo è il lavoro di scrittura dei contenuti, una volta sola (come già facciamo con le voci). Il salto pedagogico è dal **riconoscere** (che oggi l'app fa benissimo) al **produrre** (costruire una frase) e alla **comprensione su un testo/audio condiviso**. La produzione si insegna con **tessere-parola**, mai con testo libero: così la risposta è sempre finita e correggibile da sola.*
+
+### Le 5 fasi
+
+| Fase | Arcipelago | Cosa aggiunge | Livello Cambridge | Sforzo |
+|---|---|---|---|---|
+| **1 · La Palestra della Grammatica** | 7 (isole 61–70) | Dal riconoscere al **costruire**: domande, negative, ordine delle parole, comparativi, *first conditional* — a **tessere-parola** | in stile **A2 Key** | Medio |
+| **2 · Lettura e Ascolto** | 8 (isole 71–80) | **Scena condivisa** (testo ri-leggibile o audio ri-ascoltabile) + più domande collegate, con distrattori scritti a mano | A2 → inizio **B1** | Medio |
+| **3 · Il Faro della Memoria** | *strato trasversale* | **Ripetizione dilazionata** sugli item già imparati + **Sfida Giornaliera** (che "spende" lo streak già calcolato). Massima ritenzione, zero contenuto nuovo | rinforzo A2 | Medio |
+| **4 · L'Accademia degli Esami** | 9 (isole 81–90) | Formati d'esame ancora scoperti: **abbinamento** molti-a-uno, *gapped-text*, cloze a scelta, **scrittura guidata a tessere** | **A2 Key** completo → ponte B1 | Alto |
+| **5 · Il Grande Palco** *(opzionale)* | 10 (isole 91–100) | **Conversazione ramificata**: la scelta del bimbo cambia la battuta del compagno (telefonare, negoziare, opinioni con registro) | parlato funzionale | Medio |
+
+### I nuovi "mini-motori" (piccoli mattoni di codice, riusano quelli esistenti)
+
+| Motore | A cosa serve | Riusa |
+|---|---|---|
+| **Costruttore di frasi** (tessere-parola) | Ordinare le tessere per formare una frase → si confronta con l'ordine giusto | il motore dello *spelling*, con le parole al posto delle lettere |
+| **Riempi-il-buco** (banco di tessere) | Scegliere la tessera giusta per un buco (preposizioni, articoli, tempi) | il motore "ascolta e tocca" + le tessere-testo già usate ne *La Voce* |
+| **Scena di lettura/ascolto** | Uno stimolo persistente con più domande collegate e distrattori plausibili | la logica a scelta multipla, con un'intestazione-stimolo fissa |
+| **Ripasso dilazionato** | Programma quando ripresentare ogni parola (scatole di Leitner) | il contatore "parole deboli" già esistente |
+| **Abbinamento** | Collegare molti elementi a uno (formato esame reale) | la meccanica a coppie del Memory |
+
+### Onestà (come sempre)
+- Tutto ciò che si chiama *Palestra / Accademia / Grande Palco / Campione di Grammatica* resta una **tappa interna**, ispirata ma **non equivalente** a un livello o esame Cambridge. Le fasi che imitano l'esame si etichettano *"in stile A2 Key"*, mai *"esame superato"*. Arrivare all'isola 90/100 = **solida reception A2 + allenamento B1**, non un B1 certificato.
+- **Cosa resta impossibile senza AI** (e va tenuto fuori dalle promesse): la **scrittura libera estesa** (l'email da ~100 parole di PET), la **conversazione aperta** imprevedibile, la **qualità di pronuncia/fluenza**, la descrizione libera. La versione a tessere allena la *costruzione*, non la *composizione libera*; il parlato ramificato allena il *rehearsal* di funzioni, non l'interazione spontanea.
+
+### Da dove partire
+Il punto di massimo valore-per-sforzo è il **Costruttore di frasi** con le prime isole della **Fase 1**: colma l'unico vero buco (la produzione), è un'estensione quasi gratuita del motore dello spelling, ed è gioioso e adatto ai 7–10 anni. *(Requisito tecnico dal primo giorno: accettare più ordini corretti per le frasi flessibili, così un bimbo che risponde bene non viene mai segnato sbagliato.)*
+
+---
+
+## 7. In una frase
+
+> Oggi Isola Magica costruisce **l'orecchio, il vocabolario, la lettura, la scrittura** e — grande novità con 60 isole — la **conversazione parlata** (guidata). Ha portato la bambina da "capisce e legge l'inglese" a "**parla inglese in un dialogo vero**". Da qui può ancora crescere **verso A2 Key e B1** restando gratuita (produzione a tessere, comprensione, ripasso: vedi §6); l'ultimo passo, opzionale e a pagamento, è chiacchierare con una AI a braccio.
 
 ---
 
