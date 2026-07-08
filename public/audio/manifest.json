@@ -3526,5 +3526,917 @@
   {
     "file": "story_wizard_c8.mp3",
     "text": "You feel excited!"
+  },
+  {
+    "file": "word_bottle.mp3",
+    "text": "bottle"
+  },
+  {
+    "file": "prompt_recycle_bottle.mp3",
+    "text": "We should recycle the bottle!"
+  },
+  {
+    "file": "word_can.mp3",
+    "text": "can"
+  },
+  {
+    "file": "prompt_recycle_can.mp3",
+    "text": "We should recycle the can!"
+  },
+  {
+    "file": "prompt_recycle_paper.mp3",
+    "text": "We should recycle the paper!"
+  },
+  {
+    "file": "word_box.mp3",
+    "text": "box"
+  },
+  {
+    "file": "prompt_recycle_box.mp3",
+    "text": "We should recycle the box!"
+  },
+  {
+    "file": "word_jar.mp3",
+    "text": "jar"
+  },
+  {
+    "file": "prompt_recycle_jar.mp3",
+    "text": "We should recycle the jar!"
+  },
+  {
+    "file": "word_battery.mp3",
+    "text": "battery"
+  },
+  {
+    "file": "prompt_recycle_battery.mp3",
+    "text": "We should recycle the battery!"
+  },
+  {
+    "file": "prompt_recycle_plastic.mp3",
+    "text": "We should recycle the plastic!"
+  },
+  {
+    "file": "prompt_recycle_bag.mp3",
+    "text": "We should recycle the bag!"
+  },
+  {
+    "file": "word_newspaper.mp3",
+    "text": "newspaper"
+  },
+  {
+    "file": "prompt_recycle_newspaper.mp3",
+    "text": "We should recycle the newspaper!"
+  },
+  {
+    "file": "word_carton.mp3",
+    "text": "carton"
+  },
+  {
+    "file": "prompt_recycle_carton.mp3",
+    "text": "We should recycle the carton!"
+  },
+  {
+    "file": "word_maths.mp3",
+    "text": "maths"
+  },
+  {
+    "file": "prompt_subject_maths.mp3",
+    "text": "My favourite subject is maths."
+  },
+  {
+    "file": "word_science.mp3",
+    "text": "science"
+  },
+  {
+    "file": "prompt_subject_science.mp3",
+    "text": "My favourite subject is science."
+  },
+  {
+    "file": "word_history.mp3",
+    "text": "history"
+  },
+  {
+    "file": "prompt_subject_history.mp3",
+    "text": "My favourite subject is history."
+  },
+  {
+    "file": "word_geography.mp3",
+    "text": "geography"
+  },
+  {
+    "file": "prompt_subject_geography.mp3",
+    "text": "My favourite subject is geography."
+  },
+  {
+    "file": "word_art.mp3",
+    "text": "art"
+  },
+  {
+    "file": "prompt_subject_art.mp3",
+    "text": "My favourite subject is art."
+  },
+  {
+    "file": "word_music.mp3",
+    "text": "music"
+  },
+  {
+    "file": "prompt_subject_music.mp3",
+    "text": "My favourite subject is music."
+  },
+  {
+    "file": "word_english.mp3",
+    "text": "English"
+  },
+  {
+    "file": "prompt_subject_english.mp3",
+    "text": "My favourite subject is English."
+  },
+  {
+    "file": "word_sport.mp3",
+    "text": "sport"
+  },
+  {
+    "file": "prompt_subject_sport.mp3",
+    "text": "My favourite subject is sport."
+  },
+  {
+    "file": "word_drama.mp3",
+    "text": "drama"
+  },
+  {
+    "file": "prompt_subject_drama.mp3",
+    "text": "My favourite subject is drama."
+  },
+  {
+    "file": "word_computers.mp3",
+    "text": "computers"
+  },
+  {
+    "file": "prompt_subject_computers.mp3",
+    "text": "My favourite subject is computers."
+  },
+  {
+    "file": "word_drink_water.mp3",
+    "text": "drink water"
+  },
+  {
+    "file": "prompt_habit_drink_water.mp3",
+    "text": "You should drink water!"
+  },
+  {
+    "file": "word_eat_fruit.mp3",
+    "text": "eat fruit"
+  },
+  {
+    "file": "prompt_habit_eat_fruit.mp3",
+    "text": "You should eat fruit!"
+  },
+  {
+    "file": "word_eat_vegetables.mp3",
+    "text": "eat vegetables"
+  },
+  {
+    "file": "prompt_habit_eat_vegetables.mp3",
+    "text": "You should eat vegetables!"
+  },
+  {
+    "file": "word_do_exercise.mp3",
+    "text": "do exercise"
+  },
+  {
+    "file": "prompt_habit_do_exercise.mp3",
+    "text": "You should do exercise!"
+  },
+  {
+    "file": "word_sleep_well.mp3",
+    "text": "sleep well"
+  },
+  {
+    "file": "prompt_habit_sleep_well.mp3",
+    "text": "You should sleep well!"
+  },
+  {
+    "file": "word_wash_your_hands.mp3",
+    "text": "wash your hands"
+  },
+  {
+    "file": "prompt_habit_wash_your_hands.mp3",
+    "text": "You should wash your hands!"
+  },
+  {
+    "file": "word_brush_your_teeth.mp3",
+    "text": "brush your teeth"
+  },
+  {
+    "file": "prompt_habit_brush_your_teeth.mp3",
+    "text": "You should brush your teeth!"
+  },
+  {
+    "file": "word_go_outside.mp3",
+    "text": "go outside"
+  },
+  {
+    "file": "prompt_habit_go_outside.mp3",
+    "text": "You should go outside!"
+  },
+  {
+    "file": "word_eat_salad.mp3",
+    "text": "eat salad"
+  },
+  {
+    "file": "prompt_habit_eat_salad.mp3",
+    "text": "You should eat salad!"
+  },
+  {
+    "file": "word_rest.mp3",
+    "text": "rest"
+  },
+  {
+    "file": "prompt_habit_rest.mp3",
+    "text": "You should rest!"
+  },
+  {
+    "file": "word_airport.mp3",
+    "text": "airport"
+  },
+  {
+    "file": "prompt_travel_airport.mp3",
+    "text": "Find the airport!"
+  },
+  {
+    "file": "word_hotel.mp3",
+    "text": "hotel"
+  },
+  {
+    "file": "prompt_travel_hotel.mp3",
+    "text": "Find the hotel!"
+  },
+  {
+    "file": "word_ticket.mp3",
+    "text": "ticket"
+  },
+  {
+    "file": "prompt_travel_ticket.mp3",
+    "text": "Find the ticket!"
+  },
+  {
+    "file": "word_map.mp3",
+    "text": "map"
+  },
+  {
+    "file": "prompt_travel_map.mp3",
+    "text": "Find the map!"
+  },
+  {
+    "file": "prompt_travel_beach.mp3",
+    "text": "Find the beach!"
+  },
+  {
+    "file": "word_gift.mp3",
+    "text": "gift"
+  },
+  {
+    "file": "prompt_travel_gift.mp3",
+    "text": "Find the gift!"
+  },
+  {
+    "file": "word_passport.mp3",
+    "text": "passport"
+  },
+  {
+    "file": "prompt_travel_passport.mp3",
+    "text": "Find the passport!"
+  },
+  {
+    "file": "word_suitcase.mp3",
+    "text": "suitcase"
+  },
+  {
+    "file": "prompt_travel_suitcase.mp3",
+    "text": "Find the suitcase!"
+  },
+  {
+    "file": "word_tent.mp3",
+    "text": "tent"
+  },
+  {
+    "file": "prompt_travel_tent.mp3",
+    "text": "Find the tent!"
+  },
+  {
+    "file": "prompt_order_rice.mp3",
+    "text": "I would like some rice."
+  },
+  {
+    "file": "say_order_rice.mp3",
+    "text": "I would like some rice, please."
+  },
+  {
+    "file": "word_noodles.mp3",
+    "text": "noodles"
+  },
+  {
+    "file": "prompt_order_noodles.mp3",
+    "text": "I would like some noodles."
+  },
+  {
+    "file": "say_order_noodles.mp3",
+    "text": "I would like some noodles, please."
+  },
+  {
+    "file": "word_steak.mp3",
+    "text": "steak"
+  },
+  {
+    "file": "prompt_order_steak.mp3",
+    "text": "I would like some steak."
+  },
+  {
+    "file": "say_order_steak.mp3",
+    "text": "I would like some steak, please."
+  },
+  {
+    "file": "word_soup.mp3",
+    "text": "soup"
+  },
+  {
+    "file": "prompt_order_soup.mp3",
+    "text": "I would like some soup."
+  },
+  {
+    "file": "say_order_soup.mp3",
+    "text": "I would like some soup, please."
+  },
+  {
+    "file": "word_salad.mp3",
+    "text": "salad"
+  },
+  {
+    "file": "prompt_order_salad.mp3",
+    "text": "I would like some salad."
+  },
+  {
+    "file": "say_order_salad.mp3",
+    "text": "I would like some salad, please."
+  },
+  {
+    "file": "word_pasta.mp3",
+    "text": "pasta"
+  },
+  {
+    "file": "prompt_order_pasta.mp3",
+    "text": "I would like some pasta."
+  },
+  {
+    "file": "say_order_pasta.mp3",
+    "text": "I would like some pasta, please."
+  },
+  {
+    "file": "word_juice.mp3",
+    "text": "juice"
+  },
+  {
+    "file": "prompt_order_juice.mp3",
+    "text": "I would like some juice."
+  },
+  {
+    "file": "say_order_juice.mp3",
+    "text": "I would like some juice, please."
+  },
+  {
+    "file": "word_curry.mp3",
+    "text": "curry"
+  },
+  {
+    "file": "prompt_order_curry.mp3",
+    "text": "I would like some curry."
+  },
+  {
+    "file": "say_order_curry.mp3",
+    "text": "I would like some curry, please."
+  },
+  {
+    "file": "word_sushi.mp3",
+    "text": "sushi"
+  },
+  {
+    "file": "prompt_order_sushi.mp3",
+    "text": "I would like some sushi."
+  },
+  {
+    "file": "say_order_sushi.mp3",
+    "text": "I would like some sushi, please."
+  },
+  {
+    "file": "word_chips.mp3",
+    "text": "chips"
+  },
+  {
+    "file": "prompt_order_chips.mp3",
+    "text": "I would like some chips."
+  },
+  {
+    "file": "say_order_chips.mp3",
+    "text": "I would like some chips, please."
+  },
+  {
+    "file": "word_movie.mp3",
+    "text": "movie"
+  },
+  {
+    "file": "prompt_show_movie.mp3",
+    "text": "Find the movie!"
+  },
+  {
+    "file": "word_popcorn.mp3",
+    "text": "popcorn"
+  },
+  {
+    "file": "prompt_show_popcorn.mp3",
+    "text": "Find the popcorn!"
+  },
+  {
+    "file": "word_guitar.mp3",
+    "text": "guitar"
+  },
+  {
+    "file": "prompt_show_guitar.mp3",
+    "text": "Find the guitar!"
+  },
+  {
+    "file": "word_drum.mp3",
+    "text": "drum"
+  },
+  {
+    "file": "prompt_show_drum.mp3",
+    "text": "Find the drum!"
+  },
+  {
+    "file": "word_song.mp3",
+    "text": "song"
+  },
+  {
+    "file": "prompt_show_song.mp3",
+    "text": "Find the song!"
+  },
+  {
+    "file": "word_circus.mp3",
+    "text": "circus"
+  },
+  {
+    "file": "prompt_show_circus.mp3",
+    "text": "Find the circus!"
+  },
+  {
+    "file": "word_magic.mp3",
+    "text": "magic"
+  },
+  {
+    "file": "prompt_show_magic.mp3",
+    "text": "Find the magic!"
+  },
+  {
+    "file": "word_clown.mp3",
+    "text": "clown"
+  },
+  {
+    "file": "prompt_show_clown.mp3",
+    "text": "Find the clown!"
+  },
+  {
+    "file": "word_balloon.mp3",
+    "text": "balloon"
+  },
+  {
+    "file": "prompt_show_balloon.mp3",
+    "text": "Find the balloon!"
+  },
+  {
+    "file": "word_cartoon.mp3",
+    "text": "cartoon"
+  },
+  {
+    "file": "prompt_show_cartoon.mp3",
+    "text": "Find the cartoon!"
+  },
+  {
+    "file": "word_email.mp3",
+    "text": "email"
+  },
+  {
+    "file": "prompt_digital_email.mp3",
+    "text": "Find the email!"
+  },
+  {
+    "file": "word_photo.mp3",
+    "text": "photo"
+  },
+  {
+    "file": "prompt_digital_photo.mp3",
+    "text": "Find the photo!"
+  },
+  {
+    "file": "word_video.mp3",
+    "text": "video"
+  },
+  {
+    "file": "prompt_digital_video.mp3",
+    "text": "Find the video!"
+  },
+  {
+    "file": "word_chat.mp3",
+    "text": "chat"
+  },
+  {
+    "file": "prompt_digital_chat.mp3",
+    "text": "Find the chat!"
+  },
+  {
+    "file": "word_wifi.mp3",
+    "text": "wifi"
+  },
+  {
+    "file": "prompt_digital_wifi.mp3",
+    "text": "Find the wifi!"
+  },
+  {
+    "file": "word_app.mp3",
+    "text": "app"
+  },
+  {
+    "file": "prompt_digital_app.mp3",
+    "text": "Find the app!"
+  },
+  {
+    "file": "word_screen.mp3",
+    "text": "screen"
+  },
+  {
+    "file": "prompt_digital_screen.mp3",
+    "text": "Find the screen!"
+  },
+  {
+    "file": "word_link.mp3",
+    "text": "link"
+  },
+  {
+    "file": "prompt_digital_link.mp3",
+    "text": "Find the link!"
+  },
+  {
+    "file": "word_website.mp3",
+    "text": "website"
+  },
+  {
+    "file": "prompt_digital_website.mp3",
+    "text": "Find the website!"
+  },
+  {
+    "file": "word_download.mp3",
+    "text": "download"
+  },
+  {
+    "file": "prompt_digital_download.mp3",
+    "text": "Find the download!"
+  },
+  {
+    "file": "word_friendly.mp3",
+    "text": "friendly"
+  },
+  {
+    "file": "prompt_person_friendly.mp3",
+    "text": "She is friendly."
+  },
+  {
+    "file": "say_person_friendly.mp3",
+    "text": "He is friendly."
+  },
+  {
+    "file": "word_funny.mp3",
+    "text": "funny"
+  },
+  {
+    "file": "prompt_person_funny.mp3",
+    "text": "She is funny."
+  },
+  {
+    "file": "say_person_funny.mp3",
+    "text": "He is funny."
+  },
+  {
+    "file": "word_clever.mp3",
+    "text": "clever"
+  },
+  {
+    "file": "prompt_person_clever.mp3",
+    "text": "She is clever."
+  },
+  {
+    "file": "say_person_clever.mp3",
+    "text": "He is clever."
+  },
+  {
+    "file": "word_kind.mp3",
+    "text": "kind"
+  },
+  {
+    "file": "prompt_person_kind.mp3",
+    "text": "She is kind."
+  },
+  {
+    "file": "say_person_kind.mp3",
+    "text": "He is kind."
+  },
+  {
+    "file": "word_shy.mp3",
+    "text": "shy"
+  },
+  {
+    "file": "prompt_person_shy.mp3",
+    "text": "She is shy."
+  },
+  {
+    "file": "say_person_shy.mp3",
+    "text": "He is shy."
+  },
+  {
+    "file": "word_brave.mp3",
+    "text": "brave"
+  },
+  {
+    "file": "prompt_person_brave.mp3",
+    "text": "She is brave."
+  },
+  {
+    "file": "say_person_brave.mp3",
+    "text": "He is brave."
+  },
+  {
+    "file": "word_quiet.mp3",
+    "text": "quiet"
+  },
+  {
+    "file": "prompt_person_quiet.mp3",
+    "text": "She is quiet."
+  },
+  {
+    "file": "say_person_quiet.mp3",
+    "text": "He is quiet."
+  },
+  {
+    "file": "word_polite.mp3",
+    "text": "polite"
+  },
+  {
+    "file": "prompt_person_polite.mp3",
+    "text": "She is polite."
+  },
+  {
+    "file": "say_person_polite.mp3",
+    "text": "He is polite."
+  },
+  {
+    "file": "word_calm.mp3",
+    "text": "calm"
+  },
+  {
+    "file": "prompt_person_calm.mp3",
+    "text": "She is calm."
+  },
+  {
+    "file": "say_person_calm.mp3",
+    "text": "He is calm."
+  },
+  {
+    "file": "word_tidy.mp3",
+    "text": "tidy"
+  },
+  {
+    "file": "prompt_person_tidy.mp3",
+    "text": "She is tidy."
+  },
+  {
+    "file": "say_person_tidy.mp3",
+    "text": "He is tidy."
+  },
+  {
+    "file": "word_vet.mp3",
+    "text": "vet"
+  },
+  {
+    "file": "prompt_ambition_vet.mp3",
+    "text": "I want to be a vet!"
+  },
+  {
+    "file": "word_scientist.mp3",
+    "text": "scientist"
+  },
+  {
+    "file": "prompt_ambition_scientist.mp3",
+    "text": "I want to be a scientist!"
+  },
+  {
+    "file": "word_dancer.mp3",
+    "text": "dancer"
+  },
+  {
+    "file": "prompt_ambition_dancer.mp3",
+    "text": "I want to be a dancer!"
+  },
+  {
+    "file": "word_chef.mp3",
+    "text": "chef"
+  },
+  {
+    "file": "prompt_ambition_chef.mp3",
+    "text": "I want to be a chef!"
+  },
+  {
+    "file": "word_writer.mp3",
+    "text": "writer"
+  },
+  {
+    "file": "prompt_ambition_writer.mp3",
+    "text": "I want to be a writer!"
+  },
+  {
+    "file": "word_nurse.mp3",
+    "text": "nurse"
+  },
+  {
+    "file": "prompt_ambition_nurse.mp3",
+    "text": "I want to be a nurse!"
+  },
+  {
+    "file": "word_sailor.mp3",
+    "text": "sailor"
+  },
+  {
+    "file": "prompt_ambition_sailor.mp3",
+    "text": "I want to be a sailor!"
+  },
+  {
+    "file": "word_builder.mp3",
+    "text": "builder"
+  },
+  {
+    "file": "prompt_ambition_builder.mp3",
+    "text": "I want to be a builder!"
+  },
+  {
+    "file": "word_gardener.mp3",
+    "text": "gardener"
+  },
+  {
+    "file": "prompt_ambition_gardener.mp3",
+    "text": "I want to be a gardener!"
+  },
+  {
+    "file": "word_waiter.mp3",
+    "text": "waiter"
+  },
+  {
+    "file": "prompt_ambition_waiter.mp3",
+    "text": "I want to be a waiter!"
+  },
+  {
+    "file": "say_cond_1.mp3",
+    "text": "If I study, I will learn."
+  },
+  {
+    "file": "say_cond_2.mp3",
+    "text": "If I run, I will be fast."
+  },
+  {
+    "file": "say_cond_3.mp3",
+    "text": "If I try, I will win."
+  },
+  {
+    "file": "say_cond_4.mp3",
+    "text": "If I practise, I will play well."
+  },
+  {
+    "file": "say_cond_5.mp3",
+    "text": "If I read, I will be clever."
+  },
+  {
+    "file": "say_cond_6.mp3",
+    "text": "If I help, I will be kind."
+  },
+  {
+    "file": "say_cond_7.mp3",
+    "text": "If I train, I will be strong."
+  },
+  {
+    "file": "say_cond_8.mp3",
+    "text": "If I dream, I will fly."
+  },
+  {
+    "file": "prompt_find_bottle.mp3",
+    "text": "Find the bottle!"
+  },
+  {
+    "file": "prompt_find_paper.mp3",
+    "text": "Find the paper!"
+  },
+  {
+    "file": "prompt_find_juice.mp3",
+    "text": "Find the juice!"
+  },
+  {
+    "file": "prompt_find_salad.mp3",
+    "text": "Find the salad!"
+  },
+  {
+    "file": "story_exp_n1.mp3",
+    "text": "Welcome to the portrait gallery! Look at this girl. What is she like?"
+  },
+  {
+    "file": "story_exp_n2.mp3",
+    "text": "Wonderful! And this boy — what is he like?"
+  },
+  {
+    "file": "story_exp_n3.mp3",
+    "text": "Great! And you — what are you like?"
+  },
+  {
+    "file": "story_exp_n4.mp3",
+    "text": "Welcome, dreamer! If you work hard, what will you be?"
+  },
+  {
+    "file": "story_exp_n5.mp3",
+    "text": "Wonderful! And if you try your best, what will you win?"
+  },
+  {
+    "file": "story_exp_n6.mp3",
+    "text": "Amazing! How do you feel about your dream?"
+  },
+  {
+    "file": "story_exp_n7.mp3",
+    "text": "Wonderful! And what have you seen on the way?"
+  },
+  {
+    "file": "story_exp_n8.mp3",
+    "text": "Amazing! What will you explore next?"
+  },
+  {
+    "file": "story_exp_c7.mp3",
+    "text": "You are friendly!"
+  },
+  {
+    "file": "story_exp_c8.mp3",
+    "text": "You are clever!"
+  },
+  {
+    "file": "story_exp_c9.mp3",
+    "text": "You will be a vet!"
+  },
+  {
+    "file": "story_exp_c10.mp3",
+    "text": "You will be a dancer!"
+  },
+  {
+    "file": "story_exp_c11.mp3",
+    "text": "You will be a writer!"
+  },
+  {
+    "file": "story_exp_c12.mp3",
+    "text": "You will win a cup!"
+  },
+  {
+    "file": "story_exp_c13.mp3",
+    "text": "You will win a medal!"
+  },
+  {
+    "file": "story_exp_c14.mp3",
+    "text": "You will win a prize!"
+  },
+  {
+    "file": "story_exp_c17.mp3",
+    "text": "You have been to the sea!"
+  },
+  {
+    "file": "story_exp_c18.mp3",
+    "text": "You have been to the mountains!"
+  },
+  {
+    "file": "story_exp_c19.mp3",
+    "text": "You have been to the city!"
+  },
+  {
+    "file": "story_exp_c21.mp3",
+    "text": "You have seen a castle!"
+  },
+  {
+    "file": "story_exp_c22.mp3",
+    "text": "You have seen a rainbow!"
+  },
+  {
+    "file": "story_exp_c23.mp3",
+    "text": "You will explore the stars!"
+  },
+  {
+    "file": "story_exp_c24.mp3",
+    "text": "You will explore the ocean!"
   }
 ]
