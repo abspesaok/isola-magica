@@ -4438,5 +4438,2901 @@
   {
     "file": "story_exp_c24.mp3",
     "text": "You will explore the ocean!"
+  },
+  {
+    "file": "say_greet_nice_to_meet_you.mp3",
+    "text": "Nice to meet you"
+  },
+  {
+    "file": "say_greet_how_s_it_going_.mp3",
+    "text": "How's it going?"
+  },
+  {
+    "file": "say_greet_where_are_you_from_.mp3",
+    "text": "Where are you from?"
+  },
+  {
+    "file": "say_greet_how_old_are_you_.mp3",
+    "text": "How old are you?"
+  },
+  {
+    "file": "say_greet_what_is_your_name_.mp3",
+    "text": "What is your name?"
+  },
+  {
+    "file": "say_greet_this_is_my_friend.mp3",
+    "text": "This is my friend"
+  },
+  {
+    "file": "say_greet_see_you_soon.mp3",
+    "text": "See you soon"
+  },
+  {
+    "file": "say_greet_have_a_nice_day.mp3",
+    "text": "Have a nice day"
+  },
+  {
+    "file": "say_greet_welcome.mp3",
+    "text": "Welcome"
+  },
+  {
+    "file": "say_greet_glad_to_meet_you.mp3",
+    "text": "Glad to meet you"
+  },
+  {
+    "file": "prompt_greet_nice_to_meet_you.mp3",
+    "text": "Someone says: \"Nice to meet you\""
+  },
+  {
+    "file": "phr_greet_how_are_you_.mp3",
+    "text": "How are you?"
+  },
+  {
+    "file": "prompt_greet_how_are_you_.mp3",
+    "text": "Someone says: \"How are you?\""
+  },
+  {
+    "file": "prompt_greet_where_are_you_from_.mp3",
+    "text": "Someone says: \"Where are you from?\""
+  },
+  {
+    "file": "prompt_greet_how_old_are_you_.mp3",
+    "text": "Someone says: \"How old are you?\""
+  },
+  {
+    "file": "phr_greet_see_you_later.mp3",
+    "text": "See you later"
+  },
+  {
+    "file": "prompt_greet_see_you_later.mp3",
+    "text": "Someone says: \"See you later\""
+  },
+  {
+    "file": "prompt_greet_what_is_your_name_.mp3",
+    "text": "Someone says: \"What is your name?\""
+  },
+  {
+    "file": "say_opinion_i_think_so.mp3",
+    "text": "I think so"
+  },
+  {
+    "file": "say_opinion_in_my_opinion.mp3",
+    "text": "In my opinion"
+  },
+  {
+    "file": "say_opinion_i_agree.mp3",
+    "text": "I agree"
+  },
+  {
+    "file": "say_opinion_i_don_t_agree.mp3",
+    "text": "I don't agree"
+  },
+  {
+    "file": "say_opinion_i_prefer_this.mp3",
+    "text": "I prefer this"
+  },
+  {
+    "file": "say_opinion_i_d_rather_not.mp3",
+    "text": "I'd rather not"
+  },
+  {
+    "file": "say_opinion_that_is_true.mp3",
+    "text": "That is true"
+  },
+  {
+    "file": "say_opinion_i_love_it.mp3",
+    "text": "I love it"
+  },
+  {
+    "file": "say_opinion_i_can_t_stand_it.mp3",
+    "text": "I can't stand it"
+  },
+  {
+    "file": "say_opinion_you_are_right.mp3",
+    "text": "You are right"
+  },
+  {
+    "file": "prompt_opinion_i_think_so.mp3",
+    "text": "Choose: \"I think so\""
+  },
+  {
+    "file": "prompt_opinion_i_agree.mp3",
+    "text": "Choose: \"I agree\""
+  },
+  {
+    "file": "prompt_opinion_i_don_t_agree.mp3",
+    "text": "Choose: \"I don't agree\""
+  },
+  {
+    "file": "prompt_opinion_in_my_opinion.mp3",
+    "text": "Choose: \"In my opinion\""
+  },
+  {
+    "file": "phr_opinion_i_prefer_tea.mp3",
+    "text": "I prefer tea"
+  },
+  {
+    "file": "prompt_opinion_i_prefer_tea.mp3",
+    "text": "Choose: \"I prefer tea\""
+  },
+  {
+    "file": "phr_opinion_i_d_rather_stay.mp3",
+    "text": "I'd rather stay"
+  },
+  {
+    "file": "prompt_opinion_i_d_rather_stay.mp3",
+    "text": "Choose: \"I'd rather stay\""
+  },
+  {
+    "file": "prompt_opinion_you_are_right.mp3",
+    "text": "Choose: \"You are right\""
+  },
+  {
+    "file": "phr_opinion_i_like_it.mp3",
+    "text": "I like it"
+  },
+  {
+    "file": "prompt_opinion_i_like_it.mp3",
+    "text": "Choose: \"I like it\""
+  },
+  {
+    "file": "say_invite_would_you_like_to_come_.mp3",
+    "text": "Would you like to come?"
+  },
+  {
+    "file": "say_invite_shall_we_go_.mp3",
+    "text": "Shall we go?"
+  },
+  {
+    "file": "say_invite_let_s_play.mp3",
+    "text": "Let's play"
+  },
+  {
+    "file": "say_invite_how_about_pizza_.mp3",
+    "text": "How about pizza?"
+  },
+  {
+    "file": "say_invite_come_to_my_party.mp3",
+    "text": "Come to my party"
+  },
+  {
+    "file": "say_invite_i_d_love_to.mp3",
+    "text": "I'd love to"
+  },
+  {
+    "file": "say_invite_yes_please.mp3",
+    "text": "Yes, please"
+  },
+  {
+    "file": "say_invite_i_m_afraid_i_can_t.mp3",
+    "text": "I'm afraid I can't"
+  },
+  {
+    "file": "say_invite_maybe_later.mp3",
+    "text": "Maybe later"
+  },
+  {
+    "file": "say_invite_sounds_great.mp3",
+    "text": "Sounds great"
+  },
+  {
+    "file": "prompt_invite_i_d_love_to.mp3",
+    "text": "Reply: \"I'd love to\""
+  },
+  {
+    "file": "prompt_invite_yes_please.mp3",
+    "text": "Reply: \"Yes, please\""
+  },
+  {
+    "file": "phr_invite_no_thanks.mp3",
+    "text": "No, thanks"
+  },
+  {
+    "file": "prompt_invite_no_thanks.mp3",
+    "text": "Reply: \"No, thanks\""
+  },
+  {
+    "file": "prompt_invite_i_m_afraid_i_can_t.mp3",
+    "text": "Reply: \"I'm afraid I can't\""
+  },
+  {
+    "file": "phr_invite_good_idea.mp3",
+    "text": "Good idea"
+  },
+  {
+    "file": "prompt_invite_good_idea.mp3",
+    "text": "Reply: \"Good idea\""
+  },
+  {
+    "file": "phr_invite_why_not.mp3",
+    "text": "Why not"
+  },
+  {
+    "file": "prompt_invite_why_not.mp3",
+    "text": "Reply: \"Why not\""
+  },
+  {
+    "file": "say_plans_are_you_free_today_.mp3",
+    "text": "Are you free today?"
+  },
+  {
+    "file": "say_plans_when_shall_we_meet_.mp3",
+    "text": "When shall we meet?"
+  },
+  {
+    "file": "say_plans_let_s_meet_at_six.mp3",
+    "text": "Let's meet at six"
+  },
+  {
+    "file": "say_plans_see_you_at_the_park.mp3",
+    "text": "See you at the park"
+  },
+  {
+    "file": "say_plans_see_you_tomorrow.mp3",
+    "text": "See you tomorrow"
+  },
+  {
+    "file": "say_plans_what_time_is_it_.mp3",
+    "text": "What time is it?"
+  },
+  {
+    "file": "say_plans_i_am_busy.mp3",
+    "text": "I am busy"
+  },
+  {
+    "file": "say_plans_i_am_free.mp3",
+    "text": "I am free"
+  },
+  {
+    "file": "say_plans_that_s_settled.mp3",
+    "text": "That's settled"
+  },
+  {
+    "file": "phr_plans_on_friday.mp3",
+    "text": "on Friday"
+  },
+  {
+    "file": "phr_plans_at_six.mp3",
+    "text": "at six"
+  },
+  {
+    "file": "phr_plans_this_afternoon.mp3",
+    "text": "this afternoon"
+  },
+  {
+    "file": "phr_plans_tomorrow.mp3",
+    "text": "tomorrow"
+  },
+  {
+    "file": "phr_plans_next_week.mp3",
+    "text": "next week"
+  },
+  {
+    "file": "phr_plans_at_the_park.mp3",
+    "text": "at the park"
+  },
+  {
+    "file": "word_money.mp3",
+    "text": "money"
+  },
+  {
+    "file": "prompt_shop_money.mp3",
+    "text": "Find the money!"
+  },
+  {
+    "file": "word_coin.mp3",
+    "text": "coin"
+  },
+  {
+    "file": "prompt_shop_coin.mp3",
+    "text": "Find the coin!"
+  },
+  {
+    "file": "word_wallet.mp3",
+    "text": "wallet"
+  },
+  {
+    "file": "prompt_shop_wallet.mp3",
+    "text": "Find the wallet!"
+  },
+  {
+    "file": "word_price_tag.mp3",
+    "text": "price tag"
+  },
+  {
+    "file": "prompt_shop_price_tag.mp3",
+    "text": "Find the price tag!"
+  },
+  {
+    "file": "word_basket.mp3",
+    "text": "basket"
+  },
+  {
+    "file": "prompt_shop_basket.mp3",
+    "text": "Find the basket!"
+  },
+  {
+    "file": "word_trolley.mp3",
+    "text": "trolley"
+  },
+  {
+    "file": "prompt_shop_trolley.mp3",
+    "text": "Find the trolley!"
+  },
+  {
+    "file": "word_card.mp3",
+    "text": "card"
+  },
+  {
+    "file": "prompt_shop_card.mp3",
+    "text": "Find the card!"
+  },
+  {
+    "file": "word_receipt.mp3",
+    "text": "receipt"
+  },
+  {
+    "file": "prompt_shop_receipt.mp3",
+    "text": "Find the receipt!"
+  },
+  {
+    "file": "word_sale.mp3",
+    "text": "sale"
+  },
+  {
+    "file": "prompt_shop_sale.mp3",
+    "text": "Find the sale!"
+  },
+  {
+    "file": "word_cash.mp3",
+    "text": "cash"
+  },
+  {
+    "file": "prompt_shop_cash.mp3",
+    "text": "Find the cash!"
+  },
+  {
+    "file": "say_help_excuse_me.mp3",
+    "text": "Excuse me"
+  },
+  {
+    "file": "say_help_can_you_help_me_.mp3",
+    "text": "Can you help me?"
+  },
+  {
+    "file": "say_help_how_do_i_get_there_.mp3",
+    "text": "How do I get there?"
+  },
+  {
+    "file": "say_help_where_is_the_station_.mp3",
+    "text": "Where is the station?"
+  },
+  {
+    "file": "say_help_turn_left.mp3",
+    "text": "Turn left"
+  },
+  {
+    "file": "say_help_turn_right.mp3",
+    "text": "Turn right"
+  },
+  {
+    "file": "say_help_is_it_far_.mp3",
+    "text": "Is it far?"
+  },
+  {
+    "file": "say_help_it_s_near.mp3",
+    "text": "It's near"
+  },
+  {
+    "file": "say_help_thank_you_for_your_help.mp3",
+    "text": "Thank you for your help"
+  },
+  {
+    "file": "word_nervous.mp3",
+    "text": "nervous"
+  },
+  {
+    "file": "prompt_feeladv_nervous.mp3",
+    "text": "I feel nervous."
+  },
+  {
+    "file": "word_worried.mp3",
+    "text": "worried"
+  },
+  {
+    "file": "prompt_feeladv_worried.mp3",
+    "text": "I feel worried."
+  },
+  {
+    "file": "word_relieved.mp3",
+    "text": "relieved"
+  },
+  {
+    "file": "prompt_feeladv_relieved.mp3",
+    "text": "I feel relieved."
+  },
+  {
+    "file": "word_proud.mp3",
+    "text": "proud"
+  },
+  {
+    "file": "prompt_feeladv_proud.mp3",
+    "text": "I feel proud."
+  },
+  {
+    "file": "word_confused.mp3",
+    "text": "confused"
+  },
+  {
+    "file": "prompt_feeladv_confused.mp3",
+    "text": "I feel confused."
+  },
+  {
+    "file": "word_sleepy.mp3",
+    "text": "sleepy"
+  },
+  {
+    "file": "prompt_feeladv_sleepy.mp3",
+    "text": "I feel sleepy."
+  },
+  {
+    "file": "word_sick.mp3",
+    "text": "sick"
+  },
+  {
+    "file": "prompt_feeladv_sick.mp3",
+    "text": "I feel sick."
+  },
+  {
+    "file": "word_lonely.mp3",
+    "text": "lonely"
+  },
+  {
+    "file": "prompt_feeladv_lonely.mp3",
+    "text": "I feel lonely."
+  },
+  {
+    "file": "word_curious.mp3",
+    "text": "curious"
+  },
+  {
+    "file": "prompt_feeladv_curious.mp3",
+    "text": "I feel curious."
+  },
+  {
+    "file": "say_advice_you_should_relax.mp3",
+    "text": "You should relax"
+  },
+  {
+    "file": "say_advice_don_t_worry.mp3",
+    "text": "Don't worry"
+  },
+  {
+    "file": "say_advice_cheer_up.mp3",
+    "text": "Cheer up"
+  },
+  {
+    "file": "say_advice_take_it_easy.mp3",
+    "text": "Take it easy"
+  },
+  {
+    "file": "say_advice_you_can_do_it.mp3",
+    "text": "You can do it"
+  },
+  {
+    "file": "say_advice_if_i_were_you.mp3",
+    "text": "If I were you"
+  },
+  {
+    "file": "say_advice_get_some_sleep.mp3",
+    "text": "Get some sleep"
+  },
+  {
+    "file": "say_advice_everything_s_fine.mp3",
+    "text": "Everything's fine"
+  },
+  {
+    "file": "say_advice_good_luck.mp3",
+    "text": "Good luck"
+  },
+  {
+    "file": "say_manners_i_m_sorry.mp3",
+    "text": "I'm sorry"
+  },
+  {
+    "file": "say_manners_it_s_my_fault.mp3",
+    "text": "It's my fault"
+  },
+  {
+    "file": "say_manners_i_apologise.mp3",
+    "text": "I apologise"
+  },
+  {
+    "file": "say_manners_don_t_worry_about_it.mp3",
+    "text": "Don't worry about it"
+  },
+  {
+    "file": "say_manners_thank_you_so_much.mp3",
+    "text": "Thank you so much"
+  },
+  {
+    "file": "say_manners_you_re_welcome.mp3",
+    "text": "You're welcome"
+  },
+  {
+    "file": "say_manners_after_you.mp3",
+    "text": "After you"
+  },
+  {
+    "file": "say_manners_please.mp3",
+    "text": "Please"
+  },
+  {
+    "file": "say_manners_no_problem.mp3",
+    "text": "No problem"
+  },
+  {
+    "file": "phr_manners_thank_you.mp3",
+    "text": "Thank you"
+  },
+  {
+    "file": "phr_recount_guess_what.mp3",
+    "text": "Guess what"
+  },
+  {
+    "file": "phr_recount_yesterday.mp3",
+    "text": "Yesterday"
+  },
+  {
+    "file": "phr_recount_first.mp3",
+    "text": "first"
+  },
+  {
+    "file": "phr_recount_then.mp3",
+    "text": "then"
+  },
+  {
+    "file": "phr_recount_after_that.mp3",
+    "text": "after that"
+  },
+  {
+    "file": "phr_recount_finally.mp3",
+    "text": "finally"
+  },
+  {
+    "file": "phr_recount_in_the_end.mp3",
+    "text": "in the end"
+  },
+  {
+    "file": "phr_recount_suddenly.mp3",
+    "text": "suddenly"
+  },
+  {
+    "file": "say_recount_first_we_ate.mp3",
+    "text": "First we ate"
+  },
+  {
+    "file": "say_recount_then_we_ran.mp3",
+    "text": "Then we ran"
+  },
+  {
+    "file": "say_recount_after_that_we_swam.mp3",
+    "text": "After that we swam"
+  },
+  {
+    "file": "say_recount_we_saw_a_dog.mp3",
+    "text": "We saw a dog"
+  },
+  {
+    "file": "say_recount_it_was_fun.mp3",
+    "text": "It was fun"
+  },
+  {
+    "file": "say_recount_suddenly_it_rained.mp3",
+    "text": "Suddenly it rained"
+  },
+  {
+    "file": "say_recount_what_a_day.mp3",
+    "text": "What a day"
+  },
+  {
+    "file": "word_party.mp3",
+    "text": "party"
+  },
+  {
+    "file": "prompt_find_party.mp3",
+    "text": "Find the party!"
+  },
+  {
+    "file": "chat5_r1.mp3",
+    "text": "Nice to meet you too!"
+  },
+  {
+    "file": "chat5_r2.mp3",
+    "text": "Hi Mia, I'm happy to meet you."
+  },
+  {
+    "file": "chat5_r3.mp3",
+    "text": "Hello! I'm glad to meet you."
+  },
+  {
+    "file": "chat5_r4.mp3",
+    "text": "I'm great, thanks!"
+  },
+  {
+    "file": "chat5_r5.mp3",
+    "text": "Not bad, and you?"
+  },
+  {
+    "file": "chat5_r6.mp3",
+    "text": "Pretty good, thank you."
+  },
+  {
+    "file": "chat5_r7.mp3",
+    "text": "I'm from Italy."
+  },
+  {
+    "file": "chat5_r8.mp3",
+    "text": "I come from Rome."
+  },
+  {
+    "file": "chat5_r9.mp3",
+    "text": "I'm Italian, from Italy."
+  },
+  {
+    "file": "chat5_r10.mp3",
+    "text": "I'm nine years old."
+  },
+  {
+    "file": "chat5_r11.mp3",
+    "text": "I'm ten."
+  },
+  {
+    "file": "chat5_r12.mp3",
+    "text": "I'm eight, and you?"
+  },
+  {
+    "file": "chat5_r13.mp3",
+    "text": "Nice to meet you, Leo!"
+  },
+  {
+    "file": "chat5_r14.mp3",
+    "text": "Hi Leo, nice to meet you!"
+  },
+  {
+    "file": "chat5_r15.mp3",
+    "text": "Hello Leo!"
+  },
+  {
+    "file": "chat5_r16.mp3",
+    "text": "I think they're great!"
+  },
+  {
+    "file": "chat5_r17.mp3",
+    "text": "In my opinion, films are fun."
+  },
+  {
+    "file": "chat5_r18.mp3",
+    "text": "I love films!"
+  },
+  {
+    "file": "chat5_r19.mp3",
+    "text": "I prefer films to books."
+  },
+  {
+    "file": "chat5_r20.mp3",
+    "text": "I'd rather read books."
+  },
+  {
+    "file": "chat5_r21.mp3",
+    "text": "I like both, actually."
+  },
+  {
+    "file": "chat5_r22.mp3",
+    "text": "I'm really into cartoons."
+  },
+  {
+    "file": "chat5_r23.mp3",
+    "text": "I love adventure films."
+  },
+  {
+    "file": "chat5_r24.mp3",
+    "text": "I prefer funny films."
+  },
+  {
+    "file": "chat5_r25.mp3",
+    "text": "I totally agree!"
+  },
+  {
+    "file": "chat5_r26.mp3",
+    "text": "I see your point, but I'm not sure."
+  },
+  {
+    "file": "chat5_r27.mp3",
+    "text": "I don't really agree."
+  },
+  {
+    "file": "chat5_r29.mp3",
+    "text": "Yes, I'd love to!"
+  },
+  {
+    "file": "chat5_r30.mp3",
+    "text": "Sure, why not!"
+  },
+  {
+    "file": "chat5_r31.mp3",
+    "text": "I'd love to, thanks!"
+  },
+  {
+    "file": "chat5_r32.mp3",
+    "text": "Yes, that sounds great!"
+  },
+  {
+    "file": "chat5_r33.mp3",
+    "text": "Sorry, I'm afraid I can't."
+  },
+  {
+    "file": "chat5_r34.mp3",
+    "text": "Sure, I'll bring one."
+  },
+  {
+    "file": "chat5_r36.mp3",
+    "text": "Yes, let's do it!"
+  },
+  {
+    "file": "chat5_r37.mp3",
+    "text": "I love pizza!"
+  },
+  {
+    "file": "chat5_r38.mp3",
+    "text": "Great plan!"
+  },
+  {
+    "file": "chat5_r39.mp3",
+    "text": "Yes, let's invite him!"
+  },
+  {
+    "file": "chat5_r40.mp3",
+    "text": "Sure, the more the better!"
+  },
+  {
+    "file": "chat5_r41.mp3",
+    "text": "Four is perfect!"
+  },
+  {
+    "file": "chat5_r42.mp3",
+    "text": "That works for me."
+  },
+  {
+    "file": "chat5_r43.mp3",
+    "text": "Sounds good!"
+  },
+  {
+    "file": "chat5_r44.mp3",
+    "text": "Of course!"
+  },
+  {
+    "file": "chat5_r45.mp3",
+    "text": "Yes, I'd love to help."
+  },
+  {
+    "file": "chat5_r47.mp3",
+    "text": "Yes, I'm free!"
+  },
+  {
+    "file": "chat5_r48.mp3",
+    "text": "Sorry, I'm busy on Friday."
+  },
+  {
+    "file": "chat5_r49.mp3",
+    "text": "Let me check... yes!"
+  },
+  {
+    "file": "chat5_r50.mp3",
+    "text": "Yes, the park is perfect."
+  },
+  {
+    "file": "chat5_r51.mp3",
+    "text": "Sure, let's meet there."
+  },
+  {
+    "file": "chat5_r52.mp3",
+    "text": "Let's meet at four."
+  },
+  {
+    "file": "chat5_r53.mp3",
+    "text": "How about three o'clock?"
+  },
+  {
+    "file": "chat5_r54.mp3",
+    "text": "Any time is fine."
+  },
+  {
+    "file": "chat5_r55.mp3",
+    "text": "Let's play football!"
+  },
+  {
+    "file": "chat5_r56.mp3",
+    "text": "How about a bike ride?"
+  },
+  {
+    "file": "chat5_r57.mp3",
+    "text": "We could have a picnic."
+  },
+  {
+    "file": "chat5_r59.mp3",
+    "text": "Good idea, thanks!"
+  },
+  {
+    "file": "chat5_r60.mp3",
+    "text": "Sure, I'll bring drinks."
+  },
+  {
+    "file": "chat5_r61.mp3",
+    "text": "Can't wait!"
+  },
+  {
+    "file": "chat5_r63.mp3",
+    "text": "I'm just looking, thanks."
+  },
+  {
+    "file": "chat5_r64.mp3",
+    "text": "Hello! Yes, I'd like a jacket."
+  },
+  {
+    "file": "chat5_r65.mp3",
+    "text": "How much is it?"
+  },
+  {
+    "file": "chat5_r66.mp3",
+    "text": "Can I try it on?"
+  },
+  {
+    "file": "chat5_r67.mp3",
+    "text": "I like it! What's the price?"
+  },
+  {
+    "file": "chat5_r68.mp3",
+    "text": "Sure, thank you."
+  },
+  {
+    "file": "chat5_r69.mp3",
+    "text": "Yes, I'll take it!"
+  },
+  {
+    "file": "chat5_r70.mp3",
+    "text": "Do you have a bigger size?"
+  },
+  {
+    "file": "chat5_r71.mp3",
+    "text": "Yes, please, I love it."
+  },
+  {
+    "file": "chat5_r72.mp3",
+    "text": "Here you are."
+  },
+  {
+    "file": "chat5_r73.mp3",
+    "text": "Here's the money."
+  },
+  {
+    "file": "chat5_r74.mp3",
+    "text": "Can I pay with a card?"
+  },
+  {
+    "file": "chat5_r76.mp3",
+    "text": "Thanks a lot!"
+  },
+  {
+    "file": "chat5_r77.mp3",
+    "text": "Great, thank you!"
+  },
+  {
+    "file": "chat5_r78.mp3",
+    "text": "Excuse me, could you help me?"
+  },
+  {
+    "file": "chat5_r79.mp3",
+    "text": "Thank you, yes."
+  },
+  {
+    "file": "chat5_r80.mp3",
+    "text": "How do I get to the station?"
+  },
+  {
+    "file": "chat5_r81.mp3",
+    "text": "I'm looking for the park."
+  },
+  {
+    "file": "chat5_r82.mp3",
+    "text": "Where is the library, please?"
+  },
+  {
+    "file": "chat5_r83.mp3",
+    "text": "Straight on, then left. Got it!"
+  },
+  {
+    "file": "chat5_r88.mp3",
+    "text": "That's close, thanks."
+  },
+  {
+    "file": "chat5_r89.mp3",
+    "text": "No, thank you."
+  },
+  {
+    "file": "chat5_r90.mp3",
+    "text": "That's all, thanks!"
+  },
+  {
+    "file": "chat5_r91.mp3",
+    "text": "No, you've helped a lot."
+  },
+  {
+    "file": "chat5_r92.mp3",
+    "text": "What's the matter?"
+  },
+  {
+    "file": "chat5_r94.mp3",
+    "text": "Oh no, why are you worried?"
+  },
+  {
+    "file": "chat5_r95.mp3",
+    "text": "You should study tonight."
+  },
+  {
+    "file": "chat5_r96.mp3",
+    "text": "If I were you, I'd read your notes."
+  },
+  {
+    "file": "chat5_r97.mp3",
+    "text": "You'd better start now."
+  },
+  {
+    "file": "chat5_r98.mp3",
+    "text": "You should get some rest."
+  },
+  {
+    "file": "chat5_r99.mp3",
+    "text": "Why don't you take a break?"
+  },
+  {
+    "file": "chat5_r100.mp3",
+    "text": "You'd better sleep early."
+  },
+  {
+    "file": "chat5_r101.mp3",
+    "text": "Yes, don't worry!"
+  },
+  {
+    "file": "chat5_r102.mp3",
+    "text": "Everything will be fine."
+  },
+  {
+    "file": "chat5_r104.mp3",
+    "text": "I'm glad!"
+  },
+  {
+    "file": "chat5_r105.mp3",
+    "text": "That's great!"
+  },
+  {
+    "file": "chat5_r106.mp3",
+    "text": "You'll be great tomorrow."
+  },
+  {
+    "file": "chat5_r108.mp3",
+    "text": "It doesn't matter."
+  },
+  {
+    "file": "chat5_r109.mp3",
+    "text": "It's okay, really."
+  },
+  {
+    "file": "chat5_r110.mp3",
+    "text": "It's fine, don't worry."
+  },
+  {
+    "file": "chat5_r111.mp3",
+    "text": "Accidents happen!"
+  },
+  {
+    "file": "chat5_r112.mp3",
+    "text": "No problem at all."
+  },
+  {
+    "file": "chat5_r114.mp3",
+    "text": "Anytime!"
+  },
+  {
+    "file": "chat5_r115.mp3",
+    "text": "That's very kind!"
+  },
+  {
+    "file": "chat5_r116.mp3",
+    "text": "You don't have to, but thanks!"
+  },
+  {
+    "file": "chat5_r117.mp3",
+    "text": "That's polite of you!"
+  },
+  {
+    "file": "chat5_r118.mp3",
+    "text": "How kind, thanks!"
+  },
+  {
+    "file": "chat5_r119.mp3",
+    "text": "Yesterday I went to the beach!"
+  },
+  {
+    "file": "chat5_r120.mp3",
+    "text": "I played football with friends."
+  },
+  {
+    "file": "chat5_r121.mp3",
+    "text": "I visited my grandma."
+  },
+  {
+    "file": "chat5_r122.mp3",
+    "text": "First we had lunch."
+  },
+  {
+    "file": "chat5_r123.mp3",
+    "text": "Then we went swimming."
+  },
+  {
+    "file": "chat5_r124.mp3",
+    "text": "After that, we played games."
+  },
+  {
+    "file": "chat5_r125.mp3",
+    "text": "Then we ate ice cream."
+  },
+  {
+    "file": "chat5_r126.mp3",
+    "text": "After that, we walked home."
+  },
+  {
+    "file": "chat5_r127.mp3",
+    "text": "We took lots of photos."
+  },
+  {
+    "file": "chat5_r128.mp3",
+    "text": "Yes! My dog jumped in the water!"
+  },
+  {
+    "file": "chat5_r129.mp3",
+    "text": "We all laughed a lot."
+  },
+  {
+    "file": "chat5_r130.mp3",
+    "text": "I fell over, but it was funny!"
+  },
+  {
+    "file": "chat5_r131.mp3",
+    "text": "In the end, we were tired but happy."
+  },
+  {
+    "file": "chat5_r132.mp3",
+    "text": "Finally, we went home."
+  },
+  {
+    "file": "chat5_r133.mp3",
+    "text": "At last, we said goodbye."
+  },
+  {
+    "file": "chat5_r134.mp3",
+    "text": "Thanks for listening!"
+  },
+  {
+    "file": "chat5_r135.mp3",
+    "text": "It was a good day!"
+  },
+  {
+    "file": "chat5_r136.mp3",
+    "text": "Tell me about yours!"
+  },
+  {
+    "file": "chat5_r137.mp3",
+    "text": "Very well, thank you!"
+  },
+  {
+    "file": "chat5_r138.mp3",
+    "text": "I think it's fun!"
+  },
+  {
+    "file": "chat5_r139.mp3",
+    "text": "In my opinion, it's great."
+  },
+  {
+    "file": "chat5_r141.mp3",
+    "text": "Yes, let's!"
+  },
+  {
+    "file": "chat5_r142.mp3",
+    "text": "Yes, let's meet Saturday!"
+  },
+  {
+    "file": "chat5_r144.mp3",
+    "text": "Yes, here you are."
+  },
+  {
+    "file": "chat5_r145.mp3",
+    "text": "You are very kind."
+  },
+  {
+    "file": "chat5_r146.mp3",
+    "text": "Yesterday I played outside."
+  },
+  {
+    "file": "chat5_r147.mp3",
+    "text": "I read a great book."
+  },
+  {
+    "file": "chat5_r148.mp3",
+    "text": "I helped my family."
+  },
+  {
+    "file": "chat5_n1.mp3",
+    "text": "Hi! I'm Mia. Nice to meet you!"
+  },
+  {
+    "file": "chat5_n2.mp3",
+    "text": "How's it going today?"
+  },
+  {
+    "file": "chat5_n3.mp3",
+    "text": "Cool! Where are you from?"
+  },
+  {
+    "file": "chat5_n4.mp3",
+    "text": "Nice! How old are you?"
+  },
+  {
+    "file": "chat5_n5.mp3",
+    "text": "Let me introduce you to my friend Leo!"
+  },
+  {
+    "file": "chat5_n6.mp3",
+    "text": "Me too! Do you prefer films or books?"
+  },
+  {
+    "file": "chat5_n7.mp3",
+    "text": "Interesting! What's your favourite kind of film?"
+  },
+  {
+    "file": "chat5_n8.mp3",
+    "text": "Nice. I think science-fiction is the best. Do you agree?"
+  },
+  {
+    "file": "chat5_n9.mp3",
+    "text": "Ha! That's a good point. Shall we watch one together?"
+  },
+  {
+    "file": "chat5_n10.mp3",
+    "text": "Great! How about bringing a game to play?"
+  },
+  {
+    "file": "chat5_n11.mp3",
+    "text": "Perfect. Why don't we make some pizza too?"
+  },
+  {
+    "file": "chat5_n12.mp3",
+    "text": "Cool! Shall we invite Leo as well?"
+  },
+  {
+    "file": "chat5_n13.mp3",
+    "text": "Awesome. How about starting at four o'clock?"
+  },
+  {
+    "file": "chat5_n14.mp3",
+    "text": "Can you help me decorate?"
+  },
+  {
+    "file": "chat5_n15.mp3",
+    "text": "Great! Shall we meet at the park?"
+  },
+  {
+    "file": "chat5_n16.mp3",
+    "text": "Cool. What time shall we meet?"
+  },
+  {
+    "file": "chat5_n17.mp3",
+    "text": "Four o'clock works for me. What shall we do?"
+  },
+  {
+    "file": "chat5_n18.mp3",
+    "text": "Perfect plan! Shall I bring the ball?"
+  },
+  {
+    "file": "chat5_n19.mp3",
+    "text": "Hello! Welcome to my shop. Can I help you?"
+  },
+  {
+    "file": "chat5_n20.mp3",
+    "text": "Of course! How about this blue jacket?"
+  },
+  {
+    "file": "chat5_n21.mp3",
+    "text": "It's twenty euros. Would you like to try it on?"
+  },
+  {
+    "file": "chat5_n22.mp3",
+    "text": "It looks great on you! Do you want it?"
+  },
+  {
+    "file": "chat5_n23.mp3",
+    "text": "Wonderful. That's twenty euros, please."
+  },
+  {
+    "file": "chat5_n24.mp3",
+    "text": "Thank you! Here's your change and your bag."
+  },
+  {
+    "file": "chat5_n25.mp3",
+    "text": "Hi there! You look a bit lost. Can I help you?"
+  },
+  {
+    "file": "chat5_n26.mp3",
+    "text": "Of course! Where do you want to go?"
+  },
+  {
+    "file": "chat5_n27.mp3",
+    "text": "No problem. Go straight on, then turn left."
+  },
+  {
+    "file": "chat5_n28.mp3",
+    "text": "It's not far, just five minutes. You can't miss it!"
+  },
+  {
+    "file": "chat5_n29.mp3",
+    "text": "Do you need anything else?"
+  },
+  {
+    "file": "chat5_n30.mp3",
+    "text": "I'm nervous because I haven't studied enough."
+  },
+  {
+    "file": "chat5_n31.mp3",
+    "text": "That's a good idea. But I'm also very tired."
+  },
+  {
+    "file": "chat5_n32.mp3",
+    "text": "You're right. Maybe I should relax a little."
+  },
+  {
+    "file": "chat5_n33.mp3",
+    "text": "Thank you. I feel much better now."
+  },
+  {
+    "file": "chat5_n34.mp3",
+    "text": "Thanks. Oh no, I think I broke your pencil. It's my fault."
+  },
+  {
+    "file": "chat5_n35.mp3",
+    "text": "You're so kind. Thank you for being patient."
+  },
+  {
+    "file": "chat5_n36.mp3",
+    "text": "Let me buy you a new pencil to say sorry."
+  },
+  {
+    "file": "chat5_n37.mp3",
+    "text": "After you — please go first."
+  },
+  {
+    "file": "chat5_n38.mp3",
+    "text": "Wow, sounds fun! And what happened next?"
+  },
+  {
+    "file": "chat5_n39.mp3",
+    "text": "Cool! Then what did you do?"
+  },
+  {
+    "file": "chat5_n40.mp3",
+    "text": "Amazing! Did anything funny happen?"
+  },
+  {
+    "file": "chat5_n41.mp3",
+    "text": "Ha ha! And how did it end?"
+  },
+  {
+    "file": "chat5_n42.mp3",
+    "text": "What a great story! I love hearing about your day."
+  },
+  {
+    "file": "chat5_n43.mp3",
+    "text": "Wonderful! Tell me — what do you think about learning English?"
+  },
+  {
+    "file": "chat5_n44.mp3",
+    "text": "I agree! Would you like to play a game with me?"
+  },
+  {
+    "file": "chat5_n45.mp3",
+    "text": "Great! Shall we meet again on Saturday to play more?"
+  },
+  {
+    "file": "chat5_n46.mp3",
+    "text": "Perfect. Oh, I dropped my book. Could you help me?"
+  },
+  {
+    "file": "chat5_n47.mp3",
+    "text": "Thank you so much! You are very kind."
+  },
+  {
+    "file": "chat5_n48.mp3",
+    "text": "By the way — guess what! Yesterday I found a magic word. What did you do yesterday?"
+  },
+  {
+    "file": "story5_1.mp3",
+    "text": "Now, would you like to come to the word party?"
+  },
+  {
+    "file": "story5_2.mp3",
+    "text": "Someone is lost! How do we help them?"
+  },
+  {
+    "file": "story5_3.mp3",
+    "text": "Hello! Nice to meet you!"
+  },
+  {
+    "file": "story5_5.mp3",
+    "text": "I'd love to, thank you!"
+  },
+  {
+    "file": "story5_7.mp3",
+    "text": "Turn left, then go straight on!"
+  },
+  {
+    "file": "story5_8.mp3",
+    "text": "Turn right, it is not far!"
+  },
+  {
+    "file": "word_magnet.mp3",
+    "text": "magnet"
+  },
+  {
+    "file": "prompt_science_magnet.mp3",
+    "text": "It is used for science. Find the magnet!"
+  },
+  {
+    "file": "say_science_magnet.mp3",
+    "text": "A magnet is used in science."
+  },
+  {
+    "file": "word_thermometer.mp3",
+    "text": "thermometer"
+  },
+  {
+    "file": "prompt_science_thermometer.mp3",
+    "text": "It is used for science. Find the thermometer!"
+  },
+  {
+    "file": "say_science_thermometer.mp3",
+    "text": "A thermometer is used in science."
+  },
+  {
+    "file": "word_microscope.mp3",
+    "text": "microscope"
+  },
+  {
+    "file": "prompt_science_microscope.mp3",
+    "text": "It is used for science. Find the microscope!"
+  },
+  {
+    "file": "say_science_microscope.mp3",
+    "text": "A microscope is used in science."
+  },
+  {
+    "file": "word_magnifier.mp3",
+    "text": "magnifier"
+  },
+  {
+    "file": "prompt_science_magnifier.mp3",
+    "text": "It is used for science. Find the magnifier!"
+  },
+  {
+    "file": "say_science_magnifier.mp3",
+    "text": "A magnifier is used in science."
+  },
+  {
+    "file": "word_compass.mp3",
+    "text": "compass"
+  },
+  {
+    "file": "prompt_science_compass.mp3",
+    "text": "It is used for science. Find the compass!"
+  },
+  {
+    "file": "say_science_compass.mp3",
+    "text": "A compass is used in science."
+  },
+  {
+    "file": "word_gear.mp3",
+    "text": "gear"
+  },
+  {
+    "file": "prompt_science_gear.mp3",
+    "text": "It is used for science. Find the gear!"
+  },
+  {
+    "file": "say_science_gear.mp3",
+    "text": "A gear is used in science."
+  },
+  {
+    "file": "word_lightbulb.mp3",
+    "text": "lightbulb"
+  },
+  {
+    "file": "prompt_science_lightbulb.mp3",
+    "text": "It is used for science. Find the lightbulb!"
+  },
+  {
+    "file": "say_science_lightbulb.mp3",
+    "text": "A lightbulb is used in science."
+  },
+  {
+    "file": "word_test_tube.mp3",
+    "text": "test tube"
+  },
+  {
+    "file": "prompt_science_test_tube.mp3",
+    "text": "It is used for science. Find the test tube!"
+  },
+  {
+    "file": "say_science_test_tube.mp3",
+    "text": "A test tube is used in science."
+  },
+  {
+    "file": "word_scale.mp3",
+    "text": "scale"
+  },
+  {
+    "file": "prompt_science_scale.mp3",
+    "text": "It is used for science. Find the scale!"
+  },
+  {
+    "file": "say_science_scale.mp3",
+    "text": "A scale is used in science."
+  },
+  {
+    "file": "word_fork.mp3",
+    "text": "fork"
+  },
+  {
+    "file": "prompt_madeof_fork.mp3",
+    "text": "It is made of something. Find the fork!"
+  },
+  {
+    "file": "word_spoon.mp3",
+    "text": "spoon"
+  },
+  {
+    "file": "prompt_madeof_spoon.mp3",
+    "text": "It is made of something. Find the spoon!"
+  },
+  {
+    "file": "word_ring.mp3",
+    "text": "ring"
+  },
+  {
+    "file": "prompt_madeof_ring.mp3",
+    "text": "It is made of something. Find the ring!"
+  },
+  {
+    "file": "word_brick.mp3",
+    "text": "brick"
+  },
+  {
+    "file": "prompt_madeof_brick.mp3",
+    "text": "It is made of something. Find the brick!"
+  },
+  {
+    "file": "word_mirror.mp3",
+    "text": "mirror"
+  },
+  {
+    "file": "prompt_madeof_mirror.mp3",
+    "text": "It is made of something. Find the mirror!"
+  },
+  {
+    "file": "word_screw.mp3",
+    "text": "screw"
+  },
+  {
+    "file": "prompt_madeof_screw.mp3",
+    "text": "It is made of something. Find the screw!"
+  },
+  {
+    "file": "word_rope.mp3",
+    "text": "rope"
+  },
+  {
+    "file": "prompt_madeof_rope.mp3",
+    "text": "It is made of something. Find the rope!"
+  },
+  {
+    "file": "word_diamond.mp3",
+    "text": "diamond"
+  },
+  {
+    "file": "prompt_madeof_diamond.mp3",
+    "text": "It is made of something. Find the diamond!"
+  },
+  {
+    "file": "word_fox.mp3",
+    "text": "fox"
+  },
+  {
+    "file": "prompt_wild_fox.mp3",
+    "text": "Look in the wild! Find the fox!"
+  },
+  {
+    "file": "word_bear.mp3",
+    "text": "bear"
+  },
+  {
+    "file": "prompt_wild_bear.mp3",
+    "text": "Look in the wild! Find the bear!"
+  },
+  {
+    "file": "word_wolf.mp3",
+    "text": "wolf"
+  },
+  {
+    "file": "prompt_wild_wolf.mp3",
+    "text": "Look in the wild! Find the wolf!"
+  },
+  {
+    "file": "word_deer.mp3",
+    "text": "deer"
+  },
+  {
+    "file": "prompt_wild_deer.mp3",
+    "text": "Look in the wild! Find the deer!"
+  },
+  {
+    "file": "word_owl.mp3",
+    "text": "owl"
+  },
+  {
+    "file": "prompt_wild_owl.mp3",
+    "text": "Look in the wild! Find the owl!"
+  },
+  {
+    "file": "word_panda.mp3",
+    "text": "panda"
+  },
+  {
+    "file": "prompt_wild_panda.mp3",
+    "text": "Look in the wild! Find the panda!"
+  },
+  {
+    "file": "word_tiger.mp3",
+    "text": "tiger"
+  },
+  {
+    "file": "prompt_wild_tiger.mp3",
+    "text": "Look in the wild! Find the tiger!"
+  },
+  {
+    "file": "word_penguin.mp3",
+    "text": "penguin"
+  },
+  {
+    "file": "prompt_wild_penguin.mp3",
+    "text": "Look in the wild! Find the penguin!"
+  },
+  {
+    "file": "word_koala.mp3",
+    "text": "koala"
+  },
+  {
+    "file": "prompt_wild_koala.mp3",
+    "text": "Look in the wild! Find the koala!"
+  },
+  {
+    "file": "word_hedgehog.mp3",
+    "text": "hedgehog"
+  },
+  {
+    "file": "prompt_wild_hedgehog.mp3",
+    "text": "Look in the wild! Find the hedgehog!"
+  },
+  {
+    "file": "word_nest.mp3",
+    "text": "nest"
+  },
+  {
+    "file": "prompt_habitat_nest.mp3",
+    "text": "Animals live here. Find the nest!"
+  },
+  {
+    "file": "word_web.mp3",
+    "text": "web"
+  },
+  {
+    "file": "prompt_habitat_web.mp3",
+    "text": "Animals live here. Find the web!"
+  },
+  {
+    "file": "word_pond.mp3",
+    "text": "pond"
+  },
+  {
+    "file": "prompt_habitat_pond.mp3",
+    "text": "Animals live here. Find the pond!"
+  },
+  {
+    "file": "word_meadow.mp3",
+    "text": "meadow"
+  },
+  {
+    "file": "prompt_habitat_meadow.mp3",
+    "text": "Animals live here. Find the meadow!"
+  },
+  {
+    "file": "word_reef.mp3",
+    "text": "reef"
+  },
+  {
+    "file": "prompt_habitat_reef.mp3",
+    "text": "Animals live here. Find the reef!"
+  },
+  {
+    "file": "word_iceberg.mp3",
+    "text": "iceberg"
+  },
+  {
+    "file": "prompt_habitat_iceberg.mp3",
+    "text": "Animals live here. Find the iceberg!"
+  },
+  {
+    "file": "word_burrow.mp3",
+    "text": "burrow"
+  },
+  {
+    "file": "prompt_habitat_burrow.mp3",
+    "text": "Animals live here. Find the burrow!"
+  },
+  {
+    "file": "word_branch.mp3",
+    "text": "branch"
+  },
+  {
+    "file": "prompt_habitat_branch.mp3",
+    "text": "Animals live here. Find the branch!"
+  },
+  {
+    "file": "word_heart.mp3",
+    "text": "heart"
+  },
+  {
+    "file": "prompt_body_heart.mp3",
+    "text": "It is part of your body. Find the heart!"
+  },
+  {
+    "file": "word_brain.mp3",
+    "text": "brain"
+  },
+  {
+    "file": "prompt_body_brain.mp3",
+    "text": "It is part of your body. Find the brain!"
+  },
+  {
+    "file": "word_bone.mp3",
+    "text": "bone"
+  },
+  {
+    "file": "prompt_body_bone.mp3",
+    "text": "It is part of your body. Find the bone!"
+  },
+  {
+    "file": "word_lungs.mp3",
+    "text": "lungs"
+  },
+  {
+    "file": "prompt_body_lungs.mp3",
+    "text": "It is part of your body. Find the lungs!"
+  },
+  {
+    "file": "word_tooth.mp3",
+    "text": "tooth"
+  },
+  {
+    "file": "prompt_body_tooth.mp3",
+    "text": "It is part of your body. Find the tooth!"
+  },
+  {
+    "file": "word_muscle.mp3",
+    "text": "muscle"
+  },
+  {
+    "file": "prompt_body_muscle.mp3",
+    "text": "It is part of your body. Find the muscle!"
+  },
+  {
+    "file": "word_blood.mp3",
+    "text": "blood"
+  },
+  {
+    "file": "prompt_body_blood.mp3",
+    "text": "It is part of your body. Find the blood!"
+  },
+  {
+    "file": "word_tongue.mp3",
+    "text": "tongue"
+  },
+  {
+    "file": "prompt_body_tongue.mp3",
+    "text": "It is part of your body. Find the tongue!"
+  },
+  {
+    "file": "word_stretch.mp3",
+    "text": "stretch"
+  },
+  {
+    "file": "prompt_health_stretch.mp3",
+    "text": "You should stretch!"
+  },
+  {
+    "file": "say_health_stretch.mp3",
+    "text": "You should stretch to stay healthy."
+  },
+  {
+    "file": "word_jog.mp3",
+    "text": "jog"
+  },
+  {
+    "file": "prompt_health_jog.mp3",
+    "text": "You should jog!"
+  },
+  {
+    "file": "say_health_jog.mp3",
+    "text": "You should jog to stay healthy."
+  },
+  {
+    "file": "word_relax.mp3",
+    "text": "relax"
+  },
+  {
+    "file": "say_health_relax.mp3",
+    "text": "You should relax to stay healthy."
+  },
+  {
+    "file": "word_drink_milk.mp3",
+    "text": "drink milk"
+  },
+  {
+    "file": "prompt_health_drink_milk.mp3",
+    "text": "You should drink milk!"
+  },
+  {
+    "file": "say_health_drink_milk.mp3",
+    "text": "You should drink milk to stay healthy."
+  },
+  {
+    "file": "word_eat_fish.mp3",
+    "text": "eat fish"
+  },
+  {
+    "file": "prompt_health_eat_fish.mp3",
+    "text": "You should eat fish!"
+  },
+  {
+    "file": "say_health_eat_fish.mp3",
+    "text": "You should eat fish to stay healthy."
+  },
+  {
+    "file": "word_wear_a_hat.mp3",
+    "text": "wear a hat"
+  },
+  {
+    "file": "prompt_health_wear_a_hat.mp3",
+    "text": "You should wear a hat!"
+  },
+  {
+    "file": "say_health_wear_a_hat.mp3",
+    "text": "You should wear a hat to stay healthy."
+  },
+  {
+    "file": "word_see_a_doctor.mp3",
+    "text": "see a doctor"
+  },
+  {
+    "file": "prompt_health_see_a_doctor.mp3",
+    "text": "You should see a doctor!"
+  },
+  {
+    "file": "say_health_see_a_doctor.mp3",
+    "text": "You should see a doctor to stay healthy."
+  },
+  {
+    "file": "word_stay_warm.mp3",
+    "text": "stay warm"
+  },
+  {
+    "file": "prompt_health_stay_warm.mp3",
+    "text": "You should stay warm!"
+  },
+  {
+    "file": "say_health_stay_warm.mp3",
+    "text": "You should stay warm to stay healthy."
+  },
+  {
+    "file": "word_take_a_bath.mp3",
+    "text": "take a bath"
+  },
+  {
+    "file": "prompt_health_take_a_bath.mp3",
+    "text": "You should take a bath!"
+  },
+  {
+    "file": "say_health_take_a_bath.mp3",
+    "text": "You should take a bath to stay healthy."
+  },
+  {
+    "file": "word_drink_tea.mp3",
+    "text": "drink tea"
+  },
+  {
+    "file": "prompt_health_drink_tea.mp3",
+    "text": "You should drink tea!"
+  },
+  {
+    "file": "say_health_drink_tea.mp3",
+    "text": "You should drink tea to stay healthy."
+  },
+  {
+    "file": "word_christmas.mp3",
+    "text": "Christmas"
+  },
+  {
+    "file": "prompt_festival_christmas.mp3",
+    "text": "People celebrate. Find the Christmas!"
+  },
+  {
+    "file": "word_halloween.mp3",
+    "text": "Halloween"
+  },
+  {
+    "file": "prompt_festival_halloween.mp3",
+    "text": "People celebrate. Find the Halloween!"
+  },
+  {
+    "file": "word_diwali.mp3",
+    "text": "Diwali"
+  },
+  {
+    "file": "prompt_festival_diwali.mp3",
+    "text": "People celebrate. Find the Diwali!"
+  },
+  {
+    "file": "word_carnival.mp3",
+    "text": "Carnival"
+  },
+  {
+    "file": "prompt_festival_carnival.mp3",
+    "text": "People celebrate. Find the Carnival!"
+  },
+  {
+    "file": "word_easter.mp3",
+    "text": "Easter"
+  },
+  {
+    "file": "prompt_festival_easter.mp3",
+    "text": "People celebrate. Find the Easter!"
+  },
+  {
+    "file": "word_birthday.mp3",
+    "text": "birthday"
+  },
+  {
+    "file": "prompt_festival_birthday.mp3",
+    "text": "People celebrate. Find the birthday!"
+  },
+  {
+    "file": "word_wedding.mp3",
+    "text": "wedding"
+  },
+  {
+    "file": "prompt_festival_wedding.mp3",
+    "text": "People celebrate. Find the wedding!"
+  },
+  {
+    "file": "word_fireworks.mp3",
+    "text": "fireworks"
+  },
+  {
+    "file": "prompt_festival_fireworks.mp3",
+    "text": "People celebrate. Find the fireworks!"
+  },
+  {
+    "file": "word_new_year.mp3",
+    "text": "New Year"
+  },
+  {
+    "file": "prompt_festival_new_year.mp3",
+    "text": "People celebrate. Find the New Year!"
+  },
+  {
+    "file": "word_parade.mp3",
+    "text": "parade"
+  },
+  {
+    "file": "prompt_festival_parade.mp3",
+    "text": "People celebrate. Find the parade!"
+  },
+  {
+    "file": "word_flag.mp3",
+    "text": "flag"
+  },
+  {
+    "file": "prompt_symbol_flag.mp3",
+    "text": "It's a tradition. Find the flag!"
+  },
+  {
+    "file": "word_ribbon.mp3",
+    "text": "ribbon"
+  },
+  {
+    "file": "prompt_symbol_ribbon.mp3",
+    "text": "It's a tradition. Find the ribbon!"
+  },
+  {
+    "file": "word_lantern.mp3",
+    "text": "lantern"
+  },
+  {
+    "file": "prompt_symbol_lantern.mp3",
+    "text": "It's a tradition. Find the lantern!"
+  },
+  {
+    "file": "word_mask.mp3",
+    "text": "mask"
+  },
+  {
+    "file": "prompt_symbol_mask.mp3",
+    "text": "It's a tradition. Find the mask!"
+  },
+  {
+    "file": "word_crown.mp3",
+    "text": "crown"
+  },
+  {
+    "file": "prompt_symbol_crown.mp3",
+    "text": "It's a tradition. Find the crown!"
+  },
+  {
+    "file": "word_candle.mp3",
+    "text": "candle"
+  },
+  {
+    "file": "prompt_symbol_candle.mp3",
+    "text": "It's a tradition. Find the candle!"
+  },
+  {
+    "file": "word_trophy.mp3",
+    "text": "trophy"
+  },
+  {
+    "file": "prompt_symbol_trophy.mp3",
+    "text": "It's a tradition. Find the trophy!"
+  },
+  {
+    "file": "word_feast.mp3",
+    "text": "feast"
+  },
+  {
+    "file": "prompt_symbol_feast.mp3",
+    "text": "It's a tradition. Find the feast!"
+  },
+  {
+    "file": "word_firework.mp3",
+    "text": "firework"
+  },
+  {
+    "file": "prompt_symbol_firework.mp3",
+    "text": "It's a tradition. Find the firework!"
+  },
+  {
+    "file": "word_engineer.mp3",
+    "text": "engineer"
+  },
+  {
+    "file": "prompt_job_engineer.mp3",
+    "text": "When I grow up, I want this job: engineer!"
+  },
+  {
+    "file": "word_inventor.mp3",
+    "text": "inventor"
+  },
+  {
+    "file": "prompt_job_inventor.mp3",
+    "text": "When I grow up, I want this job: inventor!"
+  },
+  {
+    "file": "word_explorer.mp3",
+    "text": "explorer"
+  },
+  {
+    "file": "prompt_job_explorer.mp3",
+    "text": "When I grow up, I want this job: explorer!"
+  },
+  {
+    "file": "word_detective.mp3",
+    "text": "detective"
+  },
+  {
+    "file": "prompt_job_detective.mp3",
+    "text": "When I grow up, I want this job: detective!"
+  },
+  {
+    "file": "word_photographer.mp3",
+    "text": "photographer"
+  },
+  {
+    "file": "prompt_job_photographer.mp3",
+    "text": "When I grow up, I want this job: photographer!"
+  },
+  {
+    "file": "word_judge.mp3",
+    "text": "judge"
+  },
+  {
+    "file": "prompt_job_judge.mp3",
+    "text": "When I grow up, I want this job: judge!"
+  },
+  {
+    "file": "word_reporter.mp3",
+    "text": "reporter"
+  },
+  {
+    "file": "prompt_job_reporter.mp3",
+    "text": "When I grow up, I want this job: reporter!"
+  },
+  {
+    "file": "word_coder.mp3",
+    "text": "coder"
+  },
+  {
+    "file": "prompt_job_coder.mp3",
+    "text": "When I grow up, I want this job: coder!"
+  },
+  {
+    "file": "word_diver.mp3",
+    "text": "diver"
+  },
+  {
+    "file": "prompt_job_diver.mp3",
+    "text": "When I grow up, I want this job: diver!"
+  },
+  {
+    "file": "word_baker.mp3",
+    "text": "baker"
+  },
+  {
+    "file": "prompt_job_baker.mp3",
+    "text": "When I grow up, I want this job: baker!"
+  },
+  {
+    "file": "word_study.mp3",
+    "text": "study"
+  },
+  {
+    "file": "prompt_goal_study.mp3",
+    "text": "One day I will study!"
+  },
+  {
+    "file": "word_invent.mp3",
+    "text": "invent"
+  },
+  {
+    "file": "prompt_goal_invent.mp3",
+    "text": "One day I will invent!"
+  },
+  {
+    "file": "word_build.mp3",
+    "text": "build"
+  },
+  {
+    "file": "prompt_goal_build.mp3",
+    "text": "One day I will build!"
+  },
+  {
+    "file": "word_discover.mp3",
+    "text": "discover"
+  },
+  {
+    "file": "prompt_goal_discover.mp3",
+    "text": "One day I will discover!"
+  },
+  {
+    "file": "word_explore_space.mp3",
+    "text": "explore space"
+  },
+  {
+    "file": "prompt_goal_explore_space.mp3",
+    "text": "One day I will explore space!"
+  },
+  {
+    "file": "word_help_people.mp3",
+    "text": "help people"
+  },
+  {
+    "file": "prompt_goal_help_people.mp3",
+    "text": "One day I will help people!"
+  },
+  {
+    "file": "word_lead.mp3",
+    "text": "lead"
+  },
+  {
+    "file": "prompt_goal_lead.mp3",
+    "text": "One day I will lead!"
+  },
+  {
+    "file": "word_create.mp3",
+    "text": "create"
+  },
+  {
+    "file": "prompt_goal_create.mp3",
+    "text": "One day I will create!"
+  },
+  {
+    "file": "word_teach.mp3",
+    "text": "teach"
+  },
+  {
+    "file": "prompt_goal_teach.mp3",
+    "text": "One day I will teach!"
+  },
+  {
+    "file": "word_save_the_world.mp3",
+    "text": "save the world"
+  },
+  {
+    "file": "prompt_goal_save_the_world.mp3",
+    "text": "One day I will save the world!"
+  },
+  {
+    "file": "prompt_money_coin.mp3",
+    "text": "It's about money. Find the coin!"
+  },
+  {
+    "file": "prompt_money_money.mp3",
+    "text": "It's about money. Find the money!"
+  },
+  {
+    "file": "prompt_money_wallet.mp3",
+    "text": "It's about money. Find the wallet!"
+  },
+  {
+    "file": "word_piggy_bank.mp3",
+    "text": "piggy bank"
+  },
+  {
+    "file": "prompt_money_piggy_bank.mp3",
+    "text": "It's about money. Find the piggy bank!"
+  },
+  {
+    "file": "word_bank.mp3",
+    "text": "bank"
+  },
+  {
+    "file": "prompt_money_bank.mp3",
+    "text": "It's about money. Find the bank!"
+  },
+  {
+    "file": "prompt_money_card.mp3",
+    "text": "It's about money. Find the card!"
+  },
+  {
+    "file": "prompt_money_receipt.mp3",
+    "text": "It's about money. Find the receipt!"
+  },
+  {
+    "file": "prompt_money_price_tag.mp3",
+    "text": "It's about money. Find the price tag!"
+  },
+  {
+    "file": "word_safe.mp3",
+    "text": "safe"
+  },
+  {
+    "file": "prompt_money_safe.mp3",
+    "text": "It's about money. Find the safe!"
+  },
+  {
+    "file": "prompt_money_diamond.mp3",
+    "text": "It's about money. Find the diamond!"
+  },
+  {
+    "file": "say_money_save_my_money.mp3",
+    "text": "At the shop I will save my money."
+  },
+  {
+    "file": "say_money_buy_a_gift.mp3",
+    "text": "At the shop I will buy a gift."
+  },
+  {
+    "file": "say_money_pay_with_a_card.mp3",
+    "text": "At the shop I will pay with a card."
+  },
+  {
+    "file": "say_money_count_my_coins.mp3",
+    "text": "At the shop I will count my coins."
+  },
+  {
+    "file": "say_money_check_the_price.mp3",
+    "text": "At the shop I will check the price."
+  },
+  {
+    "file": "say_money_get_the_receipt.mp3",
+    "text": "At the shop I will get the receipt."
+  },
+  {
+    "file": "say_money_open_my_wallet.mp3",
+    "text": "At the shop I will open my wallet."
+  },
+  {
+    "file": "say_money_spend_a_little.mp3",
+    "text": "At the shop I will spend a little."
+  },
+  {
+    "file": "word_king.mp3",
+    "text": "king"
+  },
+  {
+    "file": "prompt_history_king.mp3",
+    "text": "Long ago there was a king. Find it!"
+  },
+  {
+    "file": "word_queen.mp3",
+    "text": "queen"
+  },
+  {
+    "file": "prompt_history_queen.mp3",
+    "text": "Long ago there was a queen. Find it!"
+  },
+  {
+    "file": "word_sword.mp3",
+    "text": "sword"
+  },
+  {
+    "file": "prompt_history_sword.mp3",
+    "text": "Long ago there was a sword. Find it!"
+  },
+  {
+    "file": "word_shield.mp3",
+    "text": "shield"
+  },
+  {
+    "file": "prompt_history_shield.mp3",
+    "text": "Long ago there was a shield. Find it!"
+  },
+  {
+    "file": "word_dinosaur.mp3",
+    "text": "dinosaur"
+  },
+  {
+    "file": "prompt_history_dinosaur.mp3",
+    "text": "Long ago there was a dinosaur. Find it!"
+  },
+  {
+    "file": "word_scroll.mp3",
+    "text": "scroll"
+  },
+  {
+    "file": "prompt_history_scroll.mp3",
+    "text": "Long ago there was a scroll. Find it!"
+  },
+  {
+    "file": "word_torch.mp3",
+    "text": "torch"
+  },
+  {
+    "file": "prompt_history_torch.mp3",
+    "text": "Long ago there was a torch. Find it!"
+  },
+  {
+    "file": "word_temple.mp3",
+    "text": "temple"
+  },
+  {
+    "file": "prompt_history_temple.mp3",
+    "text": "Long ago there was a temple. Find it!"
+  },
+  {
+    "file": "word_helmet.mp3",
+    "text": "helmet"
+  },
+  {
+    "file": "prompt_history_helmet.mp3",
+    "text": "Long ago there was a helmet. Find it!"
+  },
+  {
+    "file": "word_ride_a_horse.mp3",
+    "text": "ride a horse"
+  },
+  {
+    "file": "prompt_usedto_ride_a_horse.mp3",
+    "text": "People used to ride a horse!"
+  },
+  {
+    "file": "say_usedto_ride_a_horse.mp3",
+    "text": "Long ago, people used to ride a horse."
+  },
+  {
+    "file": "word_write_letters.mp3",
+    "text": "write letters"
+  },
+  {
+    "file": "prompt_usedto_write_letters.mp3",
+    "text": "People used to write letters!"
+  },
+  {
+    "file": "say_usedto_write_letters.mp3",
+    "text": "Long ago, people used to write letters."
+  },
+  {
+    "file": "word_light_a_fire.mp3",
+    "text": "light a fire"
+  },
+  {
+    "file": "prompt_usedto_light_a_fire.mp3",
+    "text": "People used to light a fire!"
+  },
+  {
+    "file": "say_usedto_light_a_fire.mp3",
+    "text": "Long ago, people used to light a fire."
+  },
+  {
+    "file": "word_hunt.mp3",
+    "text": "hunt"
+  },
+  {
+    "file": "prompt_usedto_hunt.mp3",
+    "text": "People used to hunt!"
+  },
+  {
+    "file": "say_usedto_hunt.mp3",
+    "text": "Long ago, people used to hunt."
+  },
+  {
+    "file": "word_sail.mp3",
+    "text": "sail"
+  },
+  {
+    "file": "prompt_usedto_sail.mp3",
+    "text": "People used to sail!"
+  },
+  {
+    "file": "say_usedto_sail.mp3",
+    "text": "Long ago, people used to sail."
+  },
+  {
+    "file": "word_farm_the_land.mp3",
+    "text": "farm the land"
+  },
+  {
+    "file": "prompt_usedto_farm_the_land.mp3",
+    "text": "People used to farm the land!"
+  },
+  {
+    "file": "say_usedto_farm_the_land.mp3",
+    "text": "Long ago, people used to farm the land."
+  },
+  {
+    "file": "word_wear_a_crown.mp3",
+    "text": "wear a crown"
+  },
+  {
+    "file": "prompt_usedto_wear_a_crown.mp3",
+    "text": "People used to wear a crown!"
+  },
+  {
+    "file": "say_usedto_wear_a_crown.mp3",
+    "text": "Long ago, people used to wear a crown."
+  },
+  {
+    "file": "word_carry_water.mp3",
+    "text": "carry water"
+  },
+  {
+    "file": "prompt_usedto_carry_water.mp3",
+    "text": "People used to carry water!"
+  },
+  {
+    "file": "say_usedto_carry_water.mp3",
+    "text": "Long ago, people used to carry water."
+  },
+  {
+    "file": "word_tell_stories.mp3",
+    "text": "tell stories"
+  },
+  {
+    "file": "prompt_usedto_tell_stories.mp3",
+    "text": "People used to tell stories!"
+  },
+  {
+    "file": "say_usedto_tell_stories.mp3",
+    "text": "Long ago, people used to tell stories."
+  },
+  {
+    "file": "word_live_in_caves.mp3",
+    "text": "live in caves"
+  },
+  {
+    "file": "prompt_usedto_live_in_caves.mp3",
+    "text": "People used to live in caves!"
+  },
+  {
+    "file": "say_usedto_live_in_caves.mp3",
+    "text": "Long ago, people used to live in caves."
+  },
+  {
+    "file": "word_wizard.mp3",
+    "text": "wizard"
+  },
+  {
+    "file": "prompt_tale_wizard.mp3",
+    "text": "In the story there is a wizard. Find it!"
+  },
+  {
+    "file": "word_witch.mp3",
+    "text": "witch"
+  },
+  {
+    "file": "prompt_tale_witch.mp3",
+    "text": "In the story there is a witch. Find it!"
+  },
+  {
+    "file": "word_fairy.mp3",
+    "text": "fairy"
+  },
+  {
+    "file": "prompt_tale_fairy.mp3",
+    "text": "In the story there is a fairy. Find it!"
+  },
+  {
+    "file": "word_crystal.mp3",
+    "text": "crystal"
+  },
+  {
+    "file": "prompt_tale_crystal.mp3",
+    "text": "In the story there is a crystal. Find it!"
+  },
+  {
+    "file": "word_ghost.mp3",
+    "text": "ghost"
+  },
+  {
+    "file": "prompt_tale_ghost.mp3",
+    "text": "In the story there is a ghost. Find it!"
+  },
+  {
+    "file": "word_mermaid.mp3",
+    "text": "mermaid"
+  },
+  {
+    "file": "prompt_tale_mermaid.mp3",
+    "text": "In the story there is a mermaid. Find it!"
+  },
+  {
+    "file": "word_potion.mp3",
+    "text": "potion"
+  },
+  {
+    "file": "prompt_tale_potion.mp3",
+    "text": "In the story there is a potion. Find it!"
+  },
+  {
+    "file": "word_wand.mp3",
+    "text": "wand"
+  },
+  {
+    "file": "prompt_tale_wand.mp3",
+    "text": "In the story there is a wand. Find it!"
+  },
+  {
+    "file": "word_unicorn.mp3",
+    "text": "unicorn"
+  },
+  {
+    "file": "prompt_tale_unicorn.mp3",
+    "text": "In the story there is a unicorn. Find it!"
+  },
+  {
+    "file": "word_troll.mp3",
+    "text": "troll"
+  },
+  {
+    "file": "prompt_tale_troll.mp3",
+    "text": "In the story there is a troll. Find it!"
+  },
+  {
+    "file": "word_jealous.mp3",
+    "text": "jealous"
+  },
+  {
+    "file": "prompt_deepfeel_jealous.mp3",
+    "text": "How do you feel? Find jealous!"
+  },
+  {
+    "file": "word_grateful.mp3",
+    "text": "grateful"
+  },
+  {
+    "file": "prompt_deepfeel_grateful.mp3",
+    "text": "How do you feel? Find grateful!"
+  },
+  {
+    "file": "word_hopeful.mp3",
+    "text": "hopeful"
+  },
+  {
+    "file": "prompt_deepfeel_hopeful.mp3",
+    "text": "How do you feel? Find hopeful!"
+  },
+  {
+    "file": "word_cheerful.mp3",
+    "text": "cheerful"
+  },
+  {
+    "file": "prompt_deepfeel_cheerful.mp3",
+    "text": "How do you feel? Find cheerful!"
+  },
+  {
+    "file": "word_anxious.mp3",
+    "text": "anxious"
+  },
+  {
+    "file": "prompt_deepfeel_anxious.mp3",
+    "text": "How do you feel? Find anxious!"
+  },
+  {
+    "file": "word_frustrated.mp3",
+    "text": "frustrated"
+  },
+  {
+    "file": "prompt_deepfeel_frustrated.mp3",
+    "text": "How do you feel? Find frustrated!"
+  },
+  {
+    "file": "word_embarrassed.mp3",
+    "text": "embarrassed"
+  },
+  {
+    "file": "prompt_deepfeel_embarrassed.mp3",
+    "text": "How do you feel? Find embarrassed!"
+  },
+  {
+    "file": "word_amazed.mp3",
+    "text": "amazed"
+  },
+  {
+    "file": "prompt_deepfeel_amazed.mp3",
+    "text": "How do you feel? Find amazed!"
+  },
+  {
+    "file": "word_upset.mp3",
+    "text": "upset"
+  },
+  {
+    "file": "prompt_deepfeel_upset.mp3",
+    "text": "How do you feel? Find upset!"
+  },
+  {
+    "file": "word_share.mp3",
+    "text": "share"
+  },
+  {
+    "file": "prompt_friend_share.mp3",
+    "text": "A good friend should share!"
+  },
+  {
+    "file": "word_listen.mp3",
+    "text": "listen"
+  },
+  {
+    "file": "prompt_friend_listen.mp3",
+    "text": "A good friend should listen!"
+  },
+  {
+    "file": "word_help.mp3",
+    "text": "help"
+  },
+  {
+    "file": "prompt_friend_help.mp3",
+    "text": "A good friend should help!"
+  },
+  {
+    "file": "word_forgive.mp3",
+    "text": "forgive"
+  },
+  {
+    "file": "prompt_friend_forgive.mp3",
+    "text": "A good friend should forgive!"
+  },
+  {
+    "file": "word_smile.mp3",
+    "text": "smile"
+  },
+  {
+    "file": "prompt_friend_smile.mp3",
+    "text": "A good friend should smile!"
+  },
+  {
+    "file": "word_say_sorry.mp3",
+    "text": "say sorry"
+  },
+  {
+    "file": "prompt_friend_say_sorry.mp3",
+    "text": "A good friend should say sorry!"
+  },
+  {
+    "file": "prompt_friend_cheer_up.mp3",
+    "text": "A good friend should cheer up!"
+  },
+  {
+    "file": "word_be_honest.mp3",
+    "text": "be honest"
+  },
+  {
+    "file": "prompt_friend_be_honest.mp3",
+    "text": "A good friend should be honest!"
+  },
+  {
+    "file": "word_wait.mp3",
+    "text": "wait"
+  },
+  {
+    "file": "prompt_friend_wait.mp3",
+    "text": "A good friend should wait!"
+  },
+  {
+    "file": "word_hug.mp3",
+    "text": "hug"
+  },
+  {
+    "file": "prompt_friend_hug.mp3",
+    "text": "A good friend should hug!"
+  },
+  {
+    "file": "say_comfort_talk_to_a_friend.mp3",
+    "text": "If you feel sad, you should talk to a friend."
+  },
+  {
+    "file": "say_comfort_take_a_deep_breath.mp3",
+    "text": "If you feel sad, you should take a deep breath."
+  },
+  {
+    "file": "say_comfort_ask_for_help.mp3",
+    "text": "If you feel sad, you should ask for help."
+  },
+  {
+    "file": "say_comfort_be_kind.mp3",
+    "text": "If you feel sad, you should be kind."
+  },
+  {
+    "file": "say_comfort_stay_calm.mp3",
+    "text": "If you feel sad, you should stay calm."
+  },
+  {
+    "file": "say_comfort_try_again.mp3",
+    "text": "If you feel sad, you should try again."
+  },
+  {
+    "file": "say_comfort_say_sorry.mp3",
+    "text": "If you feel sad, you should say sorry."
+  },
+  {
+    "file": "say_comfort_smile.mp3",
+    "text": "If you feel sad, you should smile."
+  },
+  {
+    "file": "prompt_find_magnet.mp3",
+    "text": "Find the magnet!"
+  },
+  {
+    "file": "prompt_find_microscope.mp3",
+    "text": "Find the microscope!"
+  },
+  {
+    "file": "prompt_find_fox.mp3",
+    "text": "Find the fox!"
+  },
+  {
+    "file": "prompt_find_panda.mp3",
+    "text": "Find the panda!"
+  },
+  {
+    "file": "prompt_find_heart.mp3",
+    "text": "Find the heart!"
+  },
+  {
+    "file": "prompt_find_brain.mp3",
+    "text": "Find the brain!"
+  },
+  {
+    "file": "prompt_find_lantern.mp3",
+    "text": "Find the lantern!"
+  },
+  {
+    "file": "prompt_find_crown.mp3",
+    "text": "Find the crown!"
+  },
+  {
+    "file": "prompt_find_ghost.mp3",
+    "text": "Find the ghost!"
+  },
+  {
+    "file": "prompt_find_wizard.mp3",
+    "text": "Find the wizard!"
+  },
+  {
+    "file": "prompt_find_compass.mp3",
+    "text": "Find the compass!"
+  },
+  {
+    "file": "story6_1.mp3",
+    "text": "At Christmas, presents are given!"
+  },
+  {
+    "file": "story6_2.mp3",
+    "text": "At Halloween, costumes are worn!"
+  },
+  {
+    "file": "story6_3.mp3",
+    "text": "At Carnival, masks are worn!"
+  },
+  {
+    "file": "story6_4.mp3",
+    "text": "Lanterns are lit everywhere!"
+  },
+  {
+    "file": "story6_5.mp3",
+    "text": "Fireworks light the sky!"
+  },
+  {
+    "file": "story6_6.mp3",
+    "text": "We dance together!"
+  },
+  {
+    "file": "story6_7.mp3",
+    "text": "We eat a big feast!"
+  },
+  {
+    "file": "story6_8.mp3",
+    "text": "We celebrate all night!"
+  },
+  {
+    "file": "story6_9.mp3",
+    "text": "Wonderful! Now we are in India for Diwali. What do people light?"
+  },
+  {
+    "file": "story6_10.mp3",
+    "text": "Amazing! Every festival ends with a party. What do we do?"
+  },
+  {
+    "file": "story6_11.mp3",
+    "text": "While you were walking in a forest, you heard a noise!"
+  },
+  {
+    "file": "story6_12.mp3",
+    "text": "While you were climbing a mountain, you heard a noise!"
+  },
+  {
+    "file": "story6_13.mp3",
+    "text": "While you were near a castle, you heard a noise!"
+  },
+  {
+    "file": "story6_14.mp3",
+    "text": "It was a wizard! He said he was lost."
+  },
+  {
+    "file": "story6_15.mp3",
+    "text": "It was a fairy! She said she needed help."
+  },
+  {
+    "file": "story6_16.mp3",
+    "text": "It was a dragon! It said it was hungry."
+  },
+  {
+    "file": "story6_17.mp3",
+    "text": "You found a magic wand!"
+  },
+  {
+    "file": "story6_18.mp3",
+    "text": "You found the treasure!"
+  },
+  {
+    "file": "story6_19.mp3",
+    "text": "You found a golden key!"
+  },
+  {
+    "file": "story6_20.mp3",
+    "text": "The story ended happily!"
+  },
+  {
+    "file": "story6_21.mp3",
+    "text": "You saved the day and won!"
+  },
+  {
+    "file": "story6_22.mp3",
+    "text": "Suddenly you met someone! Who was it?"
+  },
+  {
+    "file": "story6_23.mp3",
+    "text": "You had never seen magic before! What did you find next?"
+  },
+  {
+    "file": "story6_24.mp3",
+    "text": "Yes! A microscope is used for science!"
+  },
+  {
+    "file": "story6_25.mp3",
+    "text": "Hmm, try science! A microscope is used for science."
+  },
+  {
+    "file": "story6_26.mp3",
+    "text": "Right! People used to ride horses!"
+  },
+  {
+    "file": "story6_27.mp3",
+    "text": "Not then! People used to ride horses."
+  },
+  {
+    "file": "story6_28.mp3",
+    "text": "Yes! If we help, the planet will be happy!"
+  },
+  {
+    "file": "story6_29.mp3",
+    "text": "Exactly! The planet will be clean and green!"
+  },
+  {
+    "file": "story6_30.mp3",
+    "text": "You will be a great engineer!"
+  },
+  {
+    "file": "story6_31.mp3",
+    "text": "You will be a brave explorer!"
+  },
+  {
+    "file": "story6_32.mp3",
+    "text": "You will be a wonderful writer!"
+  },
+  {
+    "file": "story6_33.mp3",
+    "text": "Good! Long ago, what did people ride?"
+  },
+  {
+    "file": "story6_34.mp3",
+    "text": "Wonderful! If we recycle and save energy, what will happen to our planet?"
+  },
+  {
+    "file": "story6_35.mp3",
+    "text": "Last question! When you grow up, what will you be?"
   }
 ]
