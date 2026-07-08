@@ -27,9 +27,11 @@ A questo si aggiungono alcuni **principi di apprendimento** su cui è costruito 
 
 ## 2. La mappa di oggi — cosa impara, isola per isola
 
-Attualmente ci sono **60 isole** in **6 arcipelaghi**: l'intero percorso Cambridge **Starters → Movers → Flyers** (isole 1–30), il nostro arcipelago **"Explorers"** (isole 31–40, il ponte verso il B1, con la **scrittura**), **"La Voce"** (isole 41–50, la **conversazione parlata**) e **"Il Mondo Reale"** (isole 51–60, l'**arricchimento B1+**).
+Attualmente ci sono **61 isole** in **6 arcipelaghi**: l'intero percorso Cambridge **Starters → Movers → Flyers** (isole 1–31), il nostro arcipelago **"Explorers"** (isole 32–41, il ponte verso il B1, con la **scrittura**), **"La Voce"** (isole 42–51, la **conversazione parlata**) e **"Il Mondo Reale"** (isole 52–61, l'**arricchimento B1+**).
 
-### 🏝️ Arcipelago 1 — STARTERS (isole 1–10) · *Le prime parole*
+> **Novità (2026-07-08):** su richiesta della bambina è stata aggiunta l'**isola 5 · L'Orto Reale 🥕** (le verdure). Le isole successive scalano di +1 nel numero mostrato, ma **nessun progresso è andato perso** (le stelle sono legate all'identità dell'isola, non al numero).
+
+### 🏝️ Arcipelago 1 — STARTERS (isole 1–11) · *Le prime parole*
 
 | # | Isola | Cosa si impara (inglese) |
 |---|---|---|
@@ -37,93 +39,94 @@ Attualmente ci sono **60 isole** in **6 arcipelaghi**: l'intero percorso Cambrid
 | 2 | Il Bosco delle Creature Magiche | **Animali** + prime combinazioni colore+animale ("the blue fish") |
 | 3 | Lo Specchio della Principessa | **Famiglia** e **parti del corpo** |
 | 4 | Il Banchetto Reale | **Cibi e bevande** |
-| 5 | Il Castello Segreto | La **casa**, le stanze e le posizioni (**in, on, under**) |
-| 6 | La Scuola di Magia | **Oggetti di scuola** + colore & oggetto insieme |
-| 7 | Il Ballo Incantato | **Verbi di azione** e comandi ("jump!", "run!") — anche col **microfono** |
-| 8 | Il Giardino Reale | Il **meteo** e la **natura** |
-| 9 | Il Guardaroba della Regina | I **vestiti** + capo & colore ("the red dress") |
-| 10 | 🐉 BOSS: Il Drago Parlante | **Ripasso generale + mini-esame Starters** (diploma) |
+| 5 | 🥕 L'Orto Reale *(nuova)* | Le **verdure** (carrot, tomato, potato, onion, corn…) — ascolta&tocca e Memory |
+| 6 | Il Castello Segreto | La **casa**, le stanze e le posizioni (**in, on, under**) |
+| 7 | La Scuola di Magia | **Oggetti di scuola** + colore & oggetto insieme |
+| 8 | Il Ballo Incantato | **Verbi di azione** e comandi ("jump!", "run!") — anche col **microfono** |
+| 9 | Il Giardino Reale | Il **meteo** e la **natura** |
+| 10 | Il Guardaroba della Regina | I **vestiti** + capo & colore ("the red dress") |
+| 11 | 🐉 BOSS: Il Drago Parlante | **Ripasso generale + mini-esame Starters** (diploma) |
 
-### 🏝️ Arcipelago 2 — MOVERS (isole 11–20) · *Le prime frasi vere*
-
-| # | Isola | Cosa si impara (inglese) |
-|---|---|---|
-| 11 | Il Villaggio dei Mestieri | **Lavori** e **luoghi** della città |
-| 12 | Il Mercato Fatato | **Fare la spesa** e le **quantità** |
-| 13 | La Torre del Tempo | **Giorni della settimana** e la **routine quotidiana** ("I wake up…") |
-| 14 | Il Lago degli Specchi | I **confronti** (bigger / smaller / più… meno…) |
-| 15 | Il Sentiero delle Storie | I **verbi al passato** — raccontare ieri (anche col microfono) |
-| 16 | La Montagna del Meteo | Le **stagioni** e il **meteo al passato** |
-| 17 | L'Ospedale delle Fate | **Salute e malanni** ("I've got a…") |
-| 18 | La Foresta degli Hobby | **Sport e passatempi** ("I like playing…") |
-| 19 | Il Porto delle Avventure | **Trasporti** e **direzioni** (left / right / la mappa) |
-| 20 | 🧙 BOSS: La Strega del Passato | **Ripasso + esame Movers** (diploma) |
-
-### 🏝️ Arcipelago 3 — FLYERS (isole 21–30) · *Il grande mondo*
+### 🏝️ Arcipelago 2 — MOVERS (isole 12–21) · *Le prime frasi vere*
 
 | # | Isola | Cosa si impara (inglese) |
 |---|---|---|
-| 21 | Il Mappamondo Incantato | **Paesi** del mondo e **paesaggi** (mountain, river, desert…) — anche lettura |
-| 22 | Il Faro delle Emozioni | **Sentimenti ed emozioni** ("I feel happy") — anche col **microfono** |
-| 23 | La Grotta dei Materiali | I **materiali** ("It's made of wood") — anche lettura e microfono |
-| 24 | La Torre della Tecnologia | **Tecnologia e gadget** (computer, phone, robot…) — anche lettura |
-| 25 | Le Profondità del Mare | Il **mare** e le sue **creature** (dolphin, whale, octopus…) — anche microfono |
-| 26 | Il Cielo Stellato | Lo **spazio** e i **pianeti** (star, moon, rocket…) + contare |
-| 27 | Il Sentiero del Domani | Il **futuro**: "Tomorrow I will…" — anche col microfono |
-| 28 | Il Diario dei Ricordi | Il **present perfect**: "I have seen…" — anche col microfono |
-| 29 | Il Giardino degli Opposti | **Aggettivi** e **confronti** (big/small, comparativi) — anche lettura |
-| 30 | 🧙 BOSS: Il Gran Mago dei Cieli | **Ripasso + esame Flyers** (storia e diploma) |
+| 12 | Il Villaggio dei Mestieri | **Lavori** e **luoghi** della città |
+| 13 | Il Mercato Fatato | **Fare la spesa** e le **quantità** |
+| 14 | La Torre del Tempo | **Giorni della settimana** e la **routine quotidiana** ("I wake up…") |
+| 15 | Il Lago degli Specchi | I **confronti** (bigger / smaller / più… meno…) |
+| 16 | Il Sentiero delle Storie | I **verbi al passato** — raccontare ieri (anche col microfono) |
+| 17 | La Montagna del Meteo | Le **stagioni** e il **meteo al passato** |
+| 18 | L'Ospedale delle Fate | **Salute e malanni** ("I've got a…") |
+| 19 | La Foresta degli Hobby | **Sport e passatempi** ("I like playing…") |
+| 20 | Il Porto delle Avventure | **Trasporti** e **direzioni** (left / right / la mappa) |
+| 21 | 🧙 BOSS: La Strega del Passato | **Ripasso + esame Movers** (diploma) |
 
-### 🧭 Arcipelago 4 — EXPLORERS (isole 31–40) · *Il ponte verso il B1* — tappa nostra
+### 🏝️ Arcipelago 3 — FLYERS (isole 22–31) · *Il grande mondo*
+
+| # | Isola | Cosa si impara (inglese) |
+|---|---|---|
+| 22 | Il Mappamondo Incantato | **Paesi** del mondo e **paesaggi** (mountain, river, desert…) — anche lettura |
+| 23 | Il Faro delle Emozioni | **Sentimenti ed emozioni** ("I feel happy") — anche col **microfono** |
+| 24 | La Grotta dei Materiali | I **materiali** ("It's made of wood") — anche lettura e microfono |
+| 25 | La Torre della Tecnologia | **Tecnologia e gadget** (computer, phone, robot…) — anche lettura |
+| 26 | Le Profondità del Mare | Il **mare** e le sue **creature** (dolphin, whale, octopus…) — anche microfono |
+| 27 | Il Cielo Stellato | Lo **spazio** e i **pianeti** (star, moon, rocket…) + contare |
+| 28 | Il Sentiero del Domani | Il **futuro**: "Tomorrow I will…" — anche col microfono |
+| 29 | Il Diario dei Ricordi | Il **present perfect**: "I have seen…" — anche col microfono |
+| 30 | Il Giardino degli Opposti | **Aggettivi** e **confronti** (big/small, comparativi) — anche lettura |
+| 31 | 🧙 BOSS: Il Gran Mago dei Cieli | **Ripasso + esame Flyers** (storia e diploma) |
+
+### 🧭 Arcipelago 4 — EXPLORERS (isole 32–41) · *Il ponte verso il B1* — tappa nostra
 
 *Non è un livello Cambridge ufficiale: è la nostra tappa "A2+ → B1". Qui entra anche la **scrittura** (comporre le parole, ✏️).*
 
 | # | Isola | Cosa si impara (inglese) |
 |---|---|---|
-| 31 | Il Pianeta da Salvare | **Ambiente e riciclo** ("We should recycle…") — lettura e **scrittura** |
-| 32 | L'Accademia dei Saggi | Le **materie di scuola** ("My favourite subject is…") — lettura e **scrittura** |
-| 33 | Il Tempio del Benessere | **Abitudini sane** e i **consigli** ("You should…") — anche col **microfono** |
-| 34 | Il Porto dei Viaggi | **Viaggi e vacanze** (airport, hotel, passport…) — lettura e **scrittura** |
-| 35 | La Locanda del Gran Sapore | **Al ristorante**: ordinare con gentilezza ("I would like…") — microfono |
-| 36 | Il Teatro delle Meraviglie | **Spettacolo e musica** (movie, guitar, circus…) — lettura e **scrittura** |
-| 37 | Il Ponte delle Connessioni | **Comunicare e internet** (email, photo, website…) — lettura e **scrittura** |
-| 38 | La Galleria dei Ritratti | **Descrivere le persone** ("He is friendly", "She is…") — lettura e microfono |
-| 39 | Il Bivio dei Sogni | I **sogni** e il **"se…"** ("If I try, I will win", "I want to be a…") |
-| 40 | 🧭 BOSS: Il Sommo Esploratore | **Ripasso + esame Explorers** (storia, present perfect, diploma) |
+| 32 | Il Pianeta da Salvare | **Ambiente e riciclo** ("We should recycle…") — lettura e **scrittura** |
+| 33 | L'Accademia dei Saggi | Le **materie di scuola** ("My favourite subject is…") — lettura e **scrittura** |
+| 34 | Il Tempio del Benessere | **Abitudini sane** e i **consigli** ("You should…") — anche col **microfono** |
+| 35 | Il Porto dei Viaggi | **Viaggi e vacanze** (airport, hotel, passport…) — lettura e **scrittura** |
+| 36 | La Locanda del Gran Sapore | **Al ristorante**: ordinare con gentilezza ("I would like…") — microfono |
+| 37 | Il Teatro delle Meraviglie | **Spettacolo e musica** (movie, guitar, circus…) — lettura e **scrittura** |
+| 38 | Il Ponte delle Connessioni | **Comunicare e internet** (email, photo, website…) — lettura e **scrittura** |
+| 39 | La Galleria dei Ritratti | **Descrivere le persone** ("He is friendly", "She is…") — lettura e microfono |
+| 40 | Il Bivio dei Sogni | I **sogni** e il **"se…"** ("If I try, I will win", "I want to be a…") |
+| 41 | 🧭 BOSS: Il Sommo Esploratore | **Ripasso + esame Explorers** (storia, present perfect, diploma) |
 
-### 🎙️ Arcipelago 5 — LA VOCE (isole 41–50) · *La conversazione parlata* — tappa nostra
+### 🎙️ Arcipelago 5 — LA VOCE (isole 42–51) · *La conversazione parlata* — tappa nostra
 
 *La grande novità: il motore **"chat"**, un **dialogo guidato a più battute** con un compagno (Mia, Leo, un negoziante, un passante…). Il compagno parla in inglese; la bambina risponde **toccando** oppure **dicendo al microfono** una delle risposte suggerite. Sono dialoghi **scritti e sicuri** (non una chat AI libera): si arriva sempre a un finale caloroso.*
 
 | # | Isola | Cosa si impara (inglese) |
 |---|---|---|
-| 41 | La Piazza degli Incontri | **Presentarsi e salutare** ("Nice to meet you", "Where are you from?") |
-| 42 | Il Palco delle Opinioni | **Opinioni e preferenze** ("I think…", "I prefer…", "I agree") |
-| 43 | Il Salone degli Inviti | **Invitare e proporre** ("Would you like to…?", "Shall we…?") |
-| 44 | L'Orologio degli Appuntamenti | **Fare piani** ("Are you free on Friday?", "Let's meet at six") |
-| 45 | Il Bazar delle Trattative | **Comprare, prezzi e monete** ("How much is it?", "I'll take it") |
-| 46 | Il Crocevia dell'Aiuto | **Chiedere aiuto e indicazioni** ("Excuse me, how do I get to…?") |
-| 47 | La Fonte dei Consigli | **Sentimenti e consigli** ("What's the matter?", "You should…", "If I were you…") |
-| 48 | Il Giardino della Gentilezza | **Scusarsi e ringraziare** ("I'm sorry", "Thank you so much", "After you") |
-| 49 | Il Falò dei Racconti | **Raccontare cosa è successo** ("Guess what!", "first… then… in the end") |
-| 50 | 🎙️ BOSS: Il Grande Dialogo | **Ripasso della conversazione + esame** → diploma *Conversation* |
+| 42 | La Piazza degli Incontri | **Presentarsi e salutare** ("Nice to meet you", "Where are you from?") |
+| 43 | Il Palco delle Opinioni | **Opinioni e preferenze** ("I think…", "I prefer…", "I agree") |
+| 44 | Il Salone degli Inviti | **Invitare e proporre** ("Would you like to…?", "Shall we…?") |
+| 45 | L'Orologio degli Appuntamenti | **Fare piani** ("Are you free on Friday?", "Let's meet at six") |
+| 46 | Il Bazar delle Trattative | **Comprare, prezzi e monete** ("How much is it?", "I'll take it") |
+| 47 | Il Crocevia dell'Aiuto | **Chiedere aiuto e indicazioni** ("Excuse me, how do I get to…?") |
+| 48 | La Fonte dei Consigli | **Sentimenti e consigli** ("What's the matter?", "You should…", "If I were you…") |
+| 49 | Il Giardino della Gentilezza | **Scusarsi e ringraziare** ("I'm sorry", "Thank you so much", "After you") |
+| 50 | Il Falò dei Racconti | **Raccontare cosa è successo** ("Guess what!", "first… then… in the end") |
+| 51 | 🎙️ BOSS: Il Grande Dialogo | **Ripasso della conversazione + esame** → diploma *Conversation* |
 
-### 🌍 Arcipelago 6 — IL MONDO REALE (isole 51–60) · *Arricchimento B1+* — tappa nostra
+### 🌍 Arcipelago 6 — IL MONDO REALE (isole 52–61) · *Arricchimento B1+* — tappa nostra
 
 *Temi più ampi e astratti, con grammatica **ricettiva** (si ascolta e si tocca, non si deve produrre): il **passivo** ("It's made of…", "is used for…"), **"used to"** per il passato, i **condizionali**, i **comparativi** e il **discorso indiretto** ("She said she was lost"). Sempre come "pezzi" da riconoscere, mai da costruire a memoria.*
 
 | # | Isola | Cosa si impara (inglese) |
 |---|---|---|
-| 51 | La Fucina della Scienza | **Scienza e come funzionano le cose** ("is used for…", "is made of…") — **scrittura** |
-| 52 | Il Rifugio della Natura | **Animali selvaggi, habitat e ambiente** — Memory e **scrittura** |
-| 53 | Il Tempio del Corpo | Il **corpo umano** e **consigli di salute** ("You should…") — **scrittura** |
-| 54 | Il Giro del Mondo | **Culture e feste del mondo** (Christmas, Diwali, Carnival…) — storia e **scrittura** |
-| 55 | La Torre del Futuro | **Lavori e progetti per il domani** ("When I grow up, I will…") — **scrittura** |
-| 56 | Il Salvadanaio Magico | **Soldi, risparmio e spese** — Memory e **scrittura** |
-| 57 | La Macchina del Tempo | **Storia e "used to"** ("People used to ride horses") — **scrittura** |
-| 58 | Il Regno delle Storie | **Libri, racconti e fantasia** (past narrative) — storia e **scrittura** |
-| 59 | Il Faro dei Sentimenti | **Amicizia ed emozioni profonde** (nervous, grateful, jealous…) — **scrittura** |
-| 60 | 🧙 GRAN BOSS: Il Maestro delle Parole | **Grande ripasso finale + esame** → diploma *B1 Master* |
+| 52 | La Fucina della Scienza | **Scienza e come funzionano le cose** ("is used for…", "is made of…") — **scrittura** |
+| 53 | Il Rifugio della Natura | **Animali selvaggi, habitat e ambiente** — Memory e **scrittura** |
+| 54 | Il Tempio del Corpo | Il **corpo umano** e **consigli di salute** ("You should…") — **scrittura** |
+| 55 | Il Giro del Mondo | **Culture e feste del mondo** (Christmas, Diwali, Carnival…) — storia e **scrittura** |
+| 56 | La Torre del Futuro | **Lavori e progetti per il domani** ("When I grow up, I will…") — **scrittura** |
+| 57 | Il Salvadanaio Magico | **Soldi, risparmio e spese** — Memory e **scrittura** |
+| 58 | La Macchina del Tempo | **Storia e "used to"** ("People used to ride horses") — **scrittura** |
+| 59 | Il Regno delle Storie | **Libri, racconti e fantasia** (past narrative) — storia e **scrittura** |
+| 60 | Il Faro dei Sentimenti | **Amicizia ed emozioni profonde** (nervous, grateful, jealous…) — **scrittura** |
+| 61 | 🧙 GRAN BOSS: Il Maestro delle Parole | **Grande ripasso finale + esame** → diploma *B1 Master* |
 
 ---
 
@@ -148,13 +151,13 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 
 ## 4. Cosa manca ancora nel percorso
 
-Con **sei arcipelaghi (60 isole)** il percorso ufficiale Cambridge (Starters → Movers → Flyers) è coperto **e ampiamente superato**: si aggiungono il ponte **Explorers** verso il B1 (con la scrittura), la **conversazione parlata** ("La Voce") e un ricco **arricchimento B1+** ("Il Mondo Reale": scienza, natura, corpo, culture, futuro, soldi, storia, racconti, emozioni). Le cinque abilità sono tutte allenate, **conversazione guidata compresa**.
+Con **sei arcipelaghi (61 isole)** il percorso ufficiale Cambridge (Starters → Movers → Flyers) è coperto **e ampiamente superato**: si aggiungono il ponte **Explorers** verso il B1 (con la scrittura), la **conversazione parlata** ("La Voce") e un ricco **arricchimento B1+** ("Il Mondo Reale": scienza, natura, corpo, culture, futuro, soldi, storia, racconti, emozioni). Le cinque abilità sono tutte allenate, **conversazione guidata compresa**.
 
 ### I prossimi passi
 - 🧱 **Crescita sostenibile verso A2 Key → B1 Preliminary** (a costo zero, senza AI): c'è ancora molto margine per salire di livello **restando a frasi chiuse**. Oggi l'app è fortissima nel **riconoscere** (tocca quella giusta); i buchi veri sono la **produzione** (costruire una frase, non solo sceglierla) e la **comprensione su testo/audio condiviso** (leggi/ascolta una scena e rispondi a più domande). Si colmano con giochi a **tessere-parola** e **riempi-il-buco**, sempre auto-corretti sul dispositivo. Il piano completo è nella **sezione 6 (La roadmap futura)**.
 - 💬 **Conversazione libera con una vera AI** (opzionale, a pagamento): un compagno che ascolta qualunque cosa e **risponde a braccio** (non tra risposte prefissate). È l'ultimo miglio verso la padronanza, ma richiede una **AI online** (chiave API, es. Anthropic) e un **piano Firebase a pagamento (Blaze)** con un piccolo backend — non è testabile offline. I dialoghi guidati dell'Arcipelago 5 ne sono la versione **gratuita, sicura e già funzionante**; la versione AI libera è un possibile **upgrade futuro opzionale**.
 
-> **Voci:** **tutte le 60 isole** hanno ora le **voci inglesi vere** (madrelingua, ElevenLabs) — **1834 clip** incise e verificate (manifest ⟺ file: 1834 = 1834, zero mancanti). Le uniche battute in **voce sintetica del dispositivo** sono quelle **personalizzate col nome** della bambina (es. *"See you soon, Silvana!"*), che non si possono pre-registrare — tutto il resto (dialoghi, storie, prompt) è voce vera.
+> **Voci:** le **61 isole** hanno le **voci inglesi vere** (madrelingua, ElevenLabs) — **1834 clip** incise e verificate. Fanno eccezione, in **voce sintetica del dispositivo**: le battute **personalizzate col nome** della bambina (es. *"See you soon, Silvana!"*), che non si possono pre-registrare; e — per ora — le **verdure della nuova isola 5** (L'Orto Reale), finché non incidi le ~19 clip nuove col generatore. In ogni caso il gioco funziona già al 100%.
 
 ---
 
@@ -166,17 +169,17 @@ Ecco il traguardo per tappe:
 
 | Tappa | Isole | Livello raggiunto | Cosa sa fare la bambina |
 |---|---|---|---|
-| **Fondamenta** | 1–20 | Verso A1 (Movers) | Capisce e riconosce tantissime parole, dice cose semplici |
-| **Diploma Young Learners** | 21–30 | **A2 (Flyers)** | Comprende storie brevi, parla al passato/futuro, autonomia di base |
-| **Explorers** | 31–40 | **A2+ → B1** | Legge frasi, **scrive** (spelling), dà consigli, descrive persone, parla di sogni |
-| **La Voce** *(oggi costruito)* | 41–50 | **B1: conversazione** | **Sostiene un dialogo** guidato: si presenta, dà opinioni, invita, compra, chiede aiuto, racconta |
-| **Il Mondo Reale** *(oggi costruito)* | 51–60 | **B1+** | Comprende temi ampi (scienza, culture, storia, emozioni) con passivo, "used to", condizionali |
+| **Fondamenta** | 1–21 | Verso A1 (Movers) | Capisce e riconosce tantissime parole, dice cose semplici |
+| **Diploma Young Learners** | 22–31 | **A2 (Flyers)** | Comprende storie brevi, parla al passato/futuro, autonomia di base |
+| **Explorers** | 32–41 | **A2+ → B1** | Legge frasi, **scrive** (spelling), dà consigli, descrive persone, parla di sogni |
+| **La Voce** *(oggi costruito)* | 42–51 | **B1: conversazione** | **Sostiene un dialogo** guidato: si presenta, dà opinioni, invita, compra, chiede aiuto, racconta |
+| **Il Mondo Reale** *(oggi costruito)* | 52–61 | **B1+** | Comprende temi ampi (scienza, culture, storia, emozioni) con passivo, "used to", condizionali |
 
 **Quante isole al massimo?**
-- **30 isole** completano il percorso Cambridge ufficiale (Starters → Movers → Flyers) ≈ **livello A2 solido**.
-- **40 isole** aggiungono il ponte **Explorers**: lettura di frasi, primi passi nella scrittura, verso il **B1**.
-- **60 isole** *(dove siamo ora)* aggiungono **La Voce** (conversazione parlata) e **Il Mondo Reale** (arricchimento B1+): tutte le cinque abilità sono allenate, conversazione guidata compresa.
-- Oltre le 60, resta solo il **consolidamento e il piacere** (canzoni, storie lunghe) e l'eventuale **conversazione AI libera**.
+- **31 isole** completano il percorso Cambridge ufficiale (Starters → Movers → Flyers) ≈ **livello A2 solido**.
+- **41 isole** aggiungono il ponte **Explorers**: lettura di frasi, primi passi nella scrittura, verso il **B1**.
+- **61 isole** *(dove siamo ora)* aggiungono **La Voce** (conversazione parlata) e **Il Mondo Reale** (arricchimento B1+): tutte le cinque abilità sono allenate, conversazione guidata compresa.
+- Oltre le 61, la crescita **sostenibile** prosegue verso **A2 Key → B1 Preliminary** (produzione a tessere, comprensione, ripasso — vedi §6) e resta l'eventuale **conversazione AI libera**.
 
 Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso e ampiamente superato**, ed è ora coperta anche la **conversazione** (guidata). L'unico upgrade rimasto è la **conversazione libera con una AI**, opzionale e a pagamento.
 
@@ -190,11 +193,11 @@ Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso
 
 | Fase | Arcipelago | Cosa aggiunge | Livello Cambridge | Sforzo |
 |---|---|---|---|---|
-| **1 · La Palestra della Grammatica** | 7 (isole 61–70) | Dal riconoscere al **costruire**: domande, negative, ordine delle parole, comparativi, *first conditional* — a **tessere-parola** | in stile **A2 Key** | Medio |
-| **2 · Lettura e Ascolto** | 8 (isole 71–80) | **Scena condivisa** (testo ri-leggibile o audio ri-ascoltabile) + più domande collegate, con distrattori scritti a mano | A2 → inizio **B1** | Medio |
+| **1 · La Palestra della Grammatica** | 7 (isole 62–71) | Dal riconoscere al **costruire**: domande, negative, ordine delle parole, comparativi, *first conditional* — a **tessere-parola** | in stile **A2 Key** | Medio |
+| **2 · Lettura e Ascolto** | 8 (isole 72–81) | **Scena condivisa** (testo ri-leggibile o audio ri-ascoltabile) + più domande collegate, con distrattori scritti a mano | A2 → inizio **B1** | Medio |
 | **3 · Il Faro della Memoria** | *strato trasversale* | **Ripetizione dilazionata** sugli item già imparati + **Sfida Giornaliera** (che "spende" lo streak già calcolato). Massima ritenzione, zero contenuto nuovo | rinforzo A2 | Medio |
-| **4 · L'Accademia degli Esami** | 9 (isole 81–90) | Formati d'esame ancora scoperti: **abbinamento** molti-a-uno, *gapped-text*, cloze a scelta, **scrittura guidata a tessere** | **A2 Key** completo → ponte B1 | Alto |
-| **5 · Il Grande Palco** *(opzionale)* | 10 (isole 91–100) | **Conversazione ramificata**: la scelta del bimbo cambia la battuta del compagno (telefonare, negoziare, opinioni con registro) | parlato funzionale | Medio |
+| **4 · L'Accademia degli Esami** | 9 (isole 82–91) | Formati d'esame ancora scoperti: **abbinamento** molti-a-uno, *gapped-text*, cloze a scelta, **scrittura guidata a tessere** | **A2 Key** completo → ponte B1 | Alto |
+| **5 · Il Grande Palco** *(opzionale)* | 10 (isole 92–101) | **Conversazione ramificata**: la scelta del bimbo cambia la battuta del compagno (telefonare, negoziare, opinioni con registro) | parlato funzionale | Medio |
 
 ### I nuovi "mini-motori" (piccoli mattoni di codice, riusano quelli esistenti)
 
@@ -207,7 +210,7 @@ Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso
 | **Abbinamento** | Collegare molti elementi a uno (formato esame reale) | la meccanica a coppie del Memory |
 
 ### Onestà (come sempre)
-- Tutto ciò che si chiama *Palestra / Accademia / Grande Palco / Campione di Grammatica* resta una **tappa interna**, ispirata ma **non equivalente** a un livello o esame Cambridge. Le fasi che imitano l'esame si etichettano *"in stile A2 Key"*, mai *"esame superato"*. Arrivare all'isola 90/100 = **solida reception A2 + allenamento B1**, non un B1 certificato.
+- Tutto ciò che si chiama *Palestra / Accademia / Grande Palco / Campione di Grammatica* resta una **tappa interna**, ispirata ma **non equivalente** a un livello o esame Cambridge. Le fasi che imitano l'esame si etichettano *"in stile A2 Key"*, mai *"esame superato"*. Arrivare all'isola 91/101 = **solida reception A2 + allenamento B1**, non un B1 certificato.
 - **Cosa resta impossibile senza AI** (e va tenuto fuori dalle promesse): la **scrittura libera estesa** (l'email da ~100 parole di PET), la **conversazione aperta** imprevedibile, la **qualità di pronuncia/fluenza**, la descrizione libera. La versione a tessere allena la *costruzione*, non la *composizione libera*; il parlato ramificato allena il *rehearsal* di funzioni, non l'interazione spontanea.
 
 ### Da dove partire
@@ -217,7 +220,7 @@ Il punto di massimo valore-per-sforzo è il **Costruttore di frasi** con le prim
 
 ## 7. In una frase
 
-> Oggi Isola Magica costruisce **l'orecchio, il vocabolario, la lettura, la scrittura** e — grande novità con 60 isole — la **conversazione parlata** (guidata). Ha portato la bambina da "capisce e legge l'inglese" a "**parla inglese in un dialogo vero**". Da qui può ancora crescere **verso A2 Key e B1** restando gratuita (produzione a tessere, comprensione, ripasso: vedi §6); l'ultimo passo, opzionale e a pagamento, è chiacchierare con una AI a braccio.
+> Oggi Isola Magica costruisce **l'orecchio, il vocabolario, la lettura, la scrittura** e — grande novità con 61 isole — la **conversazione parlata** (guidata). Ha portato la bambina da "capisce e legge l'inglese" a "**parla inglese in un dialogo vero**". Da qui può ancora crescere **verso A2 Key e B1** restando gratuita (produzione a tessere, comprensione, ripasso: vedi §6); l'ultimo passo, opzionale e a pagamento, è chiacchierare con una AI a braccio.
 
 ---
 

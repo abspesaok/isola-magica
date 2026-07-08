@@ -13,6 +13,7 @@ const ANIMALS = ["cat","dog","horse","fish","bird","elephant","lion","monkey","m
 const FAMILY = ["mother","father","sister","brother","baby","grandmother","grandfather"];
 const BODY = ["eyes","ear","nose","mouth","hand","foot","arm","leg","face"];
 const FOOD = ["apple","banana","orange","egg","bread","milk","water","cake","ice cream","pizza","chicken","rice","carrot","grapes"];
+const VEGETABLES = ["carrot","tomato","potato","onion","peas","corn","pepper","cucumber","mushroom","broccoli"]; // Isola 5 · L'Orto Reale
 const HOUSE = ["bed","chair","door","window","lamp","clock","key","sofa","television","cup"];
 const SCHOOL = ["book","pen","pencil","bag","ruler","scissors","crayon","notebook"];
 const NUMBER_WORDS = ["","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"];
@@ -202,6 +203,10 @@ function buildManifest() {
 
   /* prompts — Isola 4 */
   FOOD.forEach((f) => add(`prompt_food_${slug(f)}`, `I like ${f}! Give me the ${f}, please!`));
+
+  /* Isola 5 · L'Orto Reale — verdure (NUOVE, da incidere) */
+  VEGETABLES.forEach((v) => { if (!M.some((m) => m.file === `word_${slug(v)}.mp3`)) addN(`word_${slug(v)}`, v); });
+  VEGETABLES.forEach((v) => addN(`prompt_veg_${slug(v)}`, `Find the ${v}!`));
 
   /* prompts — Isola 5 */
   HOUSE.forEach((h) => add(`prompt_house_${slug(h)}`, `Find the ${h}!`));
@@ -405,72 +410,72 @@ function buildManifest() {
     "You will explore the stars!", "You will explore the ocean!",
   ].forEach((t, i) => add(`story_exp_c${i + 1}`, t));
 
-  /* ═══════════ ARCIPELAGO 5 · LA VOCE (isole 41-50) — clip NUOVE ═══════════ */
+  /* ═══════════ ARCIPELAGO 5 · LA VOCE (isole 41-50) — GIÀ INCISE ═══════════ */
   // 41 Presentarsi (chat + ripeti il saluto + ascolta la frase)
-  GREET_SAY_G.forEach((w) => addN(`say_greet_${slug(w)}`, w));
-  GREET_PHRASES_G.forEach((w) => { addN(`phr_greet_${slug(w)}`, w); addN(`prompt_greet_${slug(w)}`, `Someone says: "${w}"`); });
+  GREET_SAY_G.forEach((w) => add(`say_greet_${slug(w)}`, w));
+  GREET_PHRASES_G.forEach((w) => { add(`phr_greet_${slug(w)}`, w); add(`prompt_greet_${slug(w)}`, `Someone says: "${w}"`); });
   // 42 Opinioni
-  OPINION_SAY_G.forEach((w) => addN(`say_opinion_${slug(w)}`, w));
-  OPINION_PHRASES_G.forEach((w) => { addN(`phr_opinion_${slug(w)}`, w); addN(`prompt_opinion_${slug(w)}`, `Choose: "${w}"`); });
+  OPINION_SAY_G.forEach((w) => add(`say_opinion_${slug(w)}`, w));
+  OPINION_PHRASES_G.forEach((w) => { add(`phr_opinion_${slug(w)}`, w); add(`prompt_opinion_${slug(w)}`, `Choose: "${w}"`); });
   // 43 Inviti
-  INVITE_SAY_G.forEach((w) => addN(`say_invite_${slug(w)}`, w));
-  INVITE_PHRASES_G.forEach((w) => { addN(`phr_invite_${slug(w)}`, w); addN(`prompt_invite_${slug(w)}`, `Reply: "${w}"`); });
+  INVITE_SAY_G.forEach((w) => add(`say_invite_${slug(w)}`, w));
+  INVITE_PHRASES_G.forEach((w) => { add(`phr_invite_${slug(w)}`, w); add(`prompt_invite_${slug(w)}`, `Reply: "${w}"`); });
   // 44 Piani (il prompt è solo la frase)
-  PLANS_SAY_G.forEach((w) => addN(`say_plans_${slug(w)}`, w));
-  PLANS_PHRASES_G.forEach((w) => addN(`phr_plans_${slug(w)}`, w));
+  PLANS_SAY_G.forEach((w) => add(`say_plans_${slug(w)}`, w));
+  PLANS_PHRASES_G.forEach((w) => add(`phr_plans_${slug(w)}`, w));
   // 45 Comprare (nomi + prezzo)
-  SHOP_NOUNS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_shop_${slug(w)}`, `Find the ${w}!`); });
+  SHOP_NOUNS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_shop_${slug(w)}`, `Find the ${w}!`); });
   // 46 Chiedere aiuto
-  HELP_SAY_G.forEach((w) => addN(`say_help_${slug(w)}`, w));
-  HELP_PHRASES_G.forEach((w) => addN(`phr_help_${slug(w)}`, w));
+  HELP_SAY_G.forEach((w) => add(`say_help_${slug(w)}`, w));
+  HELP_PHRASES_G.forEach((w) => add(`phr_help_${slug(w)}`, w));
   // 47 Sentimenti e consigli
-  FEELINGS_ADV_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_feeladv_${slug(w)}`, `I feel ${w}.`); });
-  ADVICE_SAY_G.forEach((w) => addN(`say_advice_${slug(w)}`, w));
+  FEELINGS_ADV_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_feeladv_${slug(w)}`, `I feel ${w}.`); });
+  ADVICE_SAY_G.forEach((w) => add(`say_advice_${slug(w)}`, w));
   // 48 Scuse e grazie
-  MANNERS_SAY_G.forEach((w) => addN(`say_manners_${slug(w)}`, w));
-  MANNERS_PHRASES_G.forEach((w) => addN(`phr_manners_${slug(w)}`, w));
+  MANNERS_SAY_G.forEach((w) => add(`say_manners_${slug(w)}`, w));
+  MANNERS_PHRASES_G.forEach((w) => add(`phr_manners_${slug(w)}`, w));
   // 49 Raccontare
-  RECOUNT_PHRASES_G.forEach((w) => addN(`phr_recount_${slug(w)}`, w));
-  RECOUNT_SAY_G.forEach((w) => addN(`say_recount_${slug(w)}`, w));
+  RECOUNT_PHRASES_G.forEach((w) => add(`phr_recount_${slug(w)}`, w));
+  RECOUNT_SAY_G.forEach((w) => add(`say_recount_${slug(w)}`, w));
   // 50 BOSS La Voce (esame + memory)
-  VOICE_POOL_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_find_${slug(w)}`, `Find the ${w}!`); });
+  VOICE_POOL_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_find_${slug(w)}`, `Find the ${w}!`); });
   // Battute chat + storia dell'Arcipelago 5 senza {name} (le battute con {name} restano voce sintetica)
-  CHAT5_REPLIES_G.forEach((t, i) => addN(`chat5_r${i + 1}`, t));
-  CHAT5_NPC_G.forEach((t, i) => addN(`chat5_n${i + 1}`, t));
-  STORY5_G.forEach((t, i) => addN(`story5_${i + 1}`, t));
+  CHAT5_REPLIES_G.forEach((t, i) => add(`chat5_r${i + 1}`, t));
+  CHAT5_NPC_G.forEach((t, i) => add(`chat5_n${i + 1}`, t));
+  STORY5_G.forEach((t, i) => add(`story5_${i + 1}`, t));
 
-  /* ═══════════ ARCIPELAGO 6 · IL MONDO REALE (isole 51-60) — clip NUOVE ═══════════ */
+  /* ═══════════ ARCIPELAGO 6 · IL MONDO REALE (isole 51-60) — GIÀ INCISE ═══════════ */
   // 51 Scienza (passivo/funzione)
-  SCIENCE_TOOLS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_science_${slug(w)}`, `It is used for science. Find the ${w}!`); addN(`say_science_${slug(w)}`, `A ${w} is used in science.`); });
-  MADE_OF_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_madeof_${slug(w)}`, `It is made of something. Find the ${w}!`); });
+  SCIENCE_TOOLS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_science_${slug(w)}`, `It is used for science. Find the ${w}!`); add(`say_science_${slug(w)}`, `A ${w} is used in science.`); });
+  MADE_OF_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_madeof_${slug(w)}`, `It is made of something. Find the ${w}!`); });
   // 52 Natura e habitat
-  WILD_ANIMALS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_wild_${slug(w)}`, `Look in the wild! Find the ${w}!`); });
-  HABITATS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_habitat_${slug(w)}`, `Animals live here. Find the ${w}!`); });
+  WILD_ANIMALS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_wild_${slug(w)}`, `Look in the wild! Find the ${w}!`); });
+  HABITATS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_habitat_${slug(w)}`, `Animals live here. Find the ${w}!`); });
   // 53 Corpo e salute (should)
-  BODY_ADV_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_body_${slug(w)}`, `It is part of your body. Find the ${w}!`); });
-  HEALTH_ACTIONS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_health_${slug(w)}`, `You should ${w}!`); addN(`say_health_${slug(w)}`, `You should ${w} to stay healthy.`); });
+  BODY_ADV_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_body_${slug(w)}`, `It is part of your body. Find the ${w}!`); });
+  HEALTH_ACTIONS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_health_${slug(w)}`, `You should ${w}!`); add(`say_health_${slug(w)}`, `You should ${w} to stay healthy.`); });
   // 54 Culture e feste
-  FESTIVALS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_festival_${slug(w)}`, `People celebrate. Find the ${w}!`); });
-  SYMBOLS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_symbol_${slug(w)}`, `It's a tradition. Find the ${w}!`); });
+  FESTIVALS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_festival_${slug(w)}`, `People celebrate. Find the ${w}!`); });
+  SYMBOLS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_symbol_${slug(w)}`, `It's a tradition. Find the ${w}!`); });
   // 55 Lavori e futuro
-  FUTURE_JOBS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_job_${slug(w)}`, `When I grow up, I want this job: ${w}!`); addN(`say_job_${slug(w)}`, `When I grow up, I want this job: ${w}.`); });
-  FUTURE_GOALS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_goal_${slug(w)}`, `One day I will ${w}!`); });
+  FUTURE_JOBS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_job_${slug(w)}`, `When I grow up, I want this job: ${w}!`); add(`say_job_${slug(w)}`, `When I grow up, I want this job: ${w}.`); });
+  FUTURE_GOALS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_goal_${slug(w)}`, `One day I will ${w}!`); });
   // 56 Soldi e risparmio
-  MONEY_NOUNS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_money_${slug(w)}`, `It's about money. Find the ${w}!`); });
-  MONEY_SAY_G.forEach((w) => addN(`say_money_${slug(w)}`, `At the shop I will ${w}.`));
+  MONEY_NOUNS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_money_${slug(w)}`, `It's about money. Find the ${w}!`); });
+  MONEY_SAY_G.forEach((w) => add(`say_money_${slug(w)}`, `At the shop I will ${w}.`));
   // 57 Storia / used to
-  HISTORY_NOUNS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_history_${slug(w)}`, `Long ago there was a ${w}. Find it!`); });
-  PAST_HABITS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_usedto_${slug(w)}`, `People used to ${w}!`); addN(`say_usedto_${slug(w)}`, `Long ago, people used to ${w}.`); });
+  HISTORY_NOUNS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_history_${slug(w)}`, `Long ago there was a ${w}. Find it!`); });
+  PAST_HABITS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_usedto_${slug(w)}`, `People used to ${w}!`); add(`say_usedto_${slug(w)}`, `Long ago, people used to ${w}.`); });
   // 58 Libri e racconti
-  STORY_POOL_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_tale_${slug(w)}`, `In the story there is a ${w}. Find it!`); });
+  STORY_POOL_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_tale_${slug(w)}`, `In the story there is a ${w}. Find it!`); });
   // 59 Amicizia e sentimenti
-  DEEP_FEELINGS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_deepfeel_${slug(w)}`, `How do you feel? Find ${w}!`); });
-  FRIEND_ACTIONS_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_friend_${slug(w)}`, `A good friend should ${w}!`); });
-  COMFORT_SAY_G.forEach((w) => addN(`say_comfort_${slug(w)}`, `If you feel sad, you should ${w}.`));
+  DEEP_FEELINGS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_deepfeel_${slug(w)}`, `How do you feel? Find ${w}!`); });
+  FRIEND_ACTIONS_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_friend_${slug(w)}`, `A good friend should ${w}!`); });
+  COMFORT_SAY_G.forEach((w) => add(`say_comfort_${slug(w)}`, `If you feel sad, you should ${w}.`));
   // 60 GRAN BOSS (sfida + esame)
-  FINAL_REVIEW_G.forEach((w) => { addN(`word_${slug(w)}`, w); addN(`prompt_find_${slug(w)}`, `Find the ${w}!`); });
+  FINAL_REVIEW_G.forEach((w) => { add(`word_${slug(w)}`, w); add(`prompt_find_${slug(w)}`, `Find the ${w}!`); });
   // Battute delle storie dell'Arcipelago 6 senza {name}
-  STORY6_G.forEach((t, i) => addN(`story6_${i + 1}`, t));
+  STORY6_G.forEach((t, i) => add(`story6_${i + 1}`, t));
 
   /* dedup per TESTO normalizzato: ogni frase distinta = una sola clip
      (stessa normalizzazione del gioco → nessuno spreco di crediti) */
@@ -670,7 +675,7 @@ export default function App() {
           🎙️ Isola Magica — <span style={{ color: "#F5C64F" }}>Generatore Audio</span>
         </h1>
         <p style={{ color: "#CDBBF2", fontSize: 14, textAlign: "center", margin: 0 }}>
-          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (isole 41-60) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
+          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (Isola 5 · L'Orto Reale) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
         </p>
 
         {/* credentials */}
@@ -723,7 +728,7 @@ export default function App() {
         {/* scope della generazione */}
         <label style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", color: "#CDBBF2", fontSize: 14, cursor: "pointer" }}>
           <input type="checkbox" checked={genAll} onChange={(e) => setGenAll(e.target.checked)} disabled={status === "running"} style={{ width: 18, height: 18 }} />
-          Rigenera <b>anche</b> le isole 1-40 (di default incide solo le <b>{newCount} nuove</b>)
+          Rigenera <b>anche</b> le isole 1-60 (di default incide solo le <b>{newCount} nuove</b>)
         </label>
 
         {/* actions */}

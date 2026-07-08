@@ -87,6 +87,21 @@ const FOOD = [
   { en: "grapes", emoji: "🍇" },
 ];
 
+// Verdure (Isola 5 "L'Orto Reale") — vocabolario Cambridge food/vegetables.
+// "carrot" è anche in FOOD: piccolo ripasso voluto (la sua voce è già incisa).
+const VEGETABLES = [
+  { en: "carrot", emoji: "🥕" },
+  { en: "tomato", emoji: "🍅" },
+  { en: "potato", emoji: "🥔" },
+  { en: "onion", emoji: "🧅" },
+  { en: "peas", emoji: "🫛" },
+  { en: "corn", emoji: "🌽" },
+  { en: "pepper", emoji: "🫑" },
+  { en: "cucumber", emoji: "🥒" },
+  { en: "mushroom", emoji: "🍄" },
+  { en: "broccoli", emoji: "🥦" },
+];
+
 const HOUSE = [
   { en: "bed", emoji: "🛏️" },
   { en: "chair", emoji: "🪑" },
@@ -2250,6 +2265,38 @@ const ISLANDS = [
     ],
   },
   {
+    id: "garden",
+    name: "L'Orto Reale",
+    emoji: "🥕",
+    sub: "Le verdure",
+    games: [
+      {
+        key: "veggies", emoji: "🧺", title: "Raccogli le Verdure", type: "listentap",
+        cfg: {
+          pool: VEGETABLES,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          wordsOf: (a) => [a.en],
+          prompt: (a) => `Find the ${a.en}!`,
+          hintIt: "Ascolta e tocca la verdura giusta",
+          render: (a) => <span style={{ fontSize: 64 }}>{a.emoji}</span>,
+          style: () => ({
+            width: 128, height: 128, borderRadius: 28,
+            background: "#ffffff14", border: "3px solid #ffffff30",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }),
+        },
+      },
+      {
+        key: "memoryGarden", emoji: "🥗", title: "Memory dell'Orto", type: "memory",
+        cfg: {
+          pool: VEGETABLES,
+          keyOf: (a) => a.en, sayOf: (a) => a.en,
+          renderPic: (a) => <span className="text-4xl">{a.emoji}</span>,
+        },
+      },
+    ],
+  },
+  {
     id: "castle",
     name: "Il Castello Segreto",
     emoji: "🗝️",
@@ -3946,7 +3993,7 @@ export default function App() {
               const unlocked = isUnlocked(idx);
               const done = isl.games ? islandDone(isl) : false;
               const totalStars = isl.games ? isl.games.reduce((s, g) => s + starsOf(isl.id, g.key), 0) : 0;
-              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 20 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 30 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : idx === 40 ? "🎙️ Arcipelago 5 · La Voce — la conversazione (verso il B1)" : idx === 50 ? "🌍 Arcipelago 6 · Il Mondo Reale — arricchimento (B1+)" : null;
+              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 11 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 21 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 31 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : idx === 41 ? "🎙️ Arcipelago 5 · La Voce — la conversazione (verso il B1)" : idx === 51 ? "🌍 Arcipelago 6 · Il Mondo Reale — arricchimento (B1+)" : null;
               return (
                 <Fragment key={isl.id}>
                 {archLabel && (
