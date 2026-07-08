@@ -900,6 +900,106 @@ function CompareGame({ speak, cfg, onGem, onDone }) {
   );
 }
 
+/* Chat — conversazione GUIDATA a più turni con un compagno. Il compagno dice una
+   battuta (voce); il bambino risponde toccando OPPURE dicendo al microfono una delle
+   risposte suggerite; il dialogo va avanti. Lineare (ogni risposta prosegue), niente
+   stress: si arriva sempre a un finale caloroso. Introduce la conversazione parlata (B1).
+   NB: NON è una chat AI libera — sono dialoghi scritti, testati e sicuri. */
+function ChatGame({ speak, cfg, name, onGem, onDone }) {
+  const script = cfg.script;
+  const [turn, setTurn] = useState(0);
+  const [chosen, setChosen] = useState(null);
+  const [listening, setListening] = useState(false);
+  const [heard, setHeard] = useState("");
+  const [burst, setBurst] = useState(0);
+  const stopRef = useRef(null);
+  const supported = micSupported();
+  const fill = (s) => String(s || "").replace(/\{name\}/g, name || "friend");
+
+  useEffect(() => {
+    if (turn >= script.length) {
+      const t = setTimeout(() => audio.whenIdle().then(() => speak(fill(cfg.end?.npc || "Great chat! See you soon!"))), 400);
+      return () => clearTimeout(t);
+    }
+    setChosen(null); setHeard("");
+    const t = setTimeout(() => audio.whenIdle().then(() => speak(fill(script[turn].npc))), 500);
+    return () => clearTimeout(t);
+  }, [turn]); // eslint-disable-line
+
+  useEffect(() => () => { if (stopRef.current) stopRef.current(); }, []);
+
+  const pickReply = (r) => {
+    if (chosen) return;
+    setChosen(r); setBurst((b) => b + 1); onGem([]);
+    speak(r.en);
+    setTimeout(() => setTurn((t) => t + 1), 1300);
+  };
+
+  const listen = () => {
+    if (listening || chosen) return;
+    setListening(true); setHeard("");
+    stopRef.current = listenOnce({ onResult: (alts) => {
+      setListening(false);
+      if (!alts) return;
+      setHeard(alts[0] || "");
+      const m = script[turn].replies.find((r) => matchesSpoken(alts, r.en));
+      if (m) pickReply(m);
+    } });
+  };
+
+  // ── schermata finale ──
+  if (turn >= script.length) {
+    return (
+      <div className="flex flex-col items-center gap-5 w-full">
+        <SparkleBurst trigger={1} />
+        <div className="text-7xl float">{cfg.companion?.emoji || "🙂"}</div>
+        <div className="rounded-3xl px-5 py-4 text-center" style={{ background: "#ffffff10", border: "2px solid #ffffff22", maxWidth: 440 }}>
+          <p className="display text-lg" style={{ color: "#F6F1FF" }}>{fill(cfg.end?.npc || "Great chat! See you soon!")}</p>
+          <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{fill(cfg.end?.npcIt || "")}</p>
+        </div>
+        <button onClick={() => onDone(3)} className="listen-btn" style={{ fontSize: "1.2rem", padding: "16px 36px" }}>🎉 Evviva!</button>
+      </div>
+    );
+  }
+
+  const cur = script[turn];
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <SparkleBurst trigger={burst} />
+      <ProgressPips total={script.length} done={turn} />
+      <div className="flex items-center gap-2">
+        <span className="text-4xl">{cfg.companion?.emoji || "🙂"}</span>
+        <span className="display" style={{ color: "#CDBBF2" }}>{cfg.companion?.name || "Friend"}</span>
+      </div>
+      <div className="rounded-3xl px-5 py-4 text-center" style={{ background: "#ffffff12", border: "2px solid #ffffff26", maxWidth: 440 }}>
+        <p className="display text-lg" style={{ color: "#F6F1FF" }}>{fill(cur.npc)}</p>
+        <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{fill(cur.npcIt)}</p>
+      </div>
+      <button onClick={() => speak(fill(cur.npc))} className="listen-btn">🔊 Riascolta</button>
+      <p className="text-sm font-semibold text-center" style={{ color: "#CDBBF2" }}>{cfg.hintIt || "Rispondi: tocca o di' la tua risposta 🎤"}</p>
+      <div className="flex flex-col gap-3 w-full items-center">
+        {cur.replies.map((r, i) => (
+          <button key={i} onClick={() => pickReply(r)} disabled={!!chosen}
+            style={{ width: "100%", maxWidth: 420, padding: "14px 16px", borderRadius: 20, border: "none",
+              background: chosen === r ? "linear-gradient(180deg,#3DBE6B,#2E9A54)" : "#F6F1FF",
+              boxShadow: chosen === r ? "none" : "0 4px 0 #C9B6EE", transition: "all .15s" }}>
+            <span className="font-extrabold" style={{ color: chosen === r ? "#fff" : "#4A2F8E", fontSize: 16 }}>
+              {r.emoji ? r.emoji + " " : ""}{r.en}
+            </span>
+          </button>
+        ))}
+      </div>
+      {supported && !chosen && (
+        <button onClick={listen} disabled={listening} className={`mic-btn ${listening ? "mic-pulse" : ""}`}
+          style={{ background: listening ? "#E8455A" : "linear-gradient(180deg,#8E5FD9,#5A3AA0)" }}>
+          {listening ? "🎙️ Ti ascolto…" : "🎤 Dillo tu"}
+        </button>
+      )}
+      {heard && !chosen && <p className="text-sm text-center" style={{ color: "#F5A9B8" }}>ho sentito: "{heard}" — o tocca una risposta</p>}
+    </div>
+  );
+}
+
 /* ═══════════ ISLAND CONTENT (data, not code) ═══════════ */
 const COMBO_POOL = (() => {
   // colored creatures: cross-sample of Island 1 colors × Island 2 animals
@@ -1385,6 +1485,588 @@ const EXPLORER_STORY = {
       emoji: "🏆",
       en: "You did it, {name}! You have explored the whole world. You are a true Explorer!",
       it: "Ce l'hai fatta, {name}! Hai esplorato il mondo intero. Ora sei un vero Esploratore!",
+      end: true,
+    },
+  },
+};
+
+/* ═══════════════════════════════════════════════════════════
+   ARCIPELAGO 5 · LA VOCE (isole 41-50) — la CONVERSAZIONE parlata
+   Funzioni comunicative A2→B1: salutare, opinioni, inviti, piani,
+   comprare, chiedere aiuto, sentimenti/consigli, scuse/grazie, raccontare.
+   Introduce il NUOVO motore "chat" (dialogo guidato a più turni).
+   NB "La Voce" è una nostra tappa interna, un ponte verso il vero
+   B1 Preliminary for Schools — NON è un livello ufficiale Cambridge.
+   ═══════════════════════════════════════════════════════════ */
+
+// ── pool di frasi/parole (say = ripeti · listentap-testo = leggi e tocca) ──
+const GREET_SAY = [
+  { en: "Nice to meet you", emoji: "🤝" }, { en: "How's it going?", emoji: "🙂" },
+  { en: "Where are you from?", emoji: "🌍" }, { en: "How old are you?", emoji: "🎂" },
+  { en: "What is your name?", emoji: "🙋" }, { en: "This is my friend", emoji: "👭" },
+  { en: "See you soon", emoji: "👋" }, { en: "Have a nice day", emoji: "😀" },
+  { en: "Welcome", emoji: "🚪" }, { en: "Glad to meet you", emoji: "😊" },
+];
+const GREET_PHRASES = [
+  { en: "Nice to meet you" }, { en: "How are you?" }, { en: "Where are you from?" },
+  { en: "How old are you?" }, { en: "See you later" }, { en: "What is your name?" },
+];
+const OPINION_SAY = [
+  { en: "I think so", emoji: "💭" }, { en: "In my opinion", emoji: "🗣️" },
+  { en: "I agree", emoji: "👍" }, { en: "I don't agree", emoji: "👎" },
+  { en: "I prefer this", emoji: "☝️" }, { en: "I'd rather not", emoji: "🙅" },
+  { en: "That is true", emoji: "✔️" }, { en: "I love it", emoji: "❤️" },
+  { en: "I can't stand it", emoji: "😖" }, { en: "You are right", emoji: "💡" },
+];
+const OPINION_PHRASES = [
+  { en: "I think so" }, { en: "I agree" }, { en: "I don't agree" }, { en: "In my opinion" },
+  { en: "I prefer tea" }, { en: "I'd rather stay" }, { en: "You are right" }, { en: "I like it" },
+];
+const INVITE_SAY = [
+  { en: "Would you like to come?", emoji: "✉️" }, { en: "Shall we go?", emoji: "🚶" },
+  { en: "Let's play", emoji: "🎲" }, { en: "How about pizza?", emoji: "🍕" },
+  { en: "Come to my party", emoji: "🎉" }, { en: "I'd love to", emoji: "😍" },
+  { en: "Yes, please", emoji: "🙌" }, { en: "I'm afraid I can't", emoji: "😔" },
+  { en: "Maybe later", emoji: "⏰" }, { en: "Sounds great", emoji: "👍" },
+];
+const INVITE_PHRASES = [
+  { en: "I'd love to" }, { en: "Yes, please" }, { en: "No, thanks" },
+  { en: "I'm afraid I can't" }, { en: "Good idea" }, { en: "Why not" },
+];
+const PLANS_SAY = [
+  { en: "Are you free today?", emoji: "📆" }, { en: "When shall we meet?", emoji: "🕒" },
+  { en: "Let's meet at six", emoji: "🕕" }, { en: "See you at the park", emoji: "🌳" },
+  { en: "See you tomorrow", emoji: "🌅" }, { en: "What time is it?", emoji: "⏰" },
+  { en: "I am busy", emoji: "📚" }, { en: "I am free", emoji: "🆓" },
+  { en: "That's settled", emoji: "✅" }, { en: "See you later", emoji: "👋" },
+];
+const PLANS_PHRASES = [
+  { en: "on Friday" }, { en: "at six" }, { en: "this afternoon" },
+  { en: "tomorrow" }, { en: "next week" }, { en: "at the park" },
+];
+const SHOP_NOUNS = [
+  { en: "money", emoji: "💵" }, { en: "coin", emoji: "🪙" }, { en: "wallet", emoji: "👛" },
+  { en: "price tag", emoji: "🏷️" }, { en: "basket", emoji: "🧺" }, { en: "trolley", emoji: "🛒" },
+  { en: "card", emoji: "💳" }, { en: "receipt", emoji: "🧾" }, { en: "sale", emoji: "🔖" },
+  { en: "cash", emoji: "💰" },
+];
+const HELP_SAY = [
+  { en: "Excuse me", emoji: "🙋" }, { en: "Can you help me?", emoji: "🤲" },
+  { en: "How do I get there?", emoji: "🧭" }, { en: "Where is the station?", emoji: "🚉" },
+  { en: "Go straight on", emoji: "⬆️" }, { en: "Turn left", emoji: "⬅️" },
+  { en: "Turn right", emoji: "➡️" }, { en: "Is it far?", emoji: "📏" },
+  { en: "It's near", emoji: "📍" }, { en: "Thank you for your help", emoji: "🙏" },
+];
+const HELP_PHRASES = [
+  { en: "Excuse me" }, { en: "Can you help me?" }, { en: "Go straight on" },
+  { en: "Turn left" }, { en: "Turn right" }, { en: "Is it far?" },
+];
+const FEELINGS_ADV = [
+  { en: "nervous", emoji: "😰" }, { en: "worried", emoji: "😟" }, { en: "relieved", emoji: "😅" },
+  { en: "proud", emoji: "😤" }, { en: "confused", emoji: "😕" }, { en: "sleepy", emoji: "😪" },
+  { en: "sick", emoji: "🤒" }, { en: "lonely", emoji: "🥲" }, { en: "curious", emoji: "🤨" },
+];
+const ADVICE_SAY = [
+  { en: "You should rest", emoji: "🛌" }, { en: "You should relax", emoji: "😌" },
+  { en: "Don't worry", emoji: "🤗" }, { en: "Cheer up", emoji: "🌈" },
+  { en: "Take it easy", emoji: "🍃" }, { en: "You can do it", emoji: "💪" },
+  { en: "If I were you", emoji: "🤔" }, { en: "Get some sleep", emoji: "😴" },
+  { en: "Everything's fine", emoji: "👌" }, { en: "Good luck", emoji: "🍀" },
+];
+const MANNERS_SAY = [
+  { en: "I'm sorry", emoji: "😞" }, { en: "It's my fault", emoji: "🙇" },
+  { en: "I apologise", emoji: "🙏" }, { en: "Don't worry about it", emoji: "🤗" },
+  { en: "Thank you so much", emoji: "💐" }, { en: "You're welcome", emoji: "😊" },
+  { en: "Excuse me", emoji: "🙋" }, { en: "After you", emoji: "🚪" },
+  { en: "Please", emoji: "🥺" }, { en: "No problem", emoji: "👌" },
+];
+const MANNERS_PHRASES = [
+  { en: "I'm sorry" }, { en: "Thank you" }, { en: "You're welcome" },
+  { en: "Excuse me" }, { en: "Don't worry" }, { en: "No problem" },
+];
+const RECOUNT_PHRASES = [
+  { en: "Guess what" }, { en: "Yesterday" }, { en: "first" }, { en: "then" },
+  { en: "after that" }, { en: "finally" }, { en: "in the end" }, { en: "suddenly" },
+];
+const RECOUNT_SAY = [
+  { en: "Guess what!", emoji: "😲" }, { en: "Yesterday I played", emoji: "⚽" },
+  { en: "First we ate", emoji: "🍽️" }, { en: "Then we ran", emoji: "🏃" },
+  { en: "After that we swam", emoji: "🏊" }, { en: "We saw a dog", emoji: "🐶" },
+  { en: "It was fun", emoji: "😄" }, { en: "Suddenly it rained", emoji: "🌧️" },
+  { en: "In the end", emoji: "🏁" }, { en: "What a day", emoji: "🌟" },
+];
+const VOICE_POOL = [
+  { en: "money", emoji: "💵" }, { en: "coin", emoji: "🪙" }, { en: "wallet", emoji: "👛" },
+  { en: "card", emoji: "💳" }, { en: "basket", emoji: "🧺" }, { en: "receipt", emoji: "🧾" },
+  { en: "sale", emoji: "🔖" }, { en: "cash", emoji: "💰" }, { en: "party", emoji: "🎉" },
+  { en: "trolley", emoji: "🛒" },
+];
+
+// ── dialoghi "chat" (companion parla, il bimbo tocca/dice una risposta) ──
+const HINT_CHAT = "Rispondi: tocca o di' la tua risposta 🎤";
+const CHAT_MEET = {
+  companion: { name: "Mia", emoji: "👧" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Hi! I'm Mia. Nice to meet you!", npcIt: "Ciao! Sono Mia. Piacere di conoscerti!",
+      replies: [{ en: "Nice to meet you too!", emoji: "🤝" }, { en: "Hi Mia, I'm happy to meet you.", emoji: "😊" }, { en: "Hello! I'm glad to meet you.", emoji: "🙂" }] },
+    { npc: "How's it going today?", npcIt: "Come va oggi?",
+      replies: [{ en: "I'm great, thanks!", emoji: "😄" }, { en: "Not bad, and you?", emoji: "🙂" }, { en: "Pretty good, thank you.", emoji: "👍" }] },
+    { npc: "Cool! Where are you from?", npcIt: "Bello! Di dove sei?",
+      replies: [{ en: "I'm from Italy.", emoji: "🌍" }, { en: "I come from Rome.", emoji: "🏛️" }, { en: "I'm Italian, from Italy.", emoji: "🗺️" }] },
+    { npc: "Nice! How old are you?", npcIt: "Che bello! Quanti anni hai?",
+      replies: [{ en: "I'm nine years old.", emoji: "🎂" }, { en: "I'm ten.", emoji: "🎈" }, { en: "I'm eight, and you?", emoji: "🙂" }] },
+    { npc: "Let me introduce you to my friend Leo!", npcIt: "Ti presento il mio amico Leo!",
+      replies: [{ en: "Nice to meet you, Leo!", emoji: "🤝" }, { en: "Hi Leo, nice to meet you!", emoji: "👋" }, { en: "Hello Leo!", emoji: "😊" }] },
+  ],
+  end: { npc: "Great! Now we are all friends. See you soon, {name}!", npcIt: "Bene! Ora siamo tutti amici. A presto, {name}!" },
+};
+const CHAT_OPINIONS = {
+  companion: { name: "Leo", emoji: "👦" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Hi {name}! What do you think about films?", npcIt: "Ciao {name}! Cosa pensi dei film?",
+      replies: [{ en: "I think they're great!", emoji: "😍" }, { en: "In my opinion, films are fun.", emoji: "💭" }, { en: "I love films!", emoji: "🎬" }] },
+    { npc: "Me too! Do you prefer films or books?", npcIt: "Anch'io! Preferisci i film o i libri?",
+      replies: [{ en: "I prefer films to books.", emoji: "🎬" }, { en: "I'd rather read books.", emoji: "📚" }, { en: "I like both, actually.", emoji: "🤝" }] },
+    { npc: "Interesting! What's your favourite kind of film?", npcIt: "Interessante! Qual è il tuo tipo di film preferito?",
+      replies: [{ en: "I'm really into cartoons.", emoji: "🐭" }, { en: "I love adventure films.", emoji: "🗺️" }, { en: "I prefer funny films.", emoji: "😂" }] },
+    { npc: "Nice. I think science-fiction is the best. Do you agree?", npcIt: "Bello. Secondo me la fantascienza è la migliore. Sei d'accordo?",
+      replies: [{ en: "I totally agree!", emoji: "👍" }, { en: "I see your point, but I'm not sure.", emoji: "🤔" }, { en: "I don't really agree.", emoji: "👎" }] },
+    { npc: "Ha! That's a good point. Shall we watch one together?", npcIt: "Ah! Bella osservazione. Ne guardiamo uno insieme?",
+      replies: [{ en: "Good idea!", emoji: "💡" }, { en: "Yes, I'd love to!", emoji: "😍" }, { en: "Sure, why not!", emoji: "🙌" }] },
+  ],
+  end: { npc: "Perfect! It's more fun to watch with a friend. Thanks, {name}!", npcIt: "Perfetto! È più divertente guardare con un amico. Grazie, {name}!" },
+};
+const CHAT_INVITES = {
+  companion: { name: "Mia", emoji: "👧" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Hi {name}! Would you like to come to my party on Saturday?", npcIt: "Ciao {name}! Ti va di venire alla mia festa sabato?",
+      replies: [{ en: "I'd love to, thanks!", emoji: "😍" }, { en: "Yes, that sounds great!", emoji: "🙌" }, { en: "Sorry, I'm afraid I can't.", emoji: "😔" }] },
+    { npc: "Great! How about bringing a game to play?", npcIt: "Bene! Che ne dici di portare un gioco?",
+      replies: [{ en: "Good idea!", emoji: "💡" }, { en: "Sure, I'll bring one.", emoji: "🎲" }, { en: "Why not!", emoji: "👍" }] },
+    { npc: "Perfect. Why don't we make some pizza too?", npcIt: "Perfetto. Perché non facciamo anche la pizza?",
+      replies: [{ en: "Yes, let's do it!", emoji: "🍕" }, { en: "I love pizza!", emoji: "😋" }, { en: "Great plan!", emoji: "🎉" }] },
+    { npc: "Cool! Shall we invite Leo as well?", npcIt: "Bello! Invitiamo anche Leo?",
+      replies: [{ en: "Yes, let's invite him!", emoji: "🙌" }, { en: "Good idea!", emoji: "💡" }, { en: "Sure, the more the better!", emoji: "😄" }] },
+    { npc: "Awesome. How about starting at four o'clock?", npcIt: "Fantastico. Che ne dici di iniziare alle quattro?",
+      replies: [{ en: "Four is perfect!", emoji: "🕓" }, { en: "That works for me.", emoji: "👌" }, { en: "Sounds good!", emoji: "👍" }] },
+    { npc: "Can you help me decorate?", npcIt: "Mi aiuti a decorare?",
+      replies: [{ en: "Of course!", emoji: "🎈" }, { en: "Yes, I'd love to help.", emoji: "🤗" }, { en: "No problem!", emoji: "👌" }] },
+  ],
+  end: { npc: "Yay! It's going to be the best party. Thank you, {name}!", npcIt: "Evviva! Sarà la festa più bella. Grazie, {name}!" },
+};
+const CHAT_PLANS = {
+  companion: { name: "Leo", emoji: "👦" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Hey {name}! Are you free on Friday afternoon?", npcIt: "Ehi {name}! Sei libero venerdì pomeriggio?",
+      replies: [{ en: "Yes, I'm free!", emoji: "🆓" }, { en: "Sorry, I'm busy on Friday.", emoji: "😔" }, { en: "Let me check... yes!", emoji: "📆" }] },
+    { npc: "Great! Shall we meet at the park?", npcIt: "Bene! Ci vediamo al parco?",
+      replies: [{ en: "Yes, the park is perfect.", emoji: "🌳" }, { en: "Good idea!", emoji: "💡" }, { en: "Sure, let's meet there.", emoji: "👍" }] },
+    { npc: "Cool. What time shall we meet?", npcIt: "Bello. A che ora ci vediamo?",
+      replies: [{ en: "Let's meet at four.", emoji: "🕓" }, { en: "How about three o'clock?", emoji: "🕒" }, { en: "Any time is fine.", emoji: "👌" }] },
+    { npc: "Four o'clock works for me. What shall we do?", npcIt: "Le quattro vanno bene. Cosa facciamo?",
+      replies: [{ en: "Let's play football!", emoji: "⚽" }, { en: "How about a bike ride?", emoji: "🚲" }, { en: "We could have a picnic.", emoji: "🧺" }] },
+    { npc: "Perfect plan! Shall I bring the ball?", npcIt: "Piano perfetto! Porto io il pallone?",
+      replies: [{ en: "Yes, please!", emoji: "🙌" }, { en: "Good idea, thanks!", emoji: "😄" }, { en: "Sure, I'll bring drinks.", emoji: "🧃" }] },
+  ],
+  end: { npc: "So, that's settled! See you on Friday at four, {name}!", npcIt: "Allora è deciso! Ci vediamo venerdì alle quattro, {name}!" },
+};
+const CHAT_SHOP = {
+  companion: { name: "Shopkeeper", emoji: "🧑" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Hello! Welcome to my shop. Can I help you?", npcIt: "Salve! Benvenuto nel mio negozio. Posso aiutarti?",
+      replies: [{ en: "Yes, please.", emoji: "🙂" }, { en: "I'm just looking, thanks.", emoji: "👀" }, { en: "Hello! Yes, I'd like a jacket.", emoji: "🧥" }] },
+    { npc: "Of course! How about this blue jacket?", npcIt: "Certo! Che ne dici di questa giacca blu?",
+      replies: [{ en: "How much is it?", emoji: "💰" }, { en: "Can I try it on?", emoji: "🪞" }, { en: "I like it! What's the price?", emoji: "🏷️" }] },
+    { npc: "It's twenty euros. Would you like to try it on?", npcIt: "Costa venti euro. Vuoi provarla?",
+      replies: [{ en: "Yes, please!", emoji: "🙌" }, { en: "Can I try it on?", emoji: "🪞" }, { en: "Sure, thank you.", emoji: "😊" }] },
+    { npc: "It looks great on you! Do you want it?", npcIt: "Ti sta benissimo! La vuoi?",
+      replies: [{ en: "Yes, I'll take it!", emoji: "🛍️" }, { en: "Do you have a bigger size?", emoji: "📏" }, { en: "Yes, please, I love it.", emoji: "❤️" }] },
+    { npc: "Wonderful. That's twenty euros, please.", npcIt: "Meraviglioso. Sono venti euro, prego.",
+      replies: [{ en: "Here you are.", emoji: "💵" }, { en: "Here's the money.", emoji: "🪙" }, { en: "Can I pay with a card?", emoji: "💳" }] },
+    { npc: "Thank you! Here's your change and your bag.", npcIt: "Grazie! Ecco il resto e la borsa.",
+      replies: [{ en: "Thank you so much!", emoji: "💐" }, { en: "Thanks a lot!", emoji: "🙏" }, { en: "Great, thank you!", emoji: "😄" }] },
+  ],
+  end: { npc: "You're welcome, {name}! Have a lovely day!", npcIt: "Prego, {name}! Buona giornata!" },
+};
+const CHAT_HELP = {
+  companion: { name: "Passer-by", emoji: "🧑" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Hi there! You look a bit lost. Can I help you?", npcIt: "Ciao! Sembri un po' perso. Posso aiutarti?",
+      replies: [{ en: "Yes, please!", emoji: "🙋" }, { en: "Excuse me, could you help me?", emoji: "🤲" }, { en: "Thank you, yes.", emoji: "😊" }] },
+    { npc: "Of course! Where do you want to go?", npcIt: "Certo! Dove vuoi andare?",
+      replies: [{ en: "How do I get to the station?", emoji: "🚉" }, { en: "I'm looking for the park.", emoji: "🌳" }, { en: "Where is the library, please?", emoji: "📚" }] },
+    { npc: "No problem. Go straight on, then turn left.", npcIt: "Nessun problema. Vai dritto, poi gira a sinistra.",
+      replies: [{ en: "Straight on, then left. Got it!", emoji: "⬅️" }, { en: "Thank you!", emoji: "🙏" }, { en: "Is it far?", emoji: "📏" }] },
+    { npc: "It's not far, just five minutes. You can't miss it!", npcIt: "Non è lontano, solo cinque minuti. Non puoi sbagliare!",
+      replies: [{ en: "Great, thank you!", emoji: "😄" }, { en: "Perfect!", emoji: "👌" }, { en: "That's close, thanks.", emoji: "📍" }] },
+    { npc: "Do you need anything else?", npcIt: "Ti serve altro?",
+      replies: [{ en: "No, thank you.", emoji: "🙂" }, { en: "That's all, thanks!", emoji: "👍" }, { en: "No, you've helped a lot.", emoji: "🤗" }] },
+  ],
+  end: { npc: "You're welcome, {name}! Have a safe trip!", npcIt: "Prego, {name}! Buon viaggio!" },
+};
+const CHAT_FEELINGS = {
+  companion: { name: "Mia", emoji: "👧" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Hi {name}... I'm a bit worried about my test tomorrow.", npcIt: "Ciao {name}... sono un po' preoccupata per la verifica di domani.",
+      replies: [{ en: "What's the matter?", emoji: "🤔" }, { en: "Don't worry!", emoji: "🤗" }, { en: "Oh no, why are you worried?", emoji: "😟" }] },
+    { npc: "I'm nervous because I haven't studied enough.", npcIt: "Sono nervosa perché non ho studiato abbastanza.",
+      replies: [{ en: "You should study tonight.", emoji: "📖" }, { en: "If I were you, I'd read your notes.", emoji: "📝" }, { en: "You'd better start now.", emoji: "⏰" }] },
+    { npc: "That's a good idea. But I'm also very tired.", npcIt: "Buona idea. Ma sono anche molto stanca.",
+      replies: [{ en: "You should get some rest.", emoji: "🛌" }, { en: "Why don't you take a break?", emoji: "🍃" }, { en: "You'd better sleep early.", emoji: "😴" }] },
+    { npc: "You're right. Maybe I should relax a little.", npcIt: "Hai ragione. Forse dovrei rilassarmi un po'.",
+      replies: [{ en: "Yes, don't worry!", emoji: "🤗" }, { en: "Everything will be fine.", emoji: "🌈" }, { en: "You can do it!", emoji: "💪" }] },
+    { npc: "Thank you. I feel much better now.", npcIt: "Grazie. Ora mi sento molto meglio.",
+      replies: [{ en: "I'm glad!", emoji: "😊" }, { en: "That's great!", emoji: "🎉" }, { en: "You'll be great tomorrow.", emoji: "⭐" }] },
+  ],
+  end: { npc: "You're a really good friend, {name}. Thanks for the advice!", npcIt: "Sei un amico davvero speciale, {name}. Grazie per il consiglio!" },
+};
+const CHAT_SORRY = {
+  companion: { name: "Leo", emoji: "👦" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "{name}, I'm really sorry I'm late. I missed the bus!", npcIt: "{name}, scusa tanto per il ritardo. Ho perso l'autobus!",
+      replies: [{ en: "Don't worry about it!", emoji: "🤗" }, { en: "It doesn't matter.", emoji: "🙂" }, { en: "It's okay, really.", emoji: "👌" }] },
+    { npc: "Thanks. Oh no, I think I broke your pencil. It's my fault.", npcIt: "Grazie. Oh no, credo di aver rotto la tua matita. È colpa mia.",
+      replies: [{ en: "It's fine, don't worry.", emoji: "😊" }, { en: "Accidents happen!", emoji: "🤷" }, { en: "No problem at all.", emoji: "👌" }] },
+    { npc: "You're so kind. Thank you for being patient.", npcIt: "Sei molto gentile. Grazie per la pazienza.",
+      replies: [{ en: "You're welcome!", emoji: "😊" }, { en: "No problem!", emoji: "👍" }, { en: "Anytime!", emoji: "🤗" }] },
+    { npc: "Let me buy you a new pencil to say sorry.", npcIt: "Lascia che ti compri una matita nuova per scusarmi.",
+      replies: [{ en: "Thank you so much!", emoji: "💐" }, { en: "That's very kind!", emoji: "🥰" }, { en: "You don't have to, but thanks!", emoji: "🙏" }] },
+    { npc: "After you — please go first.", npcIt: "Prego, passa prima tu.",
+      replies: [{ en: "Thank you!", emoji: "🙂" }, { en: "That's polite of you!", emoji: "🎩" }, { en: "How kind, thanks!", emoji: "😊" }] },
+  ],
+  end: { npc: "Good manners make good friends, {name}. Thank you!", npcIt: "I buoni modi fanno i buoni amici, {name}. Grazie!" },
+};
+const CHAT_RECOUNT = {
+  companion: { name: "Mia", emoji: "👧" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "{name}! Guess what! I had an amazing weekend. What did you do?", npcIt: "{name}! Indovina! Ho passato un weekend fantastico. Tu cosa hai fatto?",
+      replies: [{ en: "Yesterday I went to the beach!", emoji: "🏖️" }, { en: "I played football with friends.", emoji: "⚽" }, { en: "I visited my grandma.", emoji: "👵" }] },
+    { npc: "Wow, sounds fun! And what happened next?", npcIt: "Wow, che bello! E poi cosa è successo?",
+      replies: [{ en: "First we had lunch.", emoji: "🍽️" }, { en: "Then we went swimming.", emoji: "🏊" }, { en: "After that, we played games.", emoji: "🎲" }] },
+    { npc: "Cool! Then what did you do?", npcIt: "Forte! Poi cosa hai fatto?",
+      replies: [{ en: "Then we ate ice cream.", emoji: "🍦" }, { en: "After that, we walked home.", emoji: "🚶" }, { en: "We took lots of photos.", emoji: "📸" }] },
+    { npc: "Amazing! Did anything funny happen?", npcIt: "Fantastico! È successo qualcosa di divertente?",
+      replies: [{ en: "Yes! My dog jumped in the water!", emoji: "🐶" }, { en: "We all laughed a lot.", emoji: "😂" }, { en: "I fell over, but it was funny!", emoji: "🤣" }] },
+    { npc: "Ha ha! And how did it end?", npcIt: "Ah ah! E come è finita?",
+      replies: [{ en: "In the end, we were tired but happy.", emoji: "😌" }, { en: "Finally, we went home.", emoji: "🏡" }, { en: "At last, we said goodbye.", emoji: "👋" }] },
+    { npc: "What a great story! I love hearing about your day.", npcIt: "Che bella storia! Adoro sentire com'è andata la tua giornata.",
+      replies: [{ en: "Thanks for listening!", emoji: "😊" }, { en: "It was a good day!", emoji: "🌟" }, { en: "Tell me about yours!", emoji: "🗣️" }] },
+  ],
+  end: { npc: "Let's have an adventure together next time, {name}!", npcIt: "La prossima volta viviamo un'avventura insieme, {name}!" },
+};
+const CHAT_GRAND = {
+  companion: { name: "Voice Keeper", emoji: "🧙" }, hintIt: HINT_CHAT,
+  script: [
+    { npc: "Welcome to the Great Dialogue, {name}! Nice to meet you. How are you?", npcIt: "Benvenuto al Grande Dialogo, {name}! Piacere. Come stai?",
+      replies: [{ en: "Nice to meet you too!", emoji: "🤝" }, { en: "I'm great, thanks!", emoji: "😄" }, { en: "Very well, thank you!", emoji: "🙂" }] },
+    { npc: "Wonderful! Tell me — what do you think about learning English?", npcIt: "Meraviglioso! Dimmi — cosa pensi di imparare l'inglese?",
+      replies: [{ en: "I think it's fun!", emoji: "🎉" }, { en: "In my opinion, it's great.", emoji: "💭" }, { en: "I love it!", emoji: "❤️" }] },
+    { npc: "I agree! Would you like to play a game with me?", npcIt: "Sono d'accordo! Ti va di giocare con me?",
+      replies: [{ en: "I'd love to!", emoji: "😍" }, { en: "Yes, let's!", emoji: "🙌" }, { en: "Sure, why not!", emoji: "👍" }] },
+    { npc: "Great! Shall we meet again on Saturday to play more?", npcIt: "Bene! Ci rivediamo sabato per giocare ancora?",
+      replies: [{ en: "Yes, let's meet Saturday!", emoji: "📅" }, { en: "Good idea!", emoji: "💡" }, { en: "That's settled!", emoji: "✅" }] },
+    { npc: "Perfect. Oh, I dropped my book. Could you help me?", npcIt: "Perfetto. Oh, mi è caduto il libro. Mi aiuti?",
+      replies: [{ en: "Of course!", emoji: "🤲" }, { en: "Yes, here you are.", emoji: "📕" }, { en: "No problem!", emoji: "👌" }] },
+    { npc: "Thank you so much! You are very kind.", npcIt: "Grazie mille! Sei molto gentile.",
+      replies: [{ en: "You're welcome!", emoji: "😊" }, { en: "No problem!", emoji: "👍" }, { en: "Anytime!", emoji: "🤗" }] },
+    { npc: "By the way — guess what! Yesterday I found a magic word. What did you do yesterday?", npcIt: "A proposito — indovina! Ieri ho trovato una parola magica. Tu cosa hai fatto ieri?",
+      replies: [{ en: "Yesterday I played outside.", emoji: "⚽" }, { en: "I read a great book.", emoji: "📚" }, { en: "I helped my family.", emoji: "🏡" }] },
+  ],
+  end: { npc: "Amazing story! You can really speak English now, {name}. You are a true Voice Champion!", npcIt: "Che storia! Ora sai parlare inglese davvero, {name}. Sei un vero Campione della Voce!" },
+};
+
+// ── storia BOSS Arcipelago 5 ──
+const VOICE_STORY = {
+  start: "greet",
+  nodes: {
+    greet: {
+      emoji: "🎙️",
+      en: "Hello, {name}! Let's start our conversation quest. How shall we say hello?",
+      it: "Ciao, {name}! Iniziamo la nostra avventura di conversazione. Come salutiamo?",
+      choices: [
+        { emoji: "👋", label: "wave hello", say: "Hello! Nice to meet you!", next: "invite" },
+        { emoji: "🤝", label: "shake hands", say: "Nice to meet you!", next: "invite" },
+      ],
+    },
+    invite: {
+      emoji: "🎉",
+      en: "Now, would you like to come to the word party?",
+      it: "Ora, ti va di venire alla festa delle parole?",
+      choices: [
+        { emoji: "😍", label: "I'd love to", say: "I'd love to, thank you!", next: "help" },
+        { emoji: "🙌", label: "yes please", say: "Yes, please!", next: "help" },
+      ],
+    },
+    help: {
+      emoji: "🧭",
+      en: "Someone is lost! How do we help them?",
+      it: "Qualcuno si è perso! Come lo aiutiamo?",
+      choices: [
+        { emoji: "⬅️", label: "turn left", say: "Turn left, then go straight on!", next: "win" },
+        { emoji: "➡️", label: "turn right", say: "Turn right, it is not far!", next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🏆",
+      en: "Wonderful, {name}! You spoke English all the way. You are a Conversation Champion!",
+      it: "Meraviglioso, {name}! Hai parlato inglese fino in fondo. Sei un Campione della Conversazione!",
+      end: true,
+    },
+  },
+};
+
+/* ═══════════════════════════════════════════════════════════
+   ARCIPELAGO 6 · IL MONDO REALE (isole 51-60) — arricchimento B1→B1+
+   Temi nuovi: scienza, natura/habitat, corpo/salute, culture e feste,
+   lavori/futuro, soldi, storia ("used to"), libri/racconti, amicizia.
+   Grammatica ricettiva: passivo, "used to", condizionali, comparativi,
+   discorso indiretto — sempre come "pezzi" da ascoltare/toccare/raccontare.
+   NB "Il Mondo Reale" e il diploma "B1 Master" sono nostre tappe interne,
+   un ponte verso Cambridge B1 Preliminary / early B2 First for Schools —
+   NON sono livelli o esami ufficiali Cambridge.
+   ═══════════════════════════════════════════════════════════ */
+
+const SCIENCE_TOOLS = [
+  { en: "magnet", emoji: "🧲" }, { en: "thermometer", emoji: "🌡️" }, { en: "microscope", emoji: "🔬" },
+  { en: "magnifier", emoji: "🔍" }, { en: "compass", emoji: "🧭" }, { en: "gear", emoji: "⚙️" },
+  { en: "lightbulb", emoji: "💡" }, { en: "test tube", emoji: "🧪" }, { en: "scale", emoji: "⚖️" },
+];
+const MADE_OF = [
+  { en: "fork", emoji: "🍴" }, { en: "spoon", emoji: "🥄" }, { en: "ring", emoji: "💍" },
+  { en: "brick", emoji: "🧱" }, { en: "mirror", emoji: "🪞" }, { en: "screw", emoji: "🔩" },
+  { en: "rope", emoji: "🪢" }, { en: "diamond", emoji: "💎" },
+];
+const WILD_ANIMALS = [
+  { en: "fox", emoji: "🦊" }, { en: "bear", emoji: "🐻" }, { en: "wolf", emoji: "🐺" },
+  { en: "deer", emoji: "🦌" }, { en: "owl", emoji: "🦉" }, { en: "panda", emoji: "🐼" },
+  { en: "tiger", emoji: "🐯" }, { en: "penguin", emoji: "🐧" }, { en: "koala", emoji: "🐨" },
+  { en: "hedgehog", emoji: "🦔" },
+];
+const HABITATS = [
+  { en: "nest", emoji: "🪹" }, { en: "web", emoji: "🕸️" }, { en: "pond", emoji: "🏞️" },
+  { en: "meadow", emoji: "🌾" }, { en: "reef", emoji: "🪸" }, { en: "iceberg", emoji: "🧊" },
+  { en: "burrow", emoji: "🕳️" }, { en: "branch", emoji: "🌿" },
+];
+const BODY_ADV = [
+  { en: "heart", emoji: "🫀" }, { en: "brain", emoji: "🧠" }, { en: "bone", emoji: "🦴" },
+  { en: "lungs", emoji: "🫁" }, { en: "tooth", emoji: "🦷" }, { en: "muscle", emoji: "💪" },
+  { en: "blood", emoji: "🩸" }, { en: "tongue", emoji: "👅" },
+];
+const HEALTH_ACTIONS = [
+  { en: "stretch", emoji: "🤸" }, { en: "jog", emoji: "🏃" }, { en: "relax", emoji: "😌" },
+  { en: "drink milk", emoji: "🥛" }, { en: "eat fish", emoji: "🐟" }, { en: "wear a hat", emoji: "🧢" },
+  { en: "see a doctor", emoji: "🩺" }, { en: "stay warm", emoji: "🧣" }, { en: "take a bath", emoji: "🛁" },
+  { en: "drink tea", emoji: "🍵" },
+];
+const FESTIVALS = [
+  { en: "Christmas", emoji: "🎄" }, { en: "Halloween", emoji: "🎃" }, { en: "Diwali", emoji: "🪔" },
+  { en: "Carnival", emoji: "🎭" }, { en: "Easter", emoji: "🐣" }, { en: "birthday", emoji: "🎂" },
+  { en: "wedding", emoji: "💒" }, { en: "fireworks", emoji: "🎆" }, { en: "New Year", emoji: "🎊" },
+  { en: "parade", emoji: "🎏" },
+];
+const SYMBOLS = [
+  { en: "flag", emoji: "🚩" }, { en: "ribbon", emoji: "🎀" }, { en: "lantern", emoji: "🏮" },
+  { en: "mask", emoji: "🎭" }, { en: "crown", emoji: "👑" }, { en: "candle", emoji: "🕯️" },
+  { en: "trophy", emoji: "🏆" }, { en: "feast", emoji: "🍗" }, { en: "firework", emoji: "🎇" },
+];
+const FUTURE_JOBS = [
+  { en: "engineer", emoji: "🛠️" }, { en: "inventor", emoji: "💡" }, { en: "explorer", emoji: "🧭" },
+  { en: "detective", emoji: "🕵️" }, { en: "photographer", emoji: "📷" }, { en: "judge", emoji: "⚖️" },
+  { en: "reporter", emoji: "📰" }, { en: "coder", emoji: "💻" }, { en: "diver", emoji: "🤿" },
+  { en: "baker", emoji: "🥖" },
+];
+const FUTURE_GOALS = [
+  { en: "study", emoji: "📚" }, { en: "invent", emoji: "🔧" }, { en: "build", emoji: "🏗️" },
+  { en: "discover", emoji: "🔭" }, { en: "explore space", emoji: "🚀" }, { en: "help people", emoji: "🤝" },
+  { en: "lead", emoji: "🚩" }, { en: "create", emoji: "🎨" }, { en: "teach", emoji: "📖" },
+  { en: "save the world", emoji: "🦸" },
+];
+const MONEY_NOUNS = [
+  { en: "coin", emoji: "🪙" }, { en: "money", emoji: "💵" }, { en: "wallet", emoji: "👛" },
+  { en: "piggy bank", emoji: "🐷" }, { en: "bank", emoji: "🏦" }, { en: "card", emoji: "💳" },
+  { en: "receipt", emoji: "🧾" }, { en: "price tag", emoji: "🏷️" }, { en: "safe", emoji: "🔒" },
+  { en: "diamond", emoji: "💎" },
+];
+const MONEY_SAY = [
+  { en: "save my money", emoji: "🐷" }, { en: "buy a gift", emoji: "🎁" }, { en: "pay with a card", emoji: "💳" },
+  { en: "count my coins", emoji: "🪙" }, { en: "check the price", emoji: "🏷️" }, { en: "get the receipt", emoji: "🧾" },
+  { en: "open my wallet", emoji: "👛" }, { en: "spend a little", emoji: "💵" },
+];
+const HISTORY_NOUNS = [
+  { en: "king", emoji: "🤴" }, { en: "queen", emoji: "👸" }, { en: "sword", emoji: "⚔️" },
+  { en: "shield", emoji: "🛡️" }, { en: "dinosaur", emoji: "🦕" }, { en: "scroll", emoji: "📜" },
+  { en: "torch", emoji: "🔥" }, { en: "temple", emoji: "⛩️" }, { en: "helmet", emoji: "⛑️" },
+];
+const PAST_HABITS = [
+  { en: "ride a horse", emoji: "🐴" }, { en: "write letters", emoji: "✉️" }, { en: "light a fire", emoji: "🔥" },
+  { en: "hunt", emoji: "🏹" }, { en: "sail", emoji: "⛵" }, { en: "farm the land", emoji: "🌾" },
+  { en: "wear a crown", emoji: "👑" }, { en: "carry water", emoji: "🪣" }, { en: "tell stories", emoji: "📖" },
+  { en: "live in caves", emoji: "🕳️" },
+];
+const STORY_POOL = [
+  { en: "wizard", emoji: "🧙" }, { en: "witch", emoji: "🧹" }, { en: "fairy", emoji: "🧚" },
+  { en: "crystal", emoji: "🔮" }, { en: "ghost", emoji: "👻" }, { en: "mermaid", emoji: "🧜" },
+  { en: "potion", emoji: "🧪" }, { en: "wand", emoji: "🪄" }, { en: "unicorn", emoji: "🦄" },
+  { en: "troll", emoji: "🧌" },
+];
+const DEEP_FEELINGS = [
+  { en: "jealous", emoji: "😠" }, { en: "grateful", emoji: "🙏" }, { en: "hopeful", emoji: "🤞" },
+  { en: "cheerful", emoji: "😁" }, { en: "anxious", emoji: "😨" }, { en: "frustrated", emoji: "😣" },
+  { en: "embarrassed", emoji: "😳" }, { en: "amazed", emoji: "🤩" }, { en: "upset", emoji: "😢" },
+];
+const FRIEND_ACTIONS = [
+  { en: "share", emoji: "🤝" }, { en: "listen", emoji: "👂" }, { en: "help", emoji: "💪" },
+  { en: "forgive", emoji: "🕊️" }, { en: "smile", emoji: "😊" }, { en: "say sorry", emoji: "🙇" },
+  { en: "cheer up", emoji: "🎉" }, { en: "be honest", emoji: "💯" }, { en: "wait", emoji: "⏳" },
+  { en: "hug", emoji: "🫂" },
+];
+const COMFORT_SAY = [
+  { en: "talk to a friend", emoji: "🫂" }, { en: "take a deep breath", emoji: "🌬️" }, { en: "ask for help", emoji: "🙋" },
+  { en: "be kind", emoji: "💗" }, { en: "stay calm", emoji: "😌" }, { en: "try again", emoji: "🔁" },
+  { en: "say sorry", emoji: "🙇" }, { en: "smile", emoji: "😊" },
+];
+const FINAL_REVIEW = [
+  { en: "magnet", emoji: "🧲" }, { en: "microscope", emoji: "🔬" }, { en: "fox", emoji: "🦊" },
+  { en: "panda", emoji: "🐼" }, { en: "heart", emoji: "🫀" }, { en: "brain", emoji: "🧠" },
+  { en: "lantern", emoji: "🏮" }, { en: "crown", emoji: "👑" }, { en: "coin", emoji: "🪙" },
+  { en: "ghost", emoji: "👻" }, { en: "wizard", emoji: "🧙" }, { en: "compass", emoji: "🧭" },
+];
+
+// ── storie Arcipelago 6 ──
+const FESTIVAL_STORY = {
+  start: "start",
+  nodes: {
+    start: {
+      emoji: "🌍",
+      en: "Welcome, {name}! Today we travel the world to see festivals. Which one shall we visit first?",
+      it: "Benvenuto, {name}! Oggi giriamo il mondo per vedere le feste. Quale visitiamo per prima?",
+      choices: [
+        { emoji: "🎄", label: "Christmas", say: "At Christmas, presents are given!", words: ["Christmas"], next: "india" },
+        { emoji: "🎃", label: "Halloween", say: "At Halloween, costumes are worn!", words: ["Halloween"], next: "india" },
+        { emoji: "🎭", label: "Carnival", say: "At Carnival, masks are worn!", words: ["Carnival"], next: "india" },
+      ],
+    },
+    india: {
+      emoji: "🪔",
+      en: "Wonderful! Now we are in India for Diwali. What do people light?",
+      it: "Meraviglioso! Ora siamo in India per il Diwali. Cosa accendono le persone?",
+      choices: [
+        { emoji: "🪔", label: "lanterns", say: "Lanterns are lit everywhere!", words: ["lantern"], next: "party" },
+        { emoji: "🎆", label: "fireworks", say: "Fireworks light the sky!", words: ["fireworks"], next: "party" },
+      ],
+    },
+    party: {
+      emoji: "🎉",
+      en: "Amazing! Every festival ends with a party. What do we do?",
+      it: "Fantastico! Ogni festa finisce con una festa. Cosa facciamo?",
+      choices: [
+        { emoji: "💃", label: "dance", say: "We dance together!", next: "win" },
+        { emoji: "🍗", label: "eat", say: "We eat a big feast!", words: ["feast"], next: "win" },
+        { emoji: "🎊", label: "celebrate", say: "We celebrate all night!", next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🌟",
+      en: "What a trip, {name}! Now you know festivals from around the world!",
+      it: "Che viaggio, {name}! Ora conosci le feste di tutto il mondo!",
+      end: true,
+    },
+  },
+};
+const STORYLAND_STORY = {
+  start: "open",
+  nodes: {
+    open: {
+      emoji: "📖",
+      en: "Open the magic book, {name}! A story begins. Where were you walking when it started?",
+      it: "Apri il libro magico, {name}! Inizia una storia. Dove stavi camminando quando è cominciata?",
+      choices: [
+        { emoji: "🌳", label: "in a forest", say: "While you were walking in a forest, you heard a noise!", next: "meet" },
+        { emoji: "🏔️", label: "up a mountain", say: "While you were climbing a mountain, you heard a noise!", words: ["mountain"], next: "meet" },
+        { emoji: "🏰", label: "near a castle", say: "While you were near a castle, you heard a noise!", words: ["castle"], next: "meet" },
+      ],
+    },
+    meet: {
+      emoji: "🧙",
+      en: "Suddenly you met someone! Who was it?",
+      it: "All'improvviso hai incontrato qualcuno! Chi era?",
+      choices: [
+        { emoji: "🧙", label: "a wizard", say: "It was a wizard! He said he was lost.", words: ["wizard"], next: "find" },
+        { emoji: "🧚", label: "a fairy", say: "It was a fairy! She said she needed help.", words: ["fairy"], next: "find" },
+        { emoji: "🐉", label: "a dragon", say: "It was a dragon! It said it was hungry.", words: ["dragon"], next: "find" },
+      ],
+    },
+    find: {
+      emoji: "🔦",
+      en: "You had never seen magic before! What did you find next?",
+      it: "Non avevi mai visto la magia prima! Cosa hai trovato dopo?",
+      choices: [
+        { emoji: "🪄", label: "a magic wand", say: "You found a magic wand!", words: ["wand"], next: "end2" },
+        { emoji: "💰", label: "treasure", say: "You found the treasure!", words: ["treasure"], next: "end2" },
+        { emoji: "🗝️", label: "a golden key", say: "You found a golden key!", words: ["key"], next: "end2" },
+      ],
+    },
+    end2: {
+      emoji: "🌟",
+      en: "You closed the book, {name}. What a story! How did it end?",
+      it: "Hai chiuso il libro, {name}. Che storia! Come è finita?",
+      choices: [
+        { emoji: "😄", label: "happily", say: "The story ended happily!", words: ["happy"], next: "win" },
+        { emoji: "🏆", label: "you won", say: "You saved the day and won!", next: "win" },
+      ],
+    },
+    win: {
+      emoji: "📚",
+      en: "The end, {name}! You are a wonderful storyteller!",
+      it: "Fine, {name}! Sei un narratore meraviglioso!",
+      end: true,
+    },
+  },
+};
+const WORDMASTER_STORY = {
+  start: "gate",
+  nodes: {
+    gate: {
+      emoji: "🧙",
+      en: "Welcome, {name}. I am the Word Master. To pass, answer my questions! First: what is a microscope used for?",
+      it: "Benvenuto, {name}. Sono il Maestro delle Parole. Per passare, rispondi! Prima: a cosa serve un microscopio?",
+      choices: [
+        { emoji: "🔬", label: "for science", say: "Yes! A microscope is used for science!", next: "past" },
+        { emoji: "🍰", label: "for cakes", say: "Hmm, try science! A microscope is used for science.", next: "past" },
+      ],
+    },
+    past: {
+      emoji: "⏳",
+      en: "Good! Long ago, what did people ride?",
+      it: "Bene! Tanto tempo fa, cosa cavalcavano le persone?",
+      choices: [
+        { emoji: "🐴", label: "a horse", say: "Right! People used to ride horses!", words: ["horse"], next: "planet" },
+        { emoji: "✈️", label: "a plane", say: "Not then! People used to ride horses.", words: ["plane"], next: "planet" },
+      ],
+    },
+    planet: {
+      emoji: "🌍",
+      en: "Wonderful! If we recycle and save energy, what will happen to our planet?",
+      it: "Meraviglioso! Se ricicliamo e risparmiamo energia, cosa succederà al nostro pianeta?",
+      choices: [
+        { emoji: "😄", label: "it will be happy", say: "Yes! If we help, the planet will be happy!", words: ["happy"], next: "dream" },
+        { emoji: "🌈", label: "it will be clean", say: "Exactly! The planet will be clean and green!", next: "dream" },
+      ],
+    },
+    dream: {
+      emoji: "🚀",
+      en: "Last question! When you grow up, what will you be?",
+      it: "Ultima domanda! Da grande, cosa sarai?",
+      choices: [
+        { emoji: "🛠️", label: "an engineer", say: "You will be a great engineer!", next: "win" },
+        { emoji: "🔭", label: "an explorer", say: "You will be a brave explorer!", next: "win" },
+        { emoji: "✍️", label: "a writer", say: "You will be a wonderful writer!", next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🏆",
+      en: "You did it, {name}! You have mastered a whole world of words. You are a true B1 Master!",
+      it: "Ce l'hai fatta, {name}! Hai imparato un mondo intero di parole. Ora sei un vero Maestro (B1)! (È un nostro traguardo, non un livello Cambridge ufficiale.)",
       end: true,
     },
   },
@@ -2362,6 +3044,352 @@ const ISLANDS = [
       },
     ],
   },
+
+  /* ═══════════ ARCIPELAGO 5 · LA VOCE (isole 41-50) ═══════════ */
+  {
+    id: "meetGreet", name: "La Piazza degli Incontri", emoji: "👋", sub: "Presentarsi e piccole chiacchiere",
+    games: [
+      { key: "meetChat", emoji: "💬", title: "Ciao, Piacere!", type: "chat", cfg: CHAT_MEET },
+      {
+        key: "greetSay", emoji: "🎤", title: "Ripeti il Saluto", type: "say",
+        cfg: { pool: GREET_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ripeti il saluto ad alta voce!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+      {
+        key: "whoSays", emoji: "👂", title: "Chi Dice Cosa?", type: "listentap",
+        cfg: { pool: GREET_PHRASES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Someone says: "${a.en}"`, hintIt: "Ascolta la frase e tocca quella giusta", render: textRender, style: wordTileStyle },
+      },
+    ],
+  },
+  {
+    id: "opinions", name: "Il Palco delle Opinioni", emoji: "💭", sub: "Dire cosa pensi e cosa preferisci",
+    games: [
+      { key: "opinionChat", emoji: "💬", title: "Cosa Ne Pensi?", type: "chat", cfg: CHAT_OPINIONS },
+      {
+        key: "agreeTap", emoji: "👂", title: "Sono d'Accordo?", type: "listentap",
+        cfg: { pool: OPINION_PHRASES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Choose: "${a.en}"`, hintIt: "Ascolta e tocca la frase giusta", render: textRender, style: wordTileStyle },
+      },
+      {
+        key: "opinionSay", emoji: "🎤", title: "Secondo Me…", type: "say",
+        cfg: { pool: OPINION_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ripeti la tua opinione!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "invites", name: "Il Salone degli Inviti", emoji: "🎉", sub: "Invitare e proporre idee",
+    games: [
+      { key: "inviteChat", emoji: "💬", title: "Ti Va di Venire?", type: "chat", cfg: CHAT_INVITES },
+      {
+        key: "inviteSay", emoji: "🎤", title: "Facciamo Insieme!", type: "say",
+        cfg: { pool: INVITE_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Fai un invito o una proposta!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+      {
+        key: "acceptTap", emoji: "👂", title: "Accetti o No?", type: "listentap",
+        cfg: { pool: INVITE_PHRASES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Reply: "${a.en}"`, hintIt: "Ascolta e tocca la risposta giusta", render: textRender, style: wordTileStyle },
+      },
+    ],
+  },
+  {
+    id: "plansTime", name: "L'Orologio degli Appuntamenti", emoji: "📅", sub: "Fare piani e darsi appuntamento",
+    games: [
+      { key: "plansChat", emoji: "💬", title: "Quando Ci Vediamo?", type: "chat", cfg: CHAT_PLANS },
+      {
+        key: "plansSay", emoji: "🎤", title: "Diamoci Appuntamento", type: "say",
+        cfg: { pool: PLANS_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ripeti la frase per fare un piano!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+      {
+        key: "whenTap", emoji: "👂", title: "Che Giorno?", type: "listentap",
+        cfg: { pool: PLANS_PHRASES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `"${a.en}"`, hintIt: "Ascolta e tocca il momento giusto", render: textRender, style: wordTileStyle },
+      },
+    ],
+  },
+  {
+    id: "shopTalk", name: "Il Bazar delle Trattative", emoji: "🛍️", sub: "Comprare, prezzi e monete",
+    games: [
+      { key: "shopChat", emoji: "💬", title: "Quanto Costa?", type: "chat", cfg: CHAT_SHOP },
+      {
+        key: "shopTap", emoji: "🏪", title: "Al Negozio", type: "listentap",
+        cfg: { pool: SHOP_NOUNS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, hintIt: "Ascolta e tocca la cosa giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "shopSpell", emoji: "✏️", title: "Scrivi il Prezzo", type: "spelling",
+        cfg: { pool: spellable(SHOP_NOUNS), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola!" },
+      },
+    ],
+  },
+  {
+    id: "askHelp", name: "Il Crocevia dell'Aiuto", emoji: "🧭", sub: "Chiedere aiuto e indicazioni",
+    games: [
+      { key: "helpChat", emoji: "💬", title: "Scusi, Dov'è…?", type: "chat", cfg: CHAT_HELP },
+      {
+        key: "helpSay", emoji: "🎤", title: "Chiedi la Strada", type: "say",
+        cfg: { pool: HELP_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Chiedi aiuto o indicazioni!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+      {
+        key: "helpTap", emoji: "👂", title: "Indicazioni Giuste", type: "listentap",
+        cfg: { pool: HELP_PHRASES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `"${a.en}"`, hintIt: "Ascolta la richiesta e tocca la frase giusta", render: textRender, style: wordTileStyle },
+      },
+    ],
+  },
+  {
+    id: "feelingsAdvice", name: "La Fonte dei Consigli", emoji: "💗", sub: "Sentimenti, problemi e consigli",
+    games: [
+      { key: "feelChat", emoji: "💬", title: "Cosa C'è che Non Va?", type: "chat", cfg: CHAT_FEELINGS },
+      {
+        key: "feelTap", emoji: "🫂", title: "Come Ti Senti?", type: "listentap",
+        cfg: { pool: FEELINGS_ADV, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `I feel ${a.en}.`, hintIt: "Ascolta come si sente e tocca la faccia", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "adviceSay", emoji: "🎤", title: "Un Buon Consiglio", type: "say",
+        cfg: { pool: ADVICE_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Dai un consiglio a un amico!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "sorryThanks", name: "Il Giardino della Gentilezza", emoji: "🙏", sub: "Scusarsi, ringraziare e i buoni modi",
+    games: [
+      { key: "sorryChat", emoji: "💬", title: "Scusa e Grazie", type: "chat", cfg: CHAT_SORRY },
+      {
+        key: "magicSay", emoji: "🎤", title: "Le Parole Magiche", type: "say",
+        cfg: { pool: MANNERS_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ripeti la parola gentile!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+      {
+        key: "mannersTap", emoji: "👂", title: "Modi Gentili", type: "listentap",
+        cfg: { pool: MANNERS_PHRASES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Say: "${a.en}"`, hintIt: "Ascolta e tocca la frase gentile", render: textRender, style: wordTileStyle },
+      },
+    ],
+  },
+  {
+    id: "recount", name: "Il Falò dei Racconti", emoji: "🔥", sub: "Raccontare cosa è successo",
+    games: [
+      { key: "recountChat", emoji: "💬", title: "Indovina Cosa!", type: "chat", cfg: CHAT_RECOUNT },
+      {
+        key: "recountTap", emoji: "👂", title: "E Poi… E Dopo…", type: "listentap",
+        cfg: { pool: RECOUNT_PHRASES, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `"${a.en}"`, hintIt: "Ascolta e tocca la parola del racconto", render: textRender, style: wordTileStyle },
+      },
+      {
+        key: "recountSay", emoji: "🎤", title: "Racconta la Tua Giornata", type: "say",
+        cfg: { pool: RECOUNT_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Racconta cosa è successo!", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "grandDialogo", name: "BOSS: Il Grande Dialogo", emoji: "🎙️", sub: "Ripasso della conversazione ed esame · diploma Conversazione",
+    games: [
+      { key: "grandChat", emoji: "💬", title: "Il Grande Dialogo", type: "chat", cfg: CHAT_GRAND },
+      { key: "voiceStory", emoji: "📖", title: "La Voce che Vince", type: "story", story: VOICE_STORY },
+      {
+        key: "voiceExam", emoji: "🎓", title: "L'Esame della Voce", type: "exam",
+        cfg: { pool: VOICE_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, prompt: (a) => `Find the ${a.en}!`, render: emojiRender, style: tileStyle, examEmoji: "🎙️", diploma: "Conversation" },
+      },
+      {
+        key: "voiceMemory", emoji: "🧠", title: "Memory della Voce", type: "memory",
+        cfg: { pool: VOICE_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+
+  /* ═══════════ ARCIPELAGO 6 · IL MONDO REALE (isole 51-60) ═══════════ */
+  {
+    id: "howThings", name: "La Fucina della Scienza", emoji: "🔬", sub: "La scienza e come funzionano le cose",
+    games: [
+      {
+        key: "scienceUse", emoji: "🔬", title: "A Cosa Serve?", type: "listentap",
+        cfg: { pool: SCIENCE_TOOLS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It is used for science. Find the ${a.en}!`, hintIt: "Ascolta e tocca lo strumento giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "madeOf", emoji: "🧱", title: "Di Che Cosa È Fatto?", type: "listentap",
+        cfg: { pool: MADE_OF, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It is made of something. Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca l'oggetto giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "scientistSay", emoji: "🎤", title: "Il Piccolo Scienziato", type: "say",
+        cfg: { pool: SCIENCE_TOOLS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `A ${a.en} is used in science.`, hintIt: "Di' la frase come un vero scienziato!", render: (a) => <span style={{ fontSize: 72 }}>{a.emoji}</span> },
+      },
+      {
+        key: "scienceSpell", emoji: "✏️", title: "Scrivi lo Strumento", type: "spelling",
+        cfg: { pool: spellable([...SCIENCE_TOOLS, ...MADE_OF]), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi lo strumento!" },
+      },
+    ],
+  },
+  {
+    id: "wildHabitats", name: "Il Rifugio della Natura", emoji: "🌿", sub: "Animali, habitat e ambiente",
+    games: [
+      {
+        key: "wildTap", emoji: "🦊", title: "Gli Animali Selvaggi", type: "listentap",
+        cfg: { pool: WILD_ANIMALS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Look in the wild! Find the ${a.en}!`, hintIt: "Ascolta e tocca l'animale selvaggio", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "habitatTap", emoji: "🪹", title: "Dove Vivono?", type: "listentap",
+        cfg: { pool: HABITATS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Animals live here. Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca la casa dell'animale", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "natureMemory", emoji: "🧠", title: "Memory della Natura", type: "memory",
+        cfg: { pool: WILD_ANIMALS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+      {
+        key: "wildSpell", emoji: "✏️", title: "Scrivi l'Animale", type: "spelling",
+        cfg: { pool: spellable([...WILD_ANIMALS, ...HABITATS]), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi il nome!" },
+      },
+    ],
+  },
+  {
+    id: "bodyHealth", name: "Il Tempio del Corpo", emoji: "🫀", sub: "Il corpo umano e stare in forma",
+    games: [
+      {
+        key: "bodyTap", emoji: "🧠", title: "Dentro il Corpo", type: "listentap",
+        cfg: { pool: BODY_ADV, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It is part of your body. Find the ${a.en}!`, hintIt: "Ascolta e tocca la parte del corpo", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "healthTap", emoji: "🩺", title: "Consigli di Salute", type: "listentap",
+        cfg: { pool: HEALTH_ACTIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `You should ${a.en}!`, showWord: true, hintIt: "You should…: tocca il consiglio giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "doctorSay", emoji: "🎤", title: "Il Buon Dottore", type: "say",
+        cfg: { pool: HEALTH_ACTIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `You should ${a.en} to stay healthy.`, hintIt: "Dai un buon consiglio a voce!", render: (a) => <span style={{ fontSize: 72 }}>{a.emoji}</span> },
+      },
+      {
+        key: "bodySpell", emoji: "✏️", title: "Scrivi la Parte", type: "spelling",
+        cfg: { pool: spellable(BODY_ADV), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parte del corpo!" },
+      },
+    ],
+  },
+  {
+    id: "worldFestivals", name: "Il Giro del Mondo", emoji: "🎉", sub: "Culture e feste del mondo",
+    games: [
+      {
+        key: "festivalTap", emoji: "🎄", title: "Le Feste del Mondo", type: "listentap",
+        cfg: { pool: FESTIVALS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `People celebrate. Find the ${a.en}!`, hintIt: "Ascolta e tocca la festa giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "symbolTap", emoji: "🏮", title: "Simboli e Tradizioni", type: "listentap",
+        cfg: { pool: SYMBOLS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It's a tradition. Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca il simbolo giusto", render: emojiRender, style: tileStyle },
+      },
+      { key: "festivalStory", emoji: "📖", title: "La Festa Intorno al Mondo", type: "story", story: FESTIVAL_STORY },
+      {
+        key: "festivalSpell", emoji: "✏️", title: "Scrivi la Festa", type: "spelling",
+        cfg: { pool: spellable([...FESTIVALS, ...SYMBOLS]), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la festa!" },
+      },
+    ],
+  },
+  {
+    id: "futureJobs", name: "La Torre del Futuro", emoji: "🚀", sub: "Lavori e progetti per il domani",
+    games: [
+      {
+        key: "jobsTap", emoji: "🛠️", title: "I Mestieri del Domani", type: "listentap",
+        cfg: { pool: FUTURE_JOBS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `When I grow up, I want this job: ${a.en}!`, hintIt: "When I grow up…: tocca il lavoro", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "goalsTap", emoji: "🌟", title: "Cosa Farò", type: "listentap",
+        cfg: { pool: FUTURE_GOALS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `One day I will ${a.en}!`, showWord: true, hintIt: "Leggi e tocca cosa farai", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "dreamSay", emoji: "🎤", title: "Il Mio Sogno", type: "say",
+        cfg: { pool: FUTURE_JOBS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `When I grow up, I want this job: ${a.en}.`, hintIt: "Di' che lavoro vuoi fare da grande!", render: (a) => <span style={{ fontSize: 72 }}>{a.emoji}</span> },
+      },
+      {
+        key: "jobsSpell", emoji: "✏️", title: "Scrivi il Mestiere", type: "spelling",
+        cfg: { pool: spellable([...FUTURE_JOBS, ...FUTURE_GOALS]), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola del futuro!" },
+      },
+    ],
+  },
+  {
+    id: "moneyMarket", name: "Il Salvadanaio Magico", emoji: "💰", sub: "Soldi, risparmio e spese",
+    games: [
+      {
+        key: "moneyTap", emoji: "🪙", title: "Il Mondo dei Soldi", type: "listentap",
+        cfg: { pool: MONEY_NOUNS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `It's about money. Find the ${a.en}!`, hintIt: "Ascolta e tocca la cosa giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "moneyMemory", emoji: "🧠", title: "Memory dei Soldi", type: "memory",
+        cfg: { pool: MONEY_NOUNS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+      {
+        key: "moneySay", emoji: "🎤", title: "Al Negozio", type: "say",
+        cfg: { pool: MONEY_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `At the shop I will ${a.en}.`, hintIt: "Di' cosa fai con i soldi!", render: (a) => <span style={{ fontSize: 72 }}>{a.emoji}</span> },
+      },
+      {
+        key: "moneySpell", emoji: "✏️", title: "Scrivi la Parola dei Soldi", type: "spelling",
+        cfg: { pool: spellable(MONEY_NOUNS), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola dei soldi!" },
+      },
+    ],
+  },
+  {
+    id: "longAgo", name: "La Macchina del Tempo", emoji: "⏳", sub: "Tanto tempo fa e 'used to'",
+    games: [
+      {
+        key: "historyTap", emoji: "🏰", title: "Il Mondo di Una Volta", type: "listentap",
+        cfg: { pool: HISTORY_NOUNS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Long ago there was a ${a.en}. Find it!`, hintIt: "Ascolta e tocca la cosa del passato", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "usedToTap", emoji: "🐴", title: "Una Volta Si Faceva Così", type: "listentap",
+        cfg: { pool: PAST_HABITS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `People used to ${a.en}!`, showWord: true, hintIt: "Used to…: tocca cosa si faceva una volta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "ancientSay", emoji: "🎤", title: "Ai Tempi Antichi", type: "say",
+        cfg: { pool: PAST_HABITS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `Long ago, people used to ${a.en}.`, hintIt: "Di' com'era la vita una volta!", render: (a) => <span style={{ fontSize: 72 }}>{a.emoji}</span> },
+      },
+      {
+        key: "historySpell", emoji: "✏️", title: "Scrivi la Parola Antica", type: "spelling",
+        cfg: { pool: spellable(HISTORY_NOUNS), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola antica!" },
+      },
+    ],
+  },
+  {
+    id: "storyland", name: "Il Regno delle Storie", emoji: "📖", sub: "Libri, racconti e fantasia",
+    games: [
+      {
+        key: "storyTap", emoji: "🧙", title: "Nel Mondo dei Racconti", type: "listentap",
+        cfg: { pool: STORY_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `In the story there is a ${a.en}. Find it!`, hintIt: "Ascolta e tocca il personaggio della storia", render: emojiRender, style: tileStyle },
+      },
+      { key: "bigAdventure", emoji: "📖", title: "La Grande Avventura", type: "story", story: STORYLAND_STORY },
+      {
+        key: "taleMemory", emoji: "🧠", title: "Memory delle Fiabe", type: "memory",
+        cfg: { pool: STORY_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+      {
+        key: "storySpell", emoji: "✏️", title: "Scrivi la Parola Magica", type: "spelling",
+        cfg: { pool: spellable(STORY_POOL), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola magica!" },
+      },
+    ],
+  },
+  {
+    id: "growingUp", name: "Il Faro dei Sentimenti", emoji: "💗", sub: "Amicizia, emozioni e crescere",
+    games: [
+      {
+        key: "deepFeelTap", emoji: "😌", title: "Emozioni Profonde", type: "listentap",
+        cfg: { pool: DEEP_FEELINGS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `How do you feel? Find ${a.en}!`, hintIt: "Ascolta e tocca l'emozione giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "friendTap", emoji: "🤝", title: "Cosa Fa un Buon Amico", type: "listentap",
+        cfg: { pool: FRIEND_ACTIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `A good friend should ${a.en}!`, showWord: true, hintIt: "Un buon amico…: tocca l'azione giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "heartSay", emoji: "🎤", title: "Parla col Cuore", type: "say",
+        cfg: { pool: COMFORT_SAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `If you feel sad, you should ${a.en}.`, hintIt: "Dai un consiglio gentile a voce!", render: (a) => <span style={{ fontSize: 72 }}>{a.emoji}</span> },
+      },
+      {
+        key: "feelSpell", emoji: "✏️", title: "Scrivi l'Emozione", type: "spelling",
+        cfg: { pool: spellable([...DEEP_FEELINGS, ...FRIEND_ACTIONS]), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi l'emozione!" },
+      },
+    ],
+  },
+  {
+    id: "wordMaster", name: "GRAN BOSS: Il Maestro delle Parole", emoji: "🧙", sub: "Grande ripasso e diploma finale 'B1 Master'",
+    games: [
+      { key: "masterStory", emoji: "📖", title: "L'Ultima Prova del Maestro", type: "story", story: WORDMASTER_STORY },
+      {
+        key: "finalChallenge", emoji: "🌟", title: "La Sfida Finale", type: "listentap",
+        cfg: { pool: FINAL_REVIEW, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, hintIt: "Il Maestro mette alla prova tutto! Tocca la parola giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "masterExam", emoji: "🎓", title: "L'Esame del B1 Master", type: "exam",
+        cfg: { pool: FINAL_REVIEW, keyOf: (a) => a.en, sayOf: (a) => a.en, prompt: (a) => `Find the ${a.en}!`, render: emojiRender, style: tileStyle, examEmoji: "🧙", diploma: "B1 Master" },
+      },
+      {
+        key: "masterSpell", emoji: "✏️", title: "Scrivi da Maestro", type: "spelling",
+        cfg: { pool: spellable(FINAL_REVIEW), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi come un vero Maestro!" },
+      },
+    ],
+  },
 ];
 
 /* ═══════════ LEVEL-UP: header, XP, fiamma, negozio ═══════════ */
@@ -2918,7 +3946,7 @@ export default function App() {
               const unlocked = isUnlocked(idx);
               const done = isl.games ? islandDone(isl) : false;
               const totalStars = isl.games ? isl.games.reduce((s, g) => s + starsOf(isl.id, g.key), 0) : 0;
-              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 20 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 30 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : null;
+              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 20 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 30 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : idx === 40 ? "🎙️ Arcipelago 5 · La Voce — la conversazione (verso il B1)" : idx === 50 ? "🌍 Arcipelago 6 · Il Mondo Reale — arricchimento (B1+)" : null;
               return (
                 <Fragment key={isl.id}>
                 {archLabel && (
@@ -3035,6 +4063,10 @@ export default function App() {
           )}
           {currentGame.type === "compare" && (
             <CompareGame speak={speak} cfg={currentGame.cfg}
+              onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "chat" && (
+            <ChatGame speak={speak} cfg={currentGame.cfg} name={playerName}
               onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
           )}
         </div>
