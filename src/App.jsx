@@ -11,6 +11,7 @@ import {
   levelInfo, dailyVisit, skyGradient, shopItem,
   SHOP, SHOP_CATS, isOwned, XP_PER_CORRECT, XP_PER_STAR,
 } from "./progression";
+import { ARC8_ISLANDS } from "./comprehension.js";
 
 /* ═══════════════════════════════════════════════════════════
    SILVANA E IL REGNO INCANTATO — PWA
@@ -921,6 +922,134 @@ function ClozeGame({ speak, cfg, weak, onGem, onMiss, onDone }) {
                 boxShadow: "0 4px 0 #C9B6EE", opacity: done ? 0.4 : 1, transition: "all .15s",
               }}>
               {w}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* Comprensione (Arcipelago 8 · Lettura e Ascolto): uno STIMOLO condiviso che
+   resta a schermo — un testo da rileggere ("read") o un audio da riascoltare
+   ("listen") — con più DOMANDE collegate a scelta multipla e distrattori
+   autorati. Stile Cambridge A2 Key (Reading Parti 1-3 / Listening Parti 1&4).
+   Tutto CHIUSO e corretto sul dispositivo: zero AI, zero costi. Se cfg.diploma
+   è impostato, alla fine mostra la pagella-diploma come il BOSS-esame. */
+function ReadSceneGame({ speak, cfg, name, onGem, onMiss, onDone }) {
+  const scenes = cfg.pool;
+  // lista piatta delle domande, mantenendo il legame con la scena di origine
+  const flat = scenes.flatMap((s, si) => s.questions.map((q, qi) => ({ s, si, q, qi })));
+  const total = flat.length;
+  const [pos, setPos] = useState(0);
+  const [opts, setOpts] = useState([]);
+  const [locked, setLocked] = useState(false);
+  const [wrongI, setWrongI] = useState(null);
+  const [burst, setBurst] = useState(0);
+  const [show, setShow] = useState(false);     // "vedi il testo" (aiuto per l'ascolto)
+  const [finished, setFinished] = useState(false);
+  const mistakes = useRef(0);
+
+  const cur = flat[pos];
+
+  // A ogni domanda: rimescola le opzioni e, se è la prima domanda di una scena
+  // "listen", fa partire l'audio dello stimolo (le scene "read" non parlano da sole).
+  useEffect(() => {
+    if (!cur) return;
+    setOpts(shuffle(cur.q.options.slice()));
+    setLocked(false); setWrongI(null); setShow(false);
+    if (cur.s.mode === "listen" && cur.qi === 0) {
+      const t = setTimeout(() => audio.whenIdle().then(() => speak(cur.s.text)), 500);
+      return () => clearTimeout(t);
+    }
+  }, [pos]); // eslint-disable-line
+
+  const pick = (opt, i) => {
+    if (locked || !cur) return;
+    if (opt === cur.q.answer) {
+      // comprensione: assegna gemma+XP ma NON tocca le "gemme perdute" (le
+      // frasi-risposta non sono vocaboli e questo motore non le ripesca) → []
+      setLocked(true); setBurst((b) => b + 1); onGem([]);
+      setTimeout(() => speak(PRAISE[rand(PRAISE.length)]), 200);
+      setTimeout(() => {
+        if (pos + 1 >= total) {
+          if (cfg.diploma) setFinished(true);
+          else onDone(mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1);
+        } else setPos((p) => p + 1);
+      }, 1300);
+    } else {
+      mistakes.current += 1; setWrongI(i); onMiss([]);
+      setTimeout(() => setWrongI(null), 600);
+    }
+  };
+
+  if (finished) {
+    const stars = mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1;
+    const diploma = cfg.diploma;
+    return (
+      <div className="flex flex-col items-center gap-4 text-center">
+        <SparkleBurst trigger={1} />
+        <div className="text-6xl gem-pop">🎓</div>
+        <h3 className="display text-2xl" style={{ color: "#F5C64F" }}>Diploma di {diploma}</h3>
+        <div className="rounded-2xl px-6 py-5" style={{ background: "#ffffff10", border: "2px solid #F5C64F55" }}>
+          <p className="display text-xl" style={{ color: "#F6F1FF" }}>{name}</p>
+          <p className="text-sm" style={{ color: "#CDBBF2" }}>ha superato la grande prova di comprensione!</p>
+          <div className="text-2xl mt-2">{[1, 2, 3].map((i) => <span key={i} style={{ opacity: i <= stars ? 1 : 0.25 }}>⭐</span>)}</div>
+          <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{total - mistakes.current > 0 ? total - Math.min(mistakes.current, total) : 0}/{total} al primo colpo</p>
+        </div>
+        <button onClick={() => onDone(stars)} className="listen-btn" style={{ fontSize: "1.15rem", padding: "14px 32px" }}>🎉 Evviva!</button>
+      </div>
+    );
+  }
+
+  if (!cur) return null;
+  const scene = cur.s;
+  const isListen = scene.mode === "listen";
+  return (
+    <div className="flex flex-col items-center gap-5 w-full">
+      <SparkleBurst trigger={burst} />
+      <ProgressPips total={total} done={pos} />
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>{cfg.hintIt}</p>
+      {/* ── stimolo condiviso: resta a schermo per tutte le domande della scena ── */}
+      <div className="rounded-3xl px-5 py-4 w-full" style={{ background: "#ffffff10", border: "2px solid #ffffff22", maxWidth: 440 }}>
+        <p className="text-sm mb-2" style={{ color: "#9F8CC9" }}>{scene.it}</p>
+        {isListen ? (
+          <div className="flex flex-col items-center gap-3">
+            <button onClick={() => speak(scene.text)} className="listen-btn">🎧 Ascolta di nuovo</button>
+            {show && <p className="display text-base text-center" style={{ color: "#F6F1FF", lineHeight: 1.5, whiteSpace: "pre-line" }}>{scene.text}</p>}
+            <button onClick={() => setShow((s) => !s)} className="text-xs font-semibold px-3 py-1 rounded-full"
+              style={{ background: "#ffffff12", color: "#CDBBF2", border: "1.5px solid #ffffff22" }}>
+              {show ? "🙈 Nascondi il testo" : "👀 Vedi il testo"}
+            </button>
+          </div>
+        ) : (
+          <>
+            <p className="display text-base" style={{ color: "#F6F1FF", lineHeight: 1.55, whiteSpace: "pre-line" }}>{scene.text}</p>
+            <button onClick={() => speak(scene.text)} className="text-xs font-semibold px-3 py-1 rounded-full mt-2"
+              style={{ background: "#ffffff12", color: "#CDBBF2", border: "1.5px solid #ffffff22" }}>🔊 Ascolta</button>
+          </>
+        )}
+      </div>
+      {/* ── la domanda ── */}
+      <div className="text-center">
+        <p className="display text-lg" style={{ color: "#F5C64F" }}>{cur.q.q}</p>
+        {cur.q.qit && <p className="text-sm" style={{ color: "#9F8CC9" }}>{cur.q.qit}</p>}
+      </div>
+      {/* ── opzioni (lista verticale: sono frasi, non emoji) ── */}
+      <div className="flex flex-col gap-3 w-full" style={{ maxWidth: 440 }}>
+        {opts.map((opt, i) => {
+          const right = locked && opt === cur.q.answer;
+          return (
+            <button key={i} onClick={() => pick(opt, i)} disabled={locked}
+              className={`${wrongI === i ? "shake" : ""}`}
+              style={{
+                padding: "14px 18px", borderRadius: 16, fontWeight: 700, fontSize: 17,
+                color: right ? "#1E5C34" : "#4A2F8E",
+                background: right ? "#D8F5DF" : "#F6F1FF",
+                border: "none", boxShadow: right ? "0 4px 0 #A9DDB8" : "0 4px 0 #C9B6EE",
+                textAlign: "left", transition: "all .15s",
+              }}>
+              {opt}
             </button>
           );
         })}
@@ -3846,6 +3975,9 @@ const ISLANDS = [
       },
     ],
   },
+
+  /* ═══ ARCIPELAGO 8 · LETTURA E ASCOLTO (isole 72-81) — dati in comprehension.js ═══ */
+  ...ARC8_ISLANDS,
 ];
 
 /* ═══════════ LEVEL-UP: header, XP, fiamma, negozio ═══════════ */
@@ -4402,7 +4534,7 @@ export default function App() {
               const unlocked = isUnlocked(idx);
               const done = isl.games ? islandDone(isl) : false;
               const totalStars = isl.games ? isl.games.reduce((s, g) => s + starsOf(isl.id, g.key), 0) : 0;
-              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 11 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 21 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 31 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : idx === 41 ? "🎙️ Arcipelago 5 · La Voce — la conversazione (verso il B1)" : idx === 51 ? "🌍 Arcipelago 6 · Il Mondo Reale — arricchimento (B1+)" : idx === 61 ? "🏗️ Arcipelago 7 · La Palestra della Grammatica — la produzione (in stile A2 Key)" : null;
+              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 11 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 21 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 31 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : idx === 41 ? "🎙️ Arcipelago 5 · La Voce — la conversazione (verso il B1)" : idx === 51 ? "🌍 Arcipelago 6 · Il Mondo Reale — arricchimento (B1+)" : idx === 61 ? "🏗️ Arcipelago 7 · La Palestra della Grammatica — la produzione (in stile A2 Key)" : idx === 71 ? "📖 Arcipelago 8 · Lettura e Ascolto — la comprensione (in stile A2 Key)" : null;
               return (
                 <Fragment key={isl.id}>
                 {archLabel && (
@@ -4531,6 +4663,10 @@ export default function App() {
           )}
           {currentGame.type === "cloze" && (
             <ClozeGame speak={speak} cfg={currentGame.cfg} weak={progress.weak}
+              onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "readscene" && (
+            <ReadSceneGame speak={speak} cfg={currentGame.cfg} name={playerName}
               onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
           )}
         </div>
