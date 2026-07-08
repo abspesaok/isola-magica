@@ -118,7 +118,7 @@ Con il **quarto arcipelago (Explorers, isole 31–40) ora costruito**, il percor
 ### L'abilità che manca ancora
 - 💬 **Conversazione**: un **compagno con cui parlare** (un assistente che ascolta e risponde a voce) per allenare il dialogo vero — la cosa che più avvicina alla padronanza. È il cuore di un possibile quinto arcipelago.
 
-> **Voci:** le 30 isole precedenti hanno le **voci inglesi vere** (madrelingua). Le 10 nuove isole (31–40) per ora usano la **voce del tablet**; diventeranno voci vere appena si generano i nuovi audio col generatore ElevenLabs (229 nuove clip).
+> **Voci:** **tutte e 40 le isole** hanno ora le **voci inglesi vere** (madrelingua). Le **228 nuove clip** dell'Arcipelago 4 sono state generate con ElevenLabs e sono già online (manifest a **1110 clip** totali).
 
 ---
 
