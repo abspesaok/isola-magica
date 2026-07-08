@@ -612,6 +612,112 @@ function SayGame({ speak, cfg, weak, onGem, onMiss, onDone }) {
   );
 }
 
+/* Spelling / Scrittura — guarda l'immagine, ascolta, tocca le lettere in ordine per
+   comporre la parola inglese. Introduce la SCRITTURA (verso il B1). Le lettere sono
+   già date (mescolate): riordina guidato dal suono → sfidante ma sempre completabile. */
+function SpellGame({ speak, cfg, weak, onGem, onMiss, onDone }) {
+  const ROUNDS_SP = 6;
+  const [round, setRound] = useState(0);
+  const [target, setTarget] = useState(null);
+  const [tiles, setTiles] = useState([]);   // { ch, id } lettere mescolate
+  const [built, setBuilt] = useState([]);    // id delle lettere già posate, in ordine
+  const [wrongId, setWrongId] = useState(null);
+  const [show, setShow] = useState(false);   // "vedi la parola" (aiuto)
+  const [burst, setBurst] = useState(0);
+  const [locked, setLocked] = useState(false);
+  const mistakes = useRef(0);
+
+  const lettersOf = (t) => cfg.keyOf(t).replace(/[^a-zA-Z]/g, "").toUpperCase().split("");
+
+  const newRound = useCallback(() => {
+    const t = pickTarget(cfg.pool, weak, cfg.keyOf);
+    const ls = lettersOf(t);
+    let sh = shuffle(ls.map((ch, i) => ({ ch, id: i })));
+    if (ls.length > 2 && sh.map((x) => x.ch).join("") === ls.join("")) sh = shuffle(sh);
+    setTarget(t); setTiles(sh); setBuilt([]); setWrongId(null); setShow(false); setLocked(false);
+    setTimeout(() => audio.whenIdle().then(() => speak(cfg.sayOf(t))), 450);
+  }, [speak, cfg, weak]);
+
+  useEffect(() => { newRound(); }, []); // eslint-disable-line
+
+  const advance = () => {
+    if (round + 1 >= ROUNDS_SP) onDone(mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1);
+    else { setRound((r) => r + 1); newRound(); }
+  };
+
+  const tapTile = (tile) => {
+    if (locked || built.includes(tile.id)) return;
+    const goal = lettersOf(target);
+    if (tile.ch === goal[built.length]) {
+      const nb = [...built, tile.id];
+      setBuilt(nb);
+      if (nb.length === goal.length) {
+        setLocked(true); setBurst((b) => b + 1); onGem(cfg.wordsOf(target));
+        setTimeout(() => speak(cfg.sayOf(target), PRAISE[rand(PRAISE.length)]), 220);
+        setTimeout(advance, 1700);
+      }
+    } else {
+      mistakes.current += 1; onMiss(cfg.wordsOf(target)); setWrongId(tile.id);
+      setTimeout(() => setWrongId(null), 500);
+    }
+  };
+
+  if (!target) return null;
+  const goal = lettersOf(target);
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <SparkleBurst trigger={burst} />
+      <ProgressPips total={ROUNDS_SP} done={round} />
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>{cfg.hintIt}</p>
+      <div className="flex items-center justify-center" style={{ width: 128, height: 128, borderRadius: 28, background: "#ffffff12", border: "3px solid #ffffff28" }}>
+        <span style={{ fontSize: 64 }}>{target.emoji}</span>
+      </div>
+      <button onClick={() => speak(cfg.sayOf(target))} className="listen-btn">🔊 Riascolta</button>
+      {/* slot della parola */}
+      <div className="flex flex-wrap justify-center gap-2">
+        {goal.map((ch, i) => {
+          const placed = i < built.length;
+          return (
+            <span key={i} style={{
+              width: 42, height: 52, borderRadius: 12,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontWeight: 900, fontSize: 26,
+              color: placed ? "#4A2F8E" : "#8E5FD9",
+              background: placed ? "#F6F1FF" : "#ffffff10",
+              border: placed ? "none" : "2px dashed #ffffff3a",
+            }}>
+              {placed ? ch : (show ? ch : "")}
+            </span>
+          );
+        })}
+      </div>
+      {/* lettere mescolate da toccare */}
+      <div className="flex flex-wrap justify-center gap-3 mt-1" style={{ maxWidth: 380 }}>
+        {tiles.map((t) => {
+          const used = built.includes(t.id);
+          return (
+            <button key={t.id} onClick={() => tapTile(t)} disabled={used || locked}
+              className={`${wrongId === t.id ? "shake" : ""}`}
+              style={{
+                width: 52, height: 60, borderRadius: 14, fontWeight: 900, fontSize: 26,
+                color: used ? "#ffffff40" : "#4A2F8E",
+                background: used ? "#ffffff10" : "#F6F1FF",
+                border: "none", boxShadow: used ? "none" : "0 4px 0 #C9B6EE",
+                opacity: used ? 0.4 : 1, transition: "all .15s",
+              }}>
+              {t.ch}
+            </button>
+          );
+        })}
+      </div>
+      <button onClick={() => setShow((s) => !s)} className="text-sm font-semibold px-4 py-2 rounded-full"
+        style={{ background: "#ffffff12", color: "#CDBBF2", border: "1.5px solid #ffffff22" }}>
+        {show ? "🙈 Nascondi" : "👀 Vedi la parola"}
+      </button>
+    </div>
+  );
+}
+
 /* Storia interattiva a bivi (BOSS): ogni scelta porta avanti, tutti vincono */
 function StoryGame({ speak, story, name, onGem, onDone }) {
   const [nodeId, setNodeId] = useState(story.start);
@@ -709,7 +815,7 @@ function ExamGame({ speak, cfg, name, onGem, onDone }) {
         <h3 className="display text-2xl" style={{ color: "#F5C64F" }}>Diploma di {diploma}</h3>
         <div className="rounded-2xl px-6 py-5" style={{ background: "#ffffff10", border: "2px solid #F5C64F55" }}>
           <p className="display text-xl" style={{ color: "#F6F1FF" }}>{name}</p>
-          <p className="text-sm" style={{ color: "#CDBBF2" }}>ha superato l'esame del Drago!</p>
+          <p className="text-sm" style={{ color: "#CDBBF2" }}>ha superato l'esame di {diploma}!</p>
           <div className="text-2xl mt-2">{[1, 2, 3].map((i) => <span key={i} style={{ opacity: i <= stars ? 1 : 0.25 }}>⭐</span>)}</div>
           <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{s}/{N} risposte giuste</p>
         </div>
@@ -1087,6 +1193,198 @@ const WIZARD_STORY = {
       emoji: "🏆",
       en: "You did it, {name}! You have flown around the whole world. You are a true Flyer!",
       it: "Ce l'hai fatta, {name}! Hai volato intorno al mondo. Ora sei un vero Flyer!",
+      end: true,
+    },
+  },
+};
+
+/* ═══════════ ARCIPELAGO 4 · EXPLORERS — il ponte verso il B1 (isole 31-40) ═══════════
+   Tappa NOSTRA (non un livello Cambridge ufficiale): consolida A2 (Flyers/Key) e apre al B1
+   Preliminary. Grammatica nuova: should, would like, first conditional, be+aggettivo (lei/lui),
+   present perfect nel ripasso. Abilità nuova: SCRITTURA (gioco "spelling"). */
+const ENVIRONMENT = [
+  { en: "bottle", emoji: "🍾" }, { en: "can", emoji: "🥫" }, { en: "paper", emoji: "📄" },
+  { en: "box", emoji: "📦" }, { en: "jar", emoji: "🫙" }, { en: "battery", emoji: "🔋" },
+  { en: "plastic", emoji: "🧴" }, { en: "bag", emoji: "🛍️" }, { en: "newspaper", emoji: "📰" }, { en: "carton", emoji: "🧃" },
+];
+const SCHOOL_SUBJECTS = [
+  { en: "maths", emoji: "🔢" }, { en: "science", emoji: "🔬" }, { en: "history", emoji: "🏛️" },
+  { en: "geography", emoji: "🌍" }, { en: "art", emoji: "🎨" }, { en: "music", emoji: "🎵" },
+  { en: "English", emoji: "🔤" }, { en: "sport", emoji: "⚽" }, { en: "drama", emoji: "🎭" }, { en: "computers", emoji: "💻" },
+];
+const HABITS = [
+  { en: "drink water", emoji: "💧" }, { en: "eat fruit", emoji: "🍎" }, { en: "eat vegetables", emoji: "🥦" },
+  { en: "do exercise", emoji: "🏃" }, { en: "sleep well", emoji: "😴" }, { en: "wash your hands", emoji: "🧼" },
+  { en: "brush your teeth", emoji: "🪥" }, { en: "go outside", emoji: "🌳" }, { en: "eat salad", emoji: "🥗" }, { en: "rest", emoji: "🛌" },
+];
+const TRAVEL_HOLIDAY = [
+  { en: "airport", emoji: "🛫" }, { en: "hotel", emoji: "🏨" }, { en: "ticket", emoji: "🎫" },
+  { en: "map", emoji: "🗺️" }, { en: "beach", emoji: "🏖️" }, { en: "camera", emoji: "📷" },
+  { en: "gift", emoji: "🎁" }, { en: "passport", emoji: "🛂" }, { en: "suitcase", emoji: "🧳" }, { en: "tent", emoji: "⛺" },
+];
+// Solo nomi "mass/plural": così "I would like some ${en}" resta sempre grammaticale
+const RESTAURANT_FOOD = [
+  { en: "rice", emoji: "🍚" }, { en: "noodles", emoji: "🍜" }, { en: "steak", emoji: "🥩" },
+  { en: "soup", emoji: "🍲" }, { en: "salad", emoji: "🥗" }, { en: "pasta", emoji: "🍝" },
+  { en: "juice", emoji: "🧃" }, { en: "curry", emoji: "🍛" }, { en: "sushi", emoji: "🍣" }, { en: "chips", emoji: "🍟" },
+];
+const ENTERTAINMENT = [
+  { en: "movie", emoji: "🎬" }, { en: "popcorn", emoji: "🍿" }, { en: "guitar", emoji: "🎸" },
+  { en: "drum", emoji: "🥁" }, { en: "song", emoji: "🎵" }, { en: "circus", emoji: "🎪" },
+  { en: "magic", emoji: "🎩" }, { en: "clown", emoji: "🤡" }, { en: "balloon", emoji: "🎈" }, { en: "cartoon", emoji: "📺" },
+];
+const DIGITAL = [
+  { en: "email", emoji: "📧" }, { en: "photo", emoji: "📸" }, { en: "video", emoji: "📹" },
+  { en: "chat", emoji: "💬" }, { en: "wifi", emoji: "📶" }, { en: "app", emoji: "📲" },
+  { en: "screen", emoji: "🖥️" }, { en: "link", emoji: "🔗" }, { en: "website", emoji: "🌐" }, { en: "download", emoji: "⬇️" },
+];
+const PERSONALITY = [
+  { en: "friendly", emoji: "😊" }, { en: "funny", emoji: "😄" }, { en: "clever", emoji: "🤓" },
+  { en: "kind", emoji: "🤗" }, { en: "shy", emoji: "😳" }, { en: "brave", emoji: "🦸" },
+  { en: "quiet", emoji: "🤫" }, { en: "polite", emoji: "🙇" }, { en: "calm", emoji: "😌" }, { en: "tidy", emoji: "🧹" },
+];
+const AMBITIONS = [
+  { en: "vet", emoji: "🐾" }, { en: "scientist", emoji: "🔬" }, { en: "dancer", emoji: "💃" },
+  { en: "chef", emoji: "🍳" }, { en: "writer", emoji: "✍️" }, { en: "nurse", emoji: "🩺" },
+  { en: "sailor", emoji: "⚓" }, { en: "builder", emoji: "👷" }, { en: "gardener", emoji: "🌱" }, { en: "waiter", emoji: "🍽️" },
+];
+/* Prime frasi al FIRST CONDITIONAL (say: si ripetono) */
+const CONDITIONAL = [
+  { en: "If I study, I will learn", emoji: "📚" }, { en: "If I run, I will be fast", emoji: "🏃" },
+  { en: "If I try, I will win", emoji: "🏆" }, { en: "If I practise, I will play well", emoji: "🎹" },
+  { en: "If I read, I will be clever", emoji: "📖" }, { en: "If I help, I will be kind", emoji: "💗" },
+  { en: "If I train, I will be strong", emoji: "💪" }, { en: "If I dream, I will fly", emoji: "🌈" },
+];
+/* Solo parole concrete con emoji chiara per il BOSS (niente parole astratte) */
+const EXPLORERS_POOL = [
+  { en: "bottle", emoji: "🍾" }, { en: "paper", emoji: "📄" }, { en: "hotel", emoji: "🏨" },
+  { en: "airport", emoji: "🛫" }, { en: "beach", emoji: "🏖️" }, { en: "juice", emoji: "🧃" },
+  { en: "salad", emoji: "🥗" }, { en: "movie", emoji: "🎬" }, { en: "guitar", emoji: "🎸" },
+  { en: "email", emoji: "📧" }, { en: "photo", emoji: "📸" }, { en: "map", emoji: "🗺️" },
+];
+const spellable = (pool) => pool.filter((w) => w.en.length <= 7 && !w.en.includes(" "));
+
+/* Isola 38 — la galleria dei ritratti (descrivere le persone, be + aggettivo) */
+const DESCRIBE_STORY = {
+  start: "gallery",
+  nodes: {
+    gallery: {
+      emoji: "🖼️",
+      en: "Welcome to the portrait gallery! Look at this girl. What is she like?",
+      it: "Benvenuto nella galleria dei ritratti! Guarda questa bambina. Com'è?",
+      choices: [
+        { emoji: "😊", label: "friendly", say: "She is friendly!", words: ["friendly"], next: "boy" },
+        { emoji: "🤓", label: "clever", say: "She is clever!", words: ["clever"], next: "boy" },
+        { emoji: "😄", label: "funny", say: "She is funny!", words: ["funny"], next: "boy" },
+      ],
+    },
+    boy: {
+      emoji: "🧑",
+      en: "Wonderful! And this boy — what is he like?",
+      it: "Meraviglioso! E questo bambino, com'è?",
+      choices: [
+        { emoji: "🦸", label: "brave", say: "He is brave!", words: ["brave"], next: "you" },
+        { emoji: "🤗", label: "kind", say: "He is kind!", words: ["kind"], next: "you" },
+        { emoji: "🤫", label: "quiet", say: "He is quiet!", words: ["quiet"], next: "you" },
+      ],
+    },
+    you: {
+      emoji: "🪞",
+      en: "Great! And you — what are you like?",
+      it: "Bravo! E tu, come sei?",
+      choices: [
+        { emoji: "😊", label: "friendly", say: "You are friendly!", next: "win" },
+        { emoji: "🤓", label: "clever", say: "You are clever!", next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🌟",
+      en: "What a wonderful gallery, {name}! You can describe people now. You are a real Explorer!",
+      it: "Che galleria meravigliosa, {name}! Ora sai descrivere le persone. Sei un vero Esploratore!",
+      end: true,
+    },
+  },
+};
+
+/* Isola 39 — il bivio dei sogni (first conditional + "I want to be a...") */
+const DREAM_STORY = {
+  start: "dream",
+  nodes: {
+    dream: {
+      emoji: "🌠",
+      en: "Welcome, dreamer! If you work hard, what will you be?",
+      it: "Benvenuto, sognatore! Se ti impegni, cosa diventerai?",
+      choices: [
+        { emoji: "🐾", label: "a vet", say: "You will be a vet!", words: ["vet"], next: "prize" },
+        { emoji: "💃", label: "a dancer", say: "You will be a dancer!", words: ["dancer"], next: "prize" },
+        { emoji: "✍️", label: "a writer", say: "You will be a writer!", words: ["writer"], next: "prize" },
+      ],
+    },
+    prize: {
+      emoji: "🏆",
+      en: "Wonderful! And if you try your best, what will you win?",
+      it: "Meraviglioso! E se fai del tuo meglio, cosa vincerai?",
+      choices: [
+        { emoji: "🏆", label: "a cup", say: "You will win a cup!", next: "feel" },
+        { emoji: "🥇", label: "a medal", say: "You will win a medal!", next: "feel" },
+        { emoji: "🎁", label: "a prize", say: "You will win a prize!", next: "feel" },
+      ],
+    },
+    feel: {
+      emoji: "💫",
+      en: "Amazing! How do you feel about your dream?",
+      it: "Fantastico! Come ti senti riguardo al tuo sogno?",
+      choices: [
+        { emoji: "😄", label: "happy", say: "You feel happy!", words: ["happy"], next: "win" },
+        { emoji: "🤩", label: "excited", say: "You feel excited!", words: ["excited"], next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🌈",
+      en: "If you follow your dreams, {name}, you will do wonderful things! You are a real Explorer!",
+      it: "Se segui i tuoi sogni, {name}, farai cose meravigliose! Sei un vero Esploratore!",
+      end: true,
+    },
+  },
+};
+
+/* Isola 40 — il viaggio del Sommo Esploratore (present perfect nel ripasso; tutti vincono) */
+const EXPLORER_STORY = {
+  start: "arrive",
+  nodes: {
+    arrive: {
+      emoji: "🧭",
+      en: "Congratulations, {name}! You have travelled the whole world. Where have you been?",
+      it: "Congratulazioni, {name}! Hai viaggiato per tutto il mondo. Dove sei stato?",
+      choices: [
+        { emoji: "🌊", label: "the sea", say: "You have been to the sea!", words: ["sea"], next: "seen" },
+        { emoji: "🏔️", label: "the mountains", say: "You have been to the mountains!", words: ["mountain"], next: "seen" },
+        { emoji: "🏙️", label: "the city", say: "You have been to the city!", next: "seen" },
+      ],
+    },
+    seen: {
+      emoji: "👀",
+      en: "Wonderful! And what have you seen on the way?",
+      it: "Meraviglioso! E cosa hai visto lungo la strada?",
+      choices: [
+        { emoji: "🐬", label: "a dolphin", say: "You have seen a dolphin!", words: ["dolphin"], next: "nextq" },
+        { emoji: "🏰", label: "a castle", say: "You have seen a castle!", words: ["castle"], next: "nextq" },
+        { emoji: "🌈", label: "a rainbow", say: "You have seen a rainbow!", words: ["rainbow"], next: "nextq" },
+      ],
+    },
+    nextq: {
+      emoji: "✨",
+      en: "Amazing! What will you explore next?",
+      it: "Fantastico! Cosa esplorerai adesso?",
+      choices: [
+        { emoji: "⭐", label: "the stars", say: "You will explore the stars!", next: "win" },
+        { emoji: "🌊", label: "the ocean", say: "You will explore the ocean!", next: "win" },
+      ],
+    },
+    win: {
+      emoji: "🏆",
+      en: "You did it, {name}! You have explored the whole world. You are a true Explorer!",
+      it: "Ce l'hai fatta, {name}! Hai esplorato il mondo intero. Ora sei un vero Esploratore!",
       end: true,
     },
   },
@@ -1893,6 +2191,177 @@ const ISLANDS = [
       },
     ],
   },
+
+  /* ── ARCIPELAGO 4 · EXPLORERS (verso il B1) ── */
+  {
+    id: "planet", name: "Il Pianeta da Salvare", emoji: "🌍", sub: "Ambiente e riciclo · scrittura",
+    games: [
+      {
+        key: "recycle", emoji: "♻️", title: "La Squadra del Riciclo", type: "listentap",
+        cfg: { pool: ENVIRONMENT, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `We should recycle the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca la cosa da riciclare", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "spellPlanet", emoji: "✏️", title: "Scrivi e Ricicla", type: "spelling",
+        cfg: { pool: spellable(ENVIRONMENT), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola!" },
+      },
+      {
+        key: "memoryPlanet", emoji: "🌍", title: "Memory del Pianeta", type: "memory",
+        cfg: { pool: ENVIRONMENT, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "school2", name: "L'Accademia dei Saggi", emoji: "📚", sub: "Le materie di scuola · scrittura",
+    games: [
+      {
+        key: "subjects", emoji: "🔬", title: "La Mia Materia Preferita", type: "listentap",
+        cfg: { pool: SCHOOL_SUBJECTS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `My favourite subject is ${a.en}.`, showWord: true, hintIt: "Leggi e tocca la materia giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "spellSchool", emoji: "✏️", title: "Scrivi la Materia", type: "spelling",
+        cfg: { pool: spellable(SCHOOL_SUBJECTS), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la materia!" },
+      },
+      {
+        key: "memorySchool2", emoji: "📚", title: "Memory dell'Accademia", type: "memory",
+        cfg: { pool: SCHOOL_SUBJECTS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "fitness", name: "Il Tempio del Benessere", emoji: "💪", sub: "Abitudini sane · you should…",
+    games: [
+      {
+        key: "habits", emoji: "🥦", title: "Consigli di Salute", type: "listentap",
+        cfg: { pool: HABITS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `You should ${a.en}!`, hintIt: "Ascolta il consiglio e tocca l'immagine", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayHabits", emoji: "🎤", title: "Il Buon Consiglio", type: "say",
+        cfg: { pool: HABITS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `You should ${a.en}.`, hintIt: "Ripeti il consiglio: You should…", render: emojiRender },
+      },
+      {
+        key: "memoryFitness", emoji: "💪", title: "Memory del Benessere", type: "memory",
+        cfg: { pool: HABITS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "travel", name: "Il Porto dei Viaggi", emoji: "✈️", sub: "Viaggi e vacanze · scrittura",
+    games: [
+      {
+        key: "packing", emoji: "🧳", title: "Pronti a Partire", type: "listentap",
+        cfg: { pool: TRAVEL_HOLIDAY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca la cosa da viaggio", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "spellTravel", emoji: "✏️", title: "Scrivi il Viaggio", type: "spelling",
+        cfg: { pool: spellable(TRAVEL_HOLIDAY), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola!" },
+      },
+      {
+        key: "memoryTravel", emoji: "✈️", title: "Memory del Porto", type: "memory",
+        cfg: { pool: TRAVEL_HOLIDAY, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "restaurant", name: "La Locanda del Gran Sapore", emoji: "🍽️", sub: "Al ristorante · I would like…",
+    games: [
+      {
+        key: "order", emoji: "🍔", title: "Ordina al Cameriere", type: "listentap",
+        cfg: { pool: RESTAURANT_FOOD, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `I would like some ${a.en}.`, hintIt: "Cosa vuoi? Tocca il piatto giusto", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayOrder", emoji: "🎤", title: "Per Favore!", type: "say",
+        cfg: { pool: RESTAURANT_FOOD, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `I would like some ${a.en}, please.`, hintIt: "Ordina con gentilezza: I would like…", render: emojiRender },
+      },
+      {
+        key: "memoryRestaurant", emoji: "🍽️", title: "Memory della Locanda", type: "memory",
+        cfg: { pool: RESTAURANT_FOOD, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "entertainment", name: "Il Teatro delle Meraviglie", emoji: "🎬", sub: "Spettacolo e musica · scrittura",
+    games: [
+      {
+        key: "showtime", emoji: "🎪", title: "Che Spettacolo!", type: "listentap",
+        cfg: { pool: ENTERTAINMENT, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca la cosa giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "spellShow", emoji: "✏️", title: "Scrivi lo Spettacolo", type: "spelling",
+        cfg: { pool: spellable(ENTERTAINMENT), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola!" },
+      },
+      {
+        key: "memoryShow", emoji: "🎬", title: "Memory del Teatro", type: "memory",
+        cfg: { pool: ENTERTAINMENT, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "digital", name: "Il Ponte delle Connessioni", emoji: "📱", sub: "Comunicare e internet · scrittura",
+    games: [
+      {
+        key: "online", emoji: "🌐", title: "Sempre Connessi", type: "listentap",
+        cfg: { pool: DIGITAL, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, showWord: true, hintIt: "Leggi e tocca la cosa digitale", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "spellDigital", emoji: "✏️", title: "Scrivi il Messaggio", type: "spelling",
+        cfg: { pool: spellable(DIGITAL), keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], hintIt: "Ascolta e scrivi la parola!" },
+      },
+      {
+        key: "memoryDigital", emoji: "📱", title: "Memory delle Connessioni", type: "memory",
+        cfg: { pool: DIGITAL, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "describe", name: "La Galleria dei Ritratti", emoji: "🖼️", sub: "Descrivere le persone · he/she is…",
+    games: [
+      { key: "galleryStory", emoji: "📖", title: "Visita alla Galleria", type: "story", story: DESCRIBE_STORY },
+      {
+        key: "character", emoji: "😊", title: "Com'è Fatto?", type: "listentap",
+        cfg: { pool: PERSONALITY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `She is ${a.en}.`, hintIt: "Ascolta e leggi: tocca la parola giusta", render: textRender, style: wordTileStyle },
+      },
+      {
+        key: "sayCharacter", emoji: "🎤", title: "Descrivi un Amico", type: "say",
+        cfg: { pool: PERSONALITY, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `He is ${a.en}.`, hintIt: "Descrivi: He is…", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "dreams", name: "Il Bivio dei Sogni", emoji: "🌈", sub: "Sogni e se… (first conditional)",
+    games: [
+      { key: "dreamStory", emoji: "📖", title: "Il Sogno che Verrà", type: "story", story: DREAM_STORY },
+      {
+        key: "ambitions", emoji: "🌠", title: "Da Grande Sarò…", type: "listentap",
+        cfg: { pool: AMBITIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `I want to be a ${a.en}!`, showWord: true, hintIt: "Leggi e tocca il mestiere dei sogni", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "sayIf", emoji: "🎤", title: "Se Io… Allora…", type: "say",
+        cfg: { pool: CONDITIONAL, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], say: (a) => `${a.en}.`, hintIt: "Ripeti la frase: If I…, I will…", render: (a) => <span style={{ fontSize: 60 }}>{a.emoji}</span> },
+      },
+      {
+        key: "memoryDreams", emoji: "🌈", title: "Memory dei Sogni", type: "memory",
+        cfg: { pool: AMBITIONS, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
+  {
+    id: "grandexplorer", name: "BOSS: Il Sommo Esploratore", emoji: "🧭", sub: "Ripasso ed esame Explorers (verso il B1)",
+    games: [
+      { key: "explorerStory", emoji: "📖", title: "Il Grande Viaggio", type: "story", story: EXPLORER_STORY },
+      {
+        key: "explorerChallenge", emoji: "🌟", title: "La Sfida dell'Esploratore", type: "listentap",
+        cfg: { pool: EXPLORERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, wordsOf: (a) => [a.en], prompt: (a) => `Find the ${a.en}!`, hintIt: "Ripasso Explorers: tocca la parola giusta", render: emojiRender, style: tileStyle },
+      },
+      {
+        key: "explorerExam", emoji: "🎓", title: "L'Esame degli Esploratori", type: "exam",
+        cfg: { pool: EXPLORERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, prompt: (a) => `Find the ${a.en}!`, render: emojiRender, style: tileStyle, examEmoji: "🧭", diploma: "Explorers" },
+      },
+      {
+        key: "memoryExplorer", emoji: "🧭", title: "Memory dell'Esploratore", type: "memory",
+        cfg: { pool: EXPLORERS_POOL, keyOf: (a) => a.en, sayOf: (a) => a.en, renderPic: (a) => <span className="text-4xl">{a.emoji}</span> },
+      },
+    ],
+  },
 ];
 
 /* ═══════════ LEVEL-UP: header, XP, fiamma, negozio ═══════════ */
@@ -2449,7 +2918,7 @@ export default function App() {
               const unlocked = isUnlocked(idx);
               const done = isl.games ? islandDone(isl) : false;
               const totalStars = isl.games ? isl.games.reduce((s, g) => s + starsOf(isl.id, g.key), 0) : 0;
-              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 20 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : null;
+              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 10 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 20 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 30 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : null;
               return (
                 <Fragment key={isl.id}>
                 {archLabel && (
@@ -2550,6 +3019,10 @@ export default function App() {
           )}
           {currentGame.type === "say" && (
             <SayGame speak={speak} cfg={currentGame.cfg} weak={progress.weak}
+              onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "spelling" && (
+            <SpellGame speak={speak} cfg={currentGame.cfg} weak={progress.weak}
               onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
           )}
           {currentGame.type === "story" && (
