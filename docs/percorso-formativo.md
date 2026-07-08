@@ -14,6 +14,8 @@ Il percorso non è inventato: segue il programma ufficiale di **Cambridge Englis
 | **Movers** | 7–10 anni | A1 | Frasi vere, passato, routine, confronti |
 | **Flyers** | 9–12 anni | A2 | Racconti, tempi verbali ricchi, autonomia |
 
+> **Nota di onestà.** Starters / Movers / Flyers sono i veri esami Cambridge per bambini. Dopo i Flyers il cammino Cambridge prosegue con **A2 Key** e **B1 Preliminary for Schools**. Il nostro **quarto arcipelago, "Explorers", NON è un livello Cambridge ufficiale**: è una tappa *creata da noi*, ispirata a quella scala, che consolida l'A2 e comincia ad affacciarsi sul **B1** (should, would like, "if…", present perfect, descrivere le persone) e introduce la **scrittura**.
+
 A questo si aggiungono alcuni **principi di apprendimento** su cui è costruito il gioco:
 
 1. **Prima si ascolta, poi si parla** (come fanno i bambini con la lingua madre). Quasi ogni gioco è "ascolta la voce inglese e tocca la cosa giusta" — con **voci inglesi vere** (madrelingua), non robotiche.
@@ -25,7 +27,7 @@ A questo si aggiungono alcuni **principi di apprendimento** su cui è costruito 
 
 ## 2. La mappa di oggi — cosa impara, isola per isola
 
-Attualmente ci sono **30 isole** in **3 arcipelaghi** — l'intero percorso Cambridge **Starters → Movers → Flyers**. Lidia è arrivata alla **3ª isola**.
+Attualmente ci sono **40 isole** in **4 arcipelaghi**: l'intero percorso Cambridge **Starters → Movers → Flyers** (isole 1–30) più il nostro arcipelago **"Explorers"** (isole 31–40) — la tappa che consolida l'A2 e apre al **B1**, con la novità della **scrittura**. Lidia è arrivata alla **3ª isola**.
 
 ### 🏝️ Arcipelago 1 — STARTERS (isole 1–10) · *Le prime parole*
 
@@ -72,6 +74,23 @@ Attualmente ci sono **30 isole** in **3 arcipelaghi** — l'intero percorso Camb
 | 29 | Il Giardino degli Opposti | **Aggettivi** e **confronti** (big/small, comparativi) — anche lettura |
 | 30 | 🧙‍♂️ BOSS: Il Gran Mago dei Cieli | **Ripasso + esame Flyers** (storia e diploma) |
 
+### 🧭 Arcipelago 4 — EXPLORERS (isole 31–40) · *Il ponte verso il B1* — tappa nostra
+
+*Non è un livello Cambridge ufficiale: è la nostra tappa "A2+ → B1". Qui entra anche la **scrittura** (comporre le parole, ✏️).*
+
+| # | Isola | Cosa si impara (inglese) |
+|---|---|---|
+| 31 | Il Pianeta da Salvare | **Ambiente e riciclo** ("We should recycle…") — lettura e **scrittura** |
+| 32 | L'Accademia dei Saggi | Le **materie di scuola** ("My favourite subject is…") — lettura e **scrittura** |
+| 33 | Il Tempio del Benessere | **Abitudini sane** e i **consigli** ("You should…") — anche col **microfono** |
+| 34 | Il Porto dei Viaggi | **Viaggi e vacanze** (airport, hotel, passport…) — lettura e **scrittura** |
+| 35 | La Locanda del Gran Sapore | **Al ristorante**: ordinare con gentilezza ("I would like…") — microfono |
+| 36 | Il Teatro delle Meraviglie | **Spettacolo e musica** (movie, guitar, circus…) — lettura e **scrittura** |
+| 37 | Il Ponte delle Connessioni | **Comunicare e internet** (email, photo, website…) — lettura e **scrittura** |
+| 38 | La Galleria dei Ritratti | **Descrivere le persone** ("He is friendly", "She is…") — lettura e microfono |
+| 39 | Il Bivio dei Sogni | I **sogni** e il **"se…"** ("If I try, I will win", "I want to be a…") |
+| 40 | 🧭 BOSS: Il Sommo Esploratore | **Ripasso + esame Explorers** (storia, present perfect, diploma) |
+
 ---
 
 ## 3. Quali abilità stiamo allenando
@@ -84,21 +103,22 @@ L'inglese non è solo "parole": sono **cinque abilità**. Ecco come stiamo messi
 | 🧠 **Vocabolario** | 💪 Forte | Centinaia di parole sui temi Cambridge |
 | 🗣️ **Parlato / pronuncia** | ✅ Presente | Giochi col **microfono** ("Parla allo Specchio", "Ieri io…") |
 | 🃏 **Memoria** | 💪 Forte | I giochi Memory fissano le parole |
-| 📖 **Lettura** | 🌱 Iniziale | Alcune isole mostrano la parola **scritta** |
-| ✍️ **Scrittura / spelling** | ❌ Da introdurre | Comporre parole e poi frasi |
+| 📖 **Lettura** | ✅ In crescita | Tante isole mostrano la parola **scritta** (e nell'Arcipelago 4 si legge la frase) |
+| ✍️ **Scrittura / spelling** | 🌱 Iniziale | **Novità!** Nell'Arcipelago 4 si **compongono le parole** lettera per lettera (5 isole) |
 | 💬 **Conversazione libera** | ❌ Da introdurre | Parlare "a braccio", non solo rispondere |
 
-**In sintesi:** oggi il gioco è eccellente per **capire e riconoscere** l'inglese parlato, buono per la **pronuncia**, agli inizi per la **lettura**, e non copre ancora **scrittura** e **conversazione**. È esattamente giusto così per l'età di partenza — quelle abilità arrivano ai livelli successivi.
+**In sintesi:** oggi il gioco è eccellente per **capire e riconoscere** l'inglese parlato, buono per la **pronuncia**, in bella crescita per la **lettura**, e con i **primi passi nella scrittura** (comporre le parole). Resta da aggiungere la **conversazione libera** — l'ultimo grande passo verso la padronanza.
 
 ---
 
 ## 4. Cosa manca ancora nel percorso
 
-Con il **terzo arcipelago (Flyers, isole 21–30) ora costruito e doppiato**, l'intero percorso ufficiale Cambridge — Starters, Movers e Flyers — è coperto: il grande mondo (paesi e paesaggi), le emozioni, i materiali, la tecnologia, il mare, lo spazio, il **futuro** ("I will…"), il **present perfect** ("I have seen…"), aggettivi e confronti, fino al mini-esame Flyers. Tutte e 30 le isole hanno le **voci inglesi vere** (madrelingua). A ora restano **due abilità nuove** da aggiungere.
+Con il **quarto arcipelago (Explorers, isole 31–40) ora costruito**, il percorso ufficiale Cambridge (Starters → Movers → Flyers) è coperto **e superato**: si aggiungono ambiente e riciclo, le materie di scuola, le abitudini sane e i **consigli** ("You should…"), i viaggi, il ristorante ("I would like…"), spettacolo e musica, la tecnologia di tutti i giorni, il **descrivere le persone** ("He is…"), i **sogni e il "se…"** (first conditional) e un ripasso col present perfect, fino all'esame Explorers. Soprattutto, entra la **scrittura**: in 5 isole si **compongono le parole** lettera per lettera. Resta **una sola grande abilità** da aggiungere.
 
-### Le due abilità da aggiungere
-- ✍️ **Scrittura / spelling guidato**: dal comporre parole (lettera per lettera), a comporre frasi, a scrivere due righe su di sé. Serve un nuovo tipo di gioco dedicato.
-- 💬 **Conversazione**: un **compagno con cui parlare** (un assistente che ascolta e risponde a voce) per allenare il dialogo vero — la cosa che più avvicina alla padronanza.
+### L'abilità che manca ancora
+- 💬 **Conversazione**: un **compagno con cui parlare** (un assistente che ascolta e risponde a voce) per allenare il dialogo vero — la cosa che più avvicina alla padronanza. È il cuore di un possibile quinto arcipelago.
+
+> **Voci:** le 30 isole precedenti hanno le **voci inglesi vere** (madrelingua). Le 10 nuove isole (31–40) per ora usano la **voce del tablet**; diventeranno voci vere appena si generano i nuovi audio col generatore ElevenLabs (229 nuove clip).
 
 ---
 
@@ -111,23 +131,23 @@ Ecco il traguardo per tappe:
 | Tappa | Isole | Livello raggiunto | Cosa sa fare la bambina |
 |---|---|---|---|
 | **Fondamenta** | 1–20 | Verso A1 (Movers) | Capisce e riconosce tantissime parole, dice cose semplici |
-| **Diploma Young Learners** *(oggi completo)* | 21–30 | **A2 (Flyers)** | Comprende storie brevi, parla al passato/futuro, autonomia di base |
-| **Grande padronanza** | 31–40 | **A2+ → B1** | **Conversa**, legge racconti, scrive paragrafi, esprime opinioni ed emozioni |
-| *(Arricchimento facoltativo)* | 41–50 | B1 consolidato | Canzoni, cultura, storie lunghe, giochi di ruolo, dibattiti semplici |
+| **Diploma Young Learners** | 21–30 | **A2 (Flyers)** | Comprende storie brevi, parla al passato/futuro, autonomia di base |
+| **Explorers** *(oggi costruito)* | 31–40 | **A2+ → B1** | Legge frasi, **comincia a scrivere** (spelling), dà consigli, descrive persone, parla di sogni e futuro |
+| *(Prossimo passo)* | 41–50 | B1 consolidato | **Conversazione libera** con un compagno a voce, racconti lunghi, scrivere paragrafi |
 
 **Quante isole al massimo?**
-- **30 isole** completano ufficialmente il percorso Cambridge (Starters → Movers → Flyers) ≈ **livello A2 solido**.
-- **~40 isole** sono la stima realistica per una **"grandissima abilità" per la loro età**: capaci di **conversare**, leggere e scrivere.
-- Fino a **~50 isole** se vogliamo aggiungere arricchimenti (canzoni, cultura, storie lunghe) per rendere l'inglese davvero naturale e divertente a lungo termine.
+- **30 isole** completano il percorso Cambridge ufficiale (Starters → Movers → Flyers) ≈ **livello A2 solido**.
+- **40 isole** *(dove siamo ora)* aggiungono il nostro ponte **Explorers**: lettura di frasi, **primi passi nella scrittura**, temi e grammatica verso il **B1**.
+- Fino a **~50 isole** per la **vera padronanza parlata** (un compagno con cui **conversare** a voce) e arricchimenti (canzoni, cultura, storie lunghe).
 
-Detto in modo semplice: **con il terzo arcipelago il percorso "scolastico" ufficiale Cambridge è chiuso** (Starters → Movers → Flyers, ≈ A2). Con un quarto arcipelago si arriva alla **vera padronanza parlata** (conversazione e scrittura). Da lì in poi è tutto consolidamento e piacere.
+Detto in modo semplice: **il percorso "scolastico" ufficiale Cambridge è chiuso e superato** (Starters → Movers → Flyers + il nostro Explorers verso il B1). Manca l'ultimo grande passo — la **conversazione libera** — che porta alla vera padronanza parlata. Da lì in poi è tutto consolidamento e piacere.
 
 ---
 
 ## 6. In una frase
 
-> Oggi Isola Magica costruisce **l'orecchio e il vocabolario** (la base di tutto). I prossimi passi aggiungono **lettura, scrittura e conversazione**, portando le bambine — in circa **40 isole totali** — da "capiscono qualche parola" a "**parlano inglese**".
+> Oggi Isola Magica costruisce **l'orecchio, il vocabolario, la lettura** e i **primi passi nella scrittura** (con 40 isole). Manca solo la **conversazione libera**: è quella che porta le bambine da "capiscono e leggono l'inglese" a "**parlano inglese**".
 
 ---
 
-*Basato sul syllabus Cambridge English Young Learners (Starters/Movers/Flyers), sul quadro europeo CEFR (pre-A1 → B1) e sui principi dell'apprendimento linguistico infantile (ascolto prima di tutto, ripetizione spaziata, apprendimento giocoso).*
+*Basato sul syllabus Cambridge English Young Learners (Starters/Movers/Flyers) e, per il quarto arcipelago "Explorers", sui contenuti di Cambridge A2 Key → B1 Preliminary for Schools; sul quadro europeo CEFR (pre-A1 → B1) e sui principi dell'apprendimento linguistico infantile (ascolto prima di tutto, ripetizione spaziata, apprendimento giocoso). "Explorers" è una tappa creata da noi, ispirata alla scala Cambridge, non un livello/esame Cambridge ufficiale.*
