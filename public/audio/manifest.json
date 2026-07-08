@@ -876,6 +876,82 @@
     "text": "I like grapes! Give me the grapes, please!"
   },
   {
+    "file": "word_tomato.mp3",
+    "text": "tomato"
+  },
+  {
+    "file": "word_potato.mp3",
+    "text": "potato"
+  },
+  {
+    "file": "word_onion.mp3",
+    "text": "onion"
+  },
+  {
+    "file": "word_peas.mp3",
+    "text": "peas"
+  },
+  {
+    "file": "word_corn.mp3",
+    "text": "corn"
+  },
+  {
+    "file": "word_pepper.mp3",
+    "text": "pepper"
+  },
+  {
+    "file": "word_cucumber.mp3",
+    "text": "cucumber"
+  },
+  {
+    "file": "word_mushroom.mp3",
+    "text": "mushroom"
+  },
+  {
+    "file": "word_broccoli.mp3",
+    "text": "broccoli"
+  },
+  {
+    "file": "prompt_veg_carrot.mp3",
+    "text": "Find the carrot!"
+  },
+  {
+    "file": "prompt_veg_tomato.mp3",
+    "text": "Find the tomato!"
+  },
+  {
+    "file": "prompt_veg_potato.mp3",
+    "text": "Find the potato!"
+  },
+  {
+    "file": "prompt_veg_onion.mp3",
+    "text": "Find the onion!"
+  },
+  {
+    "file": "prompt_veg_peas.mp3",
+    "text": "Find the peas!"
+  },
+  {
+    "file": "prompt_veg_corn.mp3",
+    "text": "Find the corn!"
+  },
+  {
+    "file": "prompt_veg_pepper.mp3",
+    "text": "Find the pepper!"
+  },
+  {
+    "file": "prompt_veg_cucumber.mp3",
+    "text": "Find the cucumber!"
+  },
+  {
+    "file": "prompt_veg_mushroom.mp3",
+    "text": "Find the mushroom!"
+  },
+  {
+    "file": "prompt_veg_broccoli.mp3",
+    "text": "Find the broccoli!"
+  },
+  {
     "file": "prompt_house_bed.mp3",
     "text": "Find the bed!"
   },
@@ -2028,16 +2104,8 @@
     "text": "Can I have some carrot, please?"
   },
   {
-    "file": "word_tomato.mp3",
-    "text": "tomato"
-  },
-  {
     "file": "prompt_market_tomato.mp3",
     "text": "Can I have some tomato, please?"
-  },
-  {
-    "file": "word_potato.mp3",
-    "text": "potato"
   },
   {
     "file": "prompt_market_potato.mp3",
