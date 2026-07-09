@@ -4,6 +4,11 @@ import { useState, useRef, useMemo } from "react";
 import { ARC8_ISLANDS } from "../src/comprehension.js";
 import { ARC9_ISLANDS } from "../src/exams.js";
 import { ARC10_ISLANDS } from "../src/dialogues.js";
+import {
+  GRAM_QUESTIONS, GRAM_NEGATIVES, GRAM_PAST, GRAM_COMPARE, GRAM_CONDITIONAL,
+  CLOZE_VERBFORMS, CLOZE_ARTICLES, CLOZE_TOBE, CLOZE_QUANTIFIERS,
+  GRAM_BOSS_ORDER, GRAM_EXAM,
+} from "../src/grammar.js";
 
 /* ═══════════════════════════════════════════════════════════
    ISOLA MAGICA — Generatore Audio Batch (ElevenLabs)
@@ -484,28 +489,26 @@ function buildManifest() {
   // Battute delle storie dell'Arcipelago 6 senza {name}
   STORY6_G.forEach((t, i) => add(`story6_${i + 1}`, t));
 
-  /* ═══════════ ARCIPELAGO 8 · LETTURA E ASCOLTO (isole 72-81) — NUOVE ═══════════ */
-  // Si incide lo STIMOLO condiviso di ogni scena (il testo letto dal 🔊 e, per le
-  // scene "listen", l'audio da ascoltare). Le domande/opzioni non sono parlate.
+  /* ═══════════ ARCIPELAGO 8 · LETTURA E ASCOLTO (isole 72-81) — GIÀ INCISE ═══════════ */
+  // Lo STIMOLO condiviso di ogni scena (testo letto / audio da ascoltare).
   let a8 = 0;
   for (const isl of ARC8_ISLANDS)
     for (const g of isl.games || [])
       for (const sc of (g.cfg && g.cfg.pool) || [])
-        if (sc && sc.text) addN(`arc8_${++a8}`, sc.text);
+        if (sc && sc.text) add(`arc8_${++a8}`, sc.text);
 
-  /* ═══════════ ARCIPELAGO 9 · L'ACCADEMIA DEGLI ESAMI (isole 82-91) — NUOVE ═══════════ */
-  // Si incide la frase parlata (say) di ogni indizio: è ciò che dice la voce quando
-  // il bimbo tocca l'indizio (e che parte da sola nei round in ascolto).
+  /* ═══════════ ARCIPELAGO 9 · L'ACCADEMIA DEGLI ESAMI (isole 82-91) — GIÀ INCISE ═══════════ */
+  // La frase parlata (say) di ogni indizio d'abbinamento.
   let a9 = 0;
   for (const isl of ARC9_ISLANDS)
     for (const g of isl.games || [])
       for (const r of (g.cfg && g.cfg.pool) || [])
         for (const p of r.pairs || [])
-          if (p && p.say) addN(`arc9_${++a9}`, p.say);
+          if (p && p.say) add(`arc9_${++a9}`, p.say);
 
-  /* ═══════════ ARCIPELAGO 10 · IL GRANDE PALCO (isole 92-101) — NUOVE ═══════════ */
-  // Si incidono le battute del compagno (npc) e le risposte del bimbo (en) SENZA
-  // {name}: quelle personalizzate col nome restano voce sintetica (come nelle chat).
+  /* ═══════════ ARCIPELAGO 10 · IL GRANDE PALCO (isole 92-101) — GIÀ INCISE ═══════════ */
+  // Battute del compagno (npc) e risposte del bimbo (en) SENZA {name}: quelle
+  // personalizzate col nome restano voce sintetica (il nome cambia a ogni profilo).
   let a10 = 0;
   const hasName = (s) => /\{name\}/.test(s || "");
   for (const isl of ARC10_ISLANDS)
@@ -513,11 +516,22 @@ function buildManifest() {
       const nodes = (g.cfg && g.cfg.nodes) || {};
       for (const id of Object.keys(nodes)) {
         const n = nodes[id];
-        if (n.npc && !hasName(n.npc)) addN(`arc10_${++a10}`, n.npc);
+        if (n.npc && !hasName(n.npc)) add(`arc10_${++a10}`, n.npc);
         for (const c of n.choices || [])
-          if (c.en && !hasName(c.en)) addN(`arc10_${++a10}`, c.en);
+          if (c.en && !hasName(c.en)) add(`arc10_${++a10}`, c.en);
       }
     }
+
+  /* ═══════════ ARCIPELAGO 7 · LA PALESTRA DELLA GRAMMATICA (isole 62-71) — NUOVE ═══════════ */
+  // Ultimo blocco così le frasi già incise in altri arcipelaghi vincono il dedup e
+  // NON vengono re-incise. order/cloze: la frase completa (sayText), letta dal 🔊 e a
+  // ogni successo. Esame del boss: la domanda (letta all'inizio) e la risposta (al successo).
+  const ORDER7 = [...GRAM_QUESTIONS, ...GRAM_NEGATIVES, ...GRAM_PAST, ...GRAM_COMPARE, ...GRAM_CONDITIONAL, ...GRAM_BOSS_ORDER];
+  const CLOZE7 = [...CLOZE_VERBFORMS, ...CLOZE_ARTICLES, ...CLOZE_TOBE, ...CLOZE_QUANTIFIERS];
+  let a7 = 0;
+  ORDER7.forEach((t) => { if (t.sayText) addN(`arc7_${++a7}`, t.sayText); });
+  CLOZE7.forEach((t) => { if (t.sayText) addN(`arc7_${++a7}`, t.sayText); });
+  GRAM_EXAM.forEach((t) => { if (t.q) addN(`arc7_${++a7}`, t.q); if (t.a) addN(`arc7_${++a7}`, t.a); });
 
   /* dedup per TESTO normalizzato: ogni frase distinta = una sola clip
      (stessa normalizzazione del gioco → nessuno spreco di crediti) */
@@ -717,7 +731,7 @@ export default function App() {
           🎙️ Isola Magica — <span style={{ color: "#F5C64F" }}>Generatore Audio</span>
         </h1>
         <p style={{ color: "#CDBBF2", fontSize: 14, textAlign: "center", margin: 0 }}>
-          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (Arcipelaghi 8-10: comprensione, abbinamenti, dialoghi) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
+          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (Arcipelago 7: la grammatica) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
         </p>
 
         {/* credentials */}
@@ -770,7 +784,7 @@ export default function App() {
         {/* scope della generazione */}
         <label style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", color: "#CDBBF2", fontSize: 14, cursor: "pointer" }}>
           <input type="checkbox" checked={genAll} onChange={(e) => setGenAll(e.target.checked)} disabled={status === "running"} style={{ width: 18, height: 18 }} />
-          Rigenera <b>anche</b> le isole 1-61 (di default incide solo le <b>{newCount} nuove</b>)
+          Rigenera <b>anche</b> le isole già incise (1-61 e 72-101) — di default incide solo le <b>{newCount} nuove</b>
         </label>
 
         {/* actions */}
