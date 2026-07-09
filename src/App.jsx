@@ -12,6 +12,8 @@ import {
   SHOP, SHOP_CATS, isOwned, XP_PER_CORRECT, XP_PER_STAR,
 } from "./progression";
 import { ARC8_ISLANDS } from "./comprehension.js";
+import { ARC9_ISLANDS } from "./exams.js";
+import { ARC10_ISLANDS } from "./dialogues.js";
 
 /* ═══════════════════════════════════════════════════════════
    SILVANA E IL REGNO INCANTATO — PWA
@@ -1058,6 +1060,153 @@ function ReadSceneGame({ speak, cfg, name, onGem, onMiss, onDone }) {
   );
 }
 
+/* Abbinamenti (Arcipelago 9 · L'Accademia degli Esami): a schermo una colonna di
+   INDIZI a sinistra e una di FIGURE/RISPOSTE a destra (mescolate, con eventuali
+   distrattori). Il bambino tocca un indizio (lo sente) e poi la figura giusta.
+   Stile Cambridge A2 Key (Listening Part 5 / abbinamenti di lettura). Ogni round
+   ha 3-4 coppie con UNA sola corrispondenza corretta. Tutto CHIUSO e corretto sul
+   dispositivo — zero AI, zero costi. Con cfg.diploma mostra la pagella finale. */
+function MatchGame({ speak, cfg, name, onGem, onMiss, onDone }) {
+  const rounds = cfg.pool;
+  const [ri, setRi] = useState(0);
+  const [sel, setSel] = useState(null);      // indice dell'indizio scelto a sinistra
+  const [doneL, setDoneL] = useState([]);    // indizi già abbinati
+  const [doneR, setDoneR] = useState([]);    // figure già abbinate (indici nell'array mescolato)
+  const [rights, setRights] = useState([]);  // [{r, emoji}] mescolate + distrattori
+  const [wrongR, setWrongR] = useState(null);
+  const [burst, setBurst] = useState(0);
+  const [finished, setFinished] = useState(false);
+  const mistakes = useRef(0);
+
+  const round = rounds[ri];
+  const listen = !!(round && round.listen);
+
+  useEffect(() => {
+    if (!round) return;
+    const base = round.pairs.map((p) => ({ r: p.r, emoji: p.emoji }));
+    const ex = (round.extra || []).map((e) => ({ r: e.r, emoji: e.emoji }));
+    setRights(shuffle([...base, ...ex]));
+    setDoneL([]); setDoneR([]); setWrongR(null);
+    if (round.listen) {
+      // ascolto: il primo indizio è già "attivo" e parte da solo → si tocca la figura
+      setSel(0);
+      const t = setTimeout(() => audio.whenIdle().then(() => speak(round.pairs[0].say)), 500);
+      return () => clearTimeout(t);
+    }
+    setSel(null);
+  }, [ri]); // eslint-disable-line
+
+  const selectLeft = (li) => {
+    if (doneL.includes(li)) return;
+    setSel(li); speak(round.pairs[li].say);
+  };
+
+  const pickRight = (rIdx) => {
+    if (sel === null || doneR.includes(rIdx) || !round) return;
+    if (rights[rIdx].r === round.pairs[sel].r) {
+      const nL = [...doneL, sel];
+      setDoneL(nL); setDoneR([...doneR, rIdx]); setBurst((b) => b + 1); onGem([]);
+      setTimeout(() => speak(PRAISE[rand(PRAISE.length)]), 150);
+      if (nL.length === round.pairs.length) {
+        setSel(null);
+        setTimeout(() => {
+          if (ri + 1 >= rounds.length) {
+            if (cfg.diploma) setFinished(true);
+            else onDone(mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1);
+          } else setRi((x) => x + 1);
+        }, 1100);
+      } else if (round.listen) {
+        // ascolto guidato: passa al prossimo indizio e fallo partire
+        const nextLi = round.pairs.findIndex((_, i) => !nL.includes(i));
+        setSel(nextLi);
+        if (nextLi >= 0) setTimeout(() => audio.whenIdle().then(() => speak(round.pairs[nextLi].say)), 800);
+      } else {
+        setSel(null);
+      }
+    } else {
+      mistakes.current += 1; onMiss([]); setWrongR(rIdx);
+      setTimeout(() => setWrongR(null), 550);
+    }
+  };
+
+  if (finished) {
+    const stars = mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1;
+    const totalPairs = rounds.reduce((s, r) => s + r.pairs.length, 0);
+    return (
+      <div className="flex flex-col items-center gap-4 text-center">
+        <SparkleBurst trigger={1} />
+        <div className="text-6xl gem-pop">🎓</div>
+        <h3 className="display text-2xl" style={{ color: "#F5C64F" }}>Diploma di {cfg.diploma}</h3>
+        <div className="rounded-2xl px-6 py-5" style={{ background: "#ffffff10", border: "2px solid #F5C64F55" }}>
+          <p className="display text-xl" style={{ color: "#F6F1FF" }}>{name}</p>
+          <p className="text-sm" style={{ color: "#CDBBF2" }}>ha superato l'esame dell'Accademia!</p>
+          <div className="text-2xl mt-2">{[1, 2, 3].map((i) => <span key={i} style={{ opacity: i <= stars ? 1 : 0.25 }}>⭐</span>)}</div>
+          <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{Math.max(0, totalPairs - mistakes.current)}/{totalPairs} al primo colpo</p>
+        </div>
+        <button onClick={() => onDone(stars)} className="listen-btn" style={{ fontSize: "1.15rem", padding: "14px 32px" }}>🎉 Evviva!</button>
+      </div>
+    );
+  }
+
+  if (!round) return null;
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <SparkleBurst trigger={burst} />
+      {rounds.length > 1 && <ProgressPips total={rounds.length} done={ri} />}
+      <p className="text-lg font-semibold text-center" style={{ color: "#CDBBF2" }}>{cfg.hintIt}</p>
+      <p className="text-sm text-center" style={{ color: "#9F8CC9" }}>{round.it}</p>
+      <div className="flex gap-4 w-full justify-center" style={{ maxWidth: 480 }}>
+        {/* ── colonna INDIZI (sinistra) ── */}
+        <div className="flex flex-col gap-3 flex-1">
+          {round.pairs.map((p, li) => {
+            const isDone = doneL.includes(li);
+            const isSel = sel === li;
+            return (
+              <button key={li} onClick={() => selectLeft(li)} disabled={isDone}
+                style={{
+                  padding: "12px 12px", borderRadius: 14, fontWeight: 700, fontSize: listen ? 16 : 15,
+                  textAlign: "left", transition: "all .15s",
+                  color: isDone ? "#1E5C34" : "#4A2F8E",
+                  background: isDone ? "#D8F5DF" : "#F6F1FF",
+                  border: isSel ? "3px solid #F5C64F" : "3px solid transparent",
+                  boxShadow: isDone ? "0 3px 0 #A9DDB8" : "0 3px 0 #C9B6EE",
+                  opacity: isDone ? 0.92 : 1,
+                }}>
+                {isDone ? "✅ " : ""}{listen ? `🎧 Indizio ${li + 1}` : p.l}
+              </button>
+            );
+          })}
+        </div>
+        {/* ── colonna FIGURE/RISPOSTE (destra) ── */}
+        <div className="flex flex-col gap-3 flex-1">
+          {rights.map((rt, rIdx) => {
+            const isDone = doneR.includes(rIdx);
+            const hasEmoji = !!rt.emoji;
+            return (
+              <button key={rIdx} onClick={() => pickRight(rIdx)} disabled={isDone || sel === null}
+                className={wrongR === rIdx ? "shake" : ""}
+                style={{
+                  padding: hasEmoji ? "8px 8px" : "12px 10px", borderRadius: 14, transition: "all .15s",
+                  display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 2,
+                  background: isDone ? "#D8F5DF" : "#F6F1FF",
+                  border: isDone ? "3px solid #7FE0A3" : "3px solid transparent",
+                  boxShadow: isDone ? "0 3px 0 #A9DDB8" : "0 3px 0 #C9B6EE",
+                  opacity: isDone ? 0.92 : sel === null ? 0.72 : 1,
+                }}>
+                {hasEmoji && <span style={{ fontSize: 40, lineHeight: 1 }}>{rt.emoji}</span>}
+                {rt.r && <span className="font-extrabold" style={{ color: isDone ? "#1E5C34" : "#4A2F8E", fontSize: hasEmoji ? 14 : 16, textAlign: "center" }}>{rt.r}</span>}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <p className="text-xs text-center" style={{ color: "#7A68A8" }}>
+        {sel === null ? "1) Tocca un indizio a sinistra 👈" : "2) Ora tocca la risposta giusta a destra 👉"}
+      </p>
+    </div>
+  );
+}
+
 /* Storia interattiva a bivi (BOSS): ogni scelta porta avanti, tutti vincono */
 function StoryGame({ speak, story, name, onGem, onDone }) {
   const [nodeId, setNodeId] = useState(story.start);
@@ -1325,6 +1474,123 @@ function ChatGame({ speak, cfg, name, onGem, onDone }) {
               boxShadow: chosen === r ? "none" : "0 4px 0 #C9B6EE", transition: "all .15s" }}>
             <span className="font-extrabold" style={{ color: chosen === r ? "#fff" : "#4A2F8E", fontSize: 16 }}>
               {r.emoji ? r.emoji + " " : ""}{r.en}
+            </span>
+          </button>
+        ))}
+      </div>
+      {supported && !chosen && (
+        <button onClick={listen} disabled={listening} className={`mic-btn ${listening ? "mic-pulse" : ""}`}
+          style={{ background: listening ? "#E8455A" : "linear-gradient(180deg,#8E5FD9,#5A3AA0)" }}>
+          {listening ? "🎙️ Ti ascolto…" : "🎤 Dillo tu"}
+        </button>
+      )}
+      {heard && !chosen && <p className="text-sm text-center" style={{ color: "#F5A9B8" }}>ho sentito: "{heard}" — o tocca una risposta</p>}
+    </div>
+  );
+}
+
+/* Dialogo RAMIFICATO (Arcipelago 10 · Il Grande Palco): una conversazione a
+   scelte multiple che si DIRAMA — la risposta scelta decide la battuta successiva
+   del compagno. Come StoryGame ma in forma di chat con voce e microfono. Nessun
+   fallimento: ogni ramo arriva a un finale caloroso. Scenari di vita reale
+   (parco, negozio, scuola, dottore…). Introduce la conversazione libera guidata
+   (verso B1). NON è una chat AI: sono grafi di dialogo scritti, testati e sicuri.
+   Con cfg.diploma il finale mostra la pagella-diploma. */
+function DialogueGame({ speak, cfg, name, onGem, onDone }) {
+  const nodes = cfg.nodes;
+  const [nodeId, setNodeId] = useState(cfg.start);
+  const [chosen, setChosen] = useState(null);
+  const [listening, setListening] = useState(false);
+  const [heard, setHeard] = useState("");
+  const [burst, setBurst] = useState(0);
+  const stopRef = useRef(null);
+  const supported = micSupported();
+  const fill = (s) => String(s || "").replace(/\{name\}/g, name || "friend");
+  const node = nodes[nodeId];
+
+  useEffect(() => {
+    if (!node) return;
+    setChosen(null); setHeard("");
+    const t = setTimeout(() => audio.whenIdle().then(() => speak(fill(node.npc))), 500);
+    return () => clearTimeout(t);
+  }, [nodeId]); // eslint-disable-line
+
+  useEffect(() => () => { if (stopRef.current) stopRef.current(); }, []);
+
+  const choose = (c) => {
+    if (chosen) return;
+    setChosen(c); setBurst((b) => b + 1); onGem([]);
+    speak(fill(c.en));
+    setTimeout(() => setNodeId(c.next), 1250);
+  };
+
+  const listen = () => {
+    if (listening || chosen || !node.choices) return;
+    setListening(true); setHeard("");
+    stopRef.current = listenOnce({ onResult: (alts) => {
+      setListening(false);
+      if (!alts) return;
+      setHeard(alts[0] || "");
+      const m = node.choices.find((c) => matchesSpoken(alts, fill(c.en)));
+      if (m) choose(m);
+    } });
+  };
+
+  if (!node) return null;
+
+  // ── finale (nodo end) ──
+  if (node.end) {
+    if (cfg.diploma) {
+      return (
+        <div className="flex flex-col items-center gap-4 text-center">
+          <SparkleBurst trigger={1} />
+          <div className="text-6xl gem-pop">🎓</div>
+          <h3 className="display text-2xl" style={{ color: "#F5C64F" }}>Diploma di {cfg.diploma}</h3>
+          <div className="rounded-2xl px-6 py-5" style={{ background: "#ffffff10", border: "2px solid #F5C64F55" }}>
+            <p className="display text-xl" style={{ color: "#F6F1FF" }}>{name}</p>
+            <p className="display text-base mt-1" style={{ color: "#F6F1FF" }}>{fill(node.npc)}</p>
+            <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{fill(node.npcIt)}</p>
+            <div className="text-2xl mt-2">⭐⭐⭐</div>
+          </div>
+          <button onClick={() => onDone(3)} className="listen-btn" style={{ fontSize: "1.15rem", padding: "14px 32px" }}>🎉 Evviva!</button>
+        </div>
+      );
+    }
+    return (
+      <div className="flex flex-col items-center gap-5 w-full">
+        <SparkleBurst trigger={1} />
+        <div className="text-7xl float">{cfg.companion?.emoji || "🙂"}</div>
+        <div className="rounded-3xl px-5 py-4 text-center" style={{ background: "#ffffff10", border: "2px solid #ffffff22", maxWidth: 440 }}>
+          <p className="display text-lg" style={{ color: "#F6F1FF" }}>{fill(node.npc)}</p>
+          <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{fill(node.npcIt)}</p>
+        </div>
+        <button onClick={() => onDone(3)} className="listen-btn" style={{ fontSize: "1.2rem", padding: "16px 36px" }}>🎉 Evviva!</button>
+      </div>
+    );
+  }
+
+  // ── turno di conversazione ──
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <SparkleBurst trigger={burst} />
+      <div className="flex items-center gap-2">
+        <span className="text-4xl">{cfg.companion?.emoji || "🙂"}</span>
+        <span className="display" style={{ color: "#CDBBF2" }}>{cfg.companion?.name || "Friend"}</span>
+      </div>
+      <div className="rounded-3xl px-5 py-4 text-center" style={{ background: "#ffffff12", border: "2px solid #ffffff26", maxWidth: 440 }}>
+        <p className="display text-lg" style={{ color: "#F6F1FF" }}>{fill(node.npc)}</p>
+        <p className="text-sm mt-1" style={{ color: "#9F8CC9" }}>{fill(node.npcIt)}</p>
+      </div>
+      <button onClick={() => speak(fill(node.npc))} className="listen-btn">🔊 Riascolta</button>
+      <p className="text-sm font-semibold text-center" style={{ color: "#CDBBF2" }}>{cfg.hintIt || "Rispondi: tocca o di' la tua risposta 🎤"}</p>
+      <div className="flex flex-col gap-3 w-full items-center">
+        {(node.choices || []).map((c, i) => (
+          <button key={i} onClick={() => choose(c)} disabled={!!chosen}
+            style={{ width: "100%", maxWidth: 420, padding: "14px 16px", borderRadius: 20, border: "none",
+              background: chosen === c ? "linear-gradient(180deg,#3DBE6B,#2E9A54)" : "#F6F1FF",
+              boxShadow: chosen === c ? "none" : "0 4px 0 #C9B6EE", transition: "all .15s" }}>
+            <span className="font-extrabold" style={{ color: chosen === c ? "#fff" : "#4A2F8E", fontSize: 16 }}>
+              {c.emoji ? c.emoji + " " : ""}{fill(c.en)}
             </span>
           </button>
         ))}
@@ -3978,6 +4244,12 @@ const ISLANDS = [
 
   /* ═══ ARCIPELAGO 8 · LETTURA E ASCOLTO (isole 72-81) — dati in comprehension.js ═══ */
   ...ARC8_ISLANDS,
+
+  /* ═══ ARCIPELAGO 9 · L'ACCADEMIA DEGLI ESAMI (isole 82-91) — dati in exams.js ═══ */
+  ...ARC9_ISLANDS,
+
+  /* ═══ ARCIPELAGO 10 · IL GRANDE PALCO (isole 92-101) — dati in dialogues.js ═══ */
+  ...ARC10_ISLANDS,
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -4701,7 +4973,7 @@ export default function App() {
               const unlocked = isUnlocked(idx);
               const done = isl.games ? islandDone(isl) : false;
               const totalStars = isl.games ? isl.games.reduce((s, g) => s + starsOf(isl.id, g.key), 0) : 0;
-              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 11 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 21 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 31 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : idx === 41 ? "🎙️ Arcipelago 5 · La Voce — la conversazione (verso il B1)" : idx === 51 ? "🌍 Arcipelago 6 · Il Mondo Reale — arricchimento (B1+)" : idx === 61 ? "🏗️ Arcipelago 7 · La Palestra della Grammatica — la produzione (in stile A2 Key)" : idx === 71 ? "📖 Arcipelago 8 · Lettura e Ascolto — la comprensione (in stile A2 Key)" : null;
+              const archLabel = idx === 0 ? "🏰 Arcipelago 1 · Il Regno Incantato — Starters" : idx === 11 ? "☁️ Arcipelago 2 · Le Terre di Mezzo — Movers" : idx === 21 ? "🌍 Arcipelago 3 · Il Grande Mondo — Flyers" : idx === 31 ? "🧭 Arcipelago 4 · Gli Esploratori — il ponte verso il B1" : idx === 41 ? "🎙️ Arcipelago 5 · La Voce — la conversazione (verso il B1)" : idx === 51 ? "🌍 Arcipelago 6 · Il Mondo Reale — arricchimento (B1+)" : idx === 61 ? "🏗️ Arcipelago 7 · La Palestra della Grammatica — la produzione (in stile A2 Key)" : idx === 71 ? "📖 Arcipelago 8 · Lettura e Ascolto — la comprensione (in stile A2 Key)" : idx === 81 ? "🎓 Arcipelago 9 · L'Accademia degli Esami — abbinamenti e prove (in stile A2 Key)" : idx === 91 ? "🎭 Arcipelago 10 · Il Grande Palco — la conversazione a scelte (verso il B1)" : null;
               return (
                 <Fragment key={isl.id}>
                 {archLabel && (
@@ -4856,6 +5128,14 @@ export default function App() {
           {currentGame.type === "readscene" && (
             <ReadSceneGame speak={speak} cfg={currentGame.cfg} name={playerName}
               onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "matching" && (
+            <MatchGame speak={speak} cfg={currentGame.cfg} name={playerName}
+              onGem={onGem} onMiss={onMiss} onDone={finishGame(currentIsland.id, currentGame.key)} />
+          )}
+          {currentGame.type === "dialogue" && (
+            <DialogueGame speak={speak} cfg={currentGame.cfg} name={playerName}
+              onGem={onGem} onDone={finishGame(currentIsland.id, currentGame.key)} />
           )}
         </div>
       )}
