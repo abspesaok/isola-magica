@@ -1,10 +1,17 @@
 import { useState, useRef, useMemo } from "react";
+// Dati PURI (nessun React): li importiamo per rispecchiare ESATTAMENTE il gioco
+// senza ri-trascrivere a mano le frasi dei nuovi arcipelaghi 8-10.
+import { ARC8_ISLANDS } from "../src/comprehension.js";
+import { ARC9_ISLANDS } from "../src/exams.js";
+import { ARC10_ISLANDS } from "../src/dialogues.js";
 
 /* ═══════════════════════════════════════════════════════════
    ISOLA MAGICA — Generatore Audio Batch (ElevenLabs)
-   Costruisce ~670 clip MP3 da tutte le frasi del gioco (isole 1-20)
+   Costruisce le clip MP3 da tutte le frasi del gioco (isole 1-101)
    e le scarica in un unico ZIP (+ manifest.json).
    La API key vive solo in memoria: mai salvata, mai loggata.
+   Le "nuove" da incidere ora sono gli Arcipelaghi 8-10 (comprensione,
+   abbinamenti, dialoghi ramificati); le 1-61 sono già incise.
    ═══════════════════════════════════════════════════════════ */
 
 /* ─── Game data (must mirror the game exactly) ─── */
@@ -204,9 +211,9 @@ function buildManifest() {
   /* prompts — Isola 4 */
   FOOD.forEach((f) => add(`prompt_food_${slug(f)}`, `I like ${f}! Give me the ${f}, please!`));
 
-  /* Isola 5 · L'Orto Reale — verdure (NUOVE, da incidere) */
-  VEGETABLES.forEach((v) => { if (!M.some((m) => m.file === `word_${slug(v)}.mp3`)) addN(`word_${slug(v)}`, v); });
-  VEGETABLES.forEach((v) => addN(`prompt_veg_${slug(v)}`, `Find the ${v}!`));
+  /* Isola 5 · L'Orto Reale — verdure (GIÀ INCISE) */
+  VEGETABLES.forEach((v) => { if (!M.some((m) => m.file === `word_${slug(v)}.mp3`)) add(`word_${slug(v)}`, v); });
+  VEGETABLES.forEach((v) => add(`prompt_veg_${slug(v)}`, `Find the ${v}!`));
 
   /* prompts — Isola 5 */
   HOUSE.forEach((h) => add(`prompt_house_${slug(h)}`, `Find the ${h}!`));
@@ -477,6 +484,41 @@ function buildManifest() {
   // Battute delle storie dell'Arcipelago 6 senza {name}
   STORY6_G.forEach((t, i) => add(`story6_${i + 1}`, t));
 
+  /* ═══════════ ARCIPELAGO 8 · LETTURA E ASCOLTO (isole 72-81) — NUOVE ═══════════ */
+  // Si incide lo STIMOLO condiviso di ogni scena (il testo letto dal 🔊 e, per le
+  // scene "listen", l'audio da ascoltare). Le domande/opzioni non sono parlate.
+  let a8 = 0;
+  for (const isl of ARC8_ISLANDS)
+    for (const g of isl.games || [])
+      for (const sc of (g.cfg && g.cfg.pool) || [])
+        if (sc && sc.text) addN(`arc8_${++a8}`, sc.text);
+
+  /* ═══════════ ARCIPELAGO 9 · L'ACCADEMIA DEGLI ESAMI (isole 82-91) — NUOVE ═══════════ */
+  // Si incide la frase parlata (say) di ogni indizio: è ciò che dice la voce quando
+  // il bimbo tocca l'indizio (e che parte da sola nei round in ascolto).
+  let a9 = 0;
+  for (const isl of ARC9_ISLANDS)
+    for (const g of isl.games || [])
+      for (const r of (g.cfg && g.cfg.pool) || [])
+        for (const p of r.pairs || [])
+          if (p && p.say) addN(`arc9_${++a9}`, p.say);
+
+  /* ═══════════ ARCIPELAGO 10 · IL GRANDE PALCO (isole 92-101) — NUOVE ═══════════ */
+  // Si incidono le battute del compagno (npc) e le risposte del bimbo (en) SENZA
+  // {name}: quelle personalizzate col nome restano voce sintetica (come nelle chat).
+  let a10 = 0;
+  const hasName = (s) => /\{name\}/.test(s || "");
+  for (const isl of ARC10_ISLANDS)
+    for (const g of isl.games || []) {
+      const nodes = (g.cfg && g.cfg.nodes) || {};
+      for (const id of Object.keys(nodes)) {
+        const n = nodes[id];
+        if (n.npc && !hasName(n.npc)) addN(`arc10_${++a10}`, n.npc);
+        for (const c of n.choices || [])
+          if (c.en && !hasName(c.en)) addN(`arc10_${++a10}`, c.en);
+      }
+    }
+
   /* dedup per TESTO normalizzato: ogni frase distinta = una sola clip
      (stessa normalizzazione del gioco → nessuno spreco di crediti) */
   const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -675,7 +717,7 @@ export default function App() {
           🎙️ Isola Magica — <span style={{ color: "#F5C64F" }}>Generatore Audio</span>
         </h1>
         <p style={{ color: "#CDBBF2", fontSize: 14, textAlign: "center", margin: 0 }}>
-          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (Isola 5 · L'Orto Reale) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
+          {manifest.length} clip totali · {genAll ? `rigenero tutte le ${genQueue.length}` : `${newCount} nuove (Arcipelaghi 8-10: comprensione, abbinamenti, dialoghi) da incidere`} · {totalChars.toLocaleString("it-IT")} caratteri · la API key resta solo in memoria
         </p>
 
         {/* credentials */}
@@ -728,7 +770,7 @@ export default function App() {
         {/* scope della generazione */}
         <label style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", color: "#CDBBF2", fontSize: 14, cursor: "pointer" }}>
           <input type="checkbox" checked={genAll} onChange={(e) => setGenAll(e.target.checked)} disabled={status === "running"} style={{ width: 18, height: 18 }} />
-          Rigenera <b>anche</b> le isole 1-60 (di default incide solo le <b>{newCount} nuove</b>)
+          Rigenera <b>anche</b> le isole 1-61 (di default incide solo le <b>{newCount} nuove</b>)
         </label>
 
         {/* actions */}
