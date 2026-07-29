@@ -2884,7 +2884,9 @@ const ISLANDS = [
     ],
   },
   {
-    id: "garden",
+    // id "orchard" (era "garden", collideva con Il Giardino Reale — isola 9). La
+    // migrazione delle stelle vive in src/storage.js:normalizeProgress().
+    id: "orchard",
     name: "L'Orto Reale",
     emoji: "🥕",
     sub: "Le verdure",
@@ -2906,7 +2908,7 @@ const ISLANDS = [
         },
       },
       {
-        key: "memoryGarden", emoji: "🥗", title: "Memory dell'Orto", type: "memory",
+        key: "memoryOrchard", emoji: "🥗", title: "Memory dell'Orto", type: "memory",
         cfg: {
           pool: VEGETABLES,
           keyOf: (a) => a.en, sayOf: (a) => a.en,
