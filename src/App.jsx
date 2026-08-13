@@ -237,7 +237,17 @@ const NUMBER_WORDS = [
 const ROUNDS = 8;
 const PRAISE = ["Great job!", "Wonderful!", "Perfect!", "Amazing!", "Well done!", "Fantastic!"];
 
-const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+/* Fisher-Yates: mescolata UNIFORME. (Prima era `sort(() => Math.random() - 0.5)`:
+   comparatore incoerente → V8 restituisce ordini fortemente sbilanciati, quindi le
+   carte del Memory restavano spesso vicine alla posizione di partenza.) */
+const shuffle = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
 const rand = (n) => Math.floor(Math.random() * n);
 
 /* ─── Render/style condivisi per i giochi (compattezza) ─── */
@@ -467,6 +477,13 @@ function MemoryGame({ speak, cfg, onGem, onDone }) {
   const [moves, setMoves] = useState(0);
   const [burst, setBurst] = useState(0);
   const lock = useRef(false);
+  // Specchi SINCRONI dello stato: un bimbo tocca due carte nello stesso istante e
+  // il secondo tocco leggerebbe `open`/`matched` ancora vecchi (React aggiorna lo
+  // stato in modo asincrono) → il tocco veniva ignorato e la coppia non si contava.
+  const openRef = useRef([]);
+  const matchedRef = useRef([]);
+  const movesRef = useRef(0);
+  const doneRef = useRef(false); // il finale scatta una volta sola
 
   useEffect(() => {
     const chosen = shuffle(cfg.pool).slice(0, PAIRS);
@@ -479,34 +496,43 @@ function MemoryGame({ speak, cfg, onGem, onDone }) {
   }, []); // eslint-disable-line
 
   const flip = (i) => {
-    if (lock.current || open.includes(i) || matched.includes(i)) return;
+    if (lock.current || openRef.current.includes(i) || matchedRef.current.includes(i)) return;
     const card = cards[i];
+    if (!card) return;
     speak(cfg.sayOf(card.item));
-    const nowOpen = [...open, i];
+    const nowOpen = [...openRef.current, i];
+    openRef.current = nowOpen;
     setOpen(nowOpen);
-    if (nowOpen.length === 2) {
-      lock.current = true; setMoves((m) => m + 1);
-      const [a, b] = nowOpen.map((idx) => cards[idx]);
-      if (cfg.keyOf(a.item) === cfg.keyOf(b.item) && a.kind !== b.kind) {
-        setTimeout(() => {
-          setMatched((m) => {
-            const nm = [...m, ...nowOpen];
-            if (nm.length === PAIRS * 2) {
-              setTimeout(() => {
-                // Non tagliare la lode dell'ultima coppia: parla quando l'audio è libero
-                audio.whenIdle().then(() => speak("You found all the pairs!", PRAISE[rand(PRAISE.length)]));
-                onDone(moves + 1 <= 9 ? 3 : moves + 1 <= 13 ? 2 : 1);
-              }, 900);
-            }
-            return nm;
-          });
-          setOpen([]); setBurst((x) => x + 1); onGem([cfg.sayOf(a.item)]);
-          speak(cfg.sayOf(a.item), PRAISE[rand(PRAISE.length)]);
-          lock.current = false;
-        }, 650);
-      } else {
-        setTimeout(() => { setOpen([]); lock.current = false; }, 1100);
-      }
+    if (nowOpen.length < 2) return;
+
+    lock.current = true;
+    movesRef.current += 1;
+    setMoves(movesRef.current);
+    const [a, b] = nowOpen.map((idx) => cards[idx]);
+    if (cfg.keyOf(a.item) === cfg.keyOf(b.item) && a.kind !== b.kind) {
+      setTimeout(() => {
+        const nm = [...matchedRef.current, ...nowOpen];
+        matchedRef.current = nm;
+        setMatched(nm);
+        openRef.current = [];
+        setOpen([]); setBurst((x) => x + 1); onGem([cfg.sayOf(a.item)]);
+        speak(cfg.sayOf(a.item), PRAISE[rand(PRAISE.length)]);
+        lock.current = false;
+        // Fine partita: fuori dagli updater di stato (un effetto dentro un updater
+        // può ripetersi o perdersi) e confrontando col mazzo reale, non con PAIRS*2.
+        if (nm.length === cards.length && !doneRef.current) {
+          doneRef.current = true;
+          const total = movesRef.current;
+          setTimeout(() => {
+            // Non tagliare la lode dell'ultima coppia: parla quando l'audio è libero
+            audio.whenIdle().then(() => speak("You found all the pairs!", PRAISE[rand(PRAISE.length)]));
+            // Soglie tarate su 6 coppie (minimo teorico 6 mosse): generose per un bimbo.
+            onDone(total <= 11 ? 3 : total <= 17 ? 2 : 1);
+          }, 900);
+        }
+      }, 650);
+    } else {
+      setTimeout(() => { openRef.current = []; setOpen([]); lock.current = false; }, 1100);
     }
   };
 
